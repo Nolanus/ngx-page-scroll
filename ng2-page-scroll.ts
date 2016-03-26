@@ -1,0 +1,1 @@
+export * from './src/ng2-page-scroll.directive';
