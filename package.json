@@ -20,12 +20,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Nolanus/ng2-scroll-page.git"
+    "url": "git+ssh://git@github.com/Nolanus/ng2-page-scroll.git"
   },
   "bugs": {
-    "url": "https://github.com/Nolanus/ng2-scroll-page/issues"
+    "url": "https://github.com/Nolanus/ng2-page-scroll/issues"
   },
-  "homepage": "https://github.com/Nolanus/ng2-scroll-page#readme",
+  "homepage": "https://github.com/Nolanus/ng2-page-scroll#readme",
   "dependencies": {},
   "peerDependencies": {
     "angular2": "2.0.0-beta.12"
