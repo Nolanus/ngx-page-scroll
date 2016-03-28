@@ -86,7 +86,7 @@ The following example will check whether the route _Home_ is currently loaded. I
 
 Overriding all possible properties. `doSmth()` and `linearEasing` are defined in the component
 ```html
- <a pageScroll pageScrollOffset="0" pageScrollDuration="2000" [pageScrollEasing]="linearEasing" (pageScrollFinish)="doSmth()" href="#theanchor">Visit</a>
+ <a pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="linearEasing" (pageScrollFinish)="doSmth()" href="#theanchor">Visit</a>
 ```
 ```js
     linearEasing:IEasingFunction = (t:number, b:number, c:number, d:number):number => {
@@ -103,7 +103,7 @@ Overriding all possible properties. `doSmth()` and `linearEasing` are defined in
 
 * Documentation/example site
 * Unit tests
-* Test accross browsers
+* Test across browsers
 
 ## License
 
