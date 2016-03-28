@@ -1,9 +1,7 @@
-/**
- * Created by sebastianfuss on 06.03.16.
- */
 import {Directive, ElementRef, Input, Output, EventEmitter, HostListener, OnDestroy} from 'angular2/core';
 import {Router} from 'angular2/router';
 import {Subscription} from 'rxjs/Subscription';
+import {PageScrollConfig, IEasingFunction} from './ng2-page-scroll-config';
 
 @Directive({
     selector: '[pageScroll]'
@@ -17,33 +15,38 @@ export class PageScroll implements OnDestroy {
     public href:string;
 
     @Input()
-    public pageScrollOffset:number = 0;
+    public pageScrollOffset:number = null;
 
     @Input()
-    public pageScrollDuration:number = 1250;
+    public pageScrollDuration:number = null;
+
+    @Input()
+    public pageScrollEasing:IEasingFunction = null;
 
     @Output()
-    scrollFinish:EventEmitter<any> = new EventEmitter();
+    pageScrollFinish:EventEmitter<any> = new EventEmitter();
 
     private document:Document;
     private body:HTMLBodyElement;
-    private static timers:any[] = [];
-    private static listener = (event:Event) => {
+    private listener:EventListenerOrEventListenerObject = (evt:Event):void => {
         // Stop the scroll animation if the user interferes with it
-        if (event.type !== 'keyup' || [33, 34, 35, 36, 38, 40].indexOf((<KeyboardEvent>event).keyCode) >= 0) {
+        if (event.type !== 'keyup' || PageScroll.interfereKeys.indexOf((<KeyboardEvent>event).keyCode) >= 0) {
             PageScroll.stopTimers();
         }
     };
+
+    private static timers:any[] = [];
     private static interfereEvents:string[] = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
+    private static interfereKeys:number[] = [33, 34, 35, 36, 38, 40];
 
     constructor(private el:ElementRef, private router:Router) {
         this.document = el.nativeElement.ownerDocument;
         this.body = el.nativeElement.ownerDocument.body;
-        PageScroll.interfereEvents.forEach((event:string) => this.body.addEventListener(event, PageScroll.listener));
+        PageScroll.interfereEvents.forEach((event:string) => this.body.addEventListener(event, this.listener));
     }
 
     ngOnDestroy():any {
-        PageScroll.interfereEvents.forEach((event:string) => this.body.removeEventListener(event, PageScroll.listener));
+        PageScroll.interfereEvents.forEach((event:string) => this.body.removeEventListener(event, this.listener));
         return undefined;
     }
 
@@ -80,30 +83,35 @@ export class PageScroll implements OnDestroy {
 
             if (distanceToScroll !== 0) {
                 PageScroll.stopTimers();
-                let startTime:number = new Date().getTime();
-                let timer:any = setInterval((startScrollTop:number, targetScrollTop:number,
-                                             startTime:number, endTime:number, duration:number) => {
-                    let currentTime:number = new Date().getTime();
-                    this.body.scrollTop = PageScroll.easeInOutExpo(0, currentTime - startTime,
-                        startScrollTop, targetScrollTop, duration);
-                    if (endTime <= currentTime) {
-                        PageScroll.stopTimer(timer);
-                        this.scrollFinish.emit(null);
-                    }
-                }, 10, this.body.scrollTop, distanceToScroll - this.pageScrollOffset, startTime,
-                    startTime + this.pageScrollDuration, this.pageScrollDuration);
 
+                let startTime:number = new Date().getTime();
+
+                let intervalConf:any = {
+                    startScrollTop: this.body.scrollTop,
+                    targetScrollTop: distanceToScroll -
+                    (this.pageScrollOffset === null ? PageScrollConfig.defaultScrollOffset : this.pageScrollOffset),
+                    startTime: startTime,
+                    easing: this.pageScrollEasing === null ? PageScrollConfig.defaultEasingFunction : this.pageScrollEasing
+                };
+                intervalConf.duration = this.pageScrollDuration === null ? PageScrollConfig.defaultDuration : this.pageScrollDuration;
+                intervalConf.endTime = intervalConf.startTime + intervalConf.duration;
+
+                let timer:any = setInterval((intervalConf:any) => {
+                    let currentTime:number = new Date().getTime();
+                    this.body.scrollTop = intervalConf.easing(
+                        currentTime - intervalConf.startTime,
+                        intervalConf.startScrollTop,
+                        intervalConf.targetScrollTop,
+                        intervalConf.duration);
+
+                    if (intervalConf.endTime <= currentTime) {
+                        PageScroll.stopTimer(timer);
+                        this.pageScrollFinish.emit(null);
+                    }
+                }, PageScrollConfig._interval, intervalConf);
                 PageScroll.timers.push(timer);
             }
         }
-    }
-
-    // t: current time, b: beginning value, c: change In value, d: duration
-    private static easeInOutExpo(x:number, t:number, b:number, c:number, d:number):number {
-        if (t === 0) return b;
-        if (t === d) return b + c;
-        if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
-        return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
     }
 
     private static stopTimers():boolean {
