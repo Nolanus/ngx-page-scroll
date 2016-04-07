@@ -1,3 +1,8 @@
+## 0.2.2 (2016-04-07)
+Other:
+- Bumped supported angular2 version beta.14
+- Added example app
+
 ## 0.2.0 (2016-03-28)
 
 Breaking Change:
