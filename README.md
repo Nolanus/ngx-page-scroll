@@ -99,9 +99,20 @@ Overriding all possible properties. `doSmth()` and `linearEasing` are defined in
     }
 ```
 
+## Example App
+The [_example_](example) subfolder contains a clone of the [angular2 quickstart](https://github.com/angular/quickstart) repository adapted to showcase the functionality of ng2-page-scroll.
+ Run the example app by checking out that repository and execute the following commands in the example directory:
+ ```
+ // Install npm dependencies
+ npm install
+ 
+ // Run the server
+ npm start
+ ```
+
 ## TODO:
 
-* Documentation/example site
+* Documentation
 * Unit tests
 * Test across browsers
 
