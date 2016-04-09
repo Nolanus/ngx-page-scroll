@@ -64,13 +64,13 @@ export class AppComponent {
 ## API
 All properties may be set on individual elements as well. They take precedence over the default settings specified in `PageScrollConfig` class. Thereby it is possible to have all page scroll-animations last e.g. 2 seconds, but a specific one should be performed with a custom easing function and a duration of only 1 second.
 
-### ScrollPage properties
+### PageScroll properties
 - `pageScroll` - Attribute to add scroll-animation behavior when the `click`-event happens to an existing element.
 - `pageScrollOffset` (`?:number=0`) - Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element)
 - `pageScrollDuration` (`?:number=1250`) - Duration in milliseconds the whole scroll-animation should last
 - `pageScrollEasing` (`?:IEasingFunction=_linearEasing`) - Easing method to be used while calculating the scroll position over time (defaults linear easing)
 
-### ScrollPage events
+### PageScroll events
 - `pageScrollFinish` - fired when the scroll-animation reached its target. Note that it will never get called if the user interfered the scrolling
 
 ### Example
