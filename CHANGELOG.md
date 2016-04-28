@@ -1,3 +1,8 @@
+## 0.2.3 (2016-04-28)
+Other:
+- Bumped supported angular2 version to beta.16
+- Prepared demo app the showcase HashLocationStrategy
+
 ## 0.2.2 (2016-04-07)
 Other:
 - Bumped supported angular2 version beta.14
