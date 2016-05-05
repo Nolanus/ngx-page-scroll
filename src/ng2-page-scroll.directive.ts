@@ -52,22 +52,15 @@ export class PageScroll implements OnDestroy {
 
     @HostListener('click', ['$event'])
     private handleClick(event:Event):boolean {
-        event.preventDefault();
         if (this.routerLink) {
-            // Check whether we are at the target page already
-            if (this.router.isRouteActive(this.router.generate(this.routerLink))) {
-                // We're already at the correct screen
+            // We need to navigate their first.
+            // Navigation is handled by the routerLink directive
+            // so we only need to listen for route change
+            // Note: the change event is also emitted when navigating to the current route again
+            let subscription:Subscription = <Subscription>this.router.changes.subscribe(() => {
+                subscription.unsubscribe();
                 this.scrollView(this.href);
-            } else {
-                // We need to navigate their first.
-                // Navigation is handled by the routerLink directive
-                // so we only need to listen for route change
-                this.body.scrollTop = 0;
-                let subscription:Subscription = <Subscription>this.router.subscribe(() => {
-                    subscription.unsubscribe();
-                    this.scrollView(this.href);
-                });
-            }
+            });
         } else {
             this.scrollView(this.href);
         }
