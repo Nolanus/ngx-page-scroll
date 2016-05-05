@@ -1,5 +1,5 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, HostListener, OnDestroy} from 'angular2/core';
-import {Router} from 'angular2/router';
+import {Directive, ElementRef, Input, Output, EventEmitter, HostListener, OnDestroy} from '@angular/core';
+import {Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {PageScrollConfig, IEasingFunction} from './ng2-page-scroll-config';
 
