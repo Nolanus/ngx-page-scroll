@@ -1,3 +1,7 @@
+## 1.0.0-beta.1 (2016-05-19)
+Fix:
+- Referencing non existing variable causes error in non webkit-based browser (fixes #5)
+
 ## 1.0.0-beta.0 (2016-05-05)
 
 Breaking Change:
