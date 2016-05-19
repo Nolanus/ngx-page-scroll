@@ -5,7 +5,8 @@
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
     "compile": "./node_modules/.bin/tsc",
-    "prepublish": "npm run install:typings && ./node_modules/.bin/tsc && node ./make.js"
+    "prepublish": "npm run install:typings && ./node_modules/.bin/tsc && node ./make.js",
+    "example": "npm install && cd example/ && npm install && npm start"
   },
   "main": "ng2-page-scroll.js",
   "typings": "ng2-page-scroll.d.ts",
