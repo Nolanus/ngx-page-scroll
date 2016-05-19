@@ -28,7 +28,7 @@ export class PageScroll implements OnDestroy {
 
     private document:Document;
     private body:HTMLBodyElement;
-    private listener:EventListenerOrEventListenerObject = (evt:Event):void => {
+    private listener:EventListenerOrEventListenerObject = (event:Event):void => {
         // Stop the scroll animation if the user interferes with it
         if (event.type !== 'keyup' || PageScroll.interfereKeys.indexOf((<KeyboardEvent>event).keyCode) >= 0) {
             PageScroll.stopTimers();
