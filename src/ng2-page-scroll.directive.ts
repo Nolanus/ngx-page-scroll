@@ -44,7 +44,7 @@ export class PageScroll implements OnDestroy {
 
     ngOnDestroy():any {
         if (this.interruptListenersAttached) {
-        PageScrollManager.detachInterfereListeners(this.body);
+            PageScrollManager.detachInterfereListeners(this.body);
         }
         return undefined;
     }
@@ -99,6 +99,14 @@ export class PageScroll implements OnDestroy {
         intervalConf.duration = this.pageScrollDuration === null ? PageScrollConfig.defaultDuration : this.pageScrollDuration;
         intervalConf.endTime = intervalConf.startTime + intervalConf.duration;
 
+        if (intervalConf.duration <= PageScrollConfig._interval) {
+            // We should go there directly, as our "animation" would have one big step
+            // only anyway and this way we save the interval stuff
+            this.body.scrollTop = intervalConf.targetScrollTop;
+            this.pageScrollFinish.emit(true);
+            return;
+        }
+
         // Register the interrupt listeners if we want an interruptible scroll animation
         if (this.pageScrollInterruptible || (typeof this.pageScrollInterruptible === 'undefined' && PageScrollConfig.defaultInterruptible)) {
             PageScrollManager.attachInterfereListeners(this.body);
@@ -114,10 +122,10 @@ export class PageScroll implements OnDestroy {
                 newScrollTop = intervalConf.targetScrollTop;
             } else {
                 newScrollTop = intervalConf.easing(
-                currentTime - intervalConf.startTime,
-                intervalConf.startScrollTop,
-                intervalConf.targetScrollTop,
-                intervalConf.duration);
+                    currentTime - intervalConf.startTime,
+                    intervalConf.startScrollTop,
+                    intervalConf.targetScrollTop,
+                    intervalConf.duration);
             }
             this.body.scrollTop = newScrollTop;
             this.document.documentElement.scrollTop = newScrollTop;
