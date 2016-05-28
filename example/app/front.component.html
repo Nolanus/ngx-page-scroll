@@ -1,5 +1,5 @@
-<p>Do you want to <a href="#anchor1" pageScroll>go to the first heading</a> or
-    <a href="#anchor2" pageScroll [pageScrollEasing]="myEasing">the second one with a custom easing</a>?</p>
+<p>Do you want to <a href="#anchor1" pageScroll>go to the first heading</a>, go to
+    <a href="#anchor2" pageScroll [pageScrollEasing]="myEasing" (pageScrollFinish)="doSmth($event)">the second one with a custom easing</a> or <a href="#anchor2" pageScroll [pageScrollDuration]="0">jump there directly</a>?</p>
 <p>Alternatively you can <a href="#anchor2" pageScroll [pageScrollInterruptible]="false">go the second anchor and ignore user interrupts</a></p>
 
 <p>Visit another page and press the "2nd anchor" link, to see how ng2-page-scroll works across routes.</p>

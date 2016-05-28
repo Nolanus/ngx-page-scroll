@@ -9,7 +9,7 @@ Animated "Scroll to element" functionality rewritten in a pure angular2 directiv
 
 ## Features
 - scroll to the top edge of an element referenced in the href-attribute (`href="#mytarget`)
-- stops scrolling if the user interferes (e.g. scrolling on its own, pressing up/down-keys)
+- customizable: stops scrolling if the user interrupts ([read more](https://github.com/Nolanus/ng2-page-scroll/wiki/Scroll-Interruption-Interference))
 - works across routes (scrolls to target element as soon as the routing has finished)
 - custom easing functions to calculate the scroll position over time
 
@@ -39,9 +39,10 @@ export class MyComponent  {
 The class `PageScrollConfig` offers static properties to be manipulated to configure the default behavior. Override the respective properties to change all page scroll-animation defaults.
 
 ### Configuration properties
-- `defaultScrollOffset` (`?:number=0`) - Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element)
-- `defaultDuration` (`?:number=0`) - Duration in milliseconds the whole scroll-animation should last
-- `defaultEasingFunction` (`?:IEasingFunction=_linearEasing`) - Easing method to be used while calculating the scroll position over time (defaults linear easing)
+- `defaultScrollOffset` (`?:number=0`) - Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
+- `defaultDuration` (`?:number=0`) - Duration in milliseconds the whole scroll-animation should last.
+- `defaultInterruptible` (`?:boolean=true`) - Whether the scroll animation should stop if the user interferes with it (true) or not (false).
+- `defaultEasingFunction` (`?:IEasingFunction=_linearEasing`) - Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### Example
 ```js
@@ -69,7 +70,7 @@ All properties may be set on individual elements as well. They take precedence o
 - `pageScrollOffset` (`?:number=0`) - Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 - `pageScrollDuration` (`?:number=1250`) - Duration in milliseconds the whole scroll-animation should last.
 - `pageScrollInterruptible` (`?:boolean=true`) - Whether the scroll animation should stop if the user interferes with it (true) or not (false).
-- `pageScrollEasing` (`?:IEasingFunction=_linearEasing`) - Easing method to be used while calculating the scroll position over time (defaults linear easing).
+- `pageScrollEasing` (`?:IEasingFunction=_linearEasing`) - Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### PageScroll events
 - `pageScrollFinish` - fired when the scroll-animation stops. Emits a boolean value which indicates whether the scroll animation finished successfully and reached its target (true) or whether it got interrupted due to another scroll animation starting or user interaction (false).
@@ -87,7 +88,7 @@ The following example will check whether the route _Home_ is currently loaded. I
 
 Overriding all possible properties. `doSmth()` and `linearEasing` are defined in the component
 ```html
- <a pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="linearEasing" (pageScrollFinish)="doSmth()" href="#theanchor">Visit</a>
+ <a pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="linearEasing" [pageScrollInterruptible]="false" (pageScrollFinish)="doSmth($event)" href="#theanchor">Visit</a>
 ```
 ```js
     linearEasing:IEasingFunction = (t:number, b:number, c:number, d:number):number => {
@@ -95,8 +96,12 @@ Overriding all possible properties. `doSmth()` and `linearEasing` are defined in
         return c * t / d + b;
     };
 
-    doSmth() {
-        console.log('Yeah, we reached our destination');
+    doSmth(reachedTarget:boolean) {
+        if (reachedTarget){
+            console.log('Yeah, we reached our destination');
+        } else {
+            console.log('Ohoh, something interrupted us');
+        }
     }
 ```
 
@@ -123,7 +128,6 @@ The [_example_](example) subfolder contains a clone of the [angular2 quickstart]
 
 ## TODO:
 
-* Documentation
 * Unit tests
 * Test across browsers
 
