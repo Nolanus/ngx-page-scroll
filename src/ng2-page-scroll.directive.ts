@@ -106,18 +106,20 @@ export class PageScroll implements OnDestroy {
 
         this.timer = setInterval((intervalConf:any) => {
             let currentTime:number = new Date().getTime();
-            let newScrollTop:number = intervalConf.easing(
+            let newScrollTop:number;
+
+            if (intervalConf.endTime <= currentTime) {
+                this.stopInternal(false);
+                newScrollTop = intervalConf.targetScrollTop;
+            } else {
+                newScrollTop = intervalConf.easing(
                 currentTime - intervalConf.startTime,
                 intervalConf.startScrollTop,
                 intervalConf.targetScrollTop,
                 intervalConf.duration);
-                
+            }
             this.body.scrollTop = newScrollTop;
             this.document.documentElement.scrollTop = newScrollTop;
-
-            if (intervalConf.endTime <= currentTime) {
-                this.stopInternal(false);
-            }
         }, PageScrollConfig._interval, intervalConf);
 
         // Register the instance as running one
