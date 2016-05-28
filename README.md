@@ -112,7 +112,9 @@ The [_example_](example) subfolder contains a clone of the [angular2 quickstart]
  npm install
  // Change into the example website folder
  cd example/
- // Install the example website
+ // Uninstall the current ng2-page-scroll version
+ npm uninstall ng2-page-scroll
+ // Install the example website's dependencies
  npm install
  // Run the server
  npm start
