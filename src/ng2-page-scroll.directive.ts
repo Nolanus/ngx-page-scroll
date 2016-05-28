@@ -71,6 +71,9 @@ export class PageScroll implements OnDestroy {
     }
 
     private scrollView(anchor:string):void {
+        // Stop all possibly running scroll animations
+        PageScrollManager.stopAll();
+
         let anchorTarget:HTMLElement = this.document.getElementById(anchor.substr(1));
 
         if (anchorTarget === null) {
@@ -85,9 +88,6 @@ export class PageScroll implements OnDestroy {
             // We're at the final destination already, so stop
             return;
         }
-        // Stop all possibly running scroll animations
-        PageScrollManager.stopAll();
-
         let startTime:number = new Date().getTime();
 
         let intervalConf:any = {
