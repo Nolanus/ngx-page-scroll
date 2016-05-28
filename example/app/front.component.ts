@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
+
 import {PageScroll, IEasingFunction} from 'ng2-page-scroll';
 
 @Component({

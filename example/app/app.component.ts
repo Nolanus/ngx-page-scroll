@@ -1,7 +1,8 @@
 import {Component} from '@angular/core';
-
 import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
+
 import {PageScroll} from 'ng2-page-scroll';
+
 import {FrontComponent} from './front.component';
 import {LipsumComponent} from './lipsum.component';
 import {ContactComponent} from './contact.component';
