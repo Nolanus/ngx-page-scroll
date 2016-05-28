@@ -66,12 +66,13 @@ All properties may be set on individual elements as well. They take precedence o
 
 ### PageScroll properties
 - `pageScroll` - Attribute to add scroll-animation behavior when the `click`-event happens to an existing element.
-- `pageScrollOffset` (`?:number=0`) - Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element)
-- `pageScrollDuration` (`?:number=1250`) - Duration in milliseconds the whole scroll-animation should last
-- `pageScrollEasing` (`?:IEasingFunction=_linearEasing`) - Easing method to be used while calculating the scroll position over time (defaults linear easing)
+- `pageScrollOffset` (`?:number=0`) - Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
+- `pageScrollDuration` (`?:number=1250`) - Duration in milliseconds the whole scroll-animation should last.
+- `pageScrollInterruptible` (`?:boolean=true`) - Whether the scroll animation should stop if the user interferes with it (true) or not (false).
+- `pageScrollEasing` (`?:IEasingFunction=_linearEasing`) - Easing method to be used while calculating the scroll position over time (defaults linear easing).
 
 ### PageScroll events
-- `pageScrollFinish` - fired when the scroll-animation reached its target. Note that it will never get called if the user interfered the scrolling
+- `pageScrollFinish` - fired when the scroll-animation stops. Emits a boolean value which indicates whether the scroll animation finished successfully and reached its target (true) or whether it got interrupted due to another scroll animation starting or user interaction (false).
 
 ### Example
 Most basic example:
