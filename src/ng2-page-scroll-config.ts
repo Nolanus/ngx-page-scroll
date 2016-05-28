@@ -20,6 +20,12 @@ export class PageScrollConfig {
     public static defaultDuration:number = 1250;
     public static defaultScrollOffset:number = 0;
 
+    public static _interruptEvents:string[] = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
+
+    public static _interruptKeys:number[] = [33, 34, 35, 36, 38, 40];
+
+    public static defaultInterruptible:boolean = true;
+
     // Getter and setter to avoid auto completion to suggest calling the method
     static get defaultEasingFunction():IEasingFunction {
         return PageScrollConfig._easingFunction;
