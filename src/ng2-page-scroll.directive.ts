@@ -43,8 +43,9 @@ export class PageScroll implements OnDestroy {
     }
 
     ngOnDestroy():any {
-        // Remove scrollInterfere listeners, if none are attached it doesn't hurt
+        if (this.interruptListenersAttached) {
         PageScrollManager.detachInterfereListeners(this.body);
+        }
         return undefined;
     }
 
@@ -131,6 +132,7 @@ export class PageScroll implements OnDestroy {
 
         if (this.interruptListenersAttached) {
             PageScrollManager.detachInterfereListeners(this.body);
+            this.interruptListenersAttached = false;
         }
 
         if (this.timer) {
