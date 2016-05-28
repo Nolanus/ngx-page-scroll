@@ -77,7 +77,8 @@ export class PageScroll implements OnDestroy {
             return;
         }
         let targetScrollTop:number = anchorTarget.offsetTop;
-        let distanceToScroll:number = targetScrollTop - this.body.scrollTop;
+        let startScrollTop:number = (this.document.documentElement.scrollTop || this.body.scrollTop);
+        let distanceToScroll:number = targetScrollTop - startScrollTop;
 
         if (distanceToScroll === 0) {
             // We're at the final destination already, so stop
@@ -89,9 +90,8 @@ export class PageScroll implements OnDestroy {
         let startTime:number = new Date().getTime();
 
         let intervalConf:any = {
-            startScrollTop: this.body.scrollTop,
-            targetScrollTop: distanceToScroll -
-            (this.pageScrollOffset === null ? PageScrollConfig.defaultScrollOffset : this.pageScrollOffset),
+            startScrollTop: startScrollTop,
+            targetScrollTop: distanceToScroll - (this.pageScrollOffset === null ? PageScrollConfig.defaultScrollOffset : this.pageScrollOffset),
             startTime: startTime,
             easing: this.pageScrollEasing === null ? PageScrollConfig.defaultEasingFunction : this.pageScrollEasing
         };
@@ -106,11 +106,14 @@ export class PageScroll implements OnDestroy {
 
         this.timer = setInterval((intervalConf:any) => {
             let currentTime:number = new Date().getTime();
-            this.body.scrollTop = intervalConf.easing(
+            let newScrollTop:number = intervalConf.easing(
                 currentTime - intervalConf.startTime,
                 intervalConf.startScrollTop,
                 intervalConf.targetScrollTop,
                 intervalConf.duration);
+                
+            this.body.scrollTop = newScrollTop;
+            this.document.documentElement.scrollTop = newScrollTop;
 
             if (intervalConf.endTime <= currentTime) {
                 this.stopInternal(false);
