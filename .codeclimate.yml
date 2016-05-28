@@ -10,6 +10,8 @@ engines:
       - php
   eslint:
     enabled: true
+  markdownlint:
+    enabled: true
   fixme:
     enabled: true
 ratings:
