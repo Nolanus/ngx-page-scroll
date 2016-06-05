@@ -4,8 +4,9 @@
   "description": "Pure angular2 directive for scrolling to html anchors",
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
-    "compile": "./node_modules/.bin/tsc",
-    "prepublish": "npm run install:typings && ./node_modules/.bin/tsc && node ./make.js",
+    "compile": "./node_modules/.bin/tsc && npm run lint",
+    "lint": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
+    "prepublish": "npm run install:typings && npm run compile && node ./make.js",
     "example": "npm install && cd example/ && npm uninstall ng2-page-scroll && npm install && npm start"
   },
   "main": "ng2-page-scroll.js",
@@ -31,8 +32,7 @@
     "url": "https://github.com/Nolanus/ng2-page-scroll/issues"
   },
   "homepage": "https://github.com/Nolanus/ng2-page-scroll#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "@angular/core": "~2.0.0-rc.1",
     "@angular/common": "~2.0.0-rc.1",
@@ -43,13 +43,15 @@
     "zone.js": "~0.6.12"
   },
   "devDependencies": {
-    "@angular/core": "~2.0.0-rc.1",
     "@angular/common": "~2.0.0-rc.1",
     "@angular/compiler": "~2.0.0-rc.1",
+    "@angular/core": "~2.0.0-rc.1",
     "@angular/platform-browser": "~2.0.0-rc.1",
     "@angular/router": "~2.0.0-rc.1",
+    "codelyzer": "0.0.20",
     "rxjs": "5.0.0-beta.6",
     "systemjs-builder": "^0.15.0",
+    "tslint": "^3.10.2",
     "typescript": "1.8.9",
     "typings": "0.7.9",
     "zone.js": "~0.6.12"
