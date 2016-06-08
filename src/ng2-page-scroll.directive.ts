@@ -28,7 +28,7 @@ export class PageScroll implements OnDestroy {
     public pageScrollInterruptible: boolean;
 
     @Output()
-    pageScrollFinish: EventEmitter<boolean> = new EventEmitter();
+    pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     private document: Document;
     private body: HTMLBodyElement;
