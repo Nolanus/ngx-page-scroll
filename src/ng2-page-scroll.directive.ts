@@ -1,5 +1,5 @@
 import {Directive, ElementRef, Input, Output, EventEmitter, HostListener, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {PageScrollConfig, IEasingFunction} from './ng2-page-scroll-config';
 import {PageScrollManager} from './ng2-page-scroll-manager';
@@ -60,9 +60,11 @@ export class PageScroll implements OnDestroy {
             // Navigation is handled by the routerLink directive
             // so we only need to listen for route change
             // Note: the change event is also emitted when navigating to the current route again
-            let subscription: Subscription = <Subscription>this.router.changes.subscribe(() => {
-                subscription.unsubscribe();
-                this.scrollView(this.href);
+            let subscription: Subscription = <Subscription>this.router.events.subscribe((e) => {
+                if (e instanceof NavigationEnd) {
+                    subscription.unsubscribe();
+                    this.scrollView(this.href);
+                }
             });
         } else {
             this.scrollView(this.href);
