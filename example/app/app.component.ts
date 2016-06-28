@@ -1,11 +1,7 @@
 import {Component} from '@angular/core';
-import {Routes, ROUTER_DIRECTIVES} from '@angular/router';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 
 import {PageScroll} from 'ng2-page-scroll';
-
-import {FrontComponent} from './front.component';
-import {LipsumComponent} from './lipsum.component';
-import {ContactComponent} from './contact.component';
 
 @Component({
     selector: 'my-app',
@@ -22,10 +18,5 @@ import {ContactComponent} from './contact.component';
     `,
     directives: [ROUTER_DIRECTIVES, PageScroll]
 })
-@Routes([
-    {path: '/', component: FrontComponent},
-    {path: '/about', component: LipsumComponent},
-    {path: '/contact', component: ContactComponent}
-])
 export class AppComponent {
 }

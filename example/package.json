@@ -1,6 +1,6 @@
 {
   "name": "ng2-page-scroll-example",
-  "version": "1.0.0",
+  "version": "1.0.5",
   "description": "QuickStart package.json from the documentation, supplemented with testing support",
   "private": true,
   "scripts": {
@@ -21,15 +21,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@angular/common":  "2.0.0-rc.1",
-    "@angular/compiler":  "2.0.0-rc.1",
-    "@angular/core":  "2.0.0-rc.1",
-    "@angular/http":  "2.0.0-rc.1",
-    "@angular/platform-browser":  "2.0.0-rc.1",
-    "@angular/platform-browser-dynamic":  "2.0.0-rc.1",
-    "@angular/router":  "2.0.0-rc.1",
-    "@angular/router-deprecated":  "2.0.0-rc.1",
-    "@angular/upgrade":  "2.0.0-rc.1",
+    "@angular/common":  "2.0.0-rc.3",
+    "@angular/compiler":  "2.0.0-rc.3",
+    "@angular/core":  "2.0.0-rc.3",
+    "@angular/http":  "2.0.0-rc.3",
+    "@angular/platform-browser":  "2.0.0-rc.3",
+    "@angular/platform-browser-dynamic":  "2.0.0-rc.3",
+    "@angular/router":  "3.0.0-alpha.8",
+    "@angular/upgrade":  "2.0.0-rc.3",
 
     "ng2-page-scroll": "file:../",
 
