@@ -59,16 +59,18 @@ export class PageScroll implements OnDestroy {
     }
 
     @HostListener('click', ['$event'])
-    private handleClick(event: Event): boolean { // tslint:disable-line:no-unused-variable
+    private handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
         if (this.routerLink) {
             // We need to navigate their first.
             // Navigation is handled by the routerLink directive
             // so we only need to listen for route change
             // Note: the change event is also emitted when navigating to the current route again
-            let subscription: Subscription = <Subscription>this.router.events.subscribe((e) => {
-                if (e instanceof NavigationEnd) {
+            let subscription: Subscription = <Subscription>this.router.events.subscribe((routerEvent) => {
+                if (routerEvent instanceof NavigationEnd) {
                     subscription.unsubscribe();
                     this.scrollView(this.href);
+                } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
+                    subscription.unsubscribe();
                 }
             });
         } else {
