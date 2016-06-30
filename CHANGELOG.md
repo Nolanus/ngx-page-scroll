@@ -1,3 +1,18 @@
+## 1.2.0 (2016-06-30)
+
+Fix:
+
+- Scrolling did not work properly when initial scrollTop value was greater 0 (fixes #15) 
+
+Enhance:
+
+- Use another scrollTop source to increase cross browser support
+
+Other:
+
+- New angular version (rc.3)
+- New angular router version (alpha.8)
+
 ## 1.1.1 (2016-06-10)
 
 Fix:
