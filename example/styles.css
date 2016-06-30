@@ -73,8 +73,14 @@ nav a {
     border-radius: 4px;
 }
 
-nav a:visited, a:link {
+a {
     color: #607D8B;
+    text-decoration: underline;
+}
+
+a:hover, a:active {
+    text-decoration: none;
+    color: #039be5;
 }
 
 nav a:hover {

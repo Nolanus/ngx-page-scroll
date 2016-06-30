@@ -8,5 +8,5 @@ import {PageScroll} from 'ng2-page-scroll';
     directives: [PageScroll, NgFor]
 })
 export class LipsumComponent {
-    array:number[] = [2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11]
+    array:number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }

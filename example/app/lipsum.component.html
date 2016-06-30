@@ -8,7 +8,7 @@
     dubia debeatis illustrare, dubiis perspicua conamini tollere. Quamquam in hac divisione rem ipsam prorsus probo,
     elegantiam desidero. </p>
 
-<h1 id="head1">Lorem ipsum</h1>
+<h1 id="head1">Lorem ipsum 1</h1>
 <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam,
     feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
     mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat
@@ -38,8 +38,10 @@
     Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam
     erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
 
-<div *ngFor="let num of array">
-    <h1 id="head{{ num }}">Prioris generis</h1>
+<div *ngFor="let num of array; let isLast = last">
+    <h1 id="head{{ num }}">Prioris generis {{ num }}</h1>
+    <p>Scroll to sections: <a href="#head{{ num - 1 }}" pageScroll [pageScrollOffset]="50">Go to previous</a>.
+        <span *ngIf="!isLast"><a href="#head{{ num + 1 }}" pageScroll [pageScrollOffset]="50">Go to next</a>.</span> (with 50px offset)</p>
     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
         quam,
         feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
