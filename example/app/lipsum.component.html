@@ -1,6 +1,10 @@
 <p>Do you want to <a href="#head1" pageScroll>go to the first heading</a> or <a href="#head2" pageScroll>the second
     one</a>? Alternatively you can <a href="#head10" pageScroll [pageScrollDuration]="250">go the second last header</a>.
 </p>
+
+<p>Cross route linking: <a [routerLink]="['/']" pageScroll href="#anchor2">Open the Front page and scroll to second
+    heading</a>!</p>
+
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Prioris generis est docilitas, memoria; Illa argumenta
     propria videamus, cur omnia sint paria peccata. Quae cum praeponunt, ut sit aliqua rerum selectio, naturam videntur
     sequi; Ille vero, si insipiens-quo certe, quoniam tyrannus -, numquam beatus; Atqui eorum nihil est eius generis, ut
@@ -41,7 +45,8 @@
 <div *ngFor="let num of array; let isLast = last">
     <h1 id="head{{ num }}">Prioris generis {{ num }}</h1>
     <p>Scroll to sections: <a href="#head{{ num - 1 }}" pageScroll [pageScrollOffset]="50">Go to previous</a>.
-        <span *ngIf="!isLast"><a href="#head{{ num + 1 }}" pageScroll [pageScrollOffset]="50">Go to next</a>.</span> (with 50px offset)</p>
+        <span *ngIf="!isLast"><a href="#head{{ num + 1 }}" pageScroll [pageScrollOffset]="50">Go to next</a>.</span>
+        (with 50px offset)</p>
     <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
         quam,
         feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
