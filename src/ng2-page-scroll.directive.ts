@@ -32,14 +32,19 @@ export class PageScroll implements OnDestroy {
 
     private document: Document;
     private body: HTMLBodyElement;
+    private scrollTopSources: any[];
 
     private timer: any = null;
     private interruptListenersAttached: boolean = false;
 
+    private static isUndefinedOrNull(variable: any): boolean {
+        return (typeof variable === 'undefined') || variable === undefined || variable === null;
+    }
 
     constructor(private el: ElementRef, private router: Router) {
         this.document = el.nativeElement.ownerDocument;
         this.body = el.nativeElement.ownerDocument.body;
+        this.scrollTopSources = [this.document.documentElement, this.body, this.document.body.parentNode];
     }
 
     ngOnDestroy(): any {
@@ -82,21 +87,28 @@ export class PageScroll implements OnDestroy {
             // Target not found, so stop
             return;
         }
-        let targetScrollTop: number = anchorTarget.offsetTop;
-        let startScrollTop: number = (this.document.documentElement.scrollTop || this.body.scrollTop);
-        let distanceToScroll: number = targetScrollTop - startScrollTop;
 
+        let pageScrollOffset: number =
+            (PageScroll.isUndefinedOrNull(this.pageScrollOffset) ? PageScrollConfig.defaultScrollOffset : this.pageScrollOffset);
+        let targetScrollTop: number = anchorTarget.offsetTop - pageScrollOffset;
+        let startScrollTop: number =
+            this.scrollTopSources.reduce((previousValue: any, currentValue: any, currentIndex: number, array: any[]) => {
+                // Get the scrolltop value of the first scrollTopSource that returns a value for its "scrollTop" property
+                // that is not undefined and unequal to 0
+                return previousValue ? previousValue : (currentValue && currentValue.scrollTop);
+            }, undefined);
+
+        let distanceToScroll: number = targetScrollTop - startScrollTop;
         if (distanceToScroll === 0) {
             // We're at the final destination already, so stop
             return;
         }
         let startTime: number = new Date().getTime();
-        let pageScrollOffset: number =
-            (this.pageScrollOffset === null ? PageScrollConfig.defaultScrollOffset : this.pageScrollOffset);
 
         let intervalConf: any = {
             startScrollTop: startScrollTop,
-            targetScrollTop: distanceToScroll - pageScrollOffset,
+            targetScrollTop: targetScrollTop,
+            distanceToScroll: distanceToScroll,
             startTime: startTime,
             easing: this.pageScrollEasing === null ? PageScrollConfig.defaultEasingFunction : this.pageScrollEasing
         };
@@ -114,7 +126,7 @@ export class PageScroll implements OnDestroy {
 
         // Register the interrupt listeners if we want an interruptible scroll animation
         if (this.pageScrollInterruptible
-            || (typeof this.pageScrollInterruptible === 'undefined' && PageScrollConfig.defaultInterruptible)) {
+            || (PageScroll.isUndefinedOrNull(this.pageScrollInterruptible) && PageScrollConfig.defaultInterruptible)) {
             PageScrollManager.attachInterfereListeners(this.body);
             this.interruptListenersAttached = true;
         }
@@ -130,11 +142,15 @@ export class PageScroll implements OnDestroy {
                 newScrollTop = conf.easing(
                     currentTime - conf.startTime,
                     conf.startScrollTop,
-                    conf.targetScrollTop,
+                    conf.distanceToScroll,
                     conf.duration);
             }
-            this.body.scrollTop = newScrollTop;
-            this.document.documentElement.scrollTop = newScrollTop;
+            // Set the new scrollTop to all scrollTopSource elements
+            this.scrollTopSources.forEach((scrollTopSource: any) => {
+                if (scrollTopSource && !PageScroll.isUndefinedOrNull(scrollTopSource.scrollTop)) {
+                    scrollTopSource.scrollTop = newScrollTop;
+                }
+            });
         }, PageScrollConfig._interval, intervalConf);
 
         // Register the instance as running one
