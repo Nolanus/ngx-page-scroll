@@ -1,4 +1,4 @@
-import {Directive, Input, Output, EventEmitter, HostListener, OnDestroy, Inject} from '@angular/core';
+import {Directive, Input, Output, EventEmitter, OnDestroy, Inject} from '@angular/core';
 import {Router, NavigationEnd, NavigationError, NavigationCancel} from '@angular/router';
 import {DOCUMENT} from '@angular/platform-browser';
 import {Subscription} from 'rxjs/Subscription';
