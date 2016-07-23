@@ -1,11 +1,15 @@
-import {Directive, ElementRef, Input, Output, EventEmitter, HostListener, OnDestroy} from '@angular/core';
+import {Directive, Input, Output, EventEmitter, OnDestroy, Inject} from '@angular/core';
 import {Router, NavigationEnd, NavigationError, NavigationCancel} from '@angular/router';
+import {DOCUMENT} from '@angular/platform-browser';
 import {Subscription} from 'rxjs/Subscription';
 import {PageScrollConfig, IEasingFunction} from './ng2-page-scroll-config';
 import {PageScrollManager} from './ng2-page-scroll-manager';
 
 @Directive({
-    selector: '[pageScroll]'
+    selector: '[pageScroll]',
+    host: {
+      '(click)': 'handleClick($event)',
+    }
 })
 export class PageScroll implements OnDestroy {
 
@@ -30,7 +34,6 @@ export class PageScroll implements OnDestroy {
     @Output()
     pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    private document: Document;
     private body: HTMLBodyElement;
     private scrollTopSources: any[];
 
@@ -41,9 +44,8 @@ export class PageScroll implements OnDestroy {
         return (typeof variable === 'undefined') || variable === undefined || variable === null;
     }
 
-    constructor(private el: ElementRef, private router: Router) {
-        this.document = el.nativeElement.ownerDocument;
-        this.body = el.nativeElement.ownerDocument.body;
+    constructor(private router: Router, @Inject(DOCUMENT) private document: any) {
+        this.body = document.body;
         this.scrollTopSources = [this.document.documentElement, this.body, this.document.body.parentNode];
     }
 
@@ -58,7 +60,6 @@ export class PageScroll implements OnDestroy {
         return this.stopInternal(true);
     }
 
-    @HostListener('click', ['$event'])
     private handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
         if (this.routerLink) {
             // We need to navigate their first.
