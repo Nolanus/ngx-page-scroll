@@ -1,3 +1,14 @@
+## 1.2.1 (2016-07-23)
+
+Fix:
+
+- Problem with Event gloval in angular universal  (thanks to [threesquared](https://github.com/threesquared), PR #20) 
+
+Other:
+
+- New angular version (rc.4)
+- New angular router version (beta.2)
+
 ## 1.2.0 (2016-06-30)
 
 Fix:
