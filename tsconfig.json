@@ -1,5 +1,5 @@
 {
-  "version": "1.8.9",
+  "version": "2.0.0",
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
@@ -9,15 +9,13 @@
     "removeComments": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
+    "noImplicitReturns": true,
     "listFiles": false,
     "noLib": false
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "files": [
-    "./typings/browser.d.ts",
+  "include": [
+    "./typings/index.d.ts",
     "./ng2-page-scroll.ts"
   ]
 }
