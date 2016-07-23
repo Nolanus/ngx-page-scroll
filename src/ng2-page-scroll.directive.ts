@@ -7,7 +7,7 @@ import {PageScrollManager} from './ng2-page-scroll-manager';
 
 @Directive({
     selector: '[pageScroll]',
-    host: {
+    host: { // tslint:disable-line:use-host-property-decorator
       '(click)': 'handleClick($event)',
     }
 })
