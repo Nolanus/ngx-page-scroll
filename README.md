@@ -153,6 +153,12 @@ defined in the component
     }
 ```
 
+Disable the pageScroll on demand from the html
+
+```html
+ <a pageScroll [pageScrollEnable]="false" href="#theanchor">Visit</a>
+```
+
 ## Example App
 
 The [_example_](example) subfolder contains a clone of the 

@@ -31,6 +31,9 @@ export class PageScroll implements OnDestroy {
     @Input()
     public pageScrollInterruptible: boolean;
 
+    @Input()
+    public pageScrollEnable: boolean = true;
+
     @Output()
     pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -61,6 +64,9 @@ export class PageScroll implements OnDestroy {
     }
 
     private handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
+        if (!this.pageScrollEnable) {
+            return false;
+        }
         if (this.routerLink) {
             // We need to navigate their first.
             // Navigation is handled by the routerLink directive

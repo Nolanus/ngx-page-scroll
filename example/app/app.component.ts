@@ -11,7 +11,7 @@ import {PageScroll} from 'ng2-page-scroll';
             <a [routerLink]="['/']">Front Page</a>
             <a [routerLink]="['/']" pageScroll href="#anchor2">Front anchor</a>
             <a [routerLink]="['/about']">About</a>
-            <a [routerLink]="['/about']" pageScroll href="#head2">About anchor</a>
+            <a [routerLink]="['/about']" pageScroll href="#head2" [pageScrollEnable]="false">About anchor</a>
             <a [routerLink]="['/contact']">Contact</a>
         </nav>
         <router-outlet></router-outlet>
