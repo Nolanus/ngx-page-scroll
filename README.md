@@ -161,7 +161,7 @@ Disable the pageScroll on demand from the html
 ```
 
 
-#Use the pageScrollService to scroll to an element programmatically
+####Use the pageScrollService to scroll to an element programmatically
 
 ```js
  import {PageScrollService} from 'ng2-page-scroll';
