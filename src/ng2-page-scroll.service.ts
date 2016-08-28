@@ -39,6 +39,7 @@ export class PageScrollService {
         return false;
     }
     public scrollView(anchor: string,
+                      scrollTopSources: any[] = null,
                       pageScrollOffset: number = null,
                       pageScrollInterruptible: boolean = null,
                       pageScrollEasing: IEasingFunction = null,
@@ -52,9 +53,15 @@ export class PageScrollService {
             // Target not found, so stop
             return;
         }
-        let scrollTopSources: any[] = [document.documentElement, this.body, document.body.parentNode];
         pageScrollOffset =
             (PageScrollService.isUndefinedOrNull(pageScrollOffset) ? PageScrollConfig.defaultScrollOffset : pageScrollOffset);
+
+
+        if (scrollTopSources !== null) {
+            this.scrollTopSources = scrollTopSources;
+            pageScrollOffset = pageScrollOffset + (scrollTopSources[0] as HTMLElement).offsetTop;
+        }
+
         let targetScrollTop: number = anchorTarget.offsetTop - pageScrollOffset;
         let startScrollTop: number =
             scrollTopSources.reduce((previousValue: any, currentValue: any) => {
@@ -84,7 +91,7 @@ export class PageScrollService {
         if (intervalConf.duration <= PageScrollConfig._interval) {
             // We should go there directly, as our "animation" would have one big step
             // only anyway and this way we save the interval stuff
-            this.body.scrollTop = intervalConf.targetScrollTop;
+            // this.body.scrollTop = intervalConf.targetScrollTop;
             this.pageScrollFinish.emit(true);
             return;
         }

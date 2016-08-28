@@ -69,6 +69,7 @@ export class PageScroll implements OnDestroy {
                 if (routerEvent instanceof NavigationEnd) {
                     subscription.unsubscribe();
                     this.pageScrollService.scrollView(this.href,
+                        this.scrollTopSources,
                         this.pageScrollOffset,
                         this.pageScrollInterruptible,
                         this.pageScrollEasing,
@@ -79,6 +80,7 @@ export class PageScroll implements OnDestroy {
             });
         } else {
             this.pageScrollService.scrollView(this.href,
+                this.scrollTopSources,
                 this.pageScrollOffset,
                 this.pageScrollInterruptible,
                 this.pageScrollEasing,
