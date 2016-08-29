@@ -153,6 +153,49 @@ defined in the component
     }
 ```
 
+Disable the pageScroll on demand from the html
+
+```html
+ <a pageScroll [pageScrollEnable]="false" href="#theanchor">Visit</a>
+```
+
+
+##### Use the pageScrollService to scroll to an element programmatically
+
+```js
+ import {PageScrollService} from 'ng2-page-scroll';
+ @Component()
+ class myComponnet{
+  constructor(private pageScrollService: PageScrollService) {}
+  goToAnchor(theanchor) {
+   this.pageScrollService.scrollView(theanchor);
+  }
+ }
+```
+
+```html
+ <a (click)='goToAnchor("#theanchor")'>Visit</a>
+```
+
+
+##### Use the pageScrollService to scroll to an element with parent as base scroll programmatically
+
+```js
+ import {PageScrollService} from 'ng2-page-scroll';
+ @Component()
+ class myComponnet{
+  constructor(private pageScrollService: PageScrollService) {}
+  @ViewChild('container') private container : elementRef;
+  goToAnchorWithParentContainer(theanchor) {
+   this.pageScrollService.scrollView(theanchor, [this.container.nativeElement]);
+  }
+ }
+```
+
+```html
+ <a (click)='goToAnchor("#theanchor")'>Visit</a>
+```
+
 ## Example App
 
 The [_example_](example) subfolder contains a clone of the 
