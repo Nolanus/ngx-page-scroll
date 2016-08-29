@@ -4,10 +4,13 @@
   "description": "Pure angular2 directive for scrolling to html anchors",
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
-    "compile": "./node_modules/.bin/tsc && npm run lint",
-    "lint": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
+    "compile": "npm run lint && ./node_modules/.bin/tsc",
+    "lint": "npm run lint:code && npm run lint:test",
+    "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
+    "lint:test": "tslint ./test/**/*.ts -t verbose --exclude ./test/**/*.d.ts",
     "prepublish": "npm run install:typings && npm run compile && node ./make.js",
-    "example": "npm install && cd example/ && npm uninstall ng2-page-scroll && npm install && npm start"
+    "example": "npm install && cd example/ && npm uninstall ng2-page-scroll && npm install && npm start",
+    "test": "./node_modules/protractor/bin/webdriver-manager update && protractor protractor.conf.js"
   },
   "main": "ng2-page-scroll.js",
   "typings": "ng2-page-scroll.d.ts",
@@ -51,6 +54,8 @@
     "@angular/platform-browser-dynamic": "~2.0.0-rc.4",
     "@angular/router": "~3.0.0-beta.2",
     "codelyzer": "^0.0.25",
+    "jasmine": "^2.4.1",
+    "protractor": "~4.0.4",
     "rxjs": "5.0.0-beta.6",
     "systemjs-builder": "^0.15.0",
     "tslint": "^3.10.2",
