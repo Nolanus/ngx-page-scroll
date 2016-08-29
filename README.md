@@ -64,7 +64,6 @@ should stop if the user interferes with it (true) or not (false).
 - `defaultEasingFunction` (`?:IEasingFunction=_linearEasing`) - Easing method 
 to be used while calculating the scroll position over time 
 (default is linear easing).
-- `pageScrollEnable` (`?:boolean=true`) - enable and disable the scrolling.
 
 ### Example
 
