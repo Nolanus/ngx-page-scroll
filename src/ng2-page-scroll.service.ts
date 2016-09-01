@@ -1,138 +1,170 @@
-import {Injectable, Inject} from '@angular/core';
-import {DOCUMENT} from '@angular/platform-browser';
-import {PageScrollManager} from './ng2-page-scroll-manager';
+import {Injectable, isDevMode} from '@angular/core';
 import {PageScrollConfig, IEasingFunction} from './ng2-page-scroll-config';
-import {EventEmitter} from '@angular/core';
+import {PageScrollInstance} from './ng2-page-scroll-instance';
 
 @Injectable()
 export class PageScrollService {
-    private body: HTMLBodyElement;
-    private scrollTopSources: any[];
 
-    private timer: any = null;
-    private interruptListenersAttached: boolean = false;
-    public pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
+    private static runningInstances: PageScrollInstance[] = [];
 
-    private static isUndefinedOrNull(variable: any ): boolean {
-        return (typeof variable === 'undefined') || variable === undefined || variable === null;
-    }
-
-    constructor(@Inject(DOCUMENT) private document: any) {
-        this.body = document.body;
-        this.scrollTopSources = [this.document.documentElement, this.body, this.document.body.parentNode];
-    }
-
-
-    public stopInternal(interrupted: boolean): boolean {
-        PageScrollManager.remove(this);
-
-        if (this.interruptListenersAttached) {
-            PageScrollManager.detachInterfereListeners(this.body);
-            this.interruptListenersAttached = false;
+    private static stopInternal(interrupted: boolean, pageScrollInstance: PageScrollInstance): boolean {
+        let index: number = PageScrollService.runningInstances.indexOf(pageScrollInstance);
+        if (index >= 0) {
+            PageScrollService.runningInstances.splice(index, 1);
         }
 
-        if (this.timer) {
-            clearInterval(this.timer);
-            this.pageScrollFinish.emit(!interrupted);
+        if (pageScrollInstance.interruptListenersAttached) {
+            pageScrollInstance.detachInterruptListeners();
+        }
+
+        if (pageScrollInstance.timer) {
+            clearInterval(pageScrollInstance.timer);
+            pageScrollInstance.fireEvent(!interrupted);
             return true;
         }
         return false;
     }
-    public scrollView(anchor: string,
-                      scrollTopSources: any[] = null,
-                      pageScrollOffset: number = null,
-                      pageScrollInterruptible: boolean = null,
-                      pageScrollEasing: IEasingFunction = null,
-                      pageScrollDuration: number = null): void {
-        // Stop all possibly running scroll animations
-        PageScrollManager.stopAll();
 
-        let anchorTarget: HTMLElement = document.getElementById(anchor.substr(1));
+    /**
+     * Util method to check whether a given variable is either undefined or null
+     * @param variable
+     * @returns {boolean} true the variable is undefined or null
+     */
+    public static isUndefinedOrNull(variable: any): boolean {
+        return (typeof variable === 'undefined') || variable === undefined || variable === null;
+    }
 
-        if (anchorTarget === null) {
-            // Target not found, so stop
+    /**
+     *
+     * @param scrollTarget The HTMLElement to be scrolled to
+     * @param scrollingViews The objects whose "offsetTop" property should be manipulated, resulting in the scroll animation
+     * @param pageScrollOffset The offset to the top of the scrollTarget to be targeted as destination of the scroll animation
+     * @param pageScrollInterruptible Whether the scroll animation should be interruptible by the user (true) of not (false)
+     * @param pageScrollEasing Easing function to manipulate the scroll distance over time
+     * @param pageScrollDuration The duration in milliseconds the animation should take
+     */
+    public static scrollView(scrollTarget: HTMLElement,
+                             scrollingViews: any[] = null,
+                             pageScrollOffset: number = null,
+                             pageScrollInterruptible: boolean = null,
+                             pageScrollEasing: IEasingFunction = null,
+                             pageScrollDuration: number = null): void {
+    }
+
+    /**
+     * Start a scroll animation. All properties of the animation are stored in the given {@link PageScrollInstance} object.
+     *
+     * This is the core functionality of the whole library.
+     *
+     * @param pageScrollInstance
+     */
+    public static start(pageScrollInstance: PageScrollInstance): void {
+        // Stop all possibly running scroll animations in the same namespace
+        PageScrollService.stopAll(pageScrollInstance.namespace);
+
+        if (pageScrollInstance.scrollTopSources === null || pageScrollInstance.scrollTopSources.length === 0) {
+            // No scrollingViews specified, thus we can't animate anything
+            if (isDevMode()) {
+                console.warn('No ScrollTopSource specified, this ng2-page-scroll does not know which DOM elements to scroll');
+            }
             return;
         }
-        pageScrollOffset =
-            (PageScrollService.isUndefinedOrNull(pageScrollOffset) ? PageScrollConfig.defaultScrollOffset : pageScrollOffset);
 
-
-        if (scrollTopSources !== null) {
-            this.scrollTopSources = scrollTopSources;
-            pageScrollOffset = pageScrollOffset + (scrollTopSources[0] as HTMLElement).offsetTop;
-        }
-
-        let targetScrollTop: number = anchorTarget.offsetTop - pageScrollOffset;
-        let startScrollTop: number =
-            scrollTopSources.reduce((previousValue: any, currentValue: any) => {
-                // Get the scrolltop value of the first scrollTopSource that returns a value for its "scrollTop" property
-                // that is not undefined and unequal to 0
-                return previousValue ? previousValue : (currentValue && currentValue.scrollTop);
-            }, undefined);
-
-        let distanceToScroll: number = targetScrollTop - startScrollTop;
-        if (distanceToScroll === 0) {
+        if (pageScrollInstance.distanceToScroll === 0) {
             // We're at the final destination already, so stop
+            if (isDevMode()) {
+                console.log('No distance to scroll, as we\'re at the destination already');
+            }
             return;
         }
-        let startTime: number = new Date().getTime();
 
-        let intervalConf: any = {
-            startScrollTop: startScrollTop,
-            targetScrollTop: targetScrollTop,
-            distanceToScroll: distanceToScroll,
-            startTime: startTime,
-            easing: pageScrollEasing === null ? PageScrollConfig.defaultEasingFunction : pageScrollEasing
-        };
-        intervalConf.duration =
-            pageScrollDuration === null ? PageScrollConfig.defaultDuration : pageScrollDuration;
-        intervalConf.endTime = intervalConf.startTime + intervalConf.duration;
-
-        if (intervalConf.duration <= PageScrollConfig._interval) {
+        if (pageScrollInstance.duration <= PageScrollConfig._interval) {
             // We should go there directly, as our "animation" would have one big step
             // only anyway and this way we save the interval stuff
-            // this.body.scrollTop = intervalConf.targetScrollTop;
-            this.pageScrollFinish.emit(true);
+            if (isDevMode()) {
+                console.log('Scroll duration shorter that interval length, jumping to target');
+            }
+            pageScrollInstance.setScrollTopPosition(pageScrollInstance.targetScrollTop);
+            pageScrollInstance.fireEvent(true);
             return;
         }
 
         // Register the interrupt listeners if we want an interruptible scroll animation
-        if (pageScrollInterruptible
-            || (PageScrollService.isUndefinedOrNull(pageScrollInterruptible) && PageScrollConfig.defaultInterruptible)) {
-            PageScrollManager.attachInterfereListeners(this.body);
-            this.interruptListenersAttached = true;
+        if (pageScrollInstance.interruptible ||
+            (PageScrollService.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
+            pageScrollInstance.attachInterruptListeners();
         }
 
-        this.timer = setInterval((conf: any) => {
-            let currentTime: number = new Date().getTime();
-            let newScrollTop: number;
+        // Let's get started, get the start time...
+        pageScrollInstance.startTime = new Date().getTime();
+        // .. and calculate the end time (when we need to finish at last)
+        pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.duration;
 
-            if (conf.endTime <= currentTime) {
-                this.stopInternal(false);
-                newScrollTop = conf.targetScrollTop;
+        pageScrollInstance.timer = setInterval((_pageScrollInstance: PageScrollInstance) => {
+            // Take the current time
+            let currentTime: number = new Date().getTime();
+
+            // Determine the new scroll position
+            let newScrollTop: number;
+            if (_pageScrollInstance.endTime <= currentTime) {
+                // We're over the time already, so go the targetScrollTop (aka. destination)
+                this.stopInternal(false, _pageScrollInstance);
+                newScrollTop = _pageScrollInstance.targetScrollTop;
             } else {
-                newScrollTop = conf.easing(
-                    currentTime - conf.startTime,
-                    conf.startScrollTop,
-                    conf.distanceToScroll,
-                    conf.duration);
+                // Calculate the scrollTop position based on the current time using the easing function
+                newScrollTop = _pageScrollInstance.easing(
+                    currentTime - _pageScrollInstance.startTime,
+                    _pageScrollInstance.startScrollTop,
+                    _pageScrollInstance.distanceToScroll,
+                    _pageScrollInstance.duration);
             }
             // Set the new scrollTop to all scrollTopSource elements
-            this.scrollTopSources.forEach((scrollTopSource: any) => {
-                if (scrollTopSource && !PageScrollService.isUndefinedOrNull(scrollTopSource.scrollTop)) {
-                    scrollTopSource.scrollTop = newScrollTop;
-                }
-            });
-        }, PageScrollConfig._interval, intervalConf);
+            _pageScrollInstance.setScrollTopPosition(newScrollTop);
+
+        }, PageScrollConfig._interval, pageScrollInstance);
 
         // Register the instance as running one
-        PageScrollManager.add(this);
-    }
-    public stop(): boolean {
-        return this.stopInternal(true);
+        PageScrollService.runningInstances.push(pageScrollInstance);
     }
 
+    /**
+     * Stop all running scroll animations. Optionally limit to stop only the ones of specific namespace.
+     *
+     * @param namespace
+     * @returns {boolean}
+     */
+    public static stopAll(namespace?: string): boolean {
+        if (PageScrollService.runningInstances.length > 0) {
 
+            let instancesToStop: PageScrollInstance[] = [];
+            if (!PageScrollService.isUndefinedOrNull(namespace) && namespace.length > 0) {
+                instancesToStop = PageScrollService.runningInstances.filter((pageScrollInstance: PageScrollInstance) => {
+                    return pageScrollInstance.namespace === namespace;
+                });
+            } else {
+                instancesToStop = PageScrollService.runningInstances;
+            }
 
+            if (instancesToStop.length > 0) {
+                instancesToStop.forEach((pageScrollInstance: PageScrollInstance, index: number) => {
+                    PageScrollService.stopInternal(true, pageScrollInstance);
+                });
+                return true;
+            }
+        }
+        return false;
+    }
 
+    public static stop(pageScrollInstance: PageScrollInstance): boolean {
+        return this.stopInternal(true, pageScrollInstance);
+    }
+
+    constructor() {
+        let message = 'You shouldn\'t create instances of the ng2-page-scroll-service!';
+        if (isDevMode()) {
+            throw message;
+        } else {
+            console.error(message);
+        }
+    }
 }

@@ -10,6 +10,10 @@ export interface IEasingFunction {
     (t: number, b: number, c: number, d: number): number;
 }
 
+export declare type PageScrollTarget = HTMLElement | string;
+
+export declare type PageScrollingViews = HTMLElement | Document | HTMLBodyElement | Node;
+
 export class PageScrollConfig {
 
     /**
@@ -19,6 +23,8 @@ export class PageScrollConfig {
      * @private
      */
     public static _interval: number = 10;
+
+    public static _defaultNamespace = 'default';
 
     /**
      * The duration how long a scrollTo animation should last by default.
@@ -35,7 +41,7 @@ export class PageScrollConfig {
     public static defaultScrollOffset: number = 0;
 
     /**
-     * The events that are listened to on the body to decide whether a scroll animation has been interfered by the user
+     * The events that are listened to on the body to decide whether a scroll animation has been interfered/interrupted by the user
      * @type {string[]}
      * @private
      */
@@ -69,4 +75,5 @@ export class PageScrollConfig {
     public static set defaultEasingFunction(easingFunction: IEasingFunction) {
         PageScrollConfig._easingFunction = easingFunction;
     }
+
 }
