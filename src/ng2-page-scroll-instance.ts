@@ -3,47 +3,67 @@
  */
 
 import {EventEmitter} from '@angular/core';
+
 import {IEasingFunction, PageScrollConfig, PageScrollTarget, PageScrollingViews} from './ng2-page-scroll-config';
-import {PageScrollService} from './ng2-page-scroll.service';
+import {PageScrollUtilService} from './ng2-page-scroll-util.service';
 
 /**
  * Represents a scrolling action
  */
 export class PageScrollInstance {
 
-    // These properties will be set during instance construction
-    private _namespace: string = PageScrollConfig._defaultNamespace;
-    private document: Document;
-    private _scrollTopSources: any[];
+    /**
+     * These properties will be set during instance construction
+     */
 
+    /* A namespace to "group" scroll animations together and stopping some does not stop others */
+    private _namespace: string = PageScrollConfig._defaultNamespace;
+    /* The document all the scrolling takes place and scroll targets are located in */
+    private document: Document;
+    /* The DOM elements or similar nodes whose scrollTop property will be manipulated during scrolling */
+    private _scrollTopSources: PageScrollingViews[];
+
+    /* The initial value of the scrollTop position when the animation starts */
     private _startScrollTop: number = 0;
+    /* The target value of the scrollTop position for the animation (aka "the final destination" */
     private _targetScrollTop: number;
+    /* Difference between startScrollTop and targetScrollTop. Pre-calculated to minimize computations during animation */
     private _distanceToScroll: number;
+    /* Duration in milliseconds the scroll animation should last */
     private _duration: number = PageScrollConfig.defaultDuration;
+    /* Easing function to manipulate the scrollTop value over time */
     private _easing: IEasingFunction = PageScrollConfig.defaultEasingFunction;
+    /* Boolean whether the scroll animation should stop on user interruption or not */
     private _interruptible: boolean = PageScrollConfig.defaultInterruptible;
-    // The listener that this scroll instance attaches to the body to listen for interrupt events
+    /* The listener that this scroll instance attaches to the body to listen for interrupt events
+     We're keeping a reference to it so we can properly remove it when the animation finishes */
     private _interruptListener: EventListenerOrEventListenerObject;
-    // Event emitter to notify the world about the scrolling
+    /* Event emitter to notify the world about the scrolling */
     private _pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    // These properties will be set/manipulated if the scroll animation starts
+    /**
+     * These properties will be set/manipulated if the scroll animation starts
+     */
+
+    /* The timestamp when the animation starts/got started */
     private _startTime: number;
+    /* The estimate end time of the animation, calculated by startTime + duration */
     private _endTime: number;
+    /* Whether an interrupt listener is attached to the body or not */
     private _interruptListenersAttached: boolean = false;
 
-    // This property holds a references to the timer instance that is used to perform the scroll animation
+    /* References to the timer instance that is used to perform the scroll animation to be
+     able to clear it on animation end*/
     private _timer: any = null;
 
-    private static getInterruptListener(namespace: string): EventListenerOrEventListenerObject {
-        return (event: Event): void => {
-            // Stop the scroll animation if the user interferes/interrupts with it
-            if (event.type !== 'keyup' || PageScrollConfig._interruptKeys.indexOf((<KeyboardEvent>event).keyCode) >= 0) {
-                PageScrollService.stopAll(namespace);
-            }
-        };
-    }
-
+    /**
+     * Extract the scrollTarget HTMLElement from the given PageScrollTarget object. The latter one may be
+     * a string like "#heading2", then this method returns the corresponding DOM element for that id.
+     *
+     * @param document
+     * @param scrollTarget
+     * @returns {HTMLElement}
+     */
     private static extractScrollTarget(document: Document, scrollTarget: PageScrollTarget): HTMLElement {
         if (typeof scrollTarget === 'string') {
             return document.getElementById(scrollTarget.substr(1));
@@ -51,7 +71,9 @@ export class PageScrollInstance {
         return <HTMLElement>scrollTarget;
     }
 
-    // Factory methods for instance creation
+    /**
+     * Factory methods for instance creation
+     */
     public static simpleInstance(document: Document,
                                  scrollTarget: PageScrollTarget,
                                  namespace?: string): PageScrollInstance {
@@ -93,14 +115,14 @@ export class PageScrollInstance {
                                    pageScrollEasing: IEasingFunction = null,
                                    pageScrollDuration: number = null): PageScrollInstance {
 
-        if (PageScrollService.isUndefinedOrNull(namespace) || namespace.length <= 0) {
+        if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length <= 0) {
             namespace = PageScrollConfig._defaultNamespace;
         }
         let pageScrollInstance: PageScrollInstance = new PageScrollInstance(namespace, document);
 
         pageScrollInstance._scrollTopSources = scrollingViews;
 
-        if (PageScrollService.isUndefinedOrNull(pageScrollOffset)) {
+        if (PageScrollUtilService.isUndefinedOrNull(pageScrollOffset)) {
             pageScrollOffset = PageScrollConfig.defaultScrollOffset;
         }
 
@@ -109,7 +131,7 @@ export class PageScrollInstance {
 
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
         pageScrollInstance.scrollTopSources.forEach((scrollingView: any) => {
-            if (PageScrollService.isUndefinedOrNull(scrollingView)) {
+            if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
                 return;
             }
             // Get the scrolltop value of the first scrollTopSource that returns a value for its "scrollTop" property
@@ -143,19 +165,16 @@ export class PageScrollInstance {
         // Calculate the distance we need to go in total
         pageScrollInstance._distanceToScroll = pageScrollInstance.targetScrollTop - pageScrollInstance.startScrollTop;
 
-        if (!PageScrollService.isUndefinedOrNull(pageScrollEasing)) {
+        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollEasing)) {
             pageScrollInstance._easing = pageScrollEasing;
         }
 
-        if (!PageScrollService.isUndefinedOrNull(pageScrollDuration)) {
+        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollDuration)) {
             pageScrollInstance._duration = pageScrollDuration;
         }
 
         pageScrollInstance._interruptible = pageScrollInterruptible ||
-            (PageScrollService.isUndefinedOrNull(pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
-        if (pageScrollInstance._interruptible) {
-            pageScrollInstance._interruptListener = PageScrollInstance.getInterruptListener(pageScrollInstance.namespace);
-        }
+            (PageScrollUtilService.isUndefinedOrNull(pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
 
         return pageScrollInstance;
     }
@@ -171,28 +190,55 @@ export class PageScrollInstance {
         this.document = document;
     }
 
+    /**
+     * Sets the "scrollTop" property for all scrollingViews to the provided value
+     * @param position
+     */
     public setScrollTopPosition(position: number): void {
         // Set the new scrollTop to all scrollTopSource elements
         this.scrollTopSources.forEach((scrollTopSource: any) => {
-            if (scrollTopSource && !PageScrollService.isUndefinedOrNull(scrollTopSource.scrollTop)) {
+            if (scrollTopSource && !PageScrollUtilService.isUndefinedOrNull(scrollTopSource.scrollTop)) {
                 scrollTopSource.scrollTop = position;
             }
         });
     }
 
+    /**
+     * Trigger firing a animation finish event
+     * @param value Whether the animation finished at the target (true) or got interrupted (false)
+     */
     public fireEvent(value: boolean): void {
         if (this._pageScrollFinish) {
             this._pageScrollFinish.emit(value);
         }
     }
 
-    public attachInterruptListeners(): void {
+    /**
+     * Attach the interrupt listeners to the PageScrollInstance body. The given interruptReporter
+     * will be called if any of the attached events is fired.
+     *
+     * Possibly attached interruptListeners are automatically removed from the body before the new one will be attached.
+     *
+     * @param interruptReporter
+     */
+    public attachInterruptListeners(interruptReporter: InterruptReporter): void {
+        if (this._interruptListenersAttached) {
+            // Detach possibly existing listeners first
+            this.detachInterruptListeners();
+        }
+        this._interruptListener = (event: Event): void => {
+            interruptReporter.report(event, this);
+        };
         PageScrollConfig._interruptEvents.forEach(
             (event: string) => this.document.body.addEventListener(event, this._interruptListener)
         );
         this._interruptListenersAttached = true;
     }
 
+    /**
+     * Remove event listeners from the body and stop listening for events that might be treated as "animation
+     * interrupt" events.
+     */
     public detachInterruptListeners(): void {
         PageScrollConfig._interruptEvents.forEach(
             (event: string) => this.document.body.removeEventListener(event, this._interruptListener)
@@ -259,5 +305,17 @@ export class PageScrollInstance {
     public get interruptListenersAttached(): boolean {
         return this._interruptListenersAttached;
     }
+}
 
+/**
+ * An Interface a listener should implement to be notified about possible interrupt events
+ * that happend due to user interaction while a scroll animation takes place.
+ *
+ * The PageScrollService provides an implementation to a PageScrollInstance to be notified
+ * about scroll animation interrupts and stop related animations.
+ */
+export interface InterruptReporter {
+    report: {
+        (event: Event, pageScrollInstance: PageScrollInstance): void;
+    };
 }

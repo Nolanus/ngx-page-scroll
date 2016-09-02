@@ -5,9 +5,11 @@ import {LocationStrategy, HashLocationStrategy} from '@angular/common';
 import {APP_ROUTER_PROVIDERS} from './app.routes';
 
 import {AppComponent} from './app.component';
+import {PageScrollService} from 'ng2-page-scroll';
 
 //enableProdMode();
 bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
+    PageScrollService,
     //{ provide: LocationStrategy, useClass: HashLocationStrategy }
 ]).catch(err => console.error(err));

@@ -1,16 +1,29 @@
 import {Injectable, isDevMode} from '@angular/core';
-import {PageScrollConfig, IEasingFunction} from './ng2-page-scroll-config';
-import {PageScrollInstance} from './ng2-page-scroll-instance';
+
+import {PageScrollConfig} from './ng2-page-scroll-config';
+import {PageScrollInstance, InterruptReporter} from './ng2-page-scroll-instance';
+import {PageScrollUtilService} from './ng2-page-scroll-util.service';
 
 @Injectable()
 export class PageScrollService {
 
-    private static runningInstances: PageScrollInstance[] = [];
+    private static instanceCounter: number = 0;
 
-    private static stopInternal(interrupted: boolean, pageScrollInstance: PageScrollInstance): boolean {
-        let index: number = PageScrollService.runningInstances.indexOf(pageScrollInstance);
+    private runningInstances: PageScrollInstance[] = [];
+
+    private onInterrupted: InterruptReporter = {
+        report: (event: Event, pageScrollInstance: PageScrollInstance): void => {
+            if (pageScrollInstance.interruptible &&
+                (event.type !== 'keyup' || PageScrollConfig._interruptKeys.indexOf((<KeyboardEvent>event).keyCode) >= 0)) {
+                this.stopAll(pageScrollInstance.namespace);
+            }
+        }
+    };
+
+    private stopInternal(interrupted: boolean, pageScrollInstance: PageScrollInstance): boolean {
+        let index: number = this.runningInstances.indexOf(pageScrollInstance);
         if (index >= 0) {
-            PageScrollService.runningInstances.splice(index, 1);
+            this.runningInstances.splice(index, 1);
         }
 
         if (pageScrollInstance.interruptListenersAttached) {
@@ -26,41 +39,15 @@ export class PageScrollService {
     }
 
     /**
-     * Util method to check whether a given variable is either undefined or null
-     * @param variable
-     * @returns {boolean} true the variable is undefined or null
-     */
-    public static isUndefinedOrNull(variable: any): boolean {
-        return (typeof variable === 'undefined') || variable === undefined || variable === null;
-    }
-
-    /**
-     *
-     * @param scrollTarget The HTMLElement to be scrolled to
-     * @param scrollingViews The objects whose "offsetTop" property should be manipulated, resulting in the scroll animation
-     * @param pageScrollOffset The offset to the top of the scrollTarget to be targeted as destination of the scroll animation
-     * @param pageScrollInterruptible Whether the scroll animation should be interruptible by the user (true) of not (false)
-     * @param pageScrollEasing Easing function to manipulate the scroll distance over time
-     * @param pageScrollDuration The duration in milliseconds the animation should take
-     */
-    public static scrollView(scrollTarget: HTMLElement,
-                             scrollingViews: any[] = null,
-                             pageScrollOffset: number = null,
-                             pageScrollInterruptible: boolean = null,
-                             pageScrollEasing: IEasingFunction = null,
-                             pageScrollDuration: number = null): void {
-    }
-
-    /**
      * Start a scroll animation. All properties of the animation are stored in the given {@link PageScrollInstance} object.
      *
      * This is the core functionality of the whole library.
      *
      * @param pageScrollInstance
      */
-    public static start(pageScrollInstance: PageScrollInstance): void {
+    public start(pageScrollInstance: PageScrollInstance): void {
         // Stop all possibly running scroll animations in the same namespace
-        PageScrollService.stopAll(pageScrollInstance.namespace);
+        this.stopAll(pageScrollInstance.namespace);
 
         if (pageScrollInstance.scrollTopSources === null || pageScrollInstance.scrollTopSources.length === 0) {
             // No scrollingViews specified, thus we can't animate anything
@@ -91,8 +78,8 @@ export class PageScrollService {
 
         // Register the interrupt listeners if we want an interruptible scroll animation
         if (pageScrollInstance.interruptible ||
-            (PageScrollService.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
-            pageScrollInstance.attachInterruptListeners();
+            (PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
+            pageScrollInstance.attachInterruptListeners(this.onInterrupted);
         }
 
         // Let's get started, get the start time...
@@ -124,7 +111,7 @@ export class PageScrollService {
         }, PageScrollConfig._interval, pageScrollInstance);
 
         // Register the instance as running one
-        PageScrollService.runningInstances.push(pageScrollInstance);
+        this.runningInstances.push(pageScrollInstance);
     }
 
     /**
@@ -133,21 +120,21 @@ export class PageScrollService {
      * @param namespace
      * @returns {boolean}
      */
-    public static stopAll(namespace?: string): boolean {
-        if (PageScrollService.runningInstances.length > 0) {
-
+    public stopAll(namespace?: string): boolean {
+        if (this.runningInstances.length > 0) {
+            // FIXME Optimize that to only do one iteration over the array
             let instancesToStop: PageScrollInstance[] = [];
-            if (!PageScrollService.isUndefinedOrNull(namespace) && namespace.length > 0) {
-                instancesToStop = PageScrollService.runningInstances.filter((pageScrollInstance: PageScrollInstance) => {
+            if (!PageScrollUtilService.isUndefinedOrNull(namespace) && namespace.length > 0) {
+                instancesToStop = this.runningInstances.filter((pageScrollInstance: PageScrollInstance) => {
                     return pageScrollInstance.namespace === namespace;
                 });
             } else {
-                instancesToStop = PageScrollService.runningInstances;
+                instancesToStop = this.runningInstances;
             }
 
             if (instancesToStop.length > 0) {
                 instancesToStop.forEach((pageScrollInstance: PageScrollInstance, index: number) => {
-                    PageScrollService.stopInternal(true, pageScrollInstance);
+                    this.stopInternal(true, pageScrollInstance);
                 });
                 return true;
             }
@@ -155,16 +142,16 @@ export class PageScrollService {
         return false;
     }
 
-    public static stop(pageScrollInstance: PageScrollInstance): boolean {
+    public stop(pageScrollInstance: PageScrollInstance): boolean {
         return this.stopInternal(true, pageScrollInstance);
     }
 
     constructor() {
-        let message = 'You shouldn\'t create instances of the ng2-page-scroll-service!';
-        if (isDevMode()) {
-            throw message;
-        } else {
-            console.error(message);
+        if (PageScrollService.instanceCounter > 0 && isDevMode()) {
+            console.warn('An instance of PageScrollService already exists, usually ' +
+                'including one provider should be enough, so double check.');
         }
+        PageScrollService.instanceCounter++;
     }
 }
+

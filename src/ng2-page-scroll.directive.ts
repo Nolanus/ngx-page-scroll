@@ -1,17 +1,19 @@
 import {Directive, Input, Output, EventEmitter, OnDestroy, Inject} from '@angular/core';
 import {Router, NavigationEnd, NavigationError, NavigationCancel} from '@angular/router';
 import {DOCUMENT} from '@angular/platform-browser';
+
 import {Subscription} from 'rxjs/Subscription';
-import {IEasingFunction} from './ng2-page-scroll-config';
+
 import {PageScrollService} from './ng2-page-scroll.service';
 import {PageScrollInstance} from './ng2-page-scroll-instance';
+import {PageScrollUtilService} from './ng2-page-scroll-util.service';
+import {IEasingFunction} from './ng2-page-scroll-config';
 
 @Directive({
     selector: '[pageScroll]',
     host: { // tslint:disable-line:use-host-property-decorator
         '(click)': 'handleClick($event)',
-    },
-    providers: [PageScrollService]
+    }
 })
 export class PageScroll implements OnDestroy {
 
@@ -41,18 +43,18 @@ export class PageScroll implements OnDestroy {
 
     private pageScrollInstance: PageScrollInstance;
 
-    constructor(private router: Router, @Inject(DOCUMENT) private document: any) {
+    constructor(private pageScrollService: PageScrollService, private router: Router, @Inject(DOCUMENT) private document: Document) {
     }
 
     ngOnDestroy(): any {
         if (this.pageScrollInstance) {
-            PageScrollService.stop(this.pageScrollInstance);
+            this.pageScrollService.stop(this.pageScrollInstance);
         }
         return undefined;
     }
 
     private generatePageScrollInstance(): PageScrollInstance {
-        if (PageScrollService.isUndefinedOrNull(this.pageScrollInstance)) {
+        if (PageScrollUtilService.isUndefinedOrNull(this.pageScrollInstance)) {
             let scrollTopSources = [this.document.documentElement, this.document.body, this.document.body.parentNode];
             let anchorTarget: HTMLElement = this.document.body.ownerDocument.getElementById(this.href.substr(1));
             let namespace = this.pageScroll;
@@ -80,13 +82,13 @@ export class PageScroll implements OnDestroy {
             let subscription: Subscription = <Subscription>this.router.events.subscribe((routerEvent) => {
                 if (routerEvent instanceof NavigationEnd) {
                     subscription.unsubscribe();
-                    PageScrollService.start(this.generatePageScrollInstance());
+                    this.pageScrollService.start(this.generatePageScrollInstance());
                 } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
                     subscription.unsubscribe();
                 }
             });
         } else {
-            PageScrollService.start(this.generatePageScrollInstance());
+            this.pageScrollService.start(this.generatePageScrollInstance());
         }
         return false; // to preventDefault()
     }
