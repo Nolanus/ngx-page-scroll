@@ -12,4 +12,4 @@ bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
     PageScrollService,
     //{ provide: LocationStrategy, useClass: HashLocationStrategy }
-]).catch(err => console.error(err));
+]).catch((err: any) => console.error(err));

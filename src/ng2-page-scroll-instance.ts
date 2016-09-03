@@ -135,10 +135,14 @@ export class PageScrollInstance {
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
      * @param scrollingViews The elements that should be scrolled
      * @param namespace Optional namespace to group scroll animations logically
-     * @param pageScrollOffset The offset to be attached to the top of the target element or null/undefined to use application default
-     * @param pageScrollInterruptible Whether this scroll animation should be interruptible. Null/undefined for application default
-     * @param pageScrollEasing Easing function to be used for manipulating the scroll position over time. Null/undefined for application default
-     * @param pageScrollDuration The duration in milliseconds the animation should last. Null/undefined for application default
+     * @param pageScrollOffset The offset to be attached to the top of the target element or
+     *                          null/undefined to use application default
+     * @param pageScrollInterruptible Whether this scroll animation should be interruptible.
+     *                                 Null/undefined for application default
+     * @param pageScrollEasing Easing function to be used for manipulating the scroll position
+     *                          over time. Null/undefined for application default
+     * @param pageScrollDuration The duration in milliseconds the animation should last.
+     *                            Null/undefined for application default
      *
      * @returns {PageScrollInstance}
      */
