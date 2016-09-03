@@ -1,8 +1,9 @@
-import {Component, ViewChild, ElementRef} from '@angular/core';
+import {Component, ViewChild, ElementRef, Inject} from '@angular/core';
 import {ROUTER_DIRECTIVES} from '@angular/router';
 import {NgFor} from '@angular/common';
 
 import {PageScroll, PageScrollService, PageScrollInstance} from 'ng2-page-scroll';
+import {DOCUMENT} from '@angular/platform-browser';
 
 @Component({
     templateUrl: './app/lipsum.component.html',
@@ -12,19 +13,20 @@ import {PageScroll, PageScrollService, PageScrollInstance} from 'ng2-page-scroll
 export class LipsumComponent {
     array: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
-    constructor(private pageScrollService: PageScrollService) {
+    constructor(@Inject(DOCUMENT) private document: Document, private pageScrollService: PageScrollService) {
 
     }
 
-    @ViewChild('container') private container: ElementRef;
+    @ViewChild('container')
+    private container: ElementRef;
 
-    goToAnchorHead11() {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.container.nativeElement.ownerDocument, '#head11');
+    public goToAnchorHead11(): void {
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#head11');
         this.pageScrollService.start(pageScrollInstance);
     };
 
-    goToAnchorByParentSelector() {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.container.nativeElement.ownerDocument, '#inContainer', this.container.nativeElement);
+    public goToAnchorByParentSelector(): void {
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.document, '#inContainer', this.container.nativeElement);
         this.pageScrollService.start(pageScrollInstance);
     }
 }
