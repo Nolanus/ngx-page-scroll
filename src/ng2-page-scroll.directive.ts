@@ -7,7 +7,7 @@ import {Subscription} from 'rxjs/Subscription';
 import {PageScrollService} from './ng2-page-scroll.service';
 import {PageScrollInstance} from './ng2-page-scroll-instance';
 import {PageScrollUtilService} from './ng2-page-scroll-util.service';
-import {IEasingFunction} from './ng2-page-scroll-config';
+import {EasingLogic} from './ng2-page-scroll-config';
 
 @Directive({
     selector: '[pageScroll]',
@@ -30,7 +30,7 @@ export class PageScroll implements OnDestroy {
     public pageScrollDuration: number = null;
 
     @Input()
-    public pageScrollEasing: IEasingFunction = null;
+    public pageScrollEasing: EasingLogic = null;
 
     @Input()
     public pageScrollInterruptible: boolean;

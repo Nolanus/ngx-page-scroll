@@ -4,7 +4,7 @@
 
 import {EventEmitter} from '@angular/core';
 
-import {IEasingFunction, PageScrollConfig, PageScrollTarget, PageScrollingViews} from './ng2-page-scroll-config';
+import {EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews} from './ng2-page-scroll-config';
 import {PageScrollUtilService} from './ng2-page-scroll-util.service';
 
 /**
@@ -32,7 +32,7 @@ export class PageScrollInstance {
     /* Duration in milliseconds the scroll animation should last */
     private _duration: number = PageScrollConfig.defaultDuration;
     /* Easing function to manipulate the scrollTop value over time */
-    private _easing: IEasingFunction = PageScrollConfig.defaultEasingFunction;
+    private _easingLogic: EasingLogic = PageScrollConfig.defaultEasingLogic;
     /* Boolean whether the scroll animation should stop on user interruption or not */
     private _interruptible: boolean = PageScrollConfig.defaultInterruptible;
     /* The listener that this scroll instance attaches to the body to listen for interrupt events
@@ -69,6 +69,26 @@ export class PageScrollInstance {
             return document.getElementById(scrollTarget.substr(1));
         }
         return <HTMLElement>scrollTarget;
+    }
+
+    private static getOffset(document: Document, element: HTMLElement): {top: number, left: number} {
+        let box = element.getBoundingClientRect();
+
+        let body = document.body;
+        let docEl = document.documentElement;
+
+        let window = document.defaultView || {pageYOffset: undefined, pageXOffset: undefined};
+        let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+        let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+        let clientTop = docEl.clientTop || body.clientTop || 0;
+        let clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+        let top = box.top + scrollTop - clientTop;
+        let left = box.left + scrollLeft - clientLeft;
+
+        return {top: Math.round(top), left: Math.round(left)};
+
     }
 
     /*
@@ -139,7 +159,7 @@ export class PageScrollInstance {
      *                          null/undefined to use application default
      * @param pageScrollInterruptible Whether this scroll animation should be interruptible.
      *                                 Null/undefined for application default
-     * @param pageScrollEasing Easing function to be used for manipulating the scroll position
+     * @param pageScrollEasingLogic Easing function to be used for manipulating the scroll position
      *                          over time. Null/undefined for application default
      * @param pageScrollDuration The duration in milliseconds the animation should last.
      *                            Null/undefined for application default
@@ -152,7 +172,7 @@ export class PageScrollInstance {
                                    namespace: string,
                                    pageScrollOffset: number = null,
                                    pageScrollInterruptible: boolean = null,
-                                   pageScrollEasing: IEasingFunction = null,
+                                   pageScrollEasingLogic: EasingLogic = null,
                                    pageScrollDuration: number = null): PageScrollInstance {
 
         if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length <= 0) {
@@ -200,13 +220,13 @@ export class PageScrollInstance {
 
         // Calculate the target position that the scroll animation should go to
         let scrollTargetHTMLElement: HTMLElement = PageScrollInstance.extractScrollTarget(document, scrollTarget);
-        pageScrollInstance._targetScrollTop = scrollTargetHTMLElement.offsetTop - pageScrollOffset;
+        pageScrollInstance._targetScrollTop = PageScrollInstance.getOffset(document, scrollTargetHTMLElement).top - pageScrollOffset;
 
         // Calculate the distance we need to go in total
         pageScrollInstance._distanceToScroll = pageScrollInstance.targetScrollTop - pageScrollInstance.startScrollTop;
 
-        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollEasing)) {
-            pageScrollInstance._easing = pageScrollEasing;
+        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollEasingLogic)) {
+            pageScrollInstance._easingLogic = pageScrollEasingLogic;
         }
 
         if (!PageScrollUtilService.isUndefinedOrNull(pageScrollDuration)) {
@@ -310,8 +330,8 @@ export class PageScrollInstance {
         return this._duration;
     }
 
-    public get easing(): IEasingFunction {
-        return this._easing;
+    public get easingLogic(): EasingLogic {
+        return this._easingLogic;
     }
 
     public get interruptible(): boolean {

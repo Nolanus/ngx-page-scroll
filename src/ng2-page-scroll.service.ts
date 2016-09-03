@@ -99,7 +99,7 @@ export class PageScrollService {
                 newScrollTop = _pageScrollInstance.targetScrollTop;
             } else {
                 // Calculate the scrollTop position based on the current time using the easing function
-                newScrollTop = _pageScrollInstance.easing(
+                newScrollTop = _pageScrollInstance.easingLogic.ease(
                     currentTime - _pageScrollInstance.startTime,
                     _pageScrollInstance.startScrollTop,
                     _pageScrollInstance.distanceToScroll,
