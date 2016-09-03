@@ -2,11 +2,11 @@
   "dependencies": {},
   "devDependencies": {},
   "globalDependencies": {
-    "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts#6697d6f7dadbf5773cb40ecda35a76027e0783b2",
-    "zone.js": "github:DefinitelyTyped/DefinitelyTyped/zone.js/zone.js.d.ts#b923a5aaf013ac84c566f27ba6b5843211981c7a"
+    "core-js": "registry:dt/core-js#0.0.0+20160725163759",
+    "zone.js": "registry:dt/zone.js#0.0.0+20160316155526"
   },
   "globalDevDependencies": {
     "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
-    "node": "registry:dt/node#6.0.0+20160720070758"
+    "node": "registry:dt/node#6.0.0+20160831021119"
   }
 }
