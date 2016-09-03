@@ -122,22 +122,15 @@ export class PageScrollService {
      */
     public stopAll(namespace?: string): boolean {
         if (this.runningInstances.length > 0) {
-            // FIXME Optimize that to only do one iteration over the array
-            let instancesToStop: PageScrollInstance[] = [];
-            if (!PageScrollUtilService.isUndefinedOrNull(namespace) && namespace.length > 0) {
-                instancesToStop = this.runningInstances.filter((pageScrollInstance: PageScrollInstance) => {
-                    return pageScrollInstance.namespace === namespace;
-                });
-            } else {
-                instancesToStop = this.runningInstances;
-            }
-
-            if (instancesToStop.length > 0) {
-                instancesToStop.forEach((pageScrollInstance: PageScrollInstance, index: number) => {
+            let stoppedSome = false;
+            this.runningInstances.forEach((pageScrollInstance: PageScrollInstance, index: number) => {
+                if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
+                    pageScrollInstance.namespace === namespace) {
+                    stoppedSome = true;
                     this.stopInternal(true, pageScrollInstance);
-                });
-                return true;
-            }
+                }
+            });
+            return stoppedSome;
         }
         return false;
     }
