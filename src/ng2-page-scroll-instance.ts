@@ -71,8 +71,17 @@ export class PageScrollInstance {
         return <HTMLElement>scrollTarget;
     }
 
-    /**
+    /*
      * Factory methods for instance creation
+     */
+    /**
+     * Create a PageScrollInstance representing a scroll animation on the documents body.
+     *
+     * @param document The document that contains the body to be scrolled and the scrollTarget elements
+     * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
+     * @param namespace Optional namespace to group scroll animations logically
+     *
+     * @returns {PageScrollInstance}
      */
     public static simpleInstance(document: Document,
                                  scrollTarget: PageScrollTarget,
@@ -90,6 +99,20 @@ export class PageScrollInstance {
         );
     }
 
+    /**
+     * Create a PageScrollInstance representing a scroll animation to the target element where the scrollingView
+     * elements get scrolled (like a div container with fixed height, resulting in scrollbars in it).
+     *
+     * Make sure that the scrollTarget is located inside the scrollingView in the DOM hierarchy, otherwise the
+     * scrollingView will be scrolled to an apparently arbitrary position.
+     *
+     * @param document The document that contains the body to be scrolled and the scrollTarget elements
+     * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
+     * @param scrollingView The element that should be scrolled
+     * @param namespace Optional namespace to group scroll animations logically
+     *
+     * @returns {PageScrollInstance}
+     */
     public static simpleInlineInstance(document: Document,
                                        scrollTarget: PageScrollTarget,
                                        scrollingView: PageScrollingViews,
@@ -106,6 +129,19 @@ export class PageScrollInstance {
         );
     }
 
+    /**
+     *
+     * @param document The document that contains the body to be scrolled and the scrollTarget elements
+     * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
+     * @param scrollingViews The elements that should be scrolled
+     * @param namespace Optional namespace to group scroll animations logically
+     * @param pageScrollOffset The offset to be attached to the top of the target element or null/undefined to use application default
+     * @param pageScrollInterruptible Whether this scroll animation should be interruptible. Null/undefined for application default
+     * @param pageScrollEasing Easing function to be used for manipulating the scroll position over time. Null/undefined for application default
+     * @param pageScrollDuration The duration in milliseconds the animation should last. Null/undefined for application default
+     *
+     * @returns {PageScrollInstance}
+     */
     public static advancedInstance(document: Document,
                                    scrollTarget: PageScrollTarget,
                                    scrollingViews: PageScrollingViews[] = null,
