@@ -2,16 +2,18 @@
  * Created by sebastianfuss on 03.09.16.
  */
 
-import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {ModuleWithProviders} from '@angular/core';
+import {Routes, RouterModule} from '@angular/router';
 
 // Components
-import {AppComponent} from "./app.component";
+import {SimpleScrollComponent} from './simple-scroll/simple-scroll.component';
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
-    // Root
-    { path: '', component: AppComponent},
+    {path: '', component: HomeComponent},
+    {path: 'simple', component: SimpleScrollComponent},
 ];
 
-// - Updated Export
+export const appRoutingProviders: any[] = [];
+
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

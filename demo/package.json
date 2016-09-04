@@ -23,6 +23,7 @@
     "@angular2-material/button": "^2.0.0-alpha.8-1",
     "@angular2-material/card": "^2.0.0-alpha.8-1",
     "@angular2-material/core": "^2.0.0-alpha.8-1",
+    "@angular2-material/list": "^2.0.0-alpha.8-1",
     "@angular2-material/toolbar": "^2.0.0-alpha.8-1",
     "core-js": "^2.4.0",
     "ng2-page-scroll": "file:../",

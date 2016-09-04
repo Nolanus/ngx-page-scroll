@@ -7,20 +7,19 @@ import {RouterModule} from '@angular/router';
 // Material 2
 import {MdCoreModule} from '@angular2-material/core';
 import {MdButtonModule} from '@angular2-material/button';
+import {MdListModule} from '@angular2-material/list';
 import {MdCardModule} from '@angular2-material/card';
 import {MdToolbarModule} from '@angular2-material/toolbar';
 
 // Ng2PageScroll
-import {Ng2PageScrollModule, PageScroll, PageScrollService} from 'ng2-page-scroll';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
-import {routing} from './app.routes';
+import {routing, appRoutingProviders} from './app.routes';
 import {AppComponent} from './app.component';
+import {SimpleScrollComponent} from './simple-scroll/simple-scroll.component';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        PageScroll
-    ],
     imports: [
         BrowserModule,
         RouterModule,
@@ -29,12 +28,22 @@ import {AppComponent} from './app.component';
         routing,
         MdCoreModule,
         MdButtonModule,
+        MdListModule,
         MdCardModule,
         MdToolbarModule,
-        //Ng2PageScrollModule
+        Ng2PageScrollModule
     ],
-    providers: [PageScrollService],
-    bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        SimpleScrollComponent,
+        HomeComponent
+    ],
+    providers: [
+        appRoutingProviders
+    ],
+    bootstrap: [
+        AppComponent
+    ]
 })
 export class AppModule {
 }
