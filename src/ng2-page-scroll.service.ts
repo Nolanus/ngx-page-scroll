@@ -57,10 +57,51 @@ export class PageScrollService {
             return;
         }
 
+        let offsetAdjustment = 0;
+        let startScrollTopFound = false;
+
+        // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
+        pageScrollInstance.scrollTopSources.forEach((scrollingView: any) => {
+            if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
+                return;
+            }
+            // Get the scrolltop value of the first scrollTopSource that returns a value for its "scrollTop" property
+            // that is not undefined and unequal to 0
+
+            if (!startScrollTopFound && scrollingView.scrollTop) {
+                // We found a scrollingView that does not have scrollTop 0
+
+                // Return the scrollTop value, as this will be our startScrollTop
+                pageScrollInstance.startScrollTop = scrollingView.scrollTop;
+                startScrollTopFound = true;
+            }
+
+            // take the offsetTop of that scrollView and add it to the pageScrollOffset, as we need this if
+            // the scrollingView is not the body/html-root element. If the current scrollingView is the
+            // body/html-root is does not matter, as the offsetTop property of those is 0 anyway
+            if (offsetAdjustment !== 0 && offsetAdjustment !== scrollingView.offsetTop) {
+                console.warn('Using multiple scrollViews, but having different offsetTop values!');
+                console.warn('Will silently ignore it and override previous offsetTop value');
+            }
+            offsetAdjustment = scrollingView.offsetTop;
+        });
+
+        // Adjust the offsetTop to properly scroll to target element that are located in "inline" scroll DOM elements
+        let pageScrollOffset = pageScrollInstance.offset + offsetAdjustment;
+
+        // Calculate the target position that the scroll animation should go to
+        pageScrollInstance.targetScrollTop = Math.round(pageScrollInstance.extractScrollTargetPosition().top - pageScrollOffset);
+
+        // Calculate the distance we need to go in total
+        pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollTop - pageScrollInstance.startScrollTop;
+
         if (pageScrollInstance.distanceToScroll === 0) {
-            // We're at the final destination already, so stop
+            // We're at the final destination already
+            // OR we need to scroll down but are already at the end
+            // OR we need to scroll up but are at the top already
+
             if (isDevMode()) {
-                console.log('No distance to scroll, as we\'re at the destination already');
+                console.log('Scrolling not possible, as we can\'t get any closer to the destination');
             }
             return;
         }
@@ -93,20 +134,31 @@ export class PageScrollService {
 
             // Determine the new scroll position
             let newScrollTop: number;
+            let stopNow = false;
             if (_pageScrollInstance.endTime <= currentTime) {
-                // We're over the time already, so go the targetScrollTop (aka. destination)
-                this.stopInternal(false, _pageScrollInstance);
+                // We're over the time already, so go the targetScrollTop (aka destination)
                 newScrollTop = _pageScrollInstance.targetScrollTop;
+                stopNow = true;
             } else {
                 // Calculate the scrollTop position based on the current time using the easing function
-                newScrollTop = _pageScrollInstance.easingLogic.ease(
+                newScrollTop = Math.round(_pageScrollInstance.easingLogic.ease(
                     currentTime - _pageScrollInstance.startTime,
                     _pageScrollInstance.startScrollTop,
                     _pageScrollInstance.distanceToScroll,
-                    _pageScrollInstance.duration);
+                    _pageScrollInstance.duration));
             }
             // Set the new scrollTop to all scrollTopSource elements
-            _pageScrollInstance.setScrollTopPosition(newScrollTop);
+            if (!_pageScrollInstance.setScrollTopPosition(newScrollTop)) {
+                // Setting the new scrollTop value failed for all ScrollingViews
+                // early stop the scroll animation to save resources
+                stopNow = true;
+            }
+
+            // At the end do the internal stop maintenance and fire the pageScrollFinish event
+            // (otherwise the event might arrive at "too early")
+            if (stopNow) {
+                this.stopInternal(false, _pageScrollInstance);
+            }
 
         }, PageScrollConfig._interval, pageScrollInstance);
 

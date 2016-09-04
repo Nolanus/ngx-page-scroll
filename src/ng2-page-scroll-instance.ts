@@ -22,13 +22,11 @@ export class PageScrollInstance {
     private document: Document;
     /* The DOM elements or similar nodes whose scrollTop property will be manipulated during scrolling */
     private _scrollTopSources: PageScrollingViews[];
+    /* The target element that should be scrolled into the viewport */
+    private _scrollTarget: PageScrollTarget;
 
-    /* The initial value of the scrollTop position when the animation starts */
-    private _startScrollTop: number = 0;
-    /* The target value of the scrollTop position for the animation (aka "the final destination" */
-    private _targetScrollTop: number;
-    /* Difference between startScrollTop and targetScrollTop. Pre-calculated to minimize computations during animation */
-    private _distanceToScroll: number;
+    /* Offset in px that the animation should stop above that target element */
+    private _offset: number = PageScrollConfig.defaultScrollOffset;
     /* Duration in milliseconds the scroll animation should last */
     private _duration: number = PageScrollConfig.defaultDuration;
     /* Easing function to manipulate the scrollTop value over time */
@@ -44,7 +42,12 @@ export class PageScrollInstance {
     /**
      * These properties will be set/manipulated if the scroll animation starts
      */
-
+    /* The initial value of the scrollTop position when the animation starts */
+    private _startScrollTop: number = 0;
+    /* The target value of the scrollTop position for the animation (aka "the final destination") */
+    private _targetScrollTop: number;
+    /* Difference between startScrollTop and targetScrollTop. Pre-calculated to minimize computations during animation */
+    private _distanceToScroll: number;
     /* The timestamp when the animation starts/got started */
     private _startTime: number;
     /* The estimate end time of the animation, calculated by startTime + duration */
@@ -55,41 +58,6 @@ export class PageScrollInstance {
     /* References to the timer instance that is used to perform the scroll animation to be
      able to clear it on animation end*/
     private _timer: any = null;
-
-    /**
-     * Extract the scrollTarget HTMLElement from the given PageScrollTarget object. The latter one may be
-     * a string like "#heading2", then this method returns the corresponding DOM element for that id.
-     *
-     * @param document
-     * @param scrollTarget
-     * @returns {HTMLElement}
-     */
-    private static extractScrollTarget(document: Document, scrollTarget: PageScrollTarget): HTMLElement {
-        if (typeof scrollTarget === 'string') {
-            return document.getElementById(scrollTarget.substr(1));
-        }
-        return <HTMLElement>scrollTarget;
-    }
-
-    private static getOffset(document: Document, element: HTMLElement): {top: number, left: number} {
-        let box = element.getBoundingClientRect();
-
-        let body = document.body;
-        let docEl = document.documentElement;
-
-        let window = document.defaultView || {pageYOffset: undefined, pageXOffset: undefined};
-        let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-        let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-
-        let clientTop = docEl.clientTop || body.clientTop || 0;
-        let clientLeft = docEl.clientLeft || body.clientLeft || 0;
-
-        let top = box.top + scrollTop - clientTop;
-        let left = box.left + scrollLeft - clientLeft;
-
-        return {top: Math.round(top), left: Math.round(left)};
-
-    }
 
     /*
      * Factory methods for instance creation
@@ -163,6 +131,8 @@ export class PageScrollInstance {
      *                          over time. Null/undefined for application default
      * @param pageScrollDuration The duration in milliseconds the animation should last.
      *                            Null/undefined for application default
+     * @param pageScrollFinishListener Listener to be called to notify other parts of the application
+     *                                  that the scroll animation has finished
      *
      * @returns {PageScrollInstance}
      */
@@ -173,7 +143,8 @@ export class PageScrollInstance {
                                    pageScrollOffset: number = null,
                                    pageScrollInterruptible: boolean = null,
                                    pageScrollEasingLogic: EasingLogic = null,
-                                   pageScrollDuration: number = null): PageScrollInstance {
+                                   pageScrollDuration: number = null,
+                                   pageScrollFinishListener: EventEmitter<boolean> = null): PageScrollInstance {
 
         if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length <= 0) {
             namespace = PageScrollConfig._defaultNamespace;
@@ -182,48 +153,11 @@ export class PageScrollInstance {
 
         pageScrollInstance._scrollTopSources = scrollingViews;
 
-        if (PageScrollUtilService.isUndefinedOrNull(pageScrollOffset)) {
-            pageScrollOffset = PageScrollConfig.defaultScrollOffset;
+        pageScrollInstance._scrollTarget = scrollTarget;
+
+        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollOffset)) {
+            pageScrollInstance._offset = pageScrollOffset;
         }
-
-        let offsetAdjustment = 0;
-        let startScrollTopFound = false;
-
-        // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
-        pageScrollInstance.scrollTopSources.forEach((scrollingView: any) => {
-            if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
-                return;
-            }
-            // Get the scrolltop value of the first scrollTopSource that returns a value for its "scrollTop" property
-            // that is not undefined and unequal to 0
-
-            if (!startScrollTopFound && scrollingView.scrollTop) {
-                // We found a scrollingView that does not have scrollTop 0
-
-                // Return the scrollTop value, as this will be our startScrollTop
-                pageScrollInstance._startScrollTop = scrollingView.scrollTop;
-                startScrollTopFound = true;
-            }
-
-            // take the offsetTop of that scrollView and add it to the pageScrollOffset, as we need this if
-            // the scrollingView is not the body/html-root element. If the current scrollingView is the
-            // body/html-root is does not matter, as the offsetTop property of those is 0 anyway
-            if (offsetAdjustment !== 0 && offsetAdjustment !== scrollingView.offsetTop) {
-                console.warn('Using multiple scrollViews, but having different offsetTop values!');
-                console.warn('Will silently ignore it and override previous offsetTop value');
-            }
-            offsetAdjustment = scrollingView.offsetTop;
-        });
-
-        // Adjust the offsetTop to properly scroll to target element that are located in "inline" scroll DOM elements
-        pageScrollOffset += offsetAdjustment;
-
-        // Calculate the target position that the scroll animation should go to
-        let scrollTargetHTMLElement: HTMLElement = PageScrollInstance.extractScrollTarget(document, scrollTarget);
-        pageScrollInstance._targetScrollTop = PageScrollInstance.getOffset(document, scrollTargetHTMLElement).top - pageScrollOffset;
-
-        // Calculate the distance we need to go in total
-        pageScrollInstance._distanceToScroll = pageScrollInstance.targetScrollTop - pageScrollInstance.startScrollTop;
 
         if (!PageScrollUtilService.isUndefinedOrNull(pageScrollEasingLogic)) {
             pageScrollInstance._easingLogic = pageScrollEasingLogic;
@@ -231,6 +165,10 @@ export class PageScrollInstance {
 
         if (!PageScrollUtilService.isUndefinedOrNull(pageScrollDuration)) {
             pageScrollInstance._duration = pageScrollDuration;
+        }
+
+        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollFinishListener)) {
+            pageScrollInstance._pageScrollFinish = pageScrollFinishListener;
         }
 
         pageScrollInstance._interruptible = pageScrollInterruptible ||
@@ -251,16 +189,64 @@ export class PageScrollInstance {
     }
 
     /**
+     * Extract the exact location of the scrollTarget element.
+     *
+     * Extract the scrollTarget HTMLElement from the given PageScrollTarget object. The latter one may be
+     * a string like "#heading2", then this method returns the corresponding DOM element for that id.
+     *
+     * @returns {HTMLElement}
+     */
+    public extractScrollTargetPosition(): {top: number, left: number} {
+        // FIXME This propably does not return the correct values of the element is inside another
+        // div and should be "inline/nested scrolled"
+
+        let body = this.document.body;
+        let docEl = this.document.documentElement;
+
+        let window = this.document.defaultView || {pageYOffset: undefined, pageXOffset: undefined};
+        let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+        let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+        let clientTop = docEl.clientTop || body.clientTop || 0;
+        let clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+        let scrollTargetElement: HTMLElement;
+        if (typeof this._scrollTarget === 'string') {
+            scrollTargetElement = this.document.getElementById(this._scrollTarget.substr(1));
+        } else {
+            scrollTargetElement = <HTMLElement>this._scrollTarget;
+        }
+        if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
+            // No element found, so return the current position to not cause any change in scroll position
+            return {top: scrollTop, left: scrollLeft};
+        }
+        let box = scrollTargetElement.getBoundingClientRect();
+
+        let top = box.top + scrollTop - clientTop;
+        let left = box.left + scrollLeft - clientLeft;
+
+        return {top: Math.round(top), left: Math.round(left)};
+    }
+
+    /**
      * Sets the "scrollTop" property for all scrollingViews to the provided value
      * @param position
+     * @return true if at least for one ScrollTopSource the scrollTop value could be set and it kept the new value.
+     *          false if it failed for all ScrollTopSources, meaning that we should stop the animation
+     *          (probably because we're at the end of the scrolling region)
      */
-    public setScrollTopPosition(position: number): void {
+    public setScrollTopPosition(position: number): boolean {
         // Set the new scrollTop to all scrollTopSource elements
-        this.scrollTopSources.forEach((scrollTopSource: any) => {
+        return this.scrollTopSources.reduce((oneAlreadyWorked: any, scrollTopSource: any) => {
             if (scrollTopSource && !PageScrollUtilService.isUndefinedOrNull(scrollTopSource.scrollTop)) {
                 scrollTopSource.scrollTop = position;
+                // Return true of setting the new scrollTop value worked
+                if (scrollTopSource.scrollTop === position) {
+                    return true;
+                }
             }
-        });
+            return oneAlreadyWorked;
+        }, false);
     }
 
     /**
@@ -314,16 +300,32 @@ export class PageScrollInstance {
         return this._scrollTopSources;
     }
 
+    public set startScrollTop(value: number) {
+        this._startScrollTop = value;
+    }
+
     public get startScrollTop(): number {
         return this._startScrollTop;
+    }
+
+    public set targetScrollTop(value: number) {
+        this._targetScrollTop = value;
     }
 
     public get targetScrollTop(): number {
         return this._targetScrollTop;
     }
 
+    public set distanceToScroll(value: number) {
+        this._distanceToScroll = value;
+    }
+
     public get distanceToScroll(): number {
         return this._distanceToScroll;
+    }
+
+    public get offset(): number {
+        return this._offset;
     }
 
     public get duration(): number {
