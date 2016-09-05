@@ -37,13 +37,19 @@ First you need to install the npm module:
 npm install ng2-page-scroll --save
 ```
 
-Then add the `PageScrollService` to the providers array of your applications bootstrap function:
+Then add the `Ng2PageScrollModule` to the imports array of your application module:
 
-```js
-bootstrap(AppComponent, [
-    // Other providers go here
-    PageScrollService
-]);
+```typescript
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
+
+@NgModule({
+    imports: [
+        /* Other imports here */
+        Ng2PageScrollModule
+        ]
+})
+export class AppModule {
+}
 
 ```
 
@@ -55,13 +61,11 @@ more about [angular 2 dependency injection hierarchy at their documentation](htt
 
 ### Directive
 
-Import the directive and add it to the `directives` array of you
- component. In your template you may now add the `pageScroll` attribute 
+In your template you may add the `pageScroll` attribute 
  to elements with an `href` attribute pointing towards an id on the 
  same page (e.g. `#theId`).
 
 ```js
-import {PageScroll} from 'ng2-page-scroll';
 
 @Component({
    ...
@@ -70,7 +74,6 @@ import {PageScroll} from 'ng2-page-scroll';
         <!-- Further content here -->
         <h2 id="awesomePart">This is where the awesome happens</h2>
    ...`,
-    directives: [PageScroll]
 })
 export class MyComponent {
 }
@@ -126,12 +129,12 @@ The class `PageScrollConfig` offers static properties to be manipulated to
 configure the default behavior. Override the respective properties to change 
 all page scroll-animation defaults.
 
-| Configuration Option    | Type            | Default      | Description   |
-| ----------------------- | --------------- | ------------ |-------------- |
-| `defaultScrollOffset`   | number          | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
-| `defaultDuration`       | number          | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `defaultInterruptible`  | boolean         | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
-| `defaultEasingFunction` | IEasingFunction | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
+| Configuration Option    | Type        | Default      | Description   |
+| ----------------------- | ----------- | ------------ |-------------- |
+| `defaultScrollOffset`   | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
+| `defaultDuration`       | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
+| `defaultInterruptible`  | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
+| `defaultEasingFunction` | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### Example
 
@@ -141,12 +144,14 @@ import {PageScrollConfig} from 'ng2-page-scroll';
 export class AppComponent {
     constructor() {
         PageScrollConfig.defaultScrollOffset = 50;
-        PageScrollConfig.defaultEasingFunction = (t: number, b: number, c: number, d: number): number => {
-            // easeInOutExpo easing
-            if (t === 0) return b;
-            if (t === d) return b + c;
-            if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
-            return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+        PageScrollConfig.defaultEasingFunction = {
+            ease: (t: number, b: number, c: number, d: number): number => {
+                // easeInOutExpo easing
+                if (t === 0) return b;
+                if (t === d) return b + c;
+                if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+                return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+            }
         };
     }
 }
@@ -161,13 +166,13 @@ of only 1 second.
 
 ### PageScroll properties
 
-| Attribute                 | Type            | Default      | Description   |
-| ------------------------- | --------------- | ------------ |-------------- |
-| `pageScroll`              |                 |              | Attribute adding scroll-animation behavior when the `click`-event happens on the element.
-| `pageScrollOffset`        | number          | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
-| `pageScrollDuration`      | number          | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `pageScrollInterruptible` | boolean         | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
-| `pageScrollEasing`        | IEasingFunction | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
+| Attribute                 | Type        | Default      | Description   |
+| ------------------------- | ----------- | ------------ |-------------- |
+| `pageScroll`              |             |              | Attribute adding scroll-animation behavior when the `click`-event happens on the element.
+| `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
+| `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
+| `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
+| `pageScrollEasing`        | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### PageScroll events
 
@@ -187,17 +192,22 @@ route is loaded.
  <a pageScroll [routerLink]="['Home']" href="#myanchor">Go there</a>
 ```
 
-Overriding all possible properties. `doSmth()` and `linearEasing` are 
+Overriding all possible properties. `doSmth()` and `myEasing` are 
 defined in the component
 
 ```html
- <a pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="linearEasing" [pageScrollInterruptible]="false" (pageScrollFinish)="doSmth($event)" href="#theanchor">Visit</a>
+ <a pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="myEasing" [pageScrollInterruptible]="false" (pageScrollFinish)="doSmth($event)" href="#theanchor">Visit</a>
 ```
 
 ```js
-    linearEasing:IEasingFunction = (t: number, b: number, c: number, d: number): number => {
-        // Linear easing
-        return c * t / d + b;
+    myEasing: EasingLogic = {
+        ease: (t: number, b: number, c: number, d: number): number => {
+            // easeInOutExpo easing
+            if (t === 0) return b;
+            if (t === d) return b + c;
+            if ((t /= d / 2) < 1) return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
+            return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
+        }
     };
 
     doSmth(reachedTarget: boolean): void {
@@ -211,14 +221,13 @@ defined in the component
 
 ## Example App
 
-The [_example_](example) subfolder contains a clone of the 
-[angular2 quickstart](https://github.com/angular/quickstart) repository 
-adapted to showcase the functionality of ng2-page-scroll. Run the 
-example app by checking out that repository and execute the 
+The [_demo_](demo) subfolder contains a project created with angular-cli
+that has been adapted to showcase the functionality of ng2-page-scroll. Run the 
+demo app by checking out that repository and execute the 
 following command in the project root directory:
 
  ```
- npm run example
+ npm run demo
  ```
   
  This will perform the following steps:
@@ -227,13 +236,13 @@ following command in the project root directory:
  // Install the ng2-page-scroll project
  npm install
  // Change into the example website folder
- cd example/
+ cd demo/
  // Uninstall the current ng2-page-scroll version
  npm uninstall ng2-page-scroll
- // Install the example website's dependencies
+ // Install the demo website's dependencies
  npm install
  // Run the server
- npm start
+ ng serve
  ```
 
 ## TODO:

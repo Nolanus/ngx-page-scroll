@@ -9,7 +9,8 @@
     "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
     "lint:test": "tslint ./test/**/*.ts -t verbose --exclude ./test/**/*.d.ts",
     "prepublish": "npm run install:typings && npm run compile && node ./make.js",
-    "example": "npm install && cd example/ && npm uninstall ng2-page-scroll && npm install && npm start",
+    "example": "echo Outdated command, use 'npm run demo'",
+    "demo": "npm install && cd demo/ && npm uninstall ng2-page-scroll && npm install && ng serve",
     "test": "./node_modules/protractor/bin/webdriver-manager update && protractor protractor.conf.js"
   },
   "main": "ng2-page-scroll.js",

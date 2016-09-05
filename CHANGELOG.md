@@ -1,9 +1,25 @@
+## 3.0.0 (2016-09-05)
+
+Breaking Change:
+- Only angular version 2 rc.5 and older supported
+
+Feature:
+
+- automatically stop the scroll timer task when an end of the scroll-region has been reached 
+
+Other:
+
+- Added ngModule conform export
+- New demo application started with angular-cli
+
 ## 2.0.0 (2016-09-03)
 
 Breaking Change:
+
 - New `PageScrollService` needs to be added to the bootstrap() calls provider array.
 
 Feature:
+
 - Service implementation to trigger scroll animations from other places than an element click
 - Set the scroll container to scroll "inline" (e.g. a div with fixed height and vertical scroll bar)
 
