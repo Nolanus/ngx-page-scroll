@@ -22,6 +22,7 @@ export class PageScrollInstance {
     private document: Document;
     /* The DOM elements or similar nodes whose scrollTop property will be manipulated during scrolling */
     private _scrollTopSources: PageScrollingViews[];
+    private _isInlineScrolling: boolean;
     /* The target element that should be scrolled into the viewport */
     private _scrollTarget: PageScrollTarget;
 
@@ -74,11 +75,10 @@ export class PageScrollInstance {
     public static simpleInstance(document: Document,
                                  scrollTarget: PageScrollTarget,
                                  namespace?: string): PageScrollInstance {
-        let scrollingViews: PageScrollingViews[] = [document.documentElement, document.body, document.body.parentNode];
         return PageScrollInstance.advancedInstance(
             document,
             scrollTarget,
-            scrollingViews,
+            null,
             namespace,
             null,
             null,
@@ -121,7 +121,7 @@ export class PageScrollInstance {
      *
      * @param document The document that contains the body to be scrolled and the scrollTarget elements
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
-     * @param scrollingViews The elements that should be scrolled
+     * @param scrollingViews The elements that should be scrolled. Null to use the default elements of document and body.
      * @param namespace Optional namespace to group scroll animations logically
      * @param pageScrollOffset The offset to be attached to the top of the target element or
      *                          null/undefined to use application default
@@ -151,7 +151,13 @@ export class PageScrollInstance {
         }
         let pageScrollInstance: PageScrollInstance = new PageScrollInstance(namespace, document);
 
-        pageScrollInstance._scrollTopSources = scrollingViews;
+        if (PageScrollUtilService.isUndefinedOrNull(scrollingViews) || scrollingViews.length === 0) {
+            pageScrollInstance._isInlineScrolling = false;
+            pageScrollInstance._scrollTopSources = [document.documentElement, document.body, document.body.parentNode];
+        } else {
+            pageScrollInstance._isInlineScrolling = true;
+            pageScrollInstance._scrollTopSources = scrollingViews;
+        }
 
         pageScrollInstance._scrollTarget = scrollTarget;
 
@@ -200,32 +206,39 @@ export class PageScrollInstance {
         // FIXME This propably does not return the correct values of the element is inside another
         // div and should be "inline/nested scrolled"
 
-        let body = this.document.body;
-        let docEl = this.document.documentElement;
-
-        let window = this.document.defaultView || {pageYOffset: undefined, pageXOffset: undefined};
-        let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-        let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-
-        let clientTop = docEl.clientTop || body.clientTop || 0;
-        let clientLeft = docEl.clientLeft || body.clientLeft || 0;
-
         let scrollTargetElement: HTMLElement;
         if (typeof this._scrollTarget === 'string') {
             scrollTargetElement = this.document.getElementById(this._scrollTarget.substr(1));
         } else {
             scrollTargetElement = <HTMLElement>this._scrollTarget;
         }
-        if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
-            // No element found, so return the current position to not cause any change in scroll position
-            return {top: scrollTop, left: scrollLeft};
+
+        if (this._isInlineScrolling) {
+            return {top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft};
         }
-        let box = scrollTargetElement.getBoundingClientRect();
 
-        let top = box.top + scrollTop - clientTop;
-        let left = box.left + scrollLeft - clientLeft;
+        return PageScrollUtilService.extractElementPosition(this.document, scrollTargetElement);
+    }
 
-        return {top: Math.round(top), left: Math.round(left)};
+    /**
+     * Get the top offset of the scroll animation.
+     * This automatically takes the offset location of the scrolling container/scrolling view
+     * into account (for nested/inline scrolling).
+     *
+     * @returns {number}
+     */
+    public getCurrentOffset(): number {
+
+        return this._offset; /* + this._scrollTopSources.reduce((previousOffset: number, scrollingView) => {
+
+                let scrollingViewTop = PageScrollUtilService.extractElementPosition(this.document, scrollingView).top;
+
+                if (previousOffset !== 0 && previousOffset !== scrollingViewTop) {
+                    console.warn('Using multiple scrollViews, but having different offsetTop values!');
+                    console.warn('Will silently ignore it and override previous top distance value');
+                }
+                return scrollingViewTop;
+            }, 0);*/
     }
 
     /**
@@ -322,10 +335,6 @@ export class PageScrollInstance {
 
     public get distanceToScroll(): number {
         return this._distanceToScroll;
-    }
-
-    public get offset(): number {
-        return this._offset;
     }
 
     public get duration(): number {

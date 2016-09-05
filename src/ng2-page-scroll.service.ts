@@ -57,7 +57,6 @@ export class PageScrollService {
             return;
         }
 
-        let offsetAdjustment = 0;
         let startScrollTopFound = false;
 
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
@@ -75,21 +74,12 @@ export class PageScrollService {
                 pageScrollInstance.startScrollTop = scrollingView.scrollTop;
                 startScrollTopFound = true;
             }
-
-            // take the offsetTop of that scrollView and add it to the pageScrollOffset, as we need this if
-            // the scrollingView is not the body/html-root element. If the current scrollingView is the
-            // body/html-root is does not matter, as the offsetTop property of those is 0 anyway
-            if (offsetAdjustment !== 0 && offsetAdjustment !== scrollingView.offsetTop) {
-                console.warn('Using multiple scrollViews, but having different offsetTop values!');
-                console.warn('Will silently ignore it and override previous offsetTop value');
-            }
-            offsetAdjustment = scrollingView.offsetTop;
         });
 
-        // Adjust the offsetTop to properly scroll to target element that are located in "inline" scroll DOM elements
-        let pageScrollOffset = pageScrollInstance.offset + offsetAdjustment;
+        let pageScrollOffset = pageScrollInstance.getCurrentOffset();
 
         // Calculate the target position that the scroll animation should go to
+        // FIXME: Target scrolltop needs to be relative to the parent, not to the document root
         pageScrollInstance.targetScrollTop = Math.round(pageScrollInstance.extractScrollTargetPosition().top - pageScrollOffset);
 
         // Calculate the distance we need to go in total

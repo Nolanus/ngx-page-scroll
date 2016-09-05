@@ -12,4 +12,29 @@ export class PageScrollUtilService {
     public static isUndefinedOrNull(variable: any): boolean {
         return (typeof variable === 'undefined') || variable === undefined || variable === null;
     }
+
+    public static extractElementPosition(document: Document, scrollTargetElement: HTMLElement): {top: number, left: number} {
+
+        let body = document.body;
+        let docEl = document.documentElement;
+
+        let window = document.defaultView || {pageYOffset: undefined, pageXOffset: undefined};
+        let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+        let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+        let clientTop = docEl.clientTop || body.clientTop || 0;
+        let clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+
+        if (PageScrollUtilService.isUndefinedOrNull(scrollTargetElement)) {
+            // No element found, so return the current position to not cause any change in scroll position
+            return {top: scrollTop, left: scrollLeft};
+        }
+        let box = scrollTargetElement.getBoundingClientRect();
+
+        let top = box.top + scrollTop - clientTop;
+        let left = box.left + scrollLeft - clientLeft;
+
+        return {top: Math.round(top), left: Math.round(left)};
+    }
 }

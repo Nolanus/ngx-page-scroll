@@ -55,13 +55,11 @@ export class PageScroll implements OnDestroy {
 
     private generatePageScrollInstance(): PageScrollInstance {
         if (PageScrollUtilService.isUndefinedOrNull(this.pageScrollInstance)) {
-            let scrollTopSources = [this.document.documentElement, this.document.body, this.document.body.parentNode];
-            let namespace = this.pageScroll;
             this.pageScrollInstance = PageScrollInstance.advancedInstance(
                 this.document,
                 this.href,
-                scrollTopSources,
-                namespace,
+                null,
+                this.pageScroll,
                 this.pageScrollOffset,
                 this.pageScrollInterruptible,
                 this.pageScrollEasing,
