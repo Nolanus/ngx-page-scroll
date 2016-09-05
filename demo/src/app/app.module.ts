@@ -14,10 +14,12 @@ import {MdToolbarModule} from '@angular2-material/toolbar';
 // Ng2PageScroll
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
+// App specific
 import {routing, appRoutingProviders} from './app.routes';
 import {AppComponent} from './app.component';
 import {SimpleScrollComponent} from './simple-scroll/simple-scroll.component';
 import {HomeComponent} from './home/home.component';
+import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
 
 @NgModule({
     imports: [
@@ -35,8 +37,9 @@ import {HomeComponent} from './home/home.component';
     ],
     declarations: [
         AppComponent,
+        HomeComponent,
         SimpleScrollComponent,
-        HomeComponent
+        NestedScrollComponent
     ],
     providers: [
         appRoutingProviders
