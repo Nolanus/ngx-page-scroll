@@ -7,6 +7,10 @@ Feature:
 
 - automatically stop the scroll timer task when an end of the scroll-region has been reached 
 
+Fix:
+
+- Non working event emitter and directive scrolls not working properly on consecutive clicks 
+
 Other:
 
 - Added ngModule conform export
