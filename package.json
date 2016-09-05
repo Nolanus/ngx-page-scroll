@@ -1,6 +1,6 @@
 {
   "name": "ng2-page-scroll",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "Pure angular2 directive for scrolling to html anchors",
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
