@@ -1,4 +1,4 @@
-export interface EasingFunction {
+export abstract class EasingLogic {
     /**
      * Examples may be found at https://github.com/gdsmith/jquery.easing/blob/master/jquery.easing.js
      * or http://gizma.com/easing/
@@ -7,10 +7,6 @@ export interface EasingFunction {
      * @param c change In value
      * @param d duration
      */
-    (t: number, b: number, c: number, d: number): number;
-}
-
-export abstract class EasingLogic {
     public abstract ease(t: number, b: number, c: number, d: number): number;
 }
 
