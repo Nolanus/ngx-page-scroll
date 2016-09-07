@@ -129,12 +129,12 @@ The class `PageScrollConfig` offers static properties to be manipulated to
 configure the default behavior. Override the respective properties to change 
 all page scroll-animation defaults.
 
-| Configuration Option    | Type        | Default      | Description   |
-| ----------------------- | ----------- | ------------ |-------------- |
-| `defaultScrollOffset`   | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
-| `defaultDuration`       | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `defaultInterruptible`  | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
-| `defaultEasingFunction` | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
+| Configuration Option   | Type        | Default      | Description   |
+| ---------------------- | ----------- | ------------ |-------------- |
+| `defaultScrollOffset`  | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
+| `defaultDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
+| `defaultInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
+| `defaultEasingLogic`   | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### Example
 
@@ -144,7 +144,7 @@ import {PageScrollConfig} from 'ng2-page-scroll';
 export class AppComponent {
     constructor() {
         PageScrollConfig.defaultScrollOffset = 50;
-        PageScrollConfig.defaultEasingFunction = {
+        PageScrollConfig.defaultEasingLogic = {
             ease: (t: number, b: number, c: number, d: number): number => {
                 // easeInOutExpo easing
                 if (t === 0) return b;
