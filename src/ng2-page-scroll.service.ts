@@ -79,7 +79,6 @@ export class PageScrollService {
         let pageScrollOffset = pageScrollInstance.getCurrentOffset();
 
         // Calculate the target position that the scroll animation should go to
-        // FIXME: Target scrolltop needs to be relative to the parent, not to the document root
         pageScrollInstance.targetScrollTop = Math.round(pageScrollInstance.extractScrollTargetPosition().top - pageScrollOffset);
 
         // Calculate the distance we need to go in total

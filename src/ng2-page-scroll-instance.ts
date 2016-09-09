@@ -203,12 +203,9 @@ export class PageScrollInstance {
      * @returns {HTMLElement}
      */
     public extractScrollTargetPosition(): {top: number, left: number} {
-        // FIXME This propably does not return the correct values of the element is inside another
-        // div and should be "inline/nested scrolled"
-
         let scrollTargetElement: HTMLElement;
         if (typeof this._scrollTarget === 'string') {
-            scrollTargetElement = this.document.getElementById(this._scrollTarget.substr(1));
+            scrollTargetElement = this.document.getElementById((<string>this._scrollTarget).substr(1));
         } else {
             scrollTargetElement = <HTMLElement>this._scrollTarget;
         }
@@ -228,17 +225,7 @@ export class PageScrollInstance {
      * @returns {number}
      */
     public getCurrentOffset(): number {
-
-        return this._offset; /* + this._scrollTopSources.reduce((previousOffset: number, scrollingView) => {
-
-                let scrollingViewTop = PageScrollUtilService.extractElementPosition(this.document, scrollingView).top;
-
-                if (previousOffset !== 0 && previousOffset !== scrollingViewTop) {
-                    console.warn('Using multiple scrollViews, but having different offsetTop values!');
-                    console.warn('Will silently ignore it and override previous top distance value');
-                }
-                return scrollingViewTop;
-            }, 0);*/
+        return this._offset;
     }
 
     /**
