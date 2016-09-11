@@ -1,6 +1,10 @@
-<h2>Nested scrolling</h2>
-
-<button md-button (click)="scrollInside()">scroll inside the card</button>
+<md-card>
+    <md-card-title id="title">Nested scrolling</md-card-title>
+    <p>
+        Showcasing the scrolling inside a custom container. Triggering is done using the scroll service.
+    </p>
+    <button md-button (click)="scrollInside()" id="startNestedScrollingButton">scroll inside the card</button>
+</md-card>
 
 <md-card>
     <md-card-title>A card</md-card-title>

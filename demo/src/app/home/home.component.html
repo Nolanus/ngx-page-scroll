@@ -1,3 +1,24 @@
-<p>
-  home works!
-</p>
+<md-card>
+    <md-card-title id="title">NgPageScroll Demo application</md-card-title>
+    <p>
+        This small demo application showcases the usage of the ng2-page-scroll library. Please refer to the <a
+            href="https://github.com/Nolanus/ng2-page-scroll#readme" target="_blank">Readme for documentation and
+        instructions</a>. Whenever you encounter and error or have a suggestion for enhance, don't hesitate to <a
+            target="_blank" href="https://github.com/Nolanus/ng2-page-scroll/issues/new">file an issue</a> at the <a
+            target="_blank" href="https://github.com/Nolanus/ng2-page-scroll">project repo on GitHub</a>.
+    </p>
+</md-card>
+
+<md-card>
+    <p>
+        These two buttons have a "routerLink" and "href" attribute set. In combination with the pageScroll directive
+        this results in a press opening the new route and scrolling to the referred DOM element.
+    </p>
+    <button routerLink="/simple" md-raised-button color="primary" href="#head1" pageScroll>
+        Scroll to first heading on "simple scrolling" page
+    </button>
+
+    <button routerLink="/simple" md-raised-button color="primary" href="#head3" pageScroll>
+        Scroll to third heading on "simple scrolling" page
+    </button>
+</md-card>
