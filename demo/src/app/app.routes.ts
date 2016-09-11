@@ -7,13 +7,15 @@ import {Routes, RouterModule} from '@angular/router';
 
 // Components
 import {SimpleScrollComponent} from './simple-scroll/simple-scroll.component';
-import {HomeComponent} from "./home/home.component";
-import {NestedScrollComponent} from "./nested-scroll/nested-scroll.component";
+import {HomeComponent} from './home/home.component';
+import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
+import {TranslatedTargetScrollComponent} from './translated-target-scroll/translated-target-scroll.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'simple', component: SimpleScrollComponent},
     {path: 'nested', component: NestedScrollComponent},
+    {path: 'translated', component: TranslatedTargetScrollComponent},
 ];
 
 export const appRoutingProviders: any[] = [];

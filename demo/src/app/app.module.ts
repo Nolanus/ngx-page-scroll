@@ -20,6 +20,7 @@ import {AppComponent} from './app.component';
 import {SimpleScrollComponent} from './simple-scroll/simple-scroll.component';
 import {HomeComponent} from './home/home.component';
 import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
+import { TranslatedTargetScrollComponent } from './translated-target-scroll/translated-target-scroll.component';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
         AppComponent,
         HomeComponent,
         SimpleScrollComponent,
-        NestedScrollComponent
+        NestedScrollComponent,
+        TranslatedTargetScrollComponent
     ],
     providers: [
         appRoutingProviders
