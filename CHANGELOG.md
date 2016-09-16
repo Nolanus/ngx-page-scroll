@@ -1,3 +1,12 @@
+## 3.1.0 (2016-09-16)
+
+Other:
+
+- Update dependencies to support final angular 2.0.0 release
+- Enhance demo app to be a little more descriptive
+- Add e2e tests
+- Fix documentation mistakes
+
 ## 3.0.0 (2016-09-05)
 
 Breaking Change:

@@ -1,6 +1,6 @@
 {
   "name": "ng2-page-scroll",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "Pure angular2 directive for animated scrolling",
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
