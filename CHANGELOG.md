@@ -1,3 +1,10 @@
+## 3.1.1 (2016-10-01)
+
+Other:
+
+- Update peer dependency to angular 2.0.1 and add back tilde/range constraint 
+
+
 ## 3.1.0 (2016-09-16)
 
 Other:
