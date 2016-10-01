@@ -18,5 +18,10 @@
     "./typings/index.d.ts",
     "./ng2-page-scroll.ts",
     "./test/e2e/*.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "debug": true,
+    "skipMetadataEmit": true
+  }
 }

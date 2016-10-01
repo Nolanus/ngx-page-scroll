@@ -5,7 +5,7 @@
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
     "compile": "npm run lint && ./node_modules/.bin/tsc",
-    "compile_ngc": "npm run lint && ./node_modules/.bin/ngc",
+    "compile_ngc": "npm run lint && ./node_modules/.bin/ngc -p tsconfig-aot.json",
     "lint": "npm run lint:code && npm run lint:test",
     "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts --exclude ./src/**/*.ngfactory.ts",
     "lint:test": "tslint ./test/**/*.ts -t verbose --exclude ./test/**/*.d.ts",
