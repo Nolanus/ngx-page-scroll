@@ -5,8 +5,9 @@
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
     "compile": "npm run lint && ./node_modules/.bin/tsc",
+    "compile_ngc": "npm run lint && ./node_modules/.bin/ngc",
     "lint": "npm run lint:code && npm run lint:test",
-    "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
+    "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts --exclude ./src/**/*.ngfactory.ts",
     "lint:test": "tslint ./test/**/*.ts -t verbose --exclude ./test/**/*.d.ts",
     "prepublish": "npm run install:typings && npm run compile && node ./make.js",
     "example": "echo Outdated command, use 'npm run demo'",
@@ -49,8 +50,10 @@
   "devDependencies": {
     "@angular/common": "~2.0.1",
     "@angular/compiler": "~2.0.1",
+    "@angular/compiler-cli": "~0.6.3",
     "@angular/core": "~2.0.1",
     "@angular/platform-browser": "~2.0.1",
+    "@angular/platform-server": "~2.0.1",
     "@angular/router": "~3.0.0",
     "codelyzer": "^0.0.28",
     "jasmine-core": "2.4.1",
