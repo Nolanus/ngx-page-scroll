@@ -67,8 +67,7 @@ describe('Simple Scroll page', () => {
                     // After 1,25 seconds we should be somewhere in between (near 1/4 of the distance from start to finish)
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
-                            let delta = pos - Math.round(targetLocation / 4);
-                            expect(Math.abs(delta)).toBeLessThan(5);
+                            expect(pos).toBeCloseTo(Math.round(targetLocation / 4), -2);
                         });
                     });
                     // After the 5 seconds we should be at the target
