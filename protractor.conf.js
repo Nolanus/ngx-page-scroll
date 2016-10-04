@@ -1,11 +1,20 @@
+var browsers = [];
+if (process.env.TRAVIS) {
+    browsers.push({
+        browserName: 'firefox'
+    });
+} else {
+    browsers.push({
+        browserName: 'chrome'
+    });
+}
+
 exports.config = {
     baseUrl: 'http://127.0.0.1:4200/',
     specs: ['test/e2e/**/*.spec.js'],
     directConnect: true,
     exclude: [],
-    multiCapabilities: [{
-        browserName: 'chrome'
-    }],
+    multiCapabilities: browsers,
     allScriptsTimeout: 110000,
     getPageTimeout: 100000,
     framework: 'jasmine2',

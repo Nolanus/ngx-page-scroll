@@ -24,9 +24,9 @@ npm-debug.log
 testem.log
 /typings
 
-*.js
-*.js.map
-*.d.ts
+# e2e
+/e2e/*.js
+/e2e/*.map
 
 #System Files
 .DS_Store
