@@ -120,11 +120,12 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-### ng2-page-scroll specific
-*.js
-!make.js
-*.map
-*.d.ts
+# Typescript typings
 typings
+
+# ng2-page-scroll specific
+*.js.map
+*.d.ts
 *.metadata.json
-*.ngfactory.ts
+ng2-page-scroll*.js
+/test/e2e/*.spec.js
