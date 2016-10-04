@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "6"
+  - "5"
+before_install:
+  - export CHROME_BIN=chromium-browser
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sleep 3 # give xvfb some time to start
+install:
+  - npm install
+  - npm run demo &
+    SERVER_PID=$!
+script:
+  - npm test
+after_script:
+  - kill $SERVER_PID
