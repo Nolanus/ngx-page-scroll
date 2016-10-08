@@ -1,3 +1,10 @@
+## 3.1.2 (2016-10-08)
+
+Other:
+
+- TypeScript parameter type change to satisfy ngc (angular compiler) 
+
+
 ## 3.1.1 (2016-10-01)
 
 Other:
