@@ -42,8 +42,10 @@ export class PageScroll implements OnDestroy {
     pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     private pageScrollInstance: PageScrollInstance;
+    private document: Document;
 
-    constructor(private pageScrollService: PageScrollService, private router: Router, @Inject(DOCUMENT) private document: Document) {
+    constructor(private pageScrollService: PageScrollService, private router: Router, @Inject(DOCUMENT) document: any) {
+        this.document = <Document> document;
     }
 
     ngOnDestroy(): any {
