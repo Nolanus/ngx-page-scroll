@@ -54,25 +54,8 @@ export class PageScroll implements OnDestroy {
         }
         return undefined;
     }
-
-    private generatePageScrollInstance(): PageScrollInstance {
-        if (PageScrollUtilService.isUndefinedOrNull(this.pageScrollInstance)) {
-            this.pageScrollInstance = PageScrollInstance.advancedInstance(
-                this.document,
-                this.href,
-                null,
-                this.pageScroll,
-                this.pageScrollOffset,
-                this.pageScrollInterruptible,
-                this.pageScrollEasing,
-                this.pageScrollDuration,
-                this.pageScrollFinish
-            );
-        }
-        return this.pageScrollInstance;
-    }
-
-    private handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
+     
+    handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
 
         if (this.routerLink) {
             // We need to navigate their first.
@@ -93,4 +76,20 @@ export class PageScroll implements OnDestroy {
         return false; // to preventDefault()
     }
 
+    private generatePageScrollInstance(): PageScrollInstance {
+        if (PageScrollUtilService.isUndefinedOrNull(this.pageScrollInstance)) {
+            this.pageScrollInstance = PageScrollInstance.advancedInstance(
+                this.document,
+                this.href,
+                null,
+                this.pageScroll,
+                this.pageScrollOffset,
+                this.pageScrollInterruptible,
+                this.pageScrollEasing,
+                this.pageScrollDuration,
+                this.pageScrollFinish
+            );
+        }
+        return this.pageScrollInstance;
+    }
 }
