@@ -24,7 +24,7 @@ Other:
 ## 3.0.0 (2016-09-05)
 
 Breaking Change:
-- Only angular version 2 rc.5 and older supported
+- Only angular version 2 rc.5 or later supported
 - defaultEasingFunction interface has been removed in favour of defaultEasingLogic abstract class to be extended/overridden for defining custom easing methods
 
 Feature:
