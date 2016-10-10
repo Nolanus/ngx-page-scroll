@@ -1,6 +1,6 @@
 export default {
     entry     : 'ng2-page-scroll.js',
-    dest      : 'bundles/ng2-page-scroll.js',
+    dest      : 'bundles/ng2-page-scroll.umd.js',
     format    : 'umd',
     external  : [
         '@angular/core',

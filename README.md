@@ -55,7 +55,42 @@ export class AppModule {
 
 To ensure there's only one instance of a PageScrollService (Singleton) it is recommended to add the 
 PageScrollService to only one Injector, preferably the root injector of the application. You may read 
-more about [angular 2 dependency injection hierarchy at their documentation](https://angular.io/docs/ts/latest/guide/hierarchical-dependency-injection.html). 
+more about [angular 2 dependency injection hierarchy at their documentation](https://angular.io/docs/ts/latest/guide/hierarchical-dependency-injection.html).
+ 
+Finally you need to specify how your application should load the ng2-page-scroll library:
+
+#### Angular2 modules
+
+All the compiled JavaScript files use ES2015 module format, so they are ready for usage with [RollupJS](http://rollupjs.org/). However, you cannot use them with SystemJS.
+
+`.metadata.json` files are generated for usage with [Angular2 AoT compiler](https://angular.io/docs/ts/latest/cookbook/aot-compiler.html).
+
+#### SystemJS
+
+UMD bundles are available for SystemJS loading. Example:
+
+```js
+System.config({
+    paths: {
+        'npm:': 'node_modules/'
+    },
+    map: {
+        app: 'app',
+
+        '@angular/core'   : 'npm:@angular/core/bundles/core.umd.js',
+        '@angular/common' : 'npm:@angular/common/bundles/common.umd.js',
+        // further angular bundles...
+
+        'ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
+
+        rxjs: 'npm:rxjs',
+    },
+    packages: {
+        app : {defaultExtension: 'js', main: './main.js'},
+        rxjs: {defaultExtension: 'js'}
+    }
+});
+```
 
 ## Usage 
 
@@ -247,7 +282,6 @@ following command in the project root directory:
 
 ## TODO:
 
-* Unit tests
 * Test across browsers
 
 ## License
