@@ -30,9 +30,15 @@ node_modules
 typings
 /.codeclimate.yml
 /.gitignore
+/.gitattributes
 /.npmignore
 /.travis.yml
-
+/.eslintignore
+/.eslintrc
+/tslint.json
+/rollup-uglify.conf.js
+/rollup.conf.js
+/protractor.conf.js
 
 # Editor specific
 .idea
