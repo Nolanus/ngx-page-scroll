@@ -10,7 +10,7 @@ import {EasingLogic} from 'ng2-page-scroll';
 })
 export class SimpleScrollComponent implements OnInit {
 
-    public constructor(@Inject(DOCUMENT) private document: Document, private pageScrollService: PageScrollService) {
+    public constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
     }
 
     ngOnInit() {

@@ -10,14 +10,13 @@ import {DOCUMENT} from '@angular/platform-browser';
 export class NestedScrollComponent implements OnInit {
 
     @ViewChild('container')
-    private container: ElementRef;
+    public container: ElementRef;
 
-    constructor(@Inject(DOCUMENT) private document: Document, private pageScrollService: PageScrollService) {
+    constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
     }
 
     ngOnInit() {
     }
-
 
     public scrollInside() {
         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.document, '#inContainer', this.container.nativeElement);

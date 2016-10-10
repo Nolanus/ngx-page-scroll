@@ -25,7 +25,9 @@ testem.log
 /typings
 
 # source
-/src/*.js
+/src/**/*.js
+/src/**/*.css.shim.ts
+/src/**/*.ngfactory.ts
 
 # e2e
 /e2e/*.js
