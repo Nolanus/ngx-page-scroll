@@ -72,7 +72,7 @@ export class PageScroll implements OnDestroy {
         return this.pageScrollInstance;
     }
 
-    private handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
+    public handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
 
         if (this.routerLink) {
             // We need to navigate their first.
