@@ -1,3 +1,9 @@
+## 3.1.4 (2016-10-10)
+
+Fix:
+
+- Private method handleClick() referenced in template 
+
 ## 3.1.3 (2016-10-10)
 
 Other:
