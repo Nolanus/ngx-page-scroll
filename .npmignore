@@ -26,9 +26,19 @@ coverage
 build/Release
 
 # Dependency directory
-# https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
+typings
+/.codeclimate.yml
+/.gitignore
+/.npmignore
+/.travis.yml
+
+
+# Editor specific
+.idea
+
+# test cases
+test
 
 # project demo app
 demo
-
