@@ -1,3 +1,10 @@
+## 3.1.3 (2016-10-10)
+
+Other:
+
+- Add some files to npmignore to make the npm-build smaller
+- Update Readme to showcase usage of the new angular2 modules and commonJs
+
 ## 3.1.2 (2016-10-08)
 
 Other:
