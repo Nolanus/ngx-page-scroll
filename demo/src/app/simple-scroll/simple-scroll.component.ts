@@ -1,16 +1,20 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {PageScrollInstance, PageScrollService} from 'ng2-page-scroll';
+import {Component, OnInit, Inject, ViewContainerRef} from '@angular/core';
 import {DOCUMENT} from '@angular/platform-browser';
-import {EasingLogic} from 'ng2-page-scroll';
+import {MdSnackBarConfig, MdSnackBar} from '@angular/material';
+import {PageScrollInstance, PageScrollService, EasingLogic} from 'ng2-page-scroll';
 
 @Component({
     selector: 'app-simple-scroll',
     templateUrl: './simple-scroll.component.html',
-    styleUrls: ['./simple-scroll.component.css']
+    styleUrls: ['./simple-scroll.component.css'],
+    providers: [MdSnackBar]
 })
 export class SimpleScrollComponent implements OnInit {
 
-    public constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
+    public constructor(@Inject(DOCUMENT) private document: any,
+                       private pageScrollService: PageScrollService,
+                       private snackBar: MdSnackBar,
+                       private viewContainerRef: ViewContainerRef) {
     }
 
     ngOnInit() {
@@ -34,11 +38,13 @@ export class SimpleScrollComponent implements OnInit {
     };
 
     public doSmth(reachedTarget: boolean) {
+        let text: string;
         if (reachedTarget) {
-            alert('Yeah, we reached our destination');
+            text = 'Yeah, we reached our destination';
         } else {
-            alert('Ohoh, something interrupted us');
+            text = 'Ohoh, something interrupted us';
         }
+        this.snackBar.open(text, 'Ok', new MdSnackBarConfig(this.viewContainerRef));
     }
 
 }

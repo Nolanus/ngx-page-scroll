@@ -137,17 +137,21 @@ describe('Simple Scroll page', () => {
         });
     });
 
-    // TODO Figure out how to handle alerts or change the "event subscriber"
-    xit('should scroll to seventh heading from button with target reached listener', () => {
+    it('should scroll to seventh heading from button with target reached listener', () => {
         let target: any = element(by.css('#head7'));
         let trigger: any = element(by.css('#finishEventButton'));
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.click().then(() => {
-                    browser.sleep(1250).then(() => {
+                    browser.sleep(400).then(() => {
+                        let snackbar = element(by.css('simple-snack-bar'));
+                        let snackbarMessage = snackbar.element(by.css('.md-simple-snackbar-message'));
+                        let snackbarButton = snackbar.element(by.css('.md-simple-snackbar-action'));
+                        expect(snackbarMessage.getText()).toBe('Yeah, we reached our destination');
+                        snackbarButton.click();
                         getScrollPos().then((pos: number) => {
-                            expect(pos).toBe(Math.round(headingLocation.y));
+                            expect(pos).toEqual(headingLocation.y);
                         });
                     });
                 });
