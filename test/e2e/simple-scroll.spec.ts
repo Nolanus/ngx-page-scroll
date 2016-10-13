@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor/globals';
+import {browser, element, by} from 'protractor';
 
 describe('Simple Scroll page', () => {
 
@@ -10,7 +10,7 @@ describe('Simple Scroll page', () => {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
     }
 
-    function scrollTo(scrollPos: number): Promise<void> {
+    function scrollTo(scrollPos: number): Promise<any> {
         return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', scrollPos);
     }
 
