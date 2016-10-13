@@ -1,3 +1,13 @@
+## 3.1.5 (2016-10-13)
+
+Fix: 
+
+- Make router an optional injection for pageScroll directive (it however requires `@angular/router` to be included)
+
+Other:
+
+- Update dependencies (angular 2.1) 
+
 ## 3.1.4 (2016-10-10)
 
 Fix:
