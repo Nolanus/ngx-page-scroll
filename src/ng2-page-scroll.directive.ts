@@ -1,4 +1,4 @@
-import {Directive, Input, Output, EventEmitter, OnDestroy, Inject} from '@angular/core';
+import {Directive, Input, Output, EventEmitter, OnDestroy, Inject, Optional} from '@angular/core';
 import {Router, NavigationEnd, NavigationError, NavigationCancel} from '@angular/router';
 import {DOCUMENT} from '@angular/platform-browser';
 
@@ -44,7 +44,7 @@ export class PageScroll implements OnDestroy {
     private pageScrollInstance: PageScrollInstance;
     private document: Document;
 
-    constructor(private pageScrollService: PageScrollService, private router: Router, @Inject(DOCUMENT) document: any) {
+    constructor(private pageScrollService: PageScrollService, @Optional() private router: Router, @Inject(DOCUMENT) document: any) {
         this.document = <Document> document;
     }
 
@@ -74,7 +74,7 @@ export class PageScroll implements OnDestroy {
 
     public handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
 
-        if (this.routerLink) {
+        if (this.routerLink && this.router !== null && this.router !== undefined) {
             // We need to navigate their first.
             // Navigation is handled by the routerLink directive
             // so we only need to listen for route change
