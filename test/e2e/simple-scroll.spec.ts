@@ -191,4 +191,26 @@ describe('Simple Scroll page', () => {
             });
         });
     });
+
+    it('should not change scroll position when trying to scroll to non existing target', () => {
+        let body: any = element(by.css('body'));
+        let nonExistingTargetButton: any = element(by.css('#nonExistingTargetButton'));
+        scrollTo(42).then(() => {
+            browser.driver.executeScript('return window.innerHeight;').then((windowHeight: number) => {
+                body.getAttribute('scrollHeight').then((bodyScrollHeight: number) => {
+                    getScrollPos().then((initialPos: number) => {
+                        expect(initialPos).toEqual(42);
+                        nonExistingTargetButton.click().then(() => {
+                            browser.sleep(1250).then(() => {
+                                getScrollPos().then((pos: number) => {
+                                    // Should not be scrolled anywhere
+                                    expect(pos).toBe(42);
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 });

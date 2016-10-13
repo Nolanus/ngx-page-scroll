@@ -210,6 +210,11 @@ export class PageScrollInstance {
             scrollTargetElement = <HTMLElement>this._scrollTarget;
         }
 
+        if (scrollTargetElement === null || scrollTargetElement === undefined) {
+            // Scroll target not found
+            return {top: NaN, left: NaN};
+        }
+
         if (this._isInlineScrolling) {
             return {top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft};
         }

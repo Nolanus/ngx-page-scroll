@@ -84,6 +84,15 @@ export class PageScrollService {
         // Calculate the distance we need to go in total
         pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollTop - pageScrollInstance.startScrollTop;
 
+        if (isNaN(pageScrollInstance.distanceToScroll)) {
+            // We weren't able to find the target position, maybe the element does not exist?
+
+            if (isDevMode()) {
+                console.log('Scrolling not possible, as we can\'t find the specified target');
+            }
+            return;
+        }
+
         if (pageScrollInstance.distanceToScroll === 0) {
             // We're at the final destination already
             // OR we need to scroll down but are already at the end
