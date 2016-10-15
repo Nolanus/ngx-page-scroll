@@ -50,7 +50,6 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
 })
 export class AppModule {
 }
-
 ```
 
 To ensure there's only one instance of a PageScrollService (Singleton) it is recommended to add the 
@@ -81,7 +80,7 @@ System.config({
         '@angular/common' : 'npm:@angular/common/bundles/common.umd.js',
         // further angular bundles...
 
-        'ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
+        'ng2-page-scroll/ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
 
         rxjs: 'npm:rxjs',
     },
@@ -91,6 +90,20 @@ System.config({
     }
 });
 ```
+
+```typescript
+import {Ng2PageScrollModule} from 'ng2-page-scroll/ng2-page-scroll';
+
+@NgModule({
+    imports: [
+        /* Other imports here */
+        Ng2PageScrollModule
+        ]
+})
+export class AppModule {
+}
+```
+
 
 ## Usage 
 
