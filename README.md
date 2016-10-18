@@ -130,7 +130,7 @@ export class MyComponent {
 ### Service
 
 You may use the service for more advanced scroll animations. Using the service you may trigger scroll 
-animations on any custom event or more complex configuration. Possible usa cases are server responses or 
+animations on any custom event or more complex configuration. Possible use cases are server responses or 
 after content initialization.
  
 Start by obtaining a reference to the `PageScrollService` instance by adding it to your component's 
