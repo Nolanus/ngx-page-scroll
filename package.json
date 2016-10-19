@@ -1,7 +1,7 @@
 {
   "name": "ng2-page-scroll",
   "version": "3.1.6",
-  "description": "Pure angular2 directive for animated scrolling",
+  "description": "Animated scrolling functionality written in pure angular2",
   "scripts": {
     "install:typings": "./node_modules/.bin/typings install",
     "lint": "npm run lint:code && npm run lint:test",
