@@ -90,6 +90,7 @@ export class PageScrollService {
             if (isDevMode()) {
                 console.log('Scrolling not possible, as we can\'t find the specified target');
             }
+            pageScrollInstance.fireEvent(false);
             return;
         }
 
@@ -101,6 +102,7 @@ export class PageScrollService {
             if (isDevMode()) {
                 console.log('Scrolling not possible, as we can\'t get any closer to the destination');
             }
+            pageScrollInstance.fireEvent(true);
             return;
         }
 
