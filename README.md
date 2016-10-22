@@ -181,7 +181,7 @@ all page scroll-animation defaults.
 | ---------------------- | ----------- | ------------ |-------------- |
 | `defaultScrollOffset`  | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 | `defaultDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `defaultInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
+| `defaultInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
 | `defaultEasingLogic`   | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### Example
@@ -219,14 +219,14 @@ of only 1 second.
 | `pageScroll`              |             |              | Attribute adding scroll-animation behavior when the `click`-event happens on the element.
 | `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 | `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (true) or not (false).
+| `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
 | `pageScrollEasing`        | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### PageScroll events
 
 | Event                 | Type    | Description   |
 | --------------------- | ------- | ------------- |
-| `pageScrollFinish`    | boolean | Fired when the scroll-animation stops. Emits a boolean value which indicates whether the scroll animation finished successfully and reached its target (true) or whether it got interrupted due to another scroll animation starting or user interaction (false).
+| `pageScrollFinish`    | boolean | Fired when the scroll-animation stops. Emits a boolean value which indicates whether the scroll animation finished successfully and reached its target (`true`) or not (`false`). Possible reasons for false: target not found or interrupted due to another scroll animation starting or user interaction.
 
 ### Example
 
