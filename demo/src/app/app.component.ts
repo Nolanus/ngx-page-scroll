@@ -1,6 +1,7 @@
 import {Component, ElementRef, Inject} from '@angular/core';
 import {PageScrollService, PageScrollInstance} from 'ng2-page-scroll';
 import {DOCUMENT} from "@angular/platform-browser";
+import {Router, NavigationEnd} from "@angular/router";
 
 @Component({
     selector: 'app-root',
@@ -9,9 +10,45 @@ import {DOCUMENT} from "@angular/platform-browser";
 })
 export class AppComponent {
 
-    constructor() {
+    constructor(private router: Router) {
+        router.events.subscribe((event) => {
+            // see also
+            if (event instanceof NavigationEnd) {
+                this.links.forEach((link, index) => {
+                    if (link.route[0] === event.url) {
+                        this.currentTabIndex = index;
+                    }
+                });
+            }
+        });
     }
 
-    title = 'app works!';
+    public currentTabIndex: number = 0;
+
+    public links = [
+        {
+            route: ['/'],
+            name: 'Home'
+        },
+        {
+            route: ['/simple'],
+            name: 'Simple Scrolling'
+        },
+        {
+            route: ['/nested'],
+            name: 'Nested Scrolling'
+        },
+        {
+            route: ['/translated'],
+            name: 'Transformed Target Scrolling'
+        }];
+
+    public tabChange(event: any) {
+        // Select the correct route for that tab
+        let routeObj = this.links[event.index];
+        if (routeObj && routeObj.route) {
+            this.router.navigate(routeObj.route);
+        }
+    }
 
 }

@@ -35,13 +35,13 @@ describe('Simple Scroll page', () => {
     });
 
     it('should scroll to last heading using service when start position is not the top', () => {
-        scrollTo(100).then(() => {
+        scrollTo(250).then(() => {
             let body: any = element(by.css('body'));
             let lastHeadingLink: any = element(by.css('#goToLastHeadingButton'));
             browser.driver.executeScript('return window.innerHeight;').then((windowHeight: number) => {
                 body.getAttribute('scrollHeight').then((bodyScrollHeight: number) => {
                     getScrollPos().then((initialPos: number) => {
-                        expect(initialPos).toEqual(100);
+                        expect(initialPos).toEqual(250);
                         lastHeadingLink.click().then(() => {
                             browser.sleep(1250).then(() => {
                                 getScrollPos().then((pos: number) => {
@@ -151,7 +151,7 @@ describe('Simple Scroll page', () => {
                         expect(snackbarMessage.getText()).toBe('Yeah, we reached our destination');
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
-                            expect(pos).toEqual(headingLocation.y);
+                            expect(pos).toEqual(Math.round(headingLocation.y));
                         });
                     });
                 });
@@ -189,28 +189,6 @@ describe('Simple Scroll page', () => {
                         // At the end of the time the scrolling should be at the specific target position
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBe(Math.round(headingLocation.y));
-                        });
-                    });
-                });
-            });
-        });
-    });
-
-    it('should not change scroll position when trying to scroll to non existing target', () => {
-        let body: any = element(by.css('body'));
-        let nonExistingTargetButton: any = element(by.css('#nonExistingTargetButton'));
-        scrollTo(42).then(() => {
-            browser.driver.executeScript('return window.innerHeight;').then((windowHeight: number) => {
-                body.getAttribute('scrollHeight').then((bodyScrollHeight: number) => {
-                    getScrollPos().then((initialPos: number) => {
-                        expect(initialPos).toEqual(42);
-                        nonExistingTargetButton.click().then(() => {
-                            browser.sleep(1250).then(() => {
-                                getScrollPos().then((pos: number) => {
-                                    // Should not be scrolled anywhere
-                                    expect(pos).toBe(42);
-                                });
-                            });
                         });
                     });
                 });

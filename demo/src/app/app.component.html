@@ -4,12 +4,12 @@
         <span>ng2-page-scroll demo application</span>
     </md-toolbar>
 
-    <md-list>
-        <md-list-item><a routerLink="/" routerLinkActive="active">Home</a></md-list-item>
-        <md-list-item><a routerLink="/simple" routerLinkActive="active">Simple Scrolling</a></md-list-item>
-        <md-list-item><a routerLink="/nested" routerLinkActive="active">Nested Scrolling</a></md-list-item>
-        <md-list-item><a routerLink="/translated" routerLinkActive="active">Transformed Target Scrolling</a></md-list-item>
-    </md-list>
+    <md-tab-group (selectChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
+        <md-tab *ngFor="let link of links">
+            <template md-tab-label>{{ link.name }}</template>
+            <template md-tab-content></template>
+        </md-tab>
+    </md-tab-group>
 
     <!-- Routed views go here -->
     <router-outlet></router-outlet>
