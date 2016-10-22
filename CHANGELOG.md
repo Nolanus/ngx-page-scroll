@@ -1,3 +1,11 @@
+## 3.2.0 (2016-10-22)
+
+Other: 
+
+- scrollFinish event now fires when scroll target can not be found and it can not be scrolled any closer to the target (fixes #50)
+- Typo in README
+- Demo app enhancement + new e2e tests
+
 ## 3.1.6 (2016-10-15)
 
 Fix: 
