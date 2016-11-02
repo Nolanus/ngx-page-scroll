@@ -12,4 +12,6 @@ export class TranslatedTargetScrollComponent implements OnInit {
   ngOnInit() {
   }
 
+  public array: number[] = [3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 }

@@ -21,11 +21,11 @@ export class SimpleScrollComponent implements OnInit {
     }
 
     public goToLastHeading() {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#head11');
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#head15');
         this.pageScrollService.start(pageScrollInstance);
     }
 
-    public array: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+    public array: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
     public myEasing: EasingLogic = {
         ease: (t: number, b: number, c: number, d: number): number => {
