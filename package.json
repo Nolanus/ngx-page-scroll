@@ -3,18 +3,18 @@
   "version": "3.2.0",
   "description": "Animated scrolling functionality written in pure angular2",
   "scripts": {
-    "install:typings": "./node_modules/.bin/typings install",
+    "install:typings": "typings install",
     "lint": "npm run lint:code && npm run lint:test",
     "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
     "lint:test": "tslint ./test/**/*.ts -t verbose --exclude ./test/**/*.d.ts",
-    "test": "./node_modules/protractor/bin/webdriver-manager update && protractor protractor.conf.js",
-    "compile": "npm run lint:code && ./node_modules/.bin/ngc -p tsconfig-build.json",
-    "compile:tsc": "npm run lint && ./node_modules/.bin/tsc -p tsconfig.json",
+    "test": "webdriver-manager update && protractor protractor.conf.js",
+    "compile": "npm run lint:code && ngc -p tsconfig-build.json",
+    "compile:tsc": "npm run lint && tsc -p tsconfig.json",
     "bundle:clean": "rimraf bundles",
     "rollup": "rollup -c rollup.conf.js",
     "rollup:min": "rollup -c rollup-uglify.conf.js",
     "prepublish": "npm run install:typings && npm run compile && npm run bundle:clean && npm run rollup && npm run rollup:min",
-    "demo": "npm install && cd demo/ && npm uninstall ng2-page-scroll && npm install && node_modules/.bin/ng serve"
+    "demo": "npm install && cd demo/ && npm uninstall ng2-page-scroll && npm install && npm start"
   },
   "main": "bundles/ng2-page-scroll.umd.js",
   "module": "ng2-page-scroll.js",
