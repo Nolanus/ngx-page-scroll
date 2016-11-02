@@ -27,7 +27,10 @@ build/Release
 
 # Dependency directory
 node_modules
+
+# Typings subfolder
 typings
+
 /.codeclimate.yml
 /.gitignore
 /.gitattributes
@@ -35,10 +38,19 @@ typings
 /.travis.yml
 /.eslintignore
 /.eslintrc
+
+# Build System files
 /tslint.json
 /rollup-uglify.conf.js
 /rollup.conf.js
 /protractor.conf.js
+
+# Typescript source files
+*.ts
+!*.d.ts
+*.js.map
+!/bundles/*.js.map
+!*.metadata.json
 
 # Editor specific
 .idea
