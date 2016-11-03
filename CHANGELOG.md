@@ -1,3 +1,15 @@
+## 3.2.1 (2016-11-03)
+
+Fix:
+
+- Remove `*.ts` files from npm published package (fixes #54)
+- Package.json scripts calling executables in node_modules folder
+
+Other:
+
+- Update to protractor 4.0.10
+- Elongate demo app dummy texts
+
 ## 3.2.0 (2016-10-22)
 
 Other: 
