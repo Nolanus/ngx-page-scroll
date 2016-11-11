@@ -244,9 +244,20 @@ export class PageScrollInstance {
         // Set the new scrollTop to all scrollTopSource elements
         return this.scrollTopSources.reduce((oneAlreadyWorked: any, scrollTopSource: any) => {
             if (scrollTopSource && !PageScrollUtilService.isUndefinedOrNull(scrollTopSource.scrollTop)) {
+                let scrollDistance = Math.abs(scrollTopSource.scrollTop - position);
+
+                // The movement we need to perform is less than 2px
+                // This we consider a small movement which some browser may not perform when changing the scrollTop property
+                // Thus in this cases we do not stop the scroll animation, although setting the scrollTop value "fails"
+                let isSmallMovement = scrollDistance < PageScrollConfig._minScrollDistance;
+
                 scrollTopSource.scrollTop = position;
+
                 // Return true of setting the new scrollTop value worked
-                if (scrollTopSource.scrollTop === position) {
+                // We consider that it worked if the new scrollTop value is closer to the
+                // desired scrollTop than before (it might not be exactly the value we
+                // set due to dpi or rounding irregularities)
+                if (isSmallMovement || scrollDistance > Math.abs(scrollTopSource.scrollTop - position)) {
                     return true;
                 }
             }

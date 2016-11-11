@@ -24,6 +24,17 @@ export class PageScrollConfig {
      */
     public static _interval: number = 10;
 
+    /**
+     * The amount of pixels that need to be between the current scrollTop position
+     * and the target position the cause a scroll animation. In case distance is below
+     * this threshold, an immediate jump will be performed.
+     * Due to dpi or rounding irregularities in browsers floating point numbers as scrollTop values
+     * are possible, making an === comparison or current scrollTop and target scrollTop error-prone.
+     * @type {number}
+     * @private
+     */
+    public static _minScrollDistance: number = 2;
+
     public static _defaultNamespace = 'default';
 
     /**

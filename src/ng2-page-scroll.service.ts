@@ -94,23 +94,22 @@ export class PageScrollService {
             return;
         }
 
-        if (pageScrollInstance.distanceToScroll === 0) {
-            // We're at the final destination already
-            // OR we need to scroll down but are already at the end
-            // OR we need to scroll up but are at the top already
+        // We're at the final destination already
+        // OR we need to scroll down but are already at the end
+        // OR we need to scroll up but are at the top already
+        let allReadyAtDestination = Math.abs(pageScrollInstance.distanceToScroll) < PageScrollConfig._minScrollDistance;
 
-            if (isDevMode()) {
-                console.log('Scrolling not possible, as we can\'t get any closer to the destination');
-            }
-            pageScrollInstance.fireEvent(true);
-            return;
-        }
+        // We should go there directly, as our "animation" would have one big step
+        // only anyway and this way we save the interval stuff
+        let tooShortInterval = pageScrollInstance.duration <= PageScrollConfig._interval;
 
-        if (pageScrollInstance.duration <= PageScrollConfig._interval) {
-            // We should go there directly, as our "animation" would have one big step
-            // only anyway and this way we save the interval stuff
+        if (allReadyAtDestination || tooShortInterval) {
             if (isDevMode()) {
-                console.log('Scroll duration shorter that interval length, jumping to target');
+                if (allReadyAtDestination) {
+                    console.log('Scrolling not possible, as we can\'t get any closer to the destination');
+                } else {
+                    console.log('Scroll duration shorter that interval length, jumping to target');
+                }
             }
             pageScrollInstance.setScrollTopPosition(pageScrollInstance.targetScrollTop);
             pageScrollInstance.fireEvent(true);
