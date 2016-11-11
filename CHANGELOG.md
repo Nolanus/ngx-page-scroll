@@ -1,3 +1,13 @@
+## 3.2.2 (2016-11-11)
+
+Fix:
+
+- Scrolling stops in case the scrollTop value were floating point numbers, resulting in `===` comparisons to be false. Fix by comparing rounded and delta values (fixes #55)
+
+Other:
+
+- Update dependency versions
+
 ## 3.2.1 (2016-11-03)
 
 Fix:
