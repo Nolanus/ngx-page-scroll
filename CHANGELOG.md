@@ -1,3 +1,13 @@
+## 3.2.3 (2016-11-12)
+
+New:
+
+- Add static `forRoot()` method for lazy loaded modules to Ng2PageScrollModule
+
+Other:
+
+- Adjust peer dependency to satisfy angular 2.1.2 deps 
+
 ## 3.2.2 (2016-11-11)
 
 Fix:
