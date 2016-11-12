@@ -11,7 +11,7 @@
     "demo:clean": "cd demo/ && npm uninstall ng2-page-scroll && npm install",
     "demo:deploy": "git subtree push --prefix demo/dist origin gh-pages",
     "demo:start": "cd demo/ && npm start",
-    "demo:build": "npm run demo:clean && cd demo/ && ng build --prod",
+    "demo:build": "npm run demo:clean && cd demo/ && ng build --prod && sed -i '' -e 's/base href=\"\\/\"/base href=\"\\/ng2-page-scroll\\/\"/g' dist/index.html ",
     "install:typings": "typings install",
     "lint": "npm run lint:code && npm run lint:test",
     "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
