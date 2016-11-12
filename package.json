@@ -15,6 +15,7 @@
     "rollup": "rollup -c rollup.conf.js",
     "rollup:min": "rollup -c rollup-uglify.conf.js",
     "prepublish": "npm run install:typings && npm run compile && npm run bundle:clean && npm run rollup && npm run rollup:min",
+    "postpublish": "./deploy-demo.sh",
     "demo": "npm install && cd demo/ && npm uninstall ng2-page-scroll && npm install && npm start"
   },
   "main": "bundles/ng2-page-scroll.umd.js",
