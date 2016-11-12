@@ -3,7 +3,7 @@
  */
 
 import {CommonModule} from '@angular/common';
-import {NgModule} from '@angular/core';
+import {NgModule, ModuleWithProviders} from '@angular/core';
 
 import {PageScrollService} from './ng2-page-scroll.service';
 import {PageScroll} from './ng2-page-scroll.directive';
@@ -17,4 +17,12 @@ import {PageScroll} from './ng2-page-scroll.directive';
     ]
 })
 export class Ng2PageScrollModule {
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: Ng2PageScrollModule,
+            providers: [
+                {provide: PageScrollService, useClass: PageScrollService}
+            ]
+        };
+    }
 }
