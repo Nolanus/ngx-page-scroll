@@ -27,7 +27,7 @@ import { PathologicalTestsComponent } from './pathological-tests/pathological-te
         HttpModule,
         routing,
         MaterialModule.forRoot(),
-        Ng2PageScrollModule
+        Ng2PageScrollModule.forRoot()
     ],
     declarations: [
         AppComponent,
