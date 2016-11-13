@@ -11,10 +11,7 @@ import {PageScroll} from './ng2-page-scroll.directive';
 @NgModule({
     imports: [CommonModule],
     declarations: [PageScroll],
-    exports: [PageScroll],
-    providers: [
-        {provide: PageScrollService, useClass: PageScrollService}
-    ]
+    exports: [PageScroll]
 })
 export class Ng2PageScrollModule {
     static forRoot(): ModuleWithProviders {
