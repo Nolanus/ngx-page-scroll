@@ -1,3 +1,9 @@
+## 4.0.0-beta.0 (2016-11-13)
+
+Breaking Change:
+
+- Use static `forRoot()` method when importing `Ng2PageScrollModule`
+
 ## 3.2.3 (2016-11-12)
 
 New:
