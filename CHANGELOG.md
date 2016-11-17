@@ -1,3 +1,9 @@
+## 4.0.0-beta.1 (2016-11-17)
+
+Other:
+
+- Update dependencies, especially angular to support version 2.2.0
+
 ## 4.0.0-beta.0 (2016-11-13)
 
 Breaking Change:
