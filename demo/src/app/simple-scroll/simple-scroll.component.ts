@@ -1,6 +1,6 @@
-import {Component, OnInit, Inject, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/platform-browser';
-import {MdSnackBarConfig, MdSnackBar} from '@angular/material';
+import {MdSnackBar} from '@angular/material';
 import {PageScrollInstance, PageScrollService, EasingLogic} from 'ng2-page-scroll';
 
 @Component({
@@ -13,8 +13,7 @@ export class SimpleScrollComponent implements OnInit {
 
     public constructor(@Inject(DOCUMENT) private document: any,
                        private pageScrollService: PageScrollService,
-                       private snackBar: MdSnackBar,
-                       private viewContainerRef: ViewContainerRef) {
+                       private snackBar: MdSnackBar) {
     }
 
     ngOnInit() {
@@ -44,7 +43,7 @@ export class SimpleScrollComponent implements OnInit {
         } else {
             text = 'Ohoh, something interrupted us';
         }
-        this.snackBar.open(text, 'Ok', new MdSnackBarConfig(this.viewContainerRef));
+        this.snackBar.open(text, 'Ok');
     }
 
 }

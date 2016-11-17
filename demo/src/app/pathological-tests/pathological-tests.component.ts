@@ -1,6 +1,6 @@
-import {Component, OnInit, Renderer, Inject, ViewContainerRef} from '@angular/core';
+import {Component, OnInit, Renderer, Inject} from '@angular/core';
 import {DOCUMENT} from '@angular/platform-browser';
-import {MdSnackBar, MdSnackBarConfig} from '@angular/material';
+import {MdSnackBar} from '@angular/material';
 
 @Component({
     selector: 'app-pathological-tests',
@@ -12,8 +12,7 @@ export class PathologicalTestsComponent implements OnInit {
 
     constructor(@Inject(DOCUMENT) private document: any,
                 private renderer: Renderer,
-                private snackBar: MdSnackBar,
-                private viewContainerRef: ViewContainerRef) {
+                private snackBar: MdSnackBar) {
     }
 
     ngOnInit() {
@@ -34,7 +33,7 @@ export class PathologicalTestsComponent implements OnInit {
         } else {
             text = 'Ohoh, something interrupted us';
         }
-        this.snackBar.open(text, 'Ok', new MdSnackBarConfig(this.viewContainerRef));
+        this.snackBar.open(text, 'Ok');
     }
 
 }

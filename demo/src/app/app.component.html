@@ -5,10 +5,7 @@
     </md-toolbar>
 
     <md-tab-group (selectChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
-        <md-tab *ngFor="let link of links">
-            <template md-tab-label>{{ link.name }}</template>
-            <template md-tab-content></template>
-        </md-tab>
+        <md-tab *ngFor="let link of links" label="{{ link.name }}"></md-tab>
     </md-tab-group>
 
     <!-- Routed views go here -->
