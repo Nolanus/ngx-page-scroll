@@ -49,40 +49,44 @@ export class PageScrollService {
         // Stop all possibly running scroll animations in the same namespace
         this.stopAll(pageScrollInstance.namespace);
 
-        if (pageScrollInstance.scrollTopSources === null || pageScrollInstance.scrollTopSources.length === 0) {
+        if (pageScrollInstance.scrollingViews === null || pageScrollInstance.scrollingViews.length === 0) {
             // No scrollingViews specified, thus we can't animate anything
             if (isDevMode()) {
-                console.warn('No ScrollTopSource specified, this ng2-page-scroll does not know which DOM elements to scroll');
+                console.warn('No scrollingViews specified, this ng2-page-scroll does not know which DOM elements to scroll');
             }
             return;
         }
 
-        let startScrollTopFound = false;
+        let startScrollPositionFound = false;
 
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
-        pageScrollInstance.scrollTopSources.forEach((scrollingView: any) => {
+        pageScrollInstance.scrollingViews.forEach((scrollingView: any) => {
             if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
                 return;
             }
-            // Get the scrolltop value of the first scrollTopSource that returns a value for its "scrollTop" property
-            // that is not undefined and unequal to 0
+            // Get the scrollTop or scrollLeft value of the first scrollingView that returns a value for its "scrollTop"
+            // or "scrollLeft" property that is not undefined and unequal to 0
 
-            if (!startScrollTopFound && scrollingView.scrollTop) {
-                // We found a scrollingView that does not have scrollTop 0
+            let scrollPosition = pageScrollInstance.getScrollPropertyValue(scrollingView);
+            if (!startScrollPositionFound && scrollPosition) {
+                // We found a scrollingView that does not have scrollTop or scrollLeft 0
 
-                // Return the scrollTop value, as this will be our startScrollTop
-                pageScrollInstance.startScrollTop = scrollingView.scrollTop;
-                startScrollTopFound = true;
+                // Return the scroll position value, as this will be our startScrollPosition
+                pageScrollInstance.startScrollPosition = scrollPosition;
+                startScrollPositionFound = true;
             }
         });
 
         let pageScrollOffset = pageScrollInstance.getCurrentOffset();
 
         // Calculate the target position that the scroll animation should go to
-        pageScrollInstance.targetScrollTop = Math.round(pageScrollInstance.extractScrollTargetPosition().top - pageScrollOffset);
+
+        let scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
+        pageScrollInstance.targetScrollPosition = Math.round(
+            (pageScrollInstance.verticalScrolling ? scrollTargetPosition.top : scrollTargetPosition.left) - pageScrollOffset);
 
         // Calculate the distance we need to go in total
-        pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollTop - pageScrollInstance.startScrollTop;
+        pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollPosition - pageScrollInstance.startScrollPosition;
 
         if (isNaN(pageScrollInstance.distanceToScroll)) {
             // We weren't able to find the target position, maybe the element does not exist?
@@ -111,7 +115,7 @@ export class PageScrollService {
                     console.log('Scroll duration shorter that interval length, jumping to target');
                 }
             }
-            pageScrollInstance.setScrollTopPosition(pageScrollInstance.targetScrollTop);
+            pageScrollInstance.setScrollPosition(pageScrollInstance.targetScrollPosition);
             pageScrollInstance.fireEvent(true);
             return;
         }
@@ -132,23 +136,23 @@ export class PageScrollService {
             let currentTime: number = new Date().getTime();
 
             // Determine the new scroll position
-            let newScrollTop: number;
+            let newScrollPosition: number;
             let stopNow = false;
             if (_pageScrollInstance.endTime <= currentTime) {
-                // We're over the time already, so go the targetScrollTop (aka destination)
-                newScrollTop = _pageScrollInstance.targetScrollTop;
+                // We're over the time already, so go the targetScrollPosition (aka destination)
+                newScrollPosition = _pageScrollInstance.targetScrollPosition;
                 stopNow = true;
             } else {
-                // Calculate the scrollTop position based on the current time using the easing function
-                newScrollTop = Math.round(_pageScrollInstance.easingLogic.ease(
+                // Calculate the scroll position based on the current time using the easing function
+                newScrollPosition = Math.round(_pageScrollInstance.easingLogic.ease(
                     currentTime - _pageScrollInstance.startTime,
-                    _pageScrollInstance.startScrollTop,
+                    _pageScrollInstance.startScrollPosition,
                     _pageScrollInstance.distanceToScroll,
                     _pageScrollInstance.duration));
             }
-            // Set the new scrollTop to all scrollTopSource elements
-            if (!_pageScrollInstance.setScrollTopPosition(newScrollTop)) {
-                // Setting the new scrollTop value failed for all ScrollingViews
+            // Set the new scrollPosition to all scrollingViews elements
+            if (!_pageScrollInstance.setScrollPosition(newScrollPosition)) {
+                // Setting the new scrollTop/scrollLeft value failed for all ScrollingViews
                 // early stop the scroll animation to save resources
                 stopNow = true;
             }
