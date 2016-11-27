@@ -159,33 +159,34 @@ describe('Simple Scroll page', () => {
         });
     });
 
-    it('should scroll to seventh heading from button with custom easing', () => {
+    fit('should scroll to seventh heading from button with custom easing', () => {
         let target: any = element(by.css('#head7'));
         let trigger: any = element(by.css('#customEasingButton'));
+        let pageScrollDuration = 5000;
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.click().then(() => {
-                    browser.sleep(312).then(() => {
+                    browser.sleep(pageScrollDuration * 0.25).then(() => {
                         // At one quarter of the time the scrolling should be at less than when scrolling with linear easing
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeLessThan(Math.round(headingLocation.y / 4));
                         });
                     });
-                    browser.sleep(625).then(() => {
+                    browser.sleep(pageScrollDuration * 0.5).then(() => {
                         // At half of the time the scrolling should be greater than when scrolling with linear easing
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeGreaterThan(Math.round(headingLocation.y / 2));
                         });
                     });
-                    browser.sleep(938).then(() => {
+                    browser.sleep(pageScrollDuration * 0.75).then(() => {
                         // At three quarters of the time the scrolling should be be greater than when scrolling with linear easing
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeGreaterThan(Math.round(headingLocation.y / 4 * 3));
                         });
                     });
 
-                    browser.sleep(1250).then(() => {
+                    browser.sleep(pageScrollDuration).then(() => {
                         // At the end of the time the scrolling should be at the specific target position
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBe(Math.round(headingLocation.y));

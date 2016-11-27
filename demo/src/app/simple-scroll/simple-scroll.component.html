@@ -40,9 +40,12 @@
     <h3>Custom easing</h3>
     <p>You may specify a custom easing function to manipulate the scroll position over time. This example uses an <i>easeInOutExpo</i>
         function.</p>
-    <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollEasing]="myEasing"
-            id="customEasingButton">
+    <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollEasing]="myEasing">
         Start
+    </button>
+    <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollDuration]="5000"
+            [pageScrollEasing]="myEasing" id="customEasingButton">
+        Start slow version
     </button>
 
     <h3>Scrolling using <i>PageScrollService</i></h3>
