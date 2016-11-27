@@ -31,7 +31,10 @@ export class PageScrollService {
         }
 
         if (pageScrollInstance.timer) {
+            // Clear/Stop the timer
             clearInterval(pageScrollInstance.timer);
+            // Clear the reference to this timer
+            pageScrollInstance.timer = undefined;
             pageScrollInstance.fireEvent(!interrupted);
             return true;
         }
