@@ -43,7 +43,6 @@ export class PageScrollConfig {
     public static _defaultNamespace = 'default';
 
     /**
-    /**
      * Whether by default the scrolling should happen in vertical direction (by manipulating the scrollTop property)
      * (= true; default) or in horizontal direction (by manipulating the scrollLeft property) (= false
      * @type {boolean}
