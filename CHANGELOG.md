@@ -1,3 +1,17 @@
+## 4.0.0-beta.2 (2016-12-22)
+
+New:
+
+- Horizontal scrolling feature (#61)
+
+Fix:
+
+- Problem with not revmoved timer reference (fix #64)
+
+Other:
+
+- Update dependencies, especially angular to support version 2.4.0 and later
+
 ## 4.0.0-beta.1 (2016-11-17)
 
 Other:
