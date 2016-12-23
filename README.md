@@ -10,14 +10,14 @@ with no additional dependencies
 
 ## Features
 
-- easy-to-use directive: scroll to the top edge of an element referenced in the href-attribute 
+- easy-to-use directive: scroll to an element referenced in the href-attribute 
 (`href="#mytarget`) just by adding `pageScroll` directive
 - service usage: trigger scroll animations from your component or when server responds
 - customizable: adjust duration, offset or whether scrolling stops if the user interrupts 
 ([read more](https://github.com/Nolanus/ng2-page-scroll/wiki/Scroll-Interruption-Interference))
 - use custom easing functions to calculate the scroll position over time
 - works across routes (scrolls to target element as soon as the 
-routing has finished)
+routing has finished) and in both directions (horizontal/vertical)
 
 ## Table of contents
 
@@ -161,6 +161,11 @@ export class MyComponent {
      public goToHead2(): void {
          let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#head2');
          this.pageScrollService.start(pageScrollInstance);
+     };    
+     
+     public scrollSomewhereHorizontally(): void {
+         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleDirectionInstance(this.document, '#targetToTheRight', true);
+         this.pageScrollService.start(pageScrollInstance);
      }; 
 
      public goToHeadingInContainer(): void {
@@ -176,12 +181,13 @@ The class `PageScrollConfig` offers static properties to be manipulated to
 configure the default behavior. Override the respective properties to change 
 all page scroll-animation defaults.
 
-| Configuration Option   | Type        | Default      | Description   |
-| ---------------------- | ----------- | ------------ |-------------- |
-| `defaultScrollOffset`  | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
-| `defaultDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `defaultInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
-| `defaultEasingLogic`   | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
+| Configuration Option         | Type        | Default      | Description   |
+| ---------------------------- | ----------- | ------------ |-------------- |
+| `defaultScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
+| `defaultIsVerticalScrolling` | boolean     | true         | Whether the scroll should happen to the target element in vertical direction (`true`, default) or horizontal (`false`)
+| `defaultDuration`            | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
+| `defaultInterruptible`       | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
+| `defaultEasingLogic`         | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
 
 ### Example
 
@@ -216,6 +222,7 @@ of only 1 second.
 | Attribute                 | Type        | Default      | Description   |
 | ------------------------- | ----------- | ------------ |-------------- |
 | `pageScroll`              |             |              | Attribute adding scroll-animation behavior when the `click`-event happens on the element.
+| `pageScrollHorizontal`    | boolean     | false        | Whether the scroll should happen in vertical direction (`false`, default) or horizontal (`true`).
 | `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 | `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
 | `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
