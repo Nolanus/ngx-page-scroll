@@ -181,7 +181,7 @@ export class PageScrollService {
     public stopAll(namespace?: string): boolean {
         if (this.runningInstances.length > 0) {
             let stoppedSome = false;
-            this.runningInstances.forEach((pageScrollInstance: PageScrollInstance, index: number) => {
+            this.runningInstances.forEach((pageScrollInstance: PageScrollInstance) => {
                 if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
