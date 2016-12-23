@@ -24,6 +24,9 @@ export class PageScroll implements OnDestroy {
     public href: string;
 
     @Input()
+    public pageScrollHorizontal: boolean = null;
+
+    @Input()
     public pageScrollOffset: number = null;
 
     @Input()
@@ -62,6 +65,7 @@ export class PageScroll implements OnDestroy {
                 this.href,
                 null,
                 this.pageScroll,
+                !this.pageScrollHorizontal,
                 this.pageScrollOffset,
                 this.pageScrollInterruptible,
                 this.pageScrollEasing,
