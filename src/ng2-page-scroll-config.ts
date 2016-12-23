@@ -40,6 +40,16 @@ export class PageScrollConfig {
     public static _defaultIsVerticalScrolling = true;
 
     /**
+     * How many console logs should be emitted.
+     * 0: None
+     * 1: If animation could not be started due to missing target, "already at destination" or similar reasons
+     * 2: All scroll position values that get set
+     * @type {boolean}
+     * @private
+     */
+    public static _logLevel = 1;
+
+    /**
      * The duration how long a scrollTo animation should last by default.
      * May be overridden using the page-scroll-duration attribute on a single ng2PageScroll instance.
      * @type {number}

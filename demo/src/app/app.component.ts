@@ -1,7 +1,7 @@
-import {Component, ElementRef, Inject} from '@angular/core';
-import {PageScrollService, PageScrollInstance} from 'ng2-page-scroll';
-import {DOCUMENT} from "@angular/platform-browser";
-import {Router, NavigationEnd} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {Router, NavigationEnd, ActivatedRoute} from '@angular/router';
+import {MdCheckbox} from '@angular/material';
+import {PageScrollConfig} from 'ng2-page-scroll';
 
 @Component({
     selector: 'app-root',
@@ -10,7 +10,9 @@ import {Router, NavigationEnd} from "@angular/router";
 })
 export class AppComponent {
 
-    constructor(private router: Router) {
+    public isDebugEnabled = PageScrollConfig._logLevel >= 5;
+
+    constructor(private router: Router, private route: ActivatedRoute) {
         router.events.subscribe((event) => {
             // see also
             if (event instanceof NavigationEnd) {
@@ -21,6 +23,12 @@ export class AppComponent {
                 });
             }
         });
+    }
+
+    public setDebug(debug: {checked: boolean, source: MdCheckbox}) {
+        console.warn('Debug mode has been ' + (debug.checked ? 'en' : 'dis') + 'abled');
+        this.isDebugEnabled = debug.checked;
+        PageScrollConfig._logLevel = this.isDebugEnabled ? 5 : 2;
     }
 
     public currentTabIndex: number = 0;

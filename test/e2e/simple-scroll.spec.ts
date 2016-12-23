@@ -4,6 +4,7 @@ describe('Simple Scroll page', () => {
 
     beforeEach(() => {
         browser.get('/simple');
+        element(by.css('#debugCheckBox')).click();
     });
 
     function getScrollPos(): Promise<number> {
@@ -190,6 +191,16 @@ describe('Simple Scroll page', () => {
                         // At the end of the time the scrolling should be at the specific target position
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBe(Math.round(headingLocation.y));
+                        });
+                        // Inspect the console logs, they should contain all in between scroll positions
+                        // Using the browser.sleep() to execute some code while the animation is running does not work
+                        // consistently across browser, especially causing problems with the CI server
+                        browser.manage().logs().get('browser').then(function (browserLog) {
+                            let scrollPositionHistory = browserLog.filter(log => log.message.indexOf('Scroll Position: ') >= 0)
+                                .map(log => parseInt(log.message.split(' ').reverse()[0], 10));
+
+                            console.log('log: ' + require('util').inspect(scrollPositionHistory));
+                            // TODO Inspect the browserLog here and perform expect's()
                         });
                     });
                 });

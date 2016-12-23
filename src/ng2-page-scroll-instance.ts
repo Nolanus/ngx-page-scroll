@@ -287,6 +287,9 @@ export class PageScrollInstance {
      *          (probably because we're at the end of the scrolling region)
      */
     public setScrollPosition(position: number): boolean {
+        if (PageScrollConfig._logLevel >= 5) {
+            console.warn('Scroll Position: ' + position);
+        }
         // Set the new scrollTop/scrollLeft to all scrollingViews elements
         return this.scrollingViews.reduce((oneAlreadyWorked: any, scrollingView: any) => {
             let startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
