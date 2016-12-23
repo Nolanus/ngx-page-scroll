@@ -1,0 +1,10 @@
+.scroll-box {
+    overflow: auto;
+}
+
+.scroll-box > div {
+    height: 250px;
+    width: 5500px;
+    overflow: auto;
+    position: relative;
+}

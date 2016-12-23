@@ -39,6 +39,10 @@ export class AppComponent {
             name: 'Nested Scrolling'
         },
         {
+            route: ['/horizontal'],
+            name: 'Horizontal Scrolling'
+        },
+        {
             route: ['/translated'],
             name: 'Transformed Target Scrolling'
         }];

@@ -20,17 +20,19 @@ export class PageScrollInstance {
     private _namespace: string = PageScrollConfig._defaultNamespace;
     /* The document all the scrolling takes place and scroll targets are located in */
     private document: Document;
-    /* The DOM elements or similar nodes whose scrollTop property will be manipulated during scrolling */
-    private _scrollTopSources: PageScrollingViews[];
+    /* The DOM elements or similar nodes whose scrollTop/scrollLeft property will be manipulated during scrolling */
+    private _scrollingViews: PageScrollingViews[];
     private _isInlineScrolling: boolean;
     /* The target element that should be scrolled into the viewport */
     private _scrollTarget: PageScrollTarget;
 
+    /* Whether we scroll vertically (true) or horizontally (false) */
+    private _verticalScrolling = PageScrollConfig.defaultIsVerticalScrolling;
     /* Offset in px that the animation should stop above that target element */
     private _offset: number = PageScrollConfig.defaultScrollOffset;
     /* Duration in milliseconds the scroll animation should last */
     private _duration: number = PageScrollConfig.defaultDuration;
-    /* Easing function to manipulate the scrollTop value over time */
+    /* Easing function to manipulate the scrollTop/scrollLeft value over time */
     private _easingLogic: EasingLogic = PageScrollConfig.defaultEasingLogic;
     /* Boolean whether the scroll animation should stop on user interruption or not */
     private _interruptible: boolean = PageScrollConfig.defaultInterruptible;
@@ -43,11 +45,11 @@ export class PageScrollInstance {
     /**
      * These properties will be set/manipulated if the scroll animation starts
      */
-    /* The initial value of the scrollTop position when the animation starts */
-    private _startScrollTop: number = 0;
-    /* The target value of the scrollTop position for the animation (aka "the final destination") */
-    private _targetScrollTop: number;
-    /* Difference between startScrollTop and targetScrollTop. Pre-calculated to minimize computations during animation */
+    /* The initial value of the scrollTop or scrollLeft position when the animation starts */
+    private _startScrollPosition: number = 0;
+    /* The target value of the scrollTop or scrollLeft position for the animation (aka "the final destination") */
+    private _targetScrollPosition: number;
+    /* Difference between startScrollPosition and targetScrollPosition. Pre-calculated to minimize computations during animation */
     private _distanceToScroll: number;
     /* The timestamp when the animation starts/got started */
     private _startTime: number;
@@ -63,23 +65,38 @@ export class PageScrollInstance {
     /*
      * Factory methods for instance creation
      */
+    public static simpleInstance(document: Document,
+                                 scrollTarget: PageScrollTarget,
+                                 namespace?: string): PageScrollInstance {
+        return PageScrollInstance.simpleDirectionInstance(
+            document,
+            scrollTarget,
+            true,
+            namespace
+        );
+    }
+
     /**
      * Create a PageScrollInstance representing a scroll animation on the documents body.
      *
      * @param document The document that contains the body to be scrolled and the scrollTarget elements
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
+     * @param isVerticalScrolling
      * @param namespace Optional namespace to group scroll animations logically
      *
      * @returns {PageScrollInstance}
      */
-    public static simpleInstance(document: Document,
-                                 scrollTarget: PageScrollTarget,
-                                 namespace?: string): PageScrollInstance {
+    public static simpleDirectionInstance(document: Document,
+                                          scrollTarget: PageScrollTarget,
+                                          isVerticalScrolling: boolean,
+                                          namespace?: string): PageScrollInstance {
         return PageScrollInstance.advancedInstance(
             document,
             scrollTarget,
             null,
             namespace,
+            isVerticalScrolling,
+            null,
             null,
             null,
             null,
@@ -105,11 +122,27 @@ export class PageScrollInstance {
                                        scrollTarget: PageScrollTarget,
                                        scrollingView: PageScrollingViews,
                                        namespace?: string): PageScrollInstance {
+        return PageScrollInstance.simpleInlineDirectionInstance(
+            document,
+            scrollTarget,
+            scrollingView,
+            true,
+            namespace
+        );
+    }
+
+    public static simpleInlineDirectionInstance(document: Document,
+                                                scrollTarget: PageScrollTarget,
+                                                scrollingView: PageScrollingViews,
+                                                isVerticalScrolling: boolean,
+                                                namespace?: string): PageScrollInstance {
         return PageScrollInstance.advancedInstance(
             document,
             scrollTarget,
             [scrollingView],
             namespace,
+            isVerticalScrolling,
+            null,
             null,
             null,
             null,
@@ -123,6 +156,7 @@ export class PageScrollInstance {
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
      * @param scrollingViews The elements that should be scrolled. Null to use the default elements of document and body.
      * @param namespace Optional namespace to group scroll animations logically
+     * @param isVerticalScrolling whether the scrolling should be performed in vertical direction (true, default) or horizontal (false)
      * @param pageScrollOffset The offset to be attached to the top of the target element or
      *                          null/undefined to use application default
      * @param pageScrollInterruptible Whether this scroll animation should be interruptible.
@@ -140,6 +174,7 @@ export class PageScrollInstance {
                                    scrollTarget: PageScrollTarget,
                                    scrollingViews: PageScrollingViews[] = null,
                                    namespace: string,
+                                   isVerticalScrolling: boolean,
                                    pageScrollOffset: number = null,
                                    pageScrollInterruptible: boolean = null,
                                    pageScrollEasingLogic: EasingLogic = null,
@@ -153,13 +188,17 @@ export class PageScrollInstance {
 
         if (PageScrollUtilService.isUndefinedOrNull(scrollingViews) || scrollingViews.length === 0) {
             pageScrollInstance._isInlineScrolling = false;
-            pageScrollInstance._scrollTopSources = [document.documentElement, document.body, document.body.parentNode];
+            pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
         } else {
             pageScrollInstance._isInlineScrolling = true;
-            pageScrollInstance._scrollTopSources = scrollingViews;
+            pageScrollInstance._scrollingViews = scrollingViews;
         }
 
         pageScrollInstance._scrollTarget = scrollTarget;
+
+        if (!PageScrollUtilService.isUndefinedOrNull(isVerticalScrolling)) {
+            pageScrollInstance._verticalScrolling = isVerticalScrolling;
+        }
 
         if (!PageScrollUtilService.isUndefinedOrNull(pageScrollOffset)) {
             pageScrollInstance._offset = pageScrollOffset;
@@ -192,6 +231,13 @@ export class PageScrollInstance {
     constructor(namespace: string, document: Document) {
         this._namespace = namespace;
         this.document = document;
+    }
+
+    public getScrollPropertyValue(scrollingView: any): number {
+        if (!this.verticalScrolling) {
+            return scrollingView.scrollLeft;
+        }
+        return scrollingView.scrollTop;
     }
 
     /**
@@ -234,30 +280,37 @@ export class PageScrollInstance {
     }
 
     /**
-     * Sets the "scrollTop" property for all scrollingViews to the provided value
+     * Sets the "scrollTop" or "scrollLeft" property for all scrollingViews to the provided value
      * @param position
-     * @return true if at least for one ScrollTopSource the scrollTop value could be set and it kept the new value.
-     *          false if it failed for all ScrollTopSources, meaning that we should stop the animation
+     * @return true if at least for one ScrollTopSource the scrollTop/scrollLeft value could be set and it kept the new value.
+     *          false if it failed for all ScrollingViews, meaning that we should stop the animation
      *          (probably because we're at the end of the scrolling region)
      */
-    public setScrollTopPosition(position: number): boolean {
-        // Set the new scrollTop to all scrollTopSource elements
-        return this.scrollTopSources.reduce((oneAlreadyWorked: any, scrollTopSource: any) => {
-            if (scrollTopSource && !PageScrollUtilService.isUndefinedOrNull(scrollTopSource.scrollTop)) {
-                let scrollDistance = Math.abs(scrollTopSource.scrollTop - position);
+    public setScrollPosition(position: number): boolean {
+        // Set the new scrollTop/scrollLeft to all scrollingViews elements
+        return this.scrollingViews.reduce((oneAlreadyWorked: any, scrollingView: any) => {
+            let startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
+            if (scrollingView && !PageScrollUtilService.isUndefinedOrNull(startScrollPropertyValue)) {
+                let scrollDistance = Math.abs(startScrollPropertyValue - position);
 
                 // The movement we need to perform is less than 2px
-                // This we consider a small movement which some browser may not perform when changing the scrollTop property
-                // Thus in this cases we do not stop the scroll animation, although setting the scrollTop value "fails"
+                // This we consider a small movement which some browser may not perform when
+                // changing the scrollTop/scrollLeft property
+                // Thus in this cases we do not stop the scroll animation, although setting the
+                // scrollTop/scrollLeft value "fails"
                 let isSmallMovement = scrollDistance < PageScrollConfig._minScrollDistance;
 
-                scrollTopSource.scrollTop = position;
+                if (!this.verticalScrolling) {
+                    scrollingView.scrollLeft = position;
+                } else {
+                    scrollingView.scrollTop = position;
+                }
 
-                // Return true of setting the new scrollTop value worked
-                // We consider that it worked if the new scrollTop value is closer to the
-                // desired scrollTop than before (it might not be exactly the value we
+                // Return true of setting the new scrollTop/scrollLeft value worked
+                // We consider that it worked if the new scrollTop/scrollLeft value is closer to the
+                // desired scrollTop/scrollLeft than before (it might not be exactly the value we
                 // set due to dpi or rounding irregularities)
-                if (isSmallMovement || scrollDistance > Math.abs(scrollTopSource.scrollTop - position)) {
+                if (isSmallMovement || scrollDistance > Math.abs(this.getScrollPropertyValue(scrollingView) - position)) {
                     return true;
                 }
             }
@@ -312,24 +365,28 @@ export class PageScrollInstance {
         return this._namespace;
     }
 
-    public get scrollTopSources(): any[] {
-        return this._scrollTopSources;
+    get verticalScrolling(): boolean {
+        return this._verticalScrolling;
     }
 
-    public set startScrollTop(value: number) {
-        this._startScrollTop = value;
+    public get scrollingViews(): any[] {
+        return this._scrollingViews;
     }
 
-    public get startScrollTop(): number {
-        return this._startScrollTop;
+    public set startScrollPosition(value: number) {
+        this._startScrollPosition = value;
     }
 
-    public set targetScrollTop(value: number) {
-        this._targetScrollTop = value;
+    public get startScrollPosition(): number {
+        return this._startScrollPosition;
     }
 
-    public get targetScrollTop(): number {
-        return this._targetScrollTop;
+    public set targetScrollPosition(value: number) {
+        this._targetScrollPosition = value;
+    }
+
+    public get targetScrollPosition(): number {
+        return this._targetScrollPosition;
     }
 
     public set distanceToScroll(value: number) {
