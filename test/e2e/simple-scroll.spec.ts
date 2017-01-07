@@ -160,47 +160,52 @@ describe('Simple Scroll page', () => {
         });
     });
 
-    fit('should scroll to seventh heading from button with custom easing', () => {
+    it('should scroll to seventh heading from button with custom easing', () => {
         let target: any = element(by.css('#head7'));
         let trigger: any = element(by.css('#customEasingButton'));
-        let pageScrollDuration = 5000;
+        let pageScrollDuration = 1250;
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
-                trigger.click().then(() => {
-                    browser.sleep(pageScrollDuration * 0.25).then(() => {
-                        // At one quarter of the time the scrolling should be at less than when scrolling with linear easing
-                        getScrollPos().then((pos: number) => {
-                            expect(pos).toBeLessThan(Math.round(headingLocation.y / 4));
-                        });
-                    });
-                    browser.sleep(pageScrollDuration * 0.5).then(() => {
-                        // At half of the time the scrolling should be greater than when scrolling with linear easing
-                        getScrollPos().then((pos: number) => {
-                            expect(pos).toBeGreaterThan(Math.round(headingLocation.y / 2));
-                        });
-                    });
-                    browser.sleep(pageScrollDuration * 0.75).then(() => {
-                        // At three quarters of the time the scrolling should be be greater than when scrolling with linear easing
-                        getScrollPos().then((pos: number) => {
-                            expect(pos).toBeGreaterThan(Math.round(headingLocation.y / 4 * 3));
-                        });
-                    });
+                // Make sure the browser logs are empty so get them once (which automatically clears them)
+                // Source: http://stackoverflow.com/a/30589885
+                browser.manage().logs().get('browser').then(function () {
+                    trigger.click().then(() => {
+                        browser.sleep(pageScrollDuration).then(() => {
+                            // At the end of the time the scrolling should be at the specific target position
+                            getScrollPos().then((pos: number) => {
+                                expect(pos).toBe(Math.round(headingLocation.y));
+                            });
+                            // Inspect the console logs, they should contain all in between scroll positions
+                            // Using the browser.sleep() to execute some code while the animation is running does not work
+                            // consistently across browser, especially causing problems with the CI server
+                            browser.manage().logs().get('browser').then(function (browserLog) {
+                                let scrollPositionHistory = browserLog
+                                    .filter(log => log.message.indexOf('Scroll Position: ') >= 0) // only take scroll position logs
+                                    .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints
 
-                    browser.sleep(pageScrollDuration).then(() => {
-                        // At the end of the time the scrolling should be at the specific target position
-                        getScrollPos().then((pos: number) => {
-                            expect(pos).toBe(Math.round(headingLocation.y));
-                        });
-                        // Inspect the console logs, they should contain all in between scroll positions
-                        // Using the browser.sleep() to execute some code while the animation is running does not work
-                        // consistently across browser, especially causing problems with the CI server
-                        browser.manage().logs().get('browser').then(function (browserLog) {
-                            let scrollPositionHistory = browserLog.filter(log => log.message.indexOf('Scroll Position: ') >= 0)
-                                .map(log => parseInt(log.message.split(' ').reverse()[0], 10));
+                                expect(scrollPositionHistory.length).toBeGreaterThan(0);
+                                let linear25PercScrollPos = Math.round(headingLocation.y * 0.25) + scrollPositionHistory[0];
+                                let linearHalfTimeScrollPos = Math.round(headingLocation.y / 2) + scrollPositionHistory[0];
+                                let linear75PercScrollPos = Math.round(headingLocation.y * 0.75) + scrollPositionHistory[0];
 
-                            console.log('log: ' + require('util').inspect(scrollPositionHistory));
-                            // TODO Inspect the browserLog here and perform expect's()
+                                // Check that after a quarter of the total scroll time the scroll position is less than
+                                // a quarter of the total distance. This would be the case if linear scroll easing took place
+                                let arrayFirstQuarter = Math.ceil(scrollPositionHistory.length * 0.25);
+                                let scrollPosAfter25Perc = scrollPositionHistory[arrayFirstQuarter];
+                                expect(scrollPosAfter25Perc).toBeLessThan(linear25PercScrollPos);
+
+                                // Check that after half of the total scroll time the scroll position is greater than
+                                // half of the total distance.
+                                // Half time and half distance would be the case when linear easing took place
+                                let arrayCenter = Math.floor(scrollPositionHistory.length / 2);
+                                let scrollPosAfterHalfTime = scrollPositionHistory[arrayCenter];
+                                expect(scrollPosAfterHalfTime).toBeGreaterThan(linearHalfTimeScrollPos);
+
+                                let arrayThreeQuarters = Math.floor(scrollPositionHistory.length * 0.75);
+                                let scrollPosAfter75Perc = scrollPositionHistory[arrayThreeQuarters];
+                                expect(scrollPosAfter75Perc).toBeGreaterThan(linear75PercScrollPos);
+                            });
                         });
                     });
                 });
