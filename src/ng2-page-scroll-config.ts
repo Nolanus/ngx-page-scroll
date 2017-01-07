@@ -35,9 +35,19 @@ export class PageScrollConfig {
      */
     public static _minScrollDistance: number = 2;
 
+    /**
+     * Name of the default namespace.
+     * @type {string}
+     * @private
+     */
     public static _defaultNamespace = 'default';
 
-    public static _defaultIsVerticalScrolling = true;
+    /**
+     * Whether by default the scrolling should happen in vertical direction (by manipulating the scrollTop property)
+     * (= true; default) or in horizontal direction (by manipulating the scrollLeft property) (= false
+     * @type {boolean}
+     */
+    public static defaultIsVerticalScrolling = true;
 
     /**
      * How many console logs should be emitted.

@@ -26,8 +26,8 @@ export class PageScrollInstance {
     /* The target element that should be scrolled into the viewport */
     private _scrollTarget: PageScrollTarget;
 
-    /* Wehter we scroll vertically (true) or horizontally (false) */
-    private _verticalScrolling = PageScrollConfig._defaultIsVerticalScrolling;
+    /* Whether we scroll vertically (true) or horizontally (false) */
+    private _verticalScrolling = PageScrollConfig.defaultIsVerticalScrolling;
     /* Offset in px that the animation should stop above that target element */
     private _offset: number = PageScrollConfig.defaultScrollOffset;
     /* Duration in milliseconds the scroll animation should last */

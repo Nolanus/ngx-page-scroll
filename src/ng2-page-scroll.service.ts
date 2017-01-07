@@ -31,7 +31,10 @@ export class PageScrollService {
         }
 
         if (pageScrollInstance.timer) {
+            // Clear/Stop the timer
             clearInterval(pageScrollInstance.timer);
+            // Clear the reference to this timer
+            pageScrollInstance.timer = undefined;
             pageScrollInstance.fireEvent(!interrupted);
             return true;
         }
@@ -178,7 +181,7 @@ export class PageScrollService {
     public stopAll(namespace?: string): boolean {
         if (this.runningInstances.length > 0) {
             let stoppedSome = false;
-            this.runningInstances.forEach((pageScrollInstance: PageScrollInstance, index: number) => {
+            this.runningInstances.forEach((pageScrollInstance: PageScrollInstance) => {
                 if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
