@@ -9,17 +9,9 @@ before_install:
   - sleep 3 # give xvfb some time to start
 install:
   - npm install
-  - npm run compile:tsc # compile all the filesa
-  - cd demo/
-  - npm install
-  - node_modules/.bin/ng build
-  - |
-    node_modules/.bin/ng serve &
-    SERVER_PID=$!
-  - echo $SERVER_PID
-  - sleep 10 # give the server a jump start
-  - cd ../
+  - npm run demo &
+  - sleep 15 # give the demo server a jump start
 script:
   - npm test
 after_script:
-  - kill $SERVER_PID
+  - kill $(lsof -i:4200 | grep node | awk '{print $2}') # Kill the demo app process
