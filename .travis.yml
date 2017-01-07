@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "6"
-  - "5"
+  #- "5"
 before_install:
   #- export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
@@ -9,9 +9,17 @@ before_install:
   - sleep 3 # give xvfb some time to start
 install:
   - npm install
-  - npm run demo &
-  - sleep 15 # give the demo server a jump start
+  - npm run compile:tsc # compile all the files
+  - cd demo/
+  - npm install
+  - node_modules/.bin/ng build --prod
+  - |
+    node_modules/.bin/ng serve --prod &
+    SERVER_PID=$!
+  - echo $SERVER_PID
+  - sleep 10 # give the server a jump start
+  - cd ../
 script:
   - npm test
 after_script:
-  - kill $(lsof -i:4200 | grep node | awk '{print $2}') # Kill the demo app process
+  - kill $SERVER_PID
