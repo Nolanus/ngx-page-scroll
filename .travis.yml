@@ -21,5 +21,6 @@ install:
   - cd ../
 script:
   - npm test
+  - curl http://localhost:4200
 after_script:
   - kill $SERVER_PID
