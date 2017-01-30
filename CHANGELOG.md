@@ -1,3 +1,9 @@
+## 4.0.0-beta.3 (2017-01-30)
+
+Other:
+
+- Remove source map reference from published files (#72)
+
 ## 4.0.0-beta.2 (2016-12-22)
 
 New:
