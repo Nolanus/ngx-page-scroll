@@ -127,5 +127,6 @@ typings
 *.js.map
 *.d.ts
 *.metadata.json
+*.ngsummary.json
 ng2-page-scroll*.js
 /test/e2e/*.spec.js
