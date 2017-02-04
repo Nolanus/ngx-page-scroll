@@ -90,18 +90,12 @@ export class PageScrollInstance {
                                           scrollTarget: PageScrollTarget,
                                           isVerticalScrolling: boolean,
                                           namespace?: string): PageScrollInstance {
-        return PageScrollInstance.advancedInstance(
+        return PageScrollInstance.advancedInstance({
             document,
             scrollTarget,
-            null,
             namespace,
             isVerticalScrolling,
-            null,
-            null,
-            null,
-            null,
-            null
-        );
+        });
     }
 
     /**
@@ -136,18 +130,13 @@ export class PageScrollInstance {
                                                 scrollingView: PageScrollingViews,
                                                 isVerticalScrolling: boolean,
                                                 namespace?: string): PageScrollInstance {
-        return PageScrollInstance.advancedInstance(
-            document,
-            scrollTarget,
-            [scrollingView],
-            namespace,
-            isVerticalScrolling,
-            null,
-            null,
-            null,
-            null,
-            null
-        );
+        return PageScrollInstance.advancedInstance({
+          document,
+          scrollTarget,
+          scrollingViews: [scrollingView],
+          namespace,
+          isVerticalScrolling,
+        });
     }
 
     /**
@@ -170,16 +159,44 @@ export class PageScrollInstance {
      *
      * @returns {PageScrollInstance}
      */
+    public static advancedInstance(options: AdvancedInstanceOptions): PageScrollInstance;
     public static advancedInstance(document: Document,
                                    scrollTarget: PageScrollTarget,
+                                   scrollingViews?: PageScrollingViews[],
+                                   namespace?: string,
+                                   isVerticalScrolling?: boolean,
+                                   pageScrollOffset?: number,
+                                   pageScrollInterruptible?: boolean,
+                                   pageScrollEasingLogic?: EasingLogic,
+                                   pageScrollDuration?: number,
+                                   pageScrollFinishListener?: EventEmitter<boolean>): PageScrollInstance;
+    public static advancedInstance(documentOrOptions: Document | AdvancedInstanceOptions,
+                                   scrollTarget?: PageScrollTarget,
                                    scrollingViews: PageScrollingViews[] = null,
-                                   namespace: string,
-                                   isVerticalScrolling: boolean,
+                                   namespace?: string,
+                                   isVerticalScrolling?: boolean,
                                    pageScrollOffset: number = null,
                                    pageScrollInterruptible: boolean = null,
                                    pageScrollEasingLogic: EasingLogic = null,
                                    pageScrollDuration: number = null,
                                    pageScrollFinishListener: EventEmitter<boolean> = null): PageScrollInstance {
+        let document: Document;
+        if (scrollTarget) {
+          console.warn('DEPRECATED: calling advancedInstance with arguments is deprecated.');
+          document = <Document>documentOrOptions;
+        } else {
+          let options = <AdvancedInstanceOptions>documentOrOptions;
+          document = options.document;
+          scrollTarget = options.scrollTarget;
+          scrollingViews = options.scrollingViews;
+          namespace = options.namespace;
+          isVerticalScrolling = options.isVerticalScrolling;
+          pageScrollOffset = options.pageScrollOffset;
+          pageScrollInterruptible = options.pageScrollInterruptible;
+          pageScrollEasingLogic = options.pageScrollEasingLogic;
+          pageScrollDuration = options.pageScrollDuration;
+          pageScrollFinishListener = options.pageScrollFinishListener;
+        }
 
         if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length <= 0) {
             namespace = PageScrollConfig._defaultNamespace;
@@ -450,3 +467,19 @@ export interface InterruptReporter {
         (event: Event, pageScrollInstance: PageScrollInstance): void;
     };
 }
+
+/**
+ * An Interface specifing the call signature for PageScrollInstance.advancedInstance()
+ */
+export interface AdvancedInstanceOptions {
+  document: Document;
+  scrollTarget: PageScrollTarget;
+  scrollingViews?: PageScrollingViews[];
+  namespace?: string;
+  isVerticalScrolling: boolean;
+  pageScrollOffset?: number;
+  pageScrollInterruptible?: boolean;
+  pageScrollEasingLogic?: EasingLogic;
+  pageScrollDuration?: number;
+  pageScrollFinishListener?: EventEmitter<boolean>;
+};
