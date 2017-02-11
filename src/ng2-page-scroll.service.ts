@@ -7,7 +7,7 @@ import {PageScrollUtilService} from './ng2-page-scroll-util.service';
 @Injectable()
 export class PageScrollService {
 
-    private static instanceCounter: number = 0;
+    private static instanceCounter = 0;
 
     private runningInstances: PageScrollInstance[] = [];
 
