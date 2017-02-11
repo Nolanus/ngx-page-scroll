@@ -22,7 +22,7 @@ export class PageScrollConfig {
      * @type {number}
      * @private
      */
-    public static _interval: number = 10;
+    public static _interval = 10;
 
     /**
      * The amount of pixels that need to be between the current scrollTop/scrollLeft position
@@ -33,7 +33,7 @@ export class PageScrollConfig {
      * @type {number}
      * @private
      */
-    public static _minScrollDistance: number = 2;
+    public static _minScrollDistance = 2;
 
     /**
      * Name of the default namespace.
@@ -54,14 +54,14 @@ export class PageScrollConfig {
      * May be overridden using the page-scroll-duration attribute on a single ng2PageScroll instance.
      * @type {number}
      */
-    public static defaultDuration: number = 1250;
+    public static defaultDuration = 1250;
 
     /**
      * The distance in pixels above scroll target where the animation should stop. Setting a positive number results in
      * the scroll target being more in the middle of the screen, negative numbers will produce scrolling "too far"
      * @type {number}
      */
-    public static defaultScrollOffset: number = 0;
+    public static defaultScrollOffset = 0;
 
     /**
      * The events that are listened to on the body to decide whether a scroll animation has been interfered/interrupted by the user
@@ -83,7 +83,7 @@ export class PageScrollConfig {
      * interrupting event while a scroll animation takes place, the scroll animation stops.
      * @type {boolean}
      */
-    public static defaultInterruptible: boolean = true;
+    public static defaultInterruptible = true;
 
     private static _easingLogic: EasingLogic = {
         ease: (t: number, b: number, c: number, d: number): number => {
