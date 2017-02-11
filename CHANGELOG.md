@@ -1,3 +1,13 @@
+## 4.0.0-beta.4 (2017-02-11)
+
+Fix:
+
+- No scroll animation took place if routerLink directive was present on directive element and target route already active (#68)
+
+Other:
+
+- Upgrade angular dependencies, now requires version 2.4.0 or later
+
 ## 4.0.0-beta.3 (2017-01-30)
 
 Other:
