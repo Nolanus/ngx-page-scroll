@@ -159,6 +159,60 @@ describe('Simple Scroll page', () => {
         });
     });
 
+    it('should scroll to seventh heading when directive has routerLink pointing to current route (variant 1)', () => {
+        let target: any = element(by.css('#head7'));
+        let trigger: any = element(by.css('#currentRouteScroll1'));
+        target.getLocation().then((headingLocation: any) => {
+            getScrollPos().then((initialPos: number) => {
+                expect(initialPos).toEqual(0);
+                trigger.click().then(() => {
+                    browser.sleep(1250).then(() => {
+                        getScrollPos().then((pos: number) => {
+                            // 50px negative offset should be there
+                            expect(pos).toBe(Math.round(headingLocation.y));
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    it('should scroll to seventh heading when directive has routerLink pointing to current route (variant 2)', () => {
+        let target: any = element(by.css('#head7'));
+        let trigger: any = element(by.css('#currentRouteScroll2'));
+        target.getLocation().then((headingLocation: any) => {
+            getScrollPos().then((initialPos: number) => {
+                expect(initialPos).toEqual(0);
+                trigger.click().then(() => {
+                    browser.sleep(1250).then(() => {
+                        getScrollPos().then((pos: number) => {
+                            // 50px negative offset should be there
+                            expect(pos).toBe(Math.round(headingLocation.y));
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    it('should scroll to seventh heading when directive has routerLink pointing to current route (variant 3)', () => {
+        let target: any = element(by.css('#head7'));
+        let trigger: any = element(by.css('#currentRouteScroll3'));
+        target.getLocation().then((headingLocation: any) => {
+            getScrollPos().then((initialPos: number) => {
+                expect(initialPos).toEqual(0);
+                trigger.click().then(() => {
+                    browser.sleep(1250).then(() => {
+                        getScrollPos().then((pos: number) => {
+                            // 50px negative offset should be there
+                            expect(pos).toBe(Math.round(headingLocation.y));
+                        });
+                    });
+                });
+            });
+        });
+    });
+
     it('should scroll to seventh heading from button with custom easing', () => {
         let target: any = element(by.css('#head7'));
         let trigger: any = element(by.css('#customEasingButton'));
