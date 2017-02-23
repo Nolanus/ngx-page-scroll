@@ -28,6 +28,19 @@
         Offset -50px
     </button>
 
+    <h3>Scroll target with router to current page</h3>
+    <p>The following scroll animation refers to a scroll target on the current page and includes the routerLink
+        directive pointing to the current page. Each button uses a different routerLink syntax.</p>
+    <button md-raised-button color="primary" href="#head7" pageScroll routerLink="/simple" id="currentRouteScroll1">
+        Start 1
+    </button>
+    <button md-raised-button color="primary" href="#head7" pageScroll [routerLink]="['/simple']" id="currentRouteScroll2">
+        Start 2
+    </button>
+    <button md-raised-button color="primary" href="#head7" pageScroll [routerLink]="['/simple', {foo: 'bar'}]" id="currentRouteScroll3">
+        Start 3
+    </button>
+
     <h3>Finish event</h3>
     <p>The following scroll animation has a custom duration of 350ms and a <code>pageScrollFinish</code> event listener
         attached and shows a snackbar

@@ -17,7 +17,7 @@ export class AppComponent {
             // see also
             if (event instanceof NavigationEnd) {
                 this.links.forEach((link, index) => {
-                    if (link.route[0] === event.url) {
+                    if (router.isActive(router.createUrlTree(link.route), false)) {
                         this.currentTabIndex = index;
                     }
                 });

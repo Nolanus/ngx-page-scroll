@@ -46,7 +46,7 @@ export class PageScrollInstance {
      * These properties will be set/manipulated if the scroll animation starts
      */
     /* The initial value of the scrollTop or scrollLeft position when the animation starts */
-    private _startScrollPosition: number = 0;
+    private _startScrollPosition = 0;
     /* The target value of the scrollTop or scrollLeft position for the animation (aka "the final destination") */
     private _targetScrollPosition: number;
     /* Difference between startScrollPosition and targetScrollPosition. Pre-calculated to minimize computations during animation */
@@ -56,7 +56,7 @@ export class PageScrollInstance {
     /* The estimate end time of the animation, calculated by startTime + duration */
     private _endTime: number;
     /* Whether an interrupt listener is attached to the body or not */
-    private _interruptListenersAttached: boolean = false;
+    private _interruptListenersAttached = false;
 
     /* References to the timer instance that is used to perform the scroll animation to be
      able to clear it on animation end*/

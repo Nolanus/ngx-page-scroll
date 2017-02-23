@@ -155,7 +155,7 @@ export class MyComponent {
      @ViewChild('container')
      private container: ElementRef;
 
-     constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: Document) {
+     constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
      }
 
      public goToHead2(): void {

@@ -1,3 +1,33 @@
+## 4.0.0-beta.4 (2017-02-11)
+
+Fix:
+
+- No scroll animation took place if routerLink directive was present on directive element and target route already active (#68)
+
+Other:
+
+- Upgrade angular dependencies, now requires version 2.4.0 or later
+
+## 4.0.0-beta.3 (2017-01-30)
+
+Other:
+
+- Remove source map reference from published files (#72)
+
+## 4.0.0-beta.2 (2016-12-22)
+
+New:
+
+- Horizontal scrolling feature (#61)
+
+Fix:
+
+- Problem with not revmoved timer reference (fix #64)
+
+Other:
+
+- Update dependencies, especially angular to support version 2.4.0 and later
+
 ## 4.0.0-beta.1 (2016-11-17)
 
 Other:
