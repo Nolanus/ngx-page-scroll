@@ -23,7 +23,7 @@ install:
    # Build the demo app
   - node_modules/.bin/ng build --prod
   # Start the docker container that serves the example app
-  - docker run --name ng2psDemo -v dist/:/usr/share/nginx/html:ro -d -p 127.0.0.1:4200:80 nginx
+  - docker run --name ng2psDemo -v dist:/usr/share/nginx/html:ro -d -p 127.0.0.1:4200:80 nginx
   - sleep 10 # give the server a jump start
   - cd ../
 script:
