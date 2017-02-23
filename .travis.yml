@@ -1,4 +1,10 @@
+sudo: required
+
 language: node_js
+
+services:
+  - docker
+
 node_js:
   - "6"
   #- "5"
@@ -10,17 +16,19 @@ before_install:
 install:
   - npm install
   - npm run compile:tsc # compile all the files
+
   - cd demo/
+  # Install the demo app deps
   - npm install
+   # Build the demo app
   - node_modules/.bin/ng build --prod
-  - |
-    node_modules/.bin/ng serve --prod &
-    SERVER_PID=$!
-  - echo $SERVER_PID
+  # Start the docker container that serves the example app
+  - docker run --name ng2psDemo -v dist/:/usr/share/nginx/html:ro -d -p 127.0.0.1:4200:80 nginx
   - sleep 10 # give the server a jump start
   - cd ../
 script:
+  # Execute the tests
   - npm test
-  - curl http://localhost:4200
 after_script:
-  - kill $SERVER_PID
+  - docker stop ng2psDemo
+  - docker rm ng2psDemo
