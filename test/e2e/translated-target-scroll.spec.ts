@@ -1,4 +1,5 @@
 import {browser, element, by} from 'protractor';
+import {Util as Closeness} from '../util';
 
 describe('Transformed Target Scroll page', () => {
 
@@ -19,7 +20,7 @@ describe('Transformed Target Scroll page', () => {
                 trigger.click().then(() => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
-                            expect(pos).toBe(Math.round(headingLocation.y));
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                         });
                     });
                 });
@@ -36,7 +37,7 @@ describe('Transformed Target Scroll page', () => {
                 trigger.click().then(() => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
-                            expect(pos).toBe(Math.round(headingLocation.y));
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                         });
                     });
                 });

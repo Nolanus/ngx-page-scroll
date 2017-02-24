@@ -1,4 +1,5 @@
 import {browser, element, by} from 'protractor';
+import {Util as Closeness} from '../util';
 
 describe('Simple Scroll page', () => {
 
@@ -15,6 +16,12 @@ describe('Simple Scroll page', () => {
         return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', scrollPos);
     }
 
+    function extractScrollPosFromLogs(data: number[], positionPercentage: number): number {
+        let positionFloored = Math.floor(data.length * positionPercentage);
+        let positionedCeiled = Math.ceil(data.length * positionPercentage);
+        return (data[positionFloored] + data[positionedCeiled]) / 2;
+    }
+
     it('should scroll to last heading using service', () => {
         let body: any = element(by.css('body'));
         let lastHeadingLink: any = element(by.css('#goToLastHeadingButton'));
@@ -26,7 +33,7 @@ describe('Simple Scroll page', () => {
                         browser.sleep(1250).then(() => {
                             getScrollPos().then((pos: number) => {
                                 // Should be scrolled all the way to the bottom
-                                expect(pos).toBe(bodyScrollHeight - windowHeight);
+                                expect(pos).toBeCloseTo(bodyScrollHeight - windowHeight, Closeness.ofByOne);
                             });
                         });
                     });
@@ -47,7 +54,7 @@ describe('Simple Scroll page', () => {
                             browser.sleep(1250).then(() => {
                                 getScrollPos().then((pos: number) => {
                                     // Should be scrolled all the way to the bottom
-                                    expect(pos).toBe(bodyScrollHeight - windowHeight);
+                                    expect(pos).toBeCloseTo(bodyScrollHeight - windowHeight, Closeness.ofByOne);
                                 });
                             });
                         });
@@ -57,24 +64,51 @@ describe('Simple Scroll page', () => {
         });
     });
 
-    it('should scroll to seventh heading from button', () => {
+    it('should scroll to seventh heading from button with linear easing', () => {
         let target: any = element(by.css('#head7'));
         let trigger: any = element(by.css('#testButton'));
         target.getLocation().then((headingLocation: any) => {
-            let targetLocation = Math.round(headingLocation.y);
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
-                trigger.click().then(() => {
-                    // After 1,25 seconds we should be somewhere in between (near 1/4 of the distance from start to finish)
-                    browser.sleep(1250).then(() => {
-                        getScrollPos().then((pos: number) => {
-                            expect(pos).toBeCloseTo(Math.round(targetLocation / 4), -2);
-                        });
-                    });
-                    // After the 5 seconds we should be at the target
-                    browser.sleep(5000).then(() => {
-                        getScrollPos().then((pos: number) => {
-                            expect(pos).toBe(targetLocation);
+                // Make sure the browser logs are empty so get them once (which automatically clears them)
+                // Source: http://stackoverflow.com/a/30589885
+                browser.manage().logs().get('browser').then(function () {
+                    trigger.click().then(() => {
+                        browser.sleep(5000).then(() => {
+                            // At the end of the time the scrolling should be at the specific target position
+                            getScrollPos().then((pos: number) => {
+                                expect(pos).toBeCloseTo(headingLocation.y, Closeness.ofByOne);
+                            });
+                            // Inspect the console logs, they should contain all in between scroll positions
+                            // Using the browser.sleep() to execute some code while the animation is running does not work
+                            // consistently across browser, especially causing problems with the CI server
+                            browser.manage().logs().get('browser').then(function (browserLog) {
+                                let scrollPositionHistory = browserLog
+                                    .filter(log => log.message.indexOf('Scroll Position: ') >= 0) // only take scroll position logs
+                                    .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints
+
+                                expect(scrollPositionHistory.length).toBeGreaterThan(0);
+                                let linear25PercScrollPos = Math.round(headingLocation.y * 0.25) + scrollPositionHistory[0];
+                                let linearHalfTimeScrollPos = Math.round(headingLocation.y / 2) + scrollPositionHistory[0];
+                                let linear75PercScrollPos = Math.round(headingLocation.y * 0.75) + scrollPositionHistory[0];
+
+                                // Allow a tolerance relative to the overall scroll distance (but a least 5 pixels absolute)
+                                // A three percent tolerance is chosen. This may result due to different browser and system performance
+                                let ofByThreePercent = Closeness.ofBy(Math.max(5, Math.ceil(headingLocation.y * 0.03)));
+
+                                // Check that after a quarter of the total scroll time the scroll position is near
+                                // a quarter of the total distance.
+                                let scrollPosAfter25Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.25);
+                                expect(scrollPosAfter25Perc).toBeCloseTo(linear25PercScrollPos, ofByThreePercent);
+
+                                // Check that after half of the total scroll time the scroll position is near
+                                // half of the total distance
+                                let scrollPosAfterHalfTime = extractScrollPosFromLogs(scrollPositionHistory, 0.5);
+                                expect(scrollPosAfterHalfTime).toBeCloseTo(linearHalfTimeScrollPos, ofByThreePercent);
+
+                                let scrollPosAfter75Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.75);
+                                expect(scrollPosAfter75Perc).toBeCloseTo(linear75PercScrollPos, ofByThreePercent);
+                            });
                         });
                     });
                 });
@@ -92,7 +126,7 @@ describe('Simple Scroll page', () => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             // 150px offset should be there
-                            expect(pos).toBe(Math.round(headingLocation.y) - 150);
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y) - 150, Closeness.ofByOne);
                         });
                     });
                 });
@@ -111,7 +145,7 @@ describe('Simple Scroll page', () => {
                         browser.sleep(1250).then(() => {
                             getScrollPos().then((pos: number) => {
                                 // 150px offset should be there
-                                expect(pos).toBe(Math.round(headingLocation.y) - 150);
+                                expect(pos).toBeCloseTo(Math.round(headingLocation.y) - 150, Closeness.ofByOne);
                             });
                         });
                     });
@@ -130,7 +164,7 @@ describe('Simple Scroll page', () => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             // 50px negative offset should be there
-                            expect(pos).toBe(Math.round(headingLocation.y) + 50);
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y) + 50, Closeness.ofByOne);
                         });
                     });
                 });
@@ -147,12 +181,12 @@ describe('Simple Scroll page', () => {
                 trigger.click().then(() => {
                     browser.sleep(400).then(() => {
                         let snackbar = element(by.css('simple-snack-bar'));
-                        let snackbarMessage = snackbar.element(by.css('.md-simple-snackbar-message'));
-                        let snackbarButton = snackbar.element(by.css('.md-simple-snackbar-action'));
+                        let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
+                        let snackbarButton = snackbar.element(by.css('button'));
                         expect(snackbarMessage.getText()).toBe('Yeah, we reached our destination');
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
-                            expect(pos).toEqual(Math.round(headingLocation.y));
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                         });
                     });
                 });
@@ -170,7 +204,7 @@ describe('Simple Scroll page', () => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             // 50px negative offset should be there
-                            expect(pos).toBe(Math.round(headingLocation.y));
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                         });
                     });
                 });
@@ -188,7 +222,7 @@ describe('Simple Scroll page', () => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             // 50px negative offset should be there
-                            expect(pos).toBe(Math.round(headingLocation.y));
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                         });
                     });
                 });
@@ -206,7 +240,7 @@ describe('Simple Scroll page', () => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             // 50px negative offset should be there
-                            expect(pos).toBe(Math.round(headingLocation.y));
+                            expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                         });
                     });
                 });
@@ -228,7 +262,7 @@ describe('Simple Scroll page', () => {
                         browser.sleep(pageScrollDuration).then(() => {
                             // At the end of the time the scrolling should be at the specific target position
                             getScrollPos().then((pos: number) => {
-                                expect(pos).toBe(Math.round(headingLocation.y));
+                                expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                             });
                             // Inspect the console logs, they should contain all in between scroll positions
                             // Using the browser.sleep() to execute some code while the animation is running does not work
@@ -245,19 +279,16 @@ describe('Simple Scroll page', () => {
 
                                 // Check that after a quarter of the total scroll time the scroll position is less than
                                 // a quarter of the total distance. This would be the case if linear scroll easing took place
-                                let arrayFirstQuarter = Math.ceil(scrollPositionHistory.length * 0.25);
-                                let scrollPosAfter25Perc = scrollPositionHistory[arrayFirstQuarter];
+                                let scrollPosAfter25Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.25);
                                 expect(scrollPosAfter25Perc).toBeLessThan(linear25PercScrollPos);
 
                                 // Check that after half of the total scroll time the scroll position is greater than
                                 // half of the total distance.
                                 // Half time and half distance would be the case when linear easing took place
-                                let arrayCenter = Math.floor(scrollPositionHistory.length / 2);
-                                let scrollPosAfterHalfTime = scrollPositionHistory[arrayCenter];
+                                let scrollPosAfterHalfTime = extractScrollPosFromLogs(scrollPositionHistory, 0.5);
                                 expect(scrollPosAfterHalfTime).toBeGreaterThan(linearHalfTimeScrollPos);
 
-                                let arrayThreeQuarters = Math.floor(scrollPositionHistory.length * 0.75);
-                                let scrollPosAfter75Perc = scrollPositionHistory[arrayThreeQuarters];
+                                let scrollPosAfter75Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.75);
                                 expect(scrollPosAfter75Perc).toBeGreaterThan(linear75PercScrollPos);
                             });
                         });

@@ -1,4 +1,5 @@
 import {browser, element, by} from 'protractor';
+import {Util as Closeness} from '../util';
 
 describe('Nested Scrolling page', () => {
 
@@ -20,7 +21,7 @@ describe('Nested Scrolling page', () => {
                     scrollParent.getAttribute('scrollTop').then((pos: number) => {
                         // Now the scrollTop value of the container should be the exact same value like
                         // the offsetTop of the nested element
-                        expect(target.getAttribute('offsetTop')).toBe(pos);
+                        expect(target.getAttribute('offsetTop')).toBeCloseTo(pos, Closeness.ofByOne);
                     });
                 });
             });
@@ -44,7 +45,7 @@ describe('Nested Scrolling page', () => {
                     scrollParent.getAttribute('scrollTop').then((pos: number) => {
                         // Now the scrollTop value of the container should be the exact same value like
                         // the offsetTop of the nested element
-                        expect(target.getAttribute('offsetTop')).toBe(pos);
+                        expect(target.getAttribute('offsetTop')).toBeCloseTo(pos, Closeness.ofByOne);
                     });
                 });
             });

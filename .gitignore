@@ -129,4 +129,7 @@ typings
 *.metadata.json
 *.ngsummary.json
 ng2-page-scroll*.js
-/test/e2e/*.spec.js
+/test/e2e/*.js
+/test/*.js
+/ssh
+/ssh.pub

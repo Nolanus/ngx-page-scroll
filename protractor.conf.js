@@ -1,20 +1,8 @@
-var browsers = [];
-if (process.env.TRAVIS) {
-    browsers.push({
-        browserName: 'firefox'
-    });
-} else {
-    browsers.push({
-        browserName: 'chrome'
-    });
-}
-
-exports.config = {
+var config = {
     baseUrl: 'http://localhost:4200/',
     specs: ['test/e2e/**/*.spec.js'],
-    directConnect: true,
+    directConnect: false,
     exclude: [],
-    multiCapabilities: browsers,
     allScriptsTimeout: 110000,
     getPageTimeout: 100000,
     framework: 'jasmine2',
@@ -35,3 +23,24 @@ exports.config = {
      */
     useAllAngular2AppRoots: true
 };
+
+if (process.env.TRAVIS) {
+    // Override the baseUrl, as the port is a different one
+    config.baseUrl = 'http://localhost:8000/';
+    config.multiCapabilities = [{
+        browserName: 'chrome',
+        platform: 'Windows 10',
+        version: '56.0',
+        shardTestFiles: true,
+        name: 'Ng2PageScroll',
+        maxInstances: 5,
+        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+    }];
+    config.sauceUser = process.env.SAUCE_USERNAME;
+    config.sauceKey = process.env.SAUCE_ACCESS_KEY;
+    config.sauceBuild = 'travis-build#' + process.env.TRAVIS_BUILD_NUMBER;
+} else {
+    config.multiCapabilities = [{browserName: 'chrome'}];
+}
+
+exports.config = config;

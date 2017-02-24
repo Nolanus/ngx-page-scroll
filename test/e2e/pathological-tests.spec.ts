@@ -27,8 +27,8 @@ describe('Pathological Tests page', () => {
                 trigger.click().then(() => {
                     browser.sleep(400).then(() => {
                         let snackbar = element(by.css('simple-snack-bar'));
-                        let snackbarMessage = snackbar.element(by.css('.md-simple-snackbar-message'));
-                        let snackbarButton = snackbar.element(by.css('.md-simple-snackbar-action'));
+                        let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
+                        let snackbarButton = snackbar.element(by.css('button'));
                         expect(snackbarMessage.getText()).toBe('Ohoh, something interrupted us');
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
@@ -48,8 +48,8 @@ describe('Pathological Tests page', () => {
                 nonExistingTargetButton.click().then(() => {
                     browser.sleep(500).then(() => {
                         let snackbar = element(by.css('simple-snack-bar'));
-                        let snackbarMessage = snackbar.element(by.css('.md-simple-snackbar-message'));
-                        let snackbarButton = snackbar.element(by.css('.md-simple-snackbar-action'));
+                        let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
+                        let snackbarButton = snackbar.element(by.css('button'));
                         expect(snackbarMessage.getText()).toBe('Ohoh, something interrupted us');
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
@@ -68,8 +68,8 @@ describe('Pathological Tests page', () => {
             trigger.click().then(() => {
                 browser.sleep(400).then(() => {
                     let snackbar = element(by.css('simple-snack-bar'));
-                    let snackbarMessage = snackbar.element(by.css('.md-simple-snackbar-message'));
-                    let snackbarButton = snackbar.element(by.css('.md-simple-snackbar-action'));
+                    let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
+                    let snackbarButton = snackbar.element(by.css('button'));
                     expect(snackbarMessage.getText()).toBe('Yeah, we reached our destination');
                     snackbarButton.click();
                     getScrollPos().then((pos: number) => {
