@@ -27,14 +27,14 @@ var config = {
 if (process.env.TRAVIS) {
 
     var capabilities = [
-        ['Window 10', 'chrome', '56.0'],
-        ['Window 10', 'chrome', '55.0'],
-        ['Window 10', 'chrome', '49.0'],
+        ['macOS 10.12', 'chrome', '56.0'],
+        ['macOS 10.12', 'chrome', '55.0'],
+        ['macOS 10.12', 'chrome', '49.0']/*,
         ['Window 10', 'MicrosoftEdge', '14.14393'],
         ['Window 10', 'MicrosoftEdge', '13.10586'],
         ['Window 10', 'internet explorer', '11.103'],
         ['Window 10', 'firefox', '51.0'],
-        ['Window 10', 'firefox', '50.0']
+        ['Window 10', 'firefox', '50.0']*/
     ];
 
     // Override the baseUrl, as the port is a different one
