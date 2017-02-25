@@ -25,17 +25,31 @@ var config = {
 };
 
 if (process.env.TRAVIS) {
+
+    var capabilities = [
+        ['Window 10', 'chrome', '56.0'],
+        ['Window 10', 'chrome', '55.0'],
+        ['Window 10', 'chrome', '49.0'],
+        ['Window 10', 'MicrosoftEdge', '14.14393'],
+        ['Window 10', 'MicrosoftEdge', '13.10586'],
+        ['Window 10', 'internet explorer', '11.103'],
+        ['Window 10', 'firefox', '51.0'],
+        ['Window 10', 'firefox', '50.0']
+    ];
+
     // Override the baseUrl, as the port is a different one
     config.baseUrl = 'http://localhost:8000/';
-    config.multiCapabilities = [{
-        browserName: 'chrome',
-        platform: 'Windows 10',
-        version: '56.0',
-        shardTestFiles: true,
-        name: 'Ng2PageScroll',
-        maxInstances: 5,
-        'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
-    }];
+    config.multiCapabilities = capabilities.map(function (capability) {
+        return {
+            browserName: capability[1],
+            platform: capability[0],
+            version: capability[2],
+            shardTestFiles: true,
+            name: 'Ng2PageScroll',
+            maxInstances: 5,
+            'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
+        }
+    });
     config.sauceUser = process.env.SAUCE_USERNAME;
     config.sauceKey = process.env.SAUCE_ACCESS_KEY;
     config.sauceBuild = 'travis-build#' + process.env.TRAVIS_BUILD_NUMBER;

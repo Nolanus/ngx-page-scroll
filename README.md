@@ -3,10 +3,13 @@
 Animated "scroll to element" functionality written in pure angular2 
 with no additional dependencies
 
+[![Build Status](https://travis-ci.org/Nolanus/ng2-page-scroll.svg?branch=master)](https://travis-ci.org/Nolanus/ng2-page-scroll)
 [![Dependency Status](https://david-dm.org/Nolanus/ng2-page-scroll.svg)](https://david-dm.org/Nolanus/ng2-page-scroll)
 [![devDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=dev)
 [![peerDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/peer-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=peer)
 [![Code Climate](https://codeclimate.com/github/Nolanus/ng2-page-scroll/badges/gpa.svg)](https://codeclimate.com/github/Nolanus/ng2-page-scroll)
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/Nolanus.svg)](https://saucelabs.com/u/Nolanus)
 
 ## Features
 
