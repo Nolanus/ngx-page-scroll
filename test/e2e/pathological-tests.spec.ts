@@ -2,7 +2,7 @@
  * Created by sebastianfuss on 22.10.16.
  */
 
-import {browser, element, by} from 'protractor';
+import {browser, element, by, protractor} from 'protractor';
 
 describe('Pathological Tests page', () => {
 
@@ -24,7 +24,7 @@ describe('Pathological Tests page', () => {
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
-                trigger.click().then(() => {
+                trigger.sendKeys(protractor.Key.ENTER).then(() => {
                     browser.sleep(400).then(() => {
                         let snackbar = element(by.css('simple-snack-bar'));
                         let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
@@ -45,7 +45,7 @@ describe('Pathological Tests page', () => {
         let nonExistingTargetButton: any = element(by.css('#nonExistingTargetButton'));
         browser.executeScript('arguments[0].scrollIntoView();', nonExistingTargetButton.getWebElement()).then(() => {
             getScrollPos().then((initialPos: number) => {
-                nonExistingTargetButton.click().then(() => {
+                nonExistingTargetButton.sendKeys(protractor.Key.ENTER).then(() => {
                     browser.sleep(500).then(() => {
                         let snackbar = element(by.css('simple-snack-bar'));
                         let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
@@ -65,7 +65,7 @@ describe('Pathological Tests page', () => {
     it('should trigger scrollFinish event if target is already in view', () => {
         let trigger: any = element(by.css('#alreadyAtTargetScroll'));
         scrollTo(0).then(() => {
-            trigger.click().then(() => {
+            trigger.sendKeys(protractor.Key.ENTER).then(() => {
                 browser.sleep(400).then(() => {
                     let snackbar = element(by.css('simple-snack-bar'));
                     let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
