@@ -1,7 +1,5 @@
 # ng2-page-scroll [![npm version](https://img.shields.io/npm/v/ng2-page-scroll.svg?style=flat)](https://www.npmjs.com/package/ng2-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ng2-page-scroll.svg)](https://greenkeeper.io/)
-
 Animated "scroll to element" functionality written in pure angular2 
 with no additional dependencies
 
@@ -9,6 +7,7 @@ with no additional dependencies
 [![Dependency Status](https://david-dm.org/Nolanus/ng2-page-scroll.svg)](https://david-dm.org/Nolanus/ng2-page-scroll)
 [![devDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=dev)
 [![peerDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/peer-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=peer)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ng2-page-scroll.svg)](https://greenkeeper.io/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bddd94eb51474880ac749b540470c78c)](https://www.codacy.com/app/sebastian-fuss/ng2-page-scroll?utm_source=github.com&utm_medium=referral&utm_content=Nolanus/ng2-page-scroll&utm_campaign=badger)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/Nolanus.svg)](https://saucelabs.com/u/Nolanus)
