@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, protractor} from 'protractor';
 import {Util as Closeness} from '../util';
 
 describe('Nested Scrolling page', () => {
@@ -16,7 +16,7 @@ describe('Nested Scrolling page', () => {
         scrollParent.getAttribute('scrollTop').then((initialScrollTop: string) => {
             expect(parseInt(initialScrollTop, 10)).toEqual(0);
             expect(initialScrollTop).toEqual('0');
-            trigger.click().then(() => {
+            trigger.sendKeys(protractor.Key.ENTER).then(() => {
                 browser.sleep(1250).then(() => {
                     scrollParent.getAttribute('scrollTop').then((pos: number) => {
                         // Now the scrollTop value of the container should be the exact same value like
@@ -40,7 +40,7 @@ describe('Nested Scrolling page', () => {
 
         scrollParent.getAttribute('scrollTop').then((initialScrollTop: number) => {
             expect(initialScrollTop).toBeGreaterThan(0);
-            trigger.click().then(() => {
+            trigger.sendKeys(protractor.Key.ENTER).then(() => {
                 browser.sleep(1250).then(() => {
                     scrollParent.getAttribute('scrollTop').then((pos: number) => {
                         // Now the scrollTop value of the container should be the exact same value like

@@ -1,4 +1,4 @@
-import {browser, element, by} from 'protractor';
+import {browser, element, by, protractor} from 'protractor';
 import {Util as Closeness} from '../util';
 
 describe('Transformed Target Scroll page', () => {
@@ -17,7 +17,7 @@ describe('Transformed Target Scroll page', () => {
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
-                trigger.click().then(() => {
+                trigger.sendKeys(protractor.Key.ENTER).then(() => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
@@ -34,7 +34,7 @@ describe('Transformed Target Scroll page', () => {
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
-                trigger.click().then(() => {
+                trigger.sendKeys(protractor.Key.ENTER).then(() => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);

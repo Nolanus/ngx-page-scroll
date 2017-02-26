@@ -27,14 +27,20 @@ var config = {
 if (process.env.TRAVIS) {
 
     var capabilities = [
+        // [platform, browsername, version]
         ['macOS 10.12', 'chrome', '56.0'],
         ['macOS 10.12', 'chrome', '55.0'],
-        ['macOS 10.12', 'chrome', '49.0']/*,
-        ['Window 10', 'MicrosoftEdge', '14.14393'],
-        ['Window 10', 'MicrosoftEdge', '13.10586'],
-        ['Window 10', 'internet explorer', '11.103'],
-        ['Window 10', 'firefox', '51.0'],
-        ['Window 10', 'firefox', '50.0']*/
+        ['macOS 10.12', 'chrome', '49.0'],
+        ['Windows 10', 'MicrosoftEdge', '14.14393'],
+        ['Windows 10', 'MicrosoftEdge', '13.10586'],
+        ['Linux', 'android', '5.1']
+        // TODO Selenium Driver problem for the following
+        // ['macOS 10.12', 'safari', '10.0'],
+        // ['Windows 10', 'internet explorer', '11.103'],
+        // ['Windows 10', 'firefox', '50.0'],
+        // TODO Problem calculating the target position in tests
+        // ['OS X 10.10', 'iphone', '10.0'],
+        // ['OS X 10.10', 'iphone', '9.3']
     ];
 
     // Override the baseUrl, as the port is a different one
