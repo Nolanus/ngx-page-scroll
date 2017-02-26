@@ -1,5 +1,7 @@
 # ng2-page-scroll [![npm version](https://img.shields.io/npm/v/ng2-page-scroll.svg?style=flat)](https://www.npmjs.com/package/ng2-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ng2-page-scroll.svg)](https://greenkeeper.io/)
+
 Animated "scroll to element" functionality written in pure angular2 
 with no additional dependencies
 
