@@ -6,7 +6,7 @@ with no additional dependencies
 [![Dependency Status](https://david-dm.org/Nolanus/ng2-page-scroll.svg)](https://david-dm.org/Nolanus/ng2-page-scroll)
 [![devDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=dev)
 [![peerDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/peer-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=peer)
-[![Code Climate](https://codeclimate.com/github/Nolanus/ng2-page-scroll/badges/gpa.svg)](https://codeclimate.com/github/Nolanus/ng2-page-scroll)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bddd94eb51474880ac749b540470c78c)](https://www.codacy.com/app/sebastian-fuss/ng2-page-scroll?utm_source=github.com&utm_medium=referral&utm_content=Nolanus/ng2-page-scroll&utm_campaign=badger)
 
 ## Features
 
