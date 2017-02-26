@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bddd94eb51474880ac749b540470c78c)](https://www.codacy.com/app/sebastian-fuss/ng2-page-scroll?utm_source=github.com&utm_medium=referral&utm_content=Nolanus/ng2-page-scroll&utm_campaign=badger)
 # ng2-page-scroll [![npm version](https://img.shields.io/npm/v/ng2-page-scroll.svg?style=flat)](https://www.npmjs.com/package/ng2-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 Animated "scroll to element" functionality written in pure angular2 
