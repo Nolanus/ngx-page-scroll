@@ -85,7 +85,7 @@ describe('Nested Scrolling page', () => {
             ' document.getElementById(\'complexContainer\').scrollHeight');
 
         scrollParent.getAttribute('scrollTop').then((initialScrollTop: string) => {
-            expect(initialScrollTop).toEqual('0');
+            expect(+initialScrollTop).toBeGreaterThan(0);
             trigger.sendKeys(protractor.Key.ENTER).then(() => {
                 browser.sleep(1250).then(() => {
                     protractor.promise.all([scrollParent.getLocation(), target.getLocation()])
