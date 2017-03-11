@@ -52,12 +52,12 @@ export class PageScrollConfig {
     /**
      * How many console logs should be emitted.
      * 0: None
-     * 1: If animation could not be started due to missing target, "already at destination" or similar reasons
-     * 2: All scroll position values that get set
+     * 2: If animation could not be started due to missing target, "already at destination" or similar reasons
+     * 5: All scroll position values that get set
      * @type {boolean}
      * @private
      */
-    public static _logLevel = 1;
+    public static _logLevel = 2;
 
     /**
      * The duration how long a scrollTo animation should last by default.
