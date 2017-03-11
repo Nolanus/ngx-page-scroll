@@ -74,6 +74,16 @@ export class PageScrollConfig {
     public static defaultScrollOffset = 0;
 
     /**
+     * Whether by default for inline scroll animations the advanced offset calculation should take place (true) or
+     * not (false). Default is false.
+     * The advanced offset calculation will traverse the DOM tree upwards, starting at the scrollTarget, until it finds
+     * the scrollingView container element. Along the way the offset positions of the relative positioned
+     * (position: relative) elements will be taken into account for calculating the target elements position.
+     * @type {boolean}
+     */
+    public static defaultAdvancedInlineOffsetCalculation = false;
+
+    /**
      * The events that are listened to on the body to decide whether a scroll animation has been interfered/interrupted by the user
      * @type {string[]}
      * @private

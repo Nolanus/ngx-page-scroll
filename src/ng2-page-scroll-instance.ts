@@ -16,6 +16,7 @@ export interface PageScrollOptions {
     scrollingViews?: PageScrollingViews[];
     namespace?: string;
     verticalScrolling?: boolean;
+    advancedInlineOffsetCalculation?: boolean;
     pageScrollOffset?: number;
     pageScrollInterruptible?: boolean;
     pageScrollEasingLogic?: EasingLogic;
@@ -55,6 +56,8 @@ export class PageScrollInstance {
     /* The listener that this scroll instance attaches to the body to listen for interrupt events
      We're keeping a reference to it so we can properly remove it when the animation finishes */
     private _interruptListener: EventListenerOrEventListenerObject;
+    /* Whether the advanded offset calculation for inline scrolling should be used */
+    private _advancedInlineOffsetCalculation: boolean = PageScrollConfig.defaultAdvancedInlineOffsetCalculation;
     /* Event emitter to notify the world about the scrolling */
     private _pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -131,6 +134,10 @@ export class PageScrollInstance {
         pageScrollInstance._interruptible = options.pageScrollInterruptible ||
             (PageScrollUtilService.isUndefinedOrNull(options.pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
 
+        pageScrollInstance._advancedInlineOffsetCalculation = options.advancedInlineOffsetCalculation ||
+            (PageScrollUtilService.isUndefinedOrNull(options.advancedInlineOffsetCalculation) &&
+            PageScrollConfig.defaultAdvancedInlineOffsetCalculation);
+
         return pageScrollInstance;
     }
 
@@ -190,7 +197,7 @@ export class PageScrollInstance {
      * @param document The document that contains the body to be scrolled and the scrollTarget elements
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
      * @param scrollingView The element that should be scrolled
-     * @param isVerticalScrolling whether the scrolling should be performed in vertical direction (true, default) or horizontal (false)
+     * @param verticalScrolling whether the scrolling should be performed in vertical direction (true, default) or horizontal (false)
      * @param namespace Optional namespace to group scroll animations logically
      * @returns {PageScrollInstance}
      *
@@ -216,7 +223,7 @@ export class PageScrollInstance {
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
      * @param scrollingViews The elements that should be scrolled. Null to use the default elements of document and body.
      * @param namespace Optional namespace to group scroll animations logically
-     * @param isVerticalScrolling whether the scrolling should be performed in vertical direction (true, default) or horizontal (false)
+     * @param verticalScrolling whether the scrolling should be performed in vertical direction (true, default) or horizontal (false)
      * @param pageScrollOffset The offset to be attached to the top of the target element or
      *                          null/undefined to use application default
      * @param pageScrollInterruptible Whether this scroll animation should be interruptible.
@@ -297,7 +304,37 @@ export class PageScrollInstance {
         }
 
         if (this._isInlineScrolling) {
-            return {top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft};
+            let position = {top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft};
+            if (this._advancedInlineOffsetCalculation && this.scrollingViews.length === 1) {
+                let accumulatedParentsPos = {top: 0, left: 0};
+                // not named window to make sure we're not getting the global window variable by accident
+                let theWindow = scrollTargetElement.ownerDocument.defaultView;
+                let parentFound = false;
+
+                // Start parent is the immediate parent
+                let parent = scrollTargetElement.parentElement;
+
+                // Iterate upwards all parents
+                while (!parentFound && !PageScrollUtilService.isUndefinedOrNull(parent)) {
+                    if (theWindow.getComputedStyle(parent).getPropertyValue('position') === 'relative') {
+                        accumulatedParentsPos.top += parent.offsetTop;
+                        accumulatedParentsPos.left += parent.offsetLeft;
+                    }
+                    // Next iteration
+                    parent = parent.parentElement;
+                    parentFound = parent === this.scrollingViews[0];
+                }
+                if (parentFound) {
+                    // Only use the results if we found the parent, otherwise we accumulated too much anyway
+                    position.top += accumulatedParentsPos.top;
+                    position.left += accumulatedParentsPos.left;
+                } else {
+                    if (PageScrollConfig._logLevel >= 2) {
+                        console.warn('Unable to find nested scrolling targets parent!');
+                    }
+                }
+            }
+            return position;
         }
 
         return PageScrollUtilService.extractElementPosition(this.document, scrollTargetElement);
