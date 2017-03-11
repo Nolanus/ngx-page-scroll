@@ -1,4 +1,4 @@
-import {browser, element, by, protractor} from 'protractor';
+import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
 
 describe('Simple Scroll page', () => {
@@ -9,6 +9,12 @@ describe('Simple Scroll page', () => {
 
     function getScrollPos(): Promise<number> {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
+    }
+
+    function scrollToElement(element: ElementFinder) {
+        return element.getLocation().then(function (loc) {
+            return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', loc.y);
+        });
     }
 
     function scrollTo(scrollPos: number): Promise<any> {
@@ -128,6 +134,42 @@ describe('Simple Scroll page', () => {
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    it('should recreate the pageScrollInstance on input changes', () => {
+        let firstTarget: ElementFinder = element(by.css('#head7'));
+        let secondTarget: ElementFinder = element(by.css('#head10'));
+        let trigger: ElementFinder = element(by.css('#dynamicTargetButton'));
+        let select: ElementFinder = element(by.css('#dynamicTargetSelect'));
+
+        protractor.promise.all(
+            [firstTarget.getLocation(), secondTarget.getLocation()]
+        ).then(function (targetLocations: {x: number, y: number}[]) {
+            getScrollPos().then((initialPos: number) => {
+                expect(initialPos).toEqual(0);
+                // Scroll to first target
+                trigger.sendKeys(protractor.Key.ENTER).then(() => {
+                    browser.sleep(1250).then(() => {
+                        getScrollPos().then((firstScrollPos: number) => {
+                            expect(firstScrollPos).toBeCloseTo(Math.round(targetLocations[0].y), Closeness.ofByOne);
+                            // Change the dynamic target value...
+                            scrollToElement(select);
+                            select.click();
+                            element(by.css('#md-option-1')).click();
+
+                            // ... and scroll again
+                            trigger.sendKeys(protractor.Key.ENTER).then(() => {
+                                browser.sleep(1250).then(() => {
+                                    getScrollPos().then((secondScrollPos: number) => {
+                                        expect(secondScrollPos).toBeCloseTo(Math.round(targetLocations[1].y), Closeness.ofByOne);
+                                    });
+                                });
+                            });
                         });
                     });
                 });

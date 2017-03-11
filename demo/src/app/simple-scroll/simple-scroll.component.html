@@ -50,6 +50,19 @@
     Start slow version
   </button>
 
+  <h3>Dynamic target</h3>
+  <p>The following button showcases dynamically changing the scroll targets.</p>
+  <p>
+    <button md-raised-button color="primary" [href]="dynamicSelectedTarget" pageScroll id="dynamicTargetButton">
+      Start
+    </button>
+    <md-select placeholder="Button Scroll Target" [(ngModel)]="dynamicSelectedTarget" id="dynamicTargetSelect">
+      <md-option *ngFor="let dynamicTarget of dynamicTargets" [value]="dynamicTarget">
+        {{ dynamicTarget }}
+      </md-option>
+    </md-select>
+  </p>
+
   <h3>Scrolling using <i>PageScrollService</i></h3>
   <p>You may use the <i>PageScrollService</i> to create highly customized scroll animations. This example will scroll
     to the last heading of this page.</p>

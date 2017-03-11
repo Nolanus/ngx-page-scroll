@@ -68,7 +68,8 @@ export class PageScroll implements OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        console.log(changes);
+        // Some inputs changed, reset the pageScrollInstance
+        this.pageScrollInstance = undefined;
     }
 
     ngOnDestroy(): void {
