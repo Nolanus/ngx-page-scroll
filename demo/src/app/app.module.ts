@@ -29,7 +29,7 @@ import { DummyContentComponent } from './dummy-content/dummy-content.component';
         FormsModule,
         HttpModule,
         routing,
-        MaterialModule.forRoot(),
+        MaterialModule,
         Ng2PageScrollModule.forRoot()
     ],
     declarations: [
