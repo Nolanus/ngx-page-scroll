@@ -63,7 +63,7 @@
     "@angular/platform-browser": "^2.4.0",
     "@angular/platform-server": "^2.4.0",
     "@angular/router": "^3.2.1",
-    "@types/jasmine": "2.5.43",
+    "@types/jasmine": "2.5.45",
     "codelyzer": "^2.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
@@ -73,7 +73,7 @@
     "rollup-plugin-uglify": "^1.0.1",
     "rxjs": "^5.1.0",
     "tslint": "^4.4.2",
-    "typescript": "~2.1.6",
+    "typescript": "~2.2.1",
     "typings": "^2.1.0",
     "zone.js": "^0.7.6"
   }
