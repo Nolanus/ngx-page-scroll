@@ -1,57 +1,27 @@
 <md-card>
-    <md-card-title id="title">Transformed Target scrolling</md-card-title>
-    <p>
-        Scrolling to a target that has been transformed using CSS.
-    </p>
-    <button md-raised-button color="primary" href="#untranslated" pageScroll>
-        Scroll to regular button
-    </button>
-    <button md-raised-button color="primary" href="#translated" pageScroll>
-        Scroll to transformend/translated button
-    </button>
+  <md-card-title id="title">Transformed Target scrolling</md-card-title>
+  <p>
+    Scrolling to a target that has been transformed using CSS.
+  </p>
+  <button md-raised-button color="primary" href="#untranslated" pageScroll>
+    Scroll to regular button
+  </button>
+  <button md-raised-button color="primary" href="#translated" pageScroll>
+    Scroll to transformend/translated button
+  </button>
 </md-card>
-<md-card>
-    <md-card-title id="head2">Lorem ipsum 2</md-card-title>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-        quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-        ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.
-        Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget
-        tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis
-        pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu
-        vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis
-        luctus, metus</p>
-    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor
-        quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean
-        ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra.
-        Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget
-        tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. Donec non enim in turpis
-        pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu
-        vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi, tincidunt quis, accumsan porttitor, facilisis
-        luctus, metus</p>
-</md-card>
+
+<app-dummy-content [start]="2" [length]="1" [scrollButtons]="false"></app-dummy-content>
 
 <md-card>
-    <div class="target-holder">
-        <button md-raised-button id="untranslated" href="#top" pageScroll>
-            Regular button
-        </button>
-        <button md-raised-button id="translated" class="transform" href="#top" pageScroll>
-            CSS transformed button
-        </button>
-    </div>
+  <div class="target-holder">
+    <button md-raised-button id="untranslated" href="#top" pageScroll>
+      Regular button
+    </button>
+    <button md-raised-button id="translated" class="transform" href="#top" pageScroll>
+      CSS transformed button
+    </button>
+  </div>
 </md-card>
 
-
-<md-card *ngFor="let num of array">
-    <md-card-title id="head{{ num }}">Lorem ipsum  {{ num }}</md-card-title>
-    <md-card-content>
-        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum
-            tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas
-            semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo. Quisque sit amet est et sapien
-            ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.
-            Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac
-            dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus,
-            tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat. Nam dui mi,
-            tincidunt quis, accumsan porttitor, facilisis luctus, metus</p>
-    </md-card-content>
-</md-card>
+<app-dummy-content [start]="3" [length]="10" [scrollButtons]="false"></app-dummy-content>

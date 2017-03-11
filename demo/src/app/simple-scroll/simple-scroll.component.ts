@@ -24,8 +24,6 @@ export class SimpleScrollComponent implements OnInit {
         this.pageScrollService.start(pageScrollInstance);
     }
 
-    public array: number[] = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
     public myEasing: EasingLogic = {
         ease: (t: number, b: number, c: number, d: number): number => {
             // easeInOutExpo easing

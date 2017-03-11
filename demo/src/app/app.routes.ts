@@ -12,15 +12,17 @@ import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
 import {TranslatedTargetScrollComponent} from './translated-target-scroll/translated-target-scroll.component';
 import {PathologicalTestsComponent} from './pathological-tests/pathological-tests.component';
 import {HorizontalScrollComponent} from './horizontal-scroll/horizontal-scroll.component';
+import {RouterScrollComponent} from "./router-scroll/router-scroll.component";
 
 const routes: Routes = [
-    {path: '', component: HomeComponent},
-    {path: 'simple', component: SimpleScrollComponent},
-    {path: 'nested', component: NestedScrollComponent},
-    {path: 'translated', component: TranslatedTargetScrollComponent},
-    {path: 'horizontal', component: HorizontalScrollComponent},
-    {path: 'tests', component: PathologicalTestsComponent},
-    {path: '**', redirectTo: '/'},
+  {path: '', component: HomeComponent},
+  {path: 'simple', component: SimpleScrollComponent},
+  {path: 'nested', component: NestedScrollComponent},
+  {path: 'translated', component: TranslatedTargetScrollComponent},
+  {path: 'horizontal', component: HorizontalScrollComponent},
+  {path: 'router', component: RouterScrollComponent},
+  {path: 'tests', component: PathologicalTestsComponent},
+  {path: '**', redirectTo: '/'},
 ];
 
 export const appRoutingProviders: any[] = [];

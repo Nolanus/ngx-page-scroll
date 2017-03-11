@@ -1,5 +1,21 @@
-import {Directive, Input, Output, EventEmitter, OnDestroy, Inject, Optional} from '@angular/core';
-import {Router, NavigationEnd, NavigationError, NavigationCancel, UrlTree} from '@angular/router';
+import {
+    Directive,
+    Input,
+    Output,
+    EventEmitter,
+    OnDestroy,
+    Inject,
+    Optional,
+    OnChanges,
+    SimpleChanges
+} from '@angular/core';
+import {
+    Router,
+    NavigationEnd,
+    NavigationError,
+    NavigationCancel,
+    UrlTree
+} from '@angular/router';
 import {DOCUMENT} from '@angular/platform-browser';
 
 import {Subscription} from 'rxjs/Subscription';
@@ -15,7 +31,7 @@ import {EasingLogic} from './ng2-page-scroll-config';
         '(click)': 'handleClick($event)',
     }
 })
-export class PageScroll implements OnDestroy {
+export class PageScroll implements OnChanges, OnDestroy {
 
     @Input()
     public routerLink: any;
@@ -51,7 +67,11 @@ export class PageScroll implements OnDestroy {
         this.document = <Document> document;
     }
 
-    ngOnDestroy(): any {
+    ngOnChanges(changes: SimpleChanges): void {
+        console.log(changes);
+    }
+
+    ngOnDestroy(): void {
         if (this.pageScrollInstance) {
             this.pageScrollService.stop(this.pageScrollInstance);
         }

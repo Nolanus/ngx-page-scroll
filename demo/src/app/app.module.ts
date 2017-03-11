@@ -19,6 +19,8 @@ import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
 import {TranslatedTargetScrollComponent} from './translated-target-scroll/translated-target-scroll.component';
 import { PathologicalTestsComponent } from './pathological-tests/pathological-tests.component';
 import { HorizontalScrollComponent } from './horizontal-scroll/horizontal-scroll.component';
+import { RouterScrollComponent } from './router-scroll/router-scroll.component';
+import { DummyContentComponent } from './dummy-content/dummy-content.component';
 
 @NgModule({
     imports: [
@@ -37,7 +39,9 @@ import { HorizontalScrollComponent } from './horizontal-scroll/horizontal-scroll
         NestedScrollComponent,
         TranslatedTargetScrollComponent,
         PathologicalTestsComponent,
-        HorizontalScrollComponent
+        HorizontalScrollComponent,
+        RouterScrollComponent,
+        DummyContentComponent
     ],
     providers: [
         appRoutingProviders
