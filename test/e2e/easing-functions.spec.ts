@@ -1,7 +1,7 @@
 /**
  * Created by sebastianfuss on 26.02.17.
  */
-import {browser, element, by, protractor} from 'protractor';
+import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
 
 xdescribe('Scroll Easing Functions', () => {
@@ -22,8 +22,8 @@ xdescribe('Scroll Easing Functions', () => {
     }
 
     it('should scroll to seventh heading from button with linear easing', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#testButton'));
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#testButton'));
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
@@ -74,8 +74,8 @@ xdescribe('Scroll Easing Functions', () => {
     });
 
     it('should scroll to seventh heading from button with custom easing', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#customEasingButton'));
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#customEasingButton'));
         let pageScrollDuration = 1250;
         target.getLocation().then((headingLocation: any) => {
             getScrollPos().then((initialPos: number) => {

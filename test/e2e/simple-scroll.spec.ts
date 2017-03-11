@@ -1,5 +1,6 @@
 import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
+import {ILocation} from 'selenium-webdriver';
 
 describe('Simple Scroll page', () => {
 
@@ -22,10 +23,11 @@ describe('Simple Scroll page', () => {
     }
 
     it('should scroll to last heading using service', () => {
-        let body: any = element(by.css('body'));
-        let lastHeadingLink: any = element(by.css('#goToLastHeadingButton'));
+        let body: ElementFinder = element(by.css('body'));
+        let lastHeadingLink: ElementFinder = element(by.css('#goToLastHeadingButton'));
         browser.driver.executeScript('return window.innerHeight;').then((windowHeight: number) => {
-            body.getAttribute('scrollHeight').then((bodyScrollHeight: number) => {
+            body.getAttribute('scrollHeight').then((bodyScrollHeightString: string) => {
+                let bodyScrollHeight = +bodyScrollHeightString;
                 getScrollPos().then((initialPos: number) => {
                     expect(initialPos).toEqual(0);
                     lastHeadingLink.sendKeys(protractor.Key.ENTER).then(() => {
@@ -43,10 +45,11 @@ describe('Simple Scroll page', () => {
 
     it('should scroll to last heading using service when start position is not the top', () => {
         scrollTo(250).then(() => {
-            let body: any = element(by.css('body'));
-            let lastHeadingLink: any = element(by.css('#goToLastHeadingButton'));
+            let body: ElementFinder = element(by.css('body'));
+            let lastHeadingLink: ElementFinder = element(by.css('#goToLastHeadingButton'));
             browser.driver.executeScript('return window.innerHeight;').then((windowHeight: number) => {
-                body.getAttribute('scrollHeight').then((bodyScrollHeight: number) => {
+                body.getAttribute('scrollHeight').then((bodyScrollHeightString: string) => {
+                    let bodyScrollHeight = +bodyScrollHeightString;
                     getScrollPos().then((initialPos: number) => {
                         expect(initialPos).toEqual(250);
                         lastHeadingLink.sendKeys(protractor.Key.ENTER).then(() => {
@@ -64,9 +67,9 @@ describe('Simple Scroll page', () => {
     });
 
     it('should scroll to seventh heading from button with offset', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#offsetButton'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#offsetButton'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -83,9 +86,9 @@ describe('Simple Scroll page', () => {
 
     it('should scroll to seventh heading from button with offset when start position is not the top', () => {
         scrollTo(300).then(() => {
-            let target: any = element(by.css('#head7'));
-            let trigger: any = element(by.css('#offsetButton'));
-            target.getLocation().then((headingLocation: any) => {
+            let target: ElementFinder = element(by.css('#head7'));
+            let trigger: ElementFinder = element(by.css('#offsetButton'));
+            target.getLocation().then((headingLocation: ILocation) => {
                 getScrollPos().then((initialPos: number) => {
                     expect(initialPos).toEqual(300);
                     trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -102,9 +105,9 @@ describe('Simple Scroll page', () => {
     });
 
     it('should scroll to seventh heading from button with negative offset', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#negativeOffsetButton'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#negativeOffsetButton'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -120,9 +123,9 @@ describe('Simple Scroll page', () => {
     });
 
     it('should scroll to seventh heading from button with target reached listener', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#finishEventButton'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#finishEventButton'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -149,7 +152,7 @@ describe('Simple Scroll page', () => {
 
         protractor.promise.all(
             [firstTarget.getLocation(), secondTarget.getLocation()]
-        ).then(function (targetLocations: {x: number, y: number}[]) {
+        ).then(function (targetLocations: ILocation[]) {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 // Scroll to first target

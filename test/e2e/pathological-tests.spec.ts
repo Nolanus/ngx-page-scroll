@@ -2,7 +2,8 @@
  * Created by sebastianfuss on 22.10.16.
  */
 
-import {browser, element, by, protractor} from 'protractor';
+import {browser, element, by, protractor, ElementFinder} from 'protractor';
+import {ILocation} from 'selenium-webdriver';
 
 describe('Pathological Tests page', () => {
 
@@ -19,9 +20,9 @@ describe('Pathological Tests page', () => {
     }
 
     it('should scroll stop scroll animation when interruption event occurs', () => {
-        let target: any = element(by.css('#scrollTarget'));
-        let trigger: any = element(by.css('#interruptScroll'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#scrollTarget'));
+        let trigger: ElementFinder = element(by.css('#interruptScroll'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -42,7 +43,7 @@ describe('Pathological Tests page', () => {
     });
 
     it('should not change scroll position when trying to scroll to non existing target and trigger scrollFinish event', () => {
-        let nonExistingTargetButton: any = element(by.css('#nonExistingTargetButton'));
+        let nonExistingTargetButton: ElementFinder = element(by.css('#nonExistingTargetButton'));
         browser.executeScript('arguments[0].scrollIntoView();', nonExistingTargetButton.getWebElement()).then(() => {
             getScrollPos().then((initialPos: number) => {
                 nonExistingTargetButton.sendKeys(protractor.Key.ENTER).then(() => {
@@ -63,7 +64,7 @@ describe('Pathological Tests page', () => {
     });
 
     it('should trigger scrollFinish event if target is already in view', () => {
-        let trigger: any = element(by.css('#alreadyAtTargetScroll'));
+        let trigger: ElementFinder = element(by.css('#alreadyAtTargetScroll'));
         scrollTo(0).then(() => {
             trigger.sendKeys(protractor.Key.ENTER).then(() => {
                 browser.sleep(400).then(() => {

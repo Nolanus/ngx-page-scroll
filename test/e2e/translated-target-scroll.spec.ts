@@ -1,5 +1,6 @@
-import {browser, element, by, protractor} from 'protractor';
+import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
+import {ILocation} from 'selenium-webdriver';
 
 describe('Transformed Target Scroll page', () => {
 
@@ -12,9 +13,9 @@ describe('Transformed Target Scroll page', () => {
     }
 
     it('should scroll to the untranslated DOM element', () => {
-        let target: any = element(by.css('#untranslated'));
-        let trigger: any = element(by.css('button[href="#untranslated"]'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#untranslated'));
+        let trigger: ElementFinder = element(by.css('button[href="#untranslated"]'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -29,9 +30,9 @@ describe('Transformed Target Scroll page', () => {
     });
 
     it('should scroll to the CSS translated DOM element', () => {
-        let target: any = element(by.css('#translated'));
-        let trigger: any = element(by.css('button[href="#translated"]'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#translated'));
+        let trigger: ElementFinder = element(by.css('button[href="#translated"]'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {

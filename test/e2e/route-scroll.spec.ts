@@ -1,5 +1,6 @@
-import {browser, element, by, protractor} from 'protractor';
+import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
+import {ILocation} from 'selenium-webdriver';
 
 describe('Route Scroll page', () => {
 
@@ -12,13 +13,13 @@ describe('Route Scroll page', () => {
     }
 
     it('should scroll open the new route and scroll to the target heading', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#differentRouteScroll'));
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#differentRouteScroll'));
 
         trigger.getAttribute('routerLink').then(function (routerLink: string) {
             trigger.sendKeys(protractor.Key.ENTER).then(() => {
                 expect(browser.getCurrentUrl()).toContain(routerLink);
-                target.getLocation().then((headingLocation: any) => {
+                target.getLocation().then((headingLocation: ILocation) => {
                     browser.sleep(1250).then(() => {
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
@@ -30,9 +31,9 @@ describe('Route Scroll page', () => {
     });
 
     it('should scroll to seventh heading when directive has routerLink pointing to current route (variant 1)', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#currentRouteScroll1'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#currentRouteScroll1'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -47,9 +48,9 @@ describe('Route Scroll page', () => {
     });
 
     it('should scroll to seventh heading when directive has routerLink pointing to current route (variant 2)', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#currentRouteScroll2'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#currentRouteScroll2'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
@@ -64,9 +65,9 @@ describe('Route Scroll page', () => {
     });
 
     it('should scroll to seventh heading when directive has routerLink pointing to current route (variant 3)', () => {
-        let target: any = element(by.css('#head7'));
-        let trigger: any = element(by.css('#currentRouteScroll3'));
-        target.getLocation().then((headingLocation: any) => {
+        let target: ElementFinder = element(by.css('#head7'));
+        let trigger: ElementFinder = element(by.css('#currentRouteScroll3'));
+        target.getLocation().then((headingLocation: ILocation) => {
             getScrollPos().then((initialPos: number) => {
                 expect(initialPos).toEqual(0);
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
