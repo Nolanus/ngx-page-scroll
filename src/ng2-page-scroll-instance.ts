@@ -8,12 +8,28 @@ import {EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews} fro
 import {PageScrollUtilService} from './ng2-page-scroll-util.service';
 
 /**
+ * An Interface specifying the possible options to be passed into the Factory Method
+ */
+export interface PageScrollOptions {
+    document: Document;
+    scrollTarget: PageScrollTarget;
+    scrollingViews?: PageScrollingViews[];
+    namespace?: string;
+    verticalScrolling?: boolean;
+    pageScrollOffset?: number;
+    pageScrollInterruptible?: boolean;
+    pageScrollEasingLogic?: EasingLogic;
+    pageScrollDuration?: number;
+    pageScrollFinishListener?: EventEmitter<boolean>;
+}
+
+/**
  * Represents a scrolling action
  */
 export class PageScrollInstance {
 
     /**
-     * These properties will be set during instance construction
+     * These properties will be set during instance construction and default to their defaults from PageScrollConfig
      */
 
     /* A namespace to "group" scroll animations together and stopping some does not stop others */
@@ -68,12 +84,54 @@ export class PageScrollInstance {
     public static simpleInstance(document: Document,
                                  scrollTarget: PageScrollTarget,
                                  namespace?: string): PageScrollInstance {
-        return PageScrollInstance.simpleDirectionInstance(
+        return PageScrollInstance.newInstance({
             document,
             scrollTarget,
-            true,
             namespace
-        );
+        });
+    }
+
+    public static newInstance(options: PageScrollOptions) {
+
+        if (PageScrollUtilService.isUndefinedOrNull(options.namespace) || options.namespace.length <= 0) {
+            options.namespace = PageScrollConfig._defaultNamespace;
+        }
+        let pageScrollInstance: PageScrollInstance = new PageScrollInstance(options.namespace, document);
+
+        if (PageScrollUtilService.isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
+            pageScrollInstance._isInlineScrolling = false;
+            pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
+        } else {
+            pageScrollInstance._isInlineScrolling = true;
+            pageScrollInstance._scrollingViews = options.scrollingViews;
+        }
+
+        pageScrollInstance._scrollTarget = options.scrollTarget;
+
+        if (!PageScrollUtilService.isUndefinedOrNull(options.verticalScrolling)) {
+            pageScrollInstance._verticalScrolling = options.verticalScrolling;
+        }
+
+        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollOffset)) {
+            pageScrollInstance._offset = options.pageScrollOffset;
+        }
+
+        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollEasingLogic)) {
+            pageScrollInstance._easingLogic = options.pageScrollEasingLogic;
+        }
+
+        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollDuration)) {
+            pageScrollInstance._duration = options.pageScrollDuration;
+        }
+
+        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollFinishListener)) {
+            pageScrollInstance._pageScrollFinish = options.pageScrollFinishListener;
+        }
+
+        pageScrollInstance._interruptible = options.pageScrollInterruptible ||
+            (PageScrollUtilService.isUndefinedOrNull(options.pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
+
+        return pageScrollInstance;
     }
 
     /**
@@ -81,27 +139,22 @@ export class PageScrollInstance {
      *
      * @param document The document that contains the body to be scrolled and the scrollTarget elements
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
-     * @param isVerticalScrolling
+     * @param verticalScrolling
      * @param namespace Optional namespace to group scroll animations logically
-     *
      * @returns {PageScrollInstance}
-     */
+     *
+     * @deprecated Use {@link newInstance(options: PageScrollOptions)}
+     **/
     public static simpleDirectionInstance(document: Document,
                                           scrollTarget: PageScrollTarget,
-                                          isVerticalScrolling: boolean,
+                                          verticalScrolling: boolean,
                                           namespace?: string): PageScrollInstance {
-        return PageScrollInstance.advancedInstance(
+        return PageScrollInstance.newInstance({
             document,
             scrollTarget,
-            null,
             namespace,
-            isVerticalScrolling,
-            null,
-            null,
-            null,
-            null,
-            null
-        );
+            verticalScrolling,
+        });
     }
 
     /**
@@ -115,39 +168,46 @@ export class PageScrollInstance {
      * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
      * @param scrollingView The element that should be scrolled
      * @param namespace Optional namespace to group scroll animations logically
-     *
      * @returns {PageScrollInstance}
+     *
+     * @deprecated Use {@link newInstance(options: PageScrollOptions)}
      */
     public static simpleInlineInstance(document: Document,
                                        scrollTarget: PageScrollTarget,
                                        scrollingView: PageScrollingViews,
                                        namespace?: string): PageScrollInstance {
-        return PageScrollInstance.simpleInlineDirectionInstance(
+        return PageScrollInstance.newInstance({
             document,
             scrollTarget,
-            scrollingView,
-            true,
+            scrollingViews: [scrollingView],
+            verticalScrolling: true,
             namespace
-        );
+        });
     }
 
+    /**
+     *
+     * @param document The document that contains the body to be scrolled and the scrollTarget elements
+     * @param scrollTarget Where to scroll to. Can be a HTMLElement reference or a string like '#elementId'
+     * @param scrollingView The element that should be scrolled
+     * @param isVerticalScrolling whether the scrolling should be performed in vertical direction (true, default) or horizontal (false)
+     * @param namespace Optional namespace to group scroll animations logically
+     * @returns {PageScrollInstance}
+     *
+     * @deprecated Use {@link newInstance(options: PageScrollOptions)}
+     */
     public static simpleInlineDirectionInstance(document: Document,
                                                 scrollTarget: PageScrollTarget,
                                                 scrollingView: PageScrollingViews,
-                                                isVerticalScrolling: boolean,
+                                                verticalScrolling: boolean,
                                                 namespace?: string): PageScrollInstance {
-        return PageScrollInstance.advancedInstance(
+        return PageScrollInstance.newInstance({
             document,
             scrollTarget,
-            [scrollingView],
+            scrollingViews: [scrollingView],
             namespace,
-            isVerticalScrolling,
-            null,
-            null,
-            null,
-            null,
-            null
-        );
+            verticalScrolling,
+        });
     }
 
     /**
@@ -167,64 +227,39 @@ export class PageScrollInstance {
      *                            Null/undefined for application default
      * @param pageScrollFinishListener Listener to be called to notify other parts of the application
      *                                  that the scroll animation has finished
-     *
      * @returns {PageScrollInstance}
+     *
+     * @deprecated Use {@link newInstance(options: PageScrollOptions)}
      */
     public static advancedInstance(document: Document,
                                    scrollTarget: PageScrollTarget,
-                                   scrollingViews: PageScrollingViews[] = null,
-                                   namespace: string,
-                                   isVerticalScrolling: boolean,
-                                   pageScrollOffset: number = null,
-                                   pageScrollInterruptible: boolean = null,
-                                   pageScrollEasingLogic: EasingLogic = null,
-                                   pageScrollDuration: number = null,
-                                   pageScrollFinishListener: EventEmitter<boolean> = null): PageScrollInstance {
-
-        if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length <= 0) {
-            namespace = PageScrollConfig._defaultNamespace;
-        }
-        let pageScrollInstance: PageScrollInstance = new PageScrollInstance(namespace, document);
-
-        if (PageScrollUtilService.isUndefinedOrNull(scrollingViews) || scrollingViews.length === 0) {
-            pageScrollInstance._isInlineScrolling = false;
-            pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
-        } else {
-            pageScrollInstance._isInlineScrolling = true;
-            pageScrollInstance._scrollingViews = scrollingViews;
-        }
-
-        pageScrollInstance._scrollTarget = scrollTarget;
-
-        if (!PageScrollUtilService.isUndefinedOrNull(isVerticalScrolling)) {
-            pageScrollInstance._verticalScrolling = isVerticalScrolling;
-        }
-
-        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollOffset)) {
-            pageScrollInstance._offset = pageScrollOffset;
-        }
-
-        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollEasingLogic)) {
-            pageScrollInstance._easingLogic = pageScrollEasingLogic;
-        }
-
-        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollDuration)) {
-            pageScrollInstance._duration = pageScrollDuration;
-        }
-
-        if (!PageScrollUtilService.isUndefinedOrNull(pageScrollFinishListener)) {
-            pageScrollInstance._pageScrollFinish = pageScrollFinishListener;
-        }
-
-        pageScrollInstance._interruptible = pageScrollInterruptible ||
-            (PageScrollUtilService.isUndefinedOrNull(pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
-
-        return pageScrollInstance;
+                                   scrollingViews?: PageScrollingViews[],
+                                   namespace?: string,
+                                   verticalScrolling?: boolean,
+                                   pageScrollOffset?: number,
+                                   pageScrollInterruptible?: boolean,
+                                   pageScrollEasingLogic?: EasingLogic,
+                                   pageScrollDuration?: number,
+                                   pageScrollFinishListener?: EventEmitter<boolean>): PageScrollInstance {
+        return PageScrollInstance.newInstance({
+            document,
+            scrollTarget,
+            scrollingViews,
+            namespace,
+            verticalScrolling,
+            pageScrollOffset,
+            pageScrollInterruptible,
+            pageScrollEasingLogic,
+            pageScrollDuration,
+            pageScrollFinishListener
+        });
     }
 
     /**
      * Private constructor, requires the properties assumed to be the bare minimum.
-     * Use the factory methods to create instances: {@link PageScrollInstance#simpleInstance}
+     * Use the factory methods to create instances:
+     *      {@link PageScrollInstance#simpleInstance}
+     *      {@link PageScrollInstance#newInstance}
      * @param namespace
      * @param document
      */

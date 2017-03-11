@@ -167,12 +167,12 @@ export class MyComponent {
      };    
      
      public scrollSomewhereHorizontally(): void {
-         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleDirectionInstance(this.document, '#targetToTheRight', true);
+         let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#targetToTheRight', verticalScrolling: false});
          this.pageScrollService.start(pageScrollInstance);
      }; 
 
      public goToHeadingInContainer(): void {
-         let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineInstance(this.document, '#head3', this.container.nativeElement);
+         let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#head3', scrollingViews: [this.container.nativeElement]});
          this.pageScrollService.start(pageScrollInstance);
      };
  }

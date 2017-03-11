@@ -81,18 +81,18 @@ export class PageScroll implements OnChanges, OnDestroy {
 
     private generatePageScrollInstance(): PageScrollInstance {
         if (PageScrollUtilService.isUndefinedOrNull(this.pageScrollInstance)) {
-            this.pageScrollInstance = PageScrollInstance.advancedInstance(
-                this.document,
-                this.href,
-                null,
-                this.pageScroll,
-                !this.pageScrollHorizontal,
-                this.pageScrollOffset,
-                this.pageScrollInterruptible,
-                this.pageScrollEasing,
-                this.pageScrollDuration,
-                this.pageScrollFinish
-            );
+            this.pageScrollInstance = PageScrollInstance.newInstance({
+                document: this.document,
+                scrollTarget: this.href,
+                scrollingViews: null,
+                namespace: this.pageScroll,
+                verticalScrolling: !this.pageScrollHorizontal,
+                pageScrollOffset: this.pageScrollOffset,
+                pageScrollInterruptible: this.pageScrollInterruptible,
+                pageScrollEasingLogic: this.pageScrollEasing,
+                pageScrollDuration: this.pageScrollDuration,
+                pageScrollFinishListener: this.pageScrollFinish
+            });
         }
         return this.pageScrollInstance;
     }
