@@ -181,13 +181,17 @@ export class PageScrollService {
     public stopAll(namespace?: string): boolean {
         if (this.runningInstances.length > 0) {
             let stoppedSome = false;
-            this.runningInstances.forEach((pageScrollInstance: PageScrollInstance) => {
+
+            for (let i = 0; i < this.runningInstances.length; ++i) {
+                let pageScrollInstance = this.runningInstances[i];
                 if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
                     this.stopInternal(true, pageScrollInstance);
+                    // Decrease the counter, as we removed an item from the array we iterate over
+                    i--;
                 }
-            });
+            }
             return stoppedSome;
         }
         return false;
