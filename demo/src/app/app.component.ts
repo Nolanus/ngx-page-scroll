@@ -57,6 +57,10 @@ export class AppComponent {
     {
       route: ['/translated'],
       name: 'Transformed Target Scrolling'
+    },
+    {
+      route: ['/namespace'],
+      name: 'Namespace Feature'
     }];
 
   public tabChange(event: any) {

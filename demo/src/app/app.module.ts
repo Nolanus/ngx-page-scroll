@@ -21,6 +21,7 @@ import { PathologicalTestsComponent } from './pathological-tests/pathological-te
 import { HorizontalScrollComponent } from './horizontal-scroll/horizontal-scroll.component';
 import { RouterScrollComponent } from './router-scroll/router-scroll.component';
 import { DummyContentComponent } from './dummy-content/dummy-content.component';
+import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.component';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { DummyContentComponent } from './dummy-content/dummy-content.component';
         PathologicalTestsComponent,
         HorizontalScrollComponent,
         RouterScrollComponent,
-        DummyContentComponent
+        DummyContentComponent,
+        NamespaceScrollComponent
     ],
     providers: [
         appRoutingProviders

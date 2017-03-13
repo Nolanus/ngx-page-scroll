@@ -4,3 +4,8 @@
 .mat-tab-labels .mat-tab-label {
   flex: 1;
 }
+
+.columnGrid .mat-figure {
+  flex-direction: column;
+}
+

@@ -13,6 +13,7 @@ import {TranslatedTargetScrollComponent} from './translated-target-scroll/transl
 import {PathologicalTestsComponent} from './pathological-tests/pathological-tests.component';
 import {HorizontalScrollComponent} from './horizontal-scroll/horizontal-scroll.component';
 import {RouterScrollComponent} from "./router-scroll/router-scroll.component";
+import {NamespaceScrollComponent} from "./namespace-scroll/namespace-scroll.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path: 'translated', component: TranslatedTargetScrollComponent},
   {path: 'horizontal', component: HorizontalScrollComponent},
   {path: 'router', component: RouterScrollComponent},
+  {path: 'namespace', component: NamespaceScrollComponent},
   {path: 'tests', component: PathologicalTestsComponent},
   {path: '**', redirectTo: '/'},
 ];
