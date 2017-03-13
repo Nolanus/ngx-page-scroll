@@ -278,19 +278,6 @@ defined in the component
     }
 ```
 
-## Using the right scrolling view
-
-By default the `scrollTop` property of the `body` and `html` element are manipulated. Although this works in most 
-situations, depending on your HTML structure and css setup, the DOM element that is actually scrollable may not be 
-one of these two default ones. In these situations no scroll animation will be visible at first. Create a 
-`PageScrollInstances` with an adjusted `scrollingView` (e.g. using `PageScrollInstances#simpleInlineInstance` 
-factory method) and trigger that via `PageScrollService#start`. An example is given in the 
-[`PageScrollService`](#service) section and on the "nested scrolling" page in the demo application. 
-
-To get the `scrollTop` value of a certain DOM element, you may use the Chrome Developer Tools: highlight the element
-in the "Elements" tab and execute `$0.scrollTop` in the developer console.
-
-
 ## Example App
 
 The [_demo_](demo) subfolder contains a project created with angular-cli
