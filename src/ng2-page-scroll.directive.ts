@@ -55,6 +55,9 @@ export class PageScroll implements OnChanges, OnDestroy {
     public pageScrollInterruptible: boolean;
 
     @Input()
+    public pageScrollAdjustHash = false;
+
+    @Input()
     public pageScroll: string = null;
 
     @Output()
@@ -97,6 +100,23 @@ export class PageScroll implements OnChanges, OnDestroy {
         return this.pageScrollInstance;
     }
 
+    private pushRouterState() {
+        if (this.pageScrollAdjustHash && typeof this.pageScrollInstance.scrollTarget === 'string'
+            && this.pageScrollInstance.scrollTarget.substr(0, 1) === '#') {
+            // "Navigate" to the current route again and this time set the fragment/hash
+            this.router.navigate([], {
+                fragment: <string>this.pageScrollInstance.scrollTarget.substr(1),
+                preserveQueryParams: true
+            });
+        }
+    }
+
+    private scroll(): void {
+        let pageScrollInstance = this.generatePageScrollInstance();
+        this.pushRouterState();
+        this.pageScrollService.start(pageScrollInstance);
+    }
+
     public handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
 
         if (this.routerLink && this.router !== null && this.router !== undefined) {
@@ -113,7 +133,7 @@ export class PageScroll implements OnChanges, OnDestroy {
                 let subscription: Subscription = <Subscription>this.router.events.subscribe((routerEvent) => {
                     if (routerEvent instanceof NavigationEnd) {
                         subscription.unsubscribe();
-                        this.pageScrollService.start(this.generatePageScrollInstance());
+                        this.scroll();
                     } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
                         subscription.unsubscribe();
                     }
@@ -121,7 +141,7 @@ export class PageScroll implements OnChanges, OnDestroy {
                 return false; // to preventDefault()
             }
         }
-        this.pageScrollService.start(this.generatePageScrollInstance());
+        this.scroll();
         return false; // to preventDefault()
     }
 

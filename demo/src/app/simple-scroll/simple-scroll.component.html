@@ -28,13 +28,20 @@
     Offset -50px
   </button>
 
-
   <h3>Finish event</h3>
   <p>The following scroll animation has a custom duration of 350ms and a <code>pageScrollFinish</code> event listener
     attached and shows a snackbar
     at the bottom of the page when the event fires.</p>
   <button md-raised-button color="primary" href="#head7" pageScroll (pageScrollFinish)="doSmth($event)"
           [pageScrollDuration]="350" id="finishEventButton">
+    Start
+  </button>
+
+  <h3>Hash/Fragment adjustment</h3>
+  <p>The following scroll animation adjusts the url to contain the hash of the target element once it reached the
+    target. This further allows pressing the browser's back button to jump back to the top of the page.</p>
+  <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollAdjustHash]="true"
+          id="hashAdjustmentButton">
     Start
   </button>
 

@@ -440,6 +440,10 @@ export class PageScrollInstance {
         return this._namespace;
     }
 
+    get scrollTarget(): PageScrollTarget {
+        return this._scrollTarget;
+    }
+
     get verticalScrolling(): boolean {
         return this._verticalScrolling;
     }
