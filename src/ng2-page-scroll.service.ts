@@ -13,8 +13,29 @@ export class PageScrollService {
 
     private onInterrupted: InterruptReporter = {
         report: (event: Event, pageScrollInstance: PageScrollInstance): void => {
-            if (pageScrollInstance.interruptible &&
-                (event.type !== 'keyup' || PageScrollConfig._interruptKeys.indexOf((<KeyboardEvent>event).keyCode) >= 0)) {
+            if (!pageScrollInstance.interruptible) {
+                // Non-interruptible anyway, so do not stop anything
+                return;
+            }
+
+            let shouldStop = true;
+
+            if (event.type === 'keyup') {
+                // Only stop if specific keys have been pressed, for all others don't stop anything
+                if (PageScrollConfig._interruptKeys.indexOf((<KeyboardEvent>event).keyCode) === -1) {
+                    // The pressed key is not in the list of interrupting keys
+                    shouldStop = false;
+                }
+            } else if (event.type === 'mousedown') {
+                // For mousedown events we only stop the scroll animation of the mouse has
+                // been clicked inside the scrolling container
+                if (!pageScrollInstance.scrollingViews.some(scrollingView => scrollingView.contains(event.target))) {
+                    // Mouse clicked an element which is not inside any of the the scrolling containers
+                    shouldStop = false;
+                }
+            }
+
+            if (shouldStop) {
                 this.stopAll(pageScrollInstance.namespace);
             }
         }
