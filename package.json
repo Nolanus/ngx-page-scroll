@@ -53,7 +53,7 @@
     "@angular/platform-browser": "^2.4.0",
     "@angular/router": "^3.2.0",
     "rxjs": "^5.0.1",
-    "zone.js": "^0.7.2"
+    "zone.js": "^0.8.0"
   },
   "devDependencies": {
     "@angular/common": "^2.4.0",
