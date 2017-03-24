@@ -83,7 +83,7 @@ System.config({
         '@angular/common' : 'npm:@angular/common/bundles/common.umd.js',
         // further angular bundles...
 
-        'ng2-page-scroll/ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
+        'ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
 
         rxjs: 'npm:rxjs',
     },
@@ -95,7 +95,7 @@ System.config({
 ```
 
 ```typescript
-import {Ng2PageScrollModule} from 'ng2-page-scroll/ng2-page-scroll';
+import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
 @NgModule({
     imports: [
