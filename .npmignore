@@ -60,3 +60,7 @@ test
 
 # project demo app
 demo
+
+# Travis build specific files for deployment
+/deploy.sh
+/ssh.enc
