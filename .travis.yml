@@ -20,6 +20,8 @@ before_install:
 
 install:
   - npm install
+  # Download webdriver stuff
+  - npm run webdriver:init
   - cd demo/
   # Install the demo app deps
   - npm install
