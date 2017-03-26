@@ -4,7 +4,7 @@
 import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
 
-fdescribe('Namespace Feature', () => {
+describe('Namespace Feature', () => {
 
     beforeEach(() => {
         browser.get('/namespace');
