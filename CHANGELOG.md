@@ -1,3 +1,26 @@
+## 4.0.0-beta.6 (2017-03-26)
+
+### Breaking Change
+
+- Interrupt listener for mouse clicks now only interrupts the scroll animation if click happens inside the scroll container (e8e3100)
+
+### Feature
+
+- Adjust route hash on scrolling using `pageScroll` directive (559ef67)
+
+### Fix
+
+- Bug where `stopAll` did not stop all running pageScroll instances (d5de63d)
+
+
+### Other
+
+- Document namepsace feature in demo app (b53881e)
+- Loosen peer deps for work with angular 4 (#106, #107, #108, #109, #110, #113)
+- Do not publish travis deployment specific files to npm (#112)
+- Remove inadvertent fdescribe in e2e specs
+- Fixed README typos
+
 ## 4.0.0-beta.5 (2017-03-11)
 
 ### Feature 
