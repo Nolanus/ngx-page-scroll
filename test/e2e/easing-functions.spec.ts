@@ -4,7 +4,7 @@
 import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
 
-xdescribe('Scroll Easing Functions', () => {
+describe('Scroll Easing Functions', () => {
 
     beforeEach(() => {
         browser.get('/simple');
@@ -13,12 +13,6 @@ xdescribe('Scroll Easing Functions', () => {
 
     function getScrollPos(): Promise<number> {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
-    }
-
-    function extractScrollPosFromLogs(data: number[], positionPercentage: number): number {
-        let positionFloored = Math.floor(data.length * positionPercentage);
-        let positionedCeiled = Math.ceil(data.length * positionPercentage);
-        return (data[positionFloored] + data[positionedCeiled]) / 2;
     }
 
     it('should scroll to seventh heading from button with linear easing', () => {
@@ -45,26 +39,19 @@ xdescribe('Scroll Easing Functions', () => {
                                     .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints
 
                                 expect(scrollPositionHistory.length).toBeGreaterThan(0);
-                                let linear25PercScrollPos = Math.round(headingLocation.y * 0.25) + scrollPositionHistory[0];
-                                let linearHalfTimeScrollPos = Math.round(headingLocation.y / 2) + scrollPositionHistory[0];
-                                let linear75PercScrollPos = Math.round(headingLocation.y * 0.75) + scrollPositionHistory[0];
+                                // Iterate over all scroll position logs and make sure the increment is always nearly the same
+                                // (as it should be the case for linear easing)
 
-                                // Allow a tolerance relative to the overall scroll distance (but a least 5 pixels absolute)
-                                // A three percent tolerance is chosen. This may result due to different browser and system performance
-                                let ofByThreePercent = Closeness.ofBy(Math.max(5, Math.ceil(headingLocation.y * 0.03)));
+                                let totalScrollDistance = headingLocation.y - initialPos;
+                                let averageScrollPosChange = scrollPositionHistory[scrollPositionHistory.length - 1]
+                                    / scrollPositionHistory.length;
+                                // Allow some variation (the exact absolute value is made to depend on the total scroll distance)
+                                let closeToEpsilon = Closeness.ofBy(totalScrollDistance * 0.0075);
 
-                                // Check that after a quarter of the total scroll time the scroll position is near
-                                // a quarter of the total distance.
-                                let scrollPosAfter25Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.25);
-                                expect(scrollPosAfter25Perc).toBeCloseTo(linear25PercScrollPos, ofByThreePercent);
-
-                                // Check that after half of the total scroll time the scroll position is near
-                                // half of the total distance
-                                let scrollPosAfterHalfTime = extractScrollPosFromLogs(scrollPositionHistory, 0.5);
-                                expect(scrollPosAfterHalfTime).toBeCloseTo(linearHalfTimeScrollPos, ofByThreePercent);
-
-                                let scrollPosAfter75Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.75);
-                                expect(scrollPosAfter75Perc).toBeCloseTo(linear75PercScrollPos, ofByThreePercent);
+                                for (let i = 0; i < scrollPositionHistory.length - 2; i++) {
+                                    let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                                    expect(scrollPosChange).toBeCloseTo(averageScrollPosChange, closeToEpsilon);
+                                }
                             });
                         });
                     });
@@ -98,23 +85,31 @@ xdescribe('Scroll Easing Functions', () => {
                                     .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints
 
                                 expect(scrollPositionHistory.length).toBeGreaterThan(0);
-                                let linear25PercScrollPos = Math.round(headingLocation.y * 0.25) + scrollPositionHistory[0];
-                                let linearHalfTimeScrollPos = Math.round(headingLocation.y / 2) + scrollPositionHistory[0];
-                                let linear75PercScrollPos = Math.round(headingLocation.y * 0.75) + scrollPositionHistory[0];
 
-                                // Check that after a quarter of the total scroll time the scroll position is less than
-                                // a quarter of the total distance. This would be the case if linear scroll easing took place
-                                let scrollPosAfter25Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.25);
-                                expect(scrollPosAfter25Perc).toBeLessThan(linear25PercScrollPos);
+                                let averageScrollPosChange = scrollPositionHistory[scrollPositionHistory.length - 1]
+                                    / scrollPositionHistory.length;
 
-                                // Check that after half of the total scroll time the scroll position is greater than
-                                // half of the total distance.
-                                // Half time and half distance would be the case when linear easing took place
-                                let scrollPosAfterHalfTime = extractScrollPosFromLogs(scrollPositionHistory, 0.5);
-                                expect(scrollPosAfterHalfTime).toBeGreaterThan(linearHalfTimeScrollPos);
+                                // For the first quarter check that the scrollPosChange is below the linear average
+                                let firstQuarterEnd = Math.round(scrollPositionHistory.length * 0.25);
+                                for (let i = 0; i < firstQuarterEnd; i++) {
+                                    let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                                    expect(scrollPosChange).toBeLessThan(averageScrollPosChange);
+                                }
 
-                                let scrollPosAfter75Perc = extractScrollPosFromLogs(scrollPositionHistory, 0.75);
-                                expect(scrollPosAfter75Perc).toBeGreaterThan(linear75PercScrollPos);
+                                // For the 20% in the middle check that the scrollPosChange is above the linear average
+                                let center20PercentStart = Math.round(scrollPositionHistory.length * 0.4);
+                                let center20PercentEnd = Math.round(scrollPositionHistory.length * 0.6);
+                                for (let i = center20PercentStart; i < center20PercentEnd; i++) {
+                                    let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                                    expect(scrollPosChange).toBeGreaterThan(averageScrollPosChange);
+                                }
+
+                                // For the last quarter again check that the scrollPosChange is below the linear one
+                                let lastQuarterStart = Math.round(scrollPositionHistory.length * 0.75);
+                                for (let i = lastQuarterStart; i < scrollPositionHistory.length - 2; i++) {
+                                    let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                                    expect(scrollPosChange).toBeLessThan(averageScrollPosChange);
+                                }
                             });
                         });
                     });
