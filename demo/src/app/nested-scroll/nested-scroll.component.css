@@ -1,5 +1,12 @@
 .scrollContainer {
-    height: 200px;
-    overflow: auto;
-    position: relative;
+  overflow: auto;
+  position: relative;
+}
+
+#basicContainer.scrollContainer {
+  height: 200px;
+}
+
+#complexContainer.scrollContainer {
+  height: 300px;
 }

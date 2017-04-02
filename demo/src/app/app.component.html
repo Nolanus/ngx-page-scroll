@@ -1,23 +1,22 @@
 <div class="app-content" id="top">
 
-    <md-toolbar>
-        <span>ng2-page-scroll demo application</span>
-        <span class="fill-remaining"></span>
-        <span>
-            <md-checkbox id="debugCheckBox" [checked]="isDebugEnabled" (change)="setDebug($event)" color="primary">
-                Debug Mode
-            </md-checkbox>
-        </span>
-    </md-toolbar>
+  <md-toolbar>
+    <span>ng2-page-scroll demo application</span>
+    <span>
+        <md-checkbox id="debugCheckBox" [checked]="isDebugEnabled" (change)="setDebug($event)" color="primary">
+            Debug Mode
+        </md-checkbox>
+    </span>
+  </md-toolbar>
 
-    <md-tab-group (selectChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
-        <md-tab *ngFor="let link of links" label="{{ link.name }}"></md-tab>
-    </md-tab-group>
+  <md-tab-group (selectChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
+    <md-tab *ngFor="let link of links" label="{{ link.name }}"></md-tab>
+  </md-tab-group>
 
-    <!-- Routed views go here -->
-    <router-outlet></router-outlet>
+  <!-- Routed views go here -->
+  <router-outlet></router-outlet>
 
-    <footer>
-        <p><a href="#top" pageScroll>Go to Top</a></p>
-    </footer>
+  <footer>
+    <p><a href="#top" pageScroll>Go to Top</a></p>
+  </footer>
 </div>

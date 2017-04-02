@@ -7,6 +7,9 @@ import {RouterModule} from '@angular/router';
 // Material 2
 import {MaterialModule} from '@angular/material';
 
+// Angular Flex-Layout Library
+import {FlexLayoutModule} from '@angular/flex-layout';
+
 // Ng2PageScroll
 import {Ng2PageScrollModule} from 'ng2-page-scroll';
 
@@ -22,6 +25,7 @@ import { HorizontalScrollComponent } from './horizontal-scroll/horizontal-scroll
 import { RouterScrollComponent } from './router-scroll/router-scroll.component';
 import { DummyContentComponent } from './dummy-content/dummy-content.component';
 import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.component';
+import { DummyCardComponent } from './dummy-card/dummy-card.component';
 
 @NgModule({
     imports: [
@@ -31,6 +35,7 @@ import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.co
         HttpModule,
         routing,
         MaterialModule,
+        FlexLayoutModule,
         Ng2PageScrollModule.forRoot()
     ],
     declarations: [
@@ -43,7 +48,8 @@ import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.co
         HorizontalScrollComponent,
         RouterScrollComponent,
         DummyContentComponent,
-        NamespaceScrollComponent
+        NamespaceScrollComponent,
+        DummyCardComponent
     ],
     providers: [
         appRoutingProviders
