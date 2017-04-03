@@ -4,7 +4,7 @@
 import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
 
-describe('Scroll Easing Functions', () => {
+xdescribe('Scroll Easing Functions', () => {
 
     beforeEach(() => {
         browser.get('/simple');
