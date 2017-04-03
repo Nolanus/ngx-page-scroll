@@ -49,6 +49,9 @@ export class PageScroll implements OnChanges, OnDestroy {
     public pageScrollDuration: number = null;
 
     @Input()
+    public pageScrollSpeed: number = null;
+
+    @Input()
     public pageScrollEasing: EasingLogic = null;
 
     @Input()
@@ -94,6 +97,7 @@ export class PageScroll implements OnChanges, OnDestroy {
                 pageScrollInterruptible: this.pageScrollInterruptible,
                 pageScrollEasingLogic: this.pageScrollEasing,
                 pageScrollDuration: this.pageScrollDuration,
+                pageScrollSpeed: this.pageScrollSpeed,
                 pageScrollFinishListener: this.pageScrollFinish
             });
         }
@@ -118,7 +122,6 @@ export class PageScroll implements OnChanges, OnDestroy {
     }
 
     public handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
-
         if (this.routerLink && this.router !== null && this.router !== undefined) {
             let urlTree: UrlTree;
             if (typeof this.routerLink === 'string') {
