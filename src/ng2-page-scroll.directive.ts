@@ -22,7 +22,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 import {PageScrollService} from './ng2-page-scroll.service';
 import {PageScrollInstance} from './ng2-page-scroll-instance';
-import {PageScrollUtilService} from './ng2-page-scroll-util.service';
+import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
 import {EasingLogic} from './ng2-page-scroll-config';
 
 @Directive({
@@ -47,6 +47,9 @@ export class PageScroll implements OnChanges, OnDestroy {
 
     @Input()
     public pageScrollDuration: number = null;
+
+    @Input()
+    public pageScrollSpeed: number = null;
 
     @Input()
     public pageScrollEasing: EasingLogic = null;
@@ -83,7 +86,7 @@ export class PageScroll implements OnChanges, OnDestroy {
     }
 
     private generatePageScrollInstance(): PageScrollInstance {
-        if (PageScrollUtilService.isUndefinedOrNull(this.pageScrollInstance)) {
+        if (Util.isUndefinedOrNull(this.pageScrollInstance)) {
             this.pageScrollInstance = PageScrollInstance.newInstance({
                 document: this.document,
                 scrollTarget: this.href,
@@ -94,6 +97,7 @@ export class PageScroll implements OnChanges, OnDestroy {
                 pageScrollInterruptible: this.pageScrollInterruptible,
                 pageScrollEasingLogic: this.pageScrollEasing,
                 pageScrollDuration: this.pageScrollDuration,
+                pageScrollSpeed: this.pageScrollSpeed,
                 pageScrollFinishListener: this.pageScrollFinish
             });
         }
@@ -118,7 +122,6 @@ export class PageScroll implements OnChanges, OnDestroy {
     }
 
     public handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
-
         if (this.routerLink && this.router !== null && this.router !== undefined) {
             let urlTree: UrlTree;
             if (typeof this.routerLink === 'string') {

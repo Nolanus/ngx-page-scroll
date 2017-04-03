@@ -5,22 +5,74 @@
 import {EventEmitter} from '@angular/core';
 
 import {EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews} from './ng2-page-scroll-config';
-import {PageScrollUtilService} from './ng2-page-scroll-util.service';
+import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
 
 /**
- * An Interface specifying the possible options to be passed into the Factory Method
+ * An Interface specifying the possible options to be passed into the newInstance() factory method
  */
 export interface PageScrollOptions {
+    /**
+     * The document object of the current app
+     */
     document: Document;
+
+    /**
+     * A specification of the DOM element to scroll to. Either a string referring to an
+     * object id (`#target`) or a HTMLElement that is attached to the document's DOM tree.
+     */
     scrollTarget: PageScrollTarget;
+
+    /**
+     * Array of HTMLElements or the body object that should be manipulated while performing
+     * the scroll animation.
+     */
     scrollingViews?: PageScrollingViews[];
+
+    /**
+     * Namespace of the scroll animation
+     */
     namespace?: string;
+
+    /**
+     * Whether that scroll animation scrolls in vertical direction (true) or
+     * horizontal (false, default value)
+     */
     verticalScrolling?: boolean;
+
+    /**
+     * Whether the an advanced offset calculation for inline scrollings should be applied
+     */
     advancedInlineOffsetCalculation?: boolean;
+
+    /**
+     * Offset of target elements location and scroll location
+     */
     pageScrollOffset?: number;
+
+    /**
+     * Whether the scroll animation should be interruptible
+     */
     pageScrollInterruptible?: boolean;
+
+    /**
+     * The easing logic to be used
+     */
     pageScrollEasingLogic?: EasingLogic;
+
+    /**
+     * Duration in milliseconds the scroll animation should last
+     */
     pageScrollDuration?: number;
+
+    /**
+     * Maximum speed to be used for the scroll animation. Only taken
+     * into account of no pageScrollDuration is provided
+     */
+    pageScrollSpeed?: number;
+
+    /**
+     * A listener to be called whenever the scroll animation stops
+     */
     pageScrollFinishListener?: EventEmitter<boolean>;
 }
 
@@ -49,6 +101,8 @@ export class PageScrollInstance {
     private _offset: number = PageScrollConfig.defaultScrollOffset;
     /* Duration in milliseconds the scroll animation should last */
     private _duration: number = PageScrollConfig.defaultDuration;
+    /* Speed in "pixels/second" to be used when scrolling to the target element */
+    private _speed: number;
     /* Easing function to manipulate the scrollTop/scrollLeft value over time */
     private _easingLogic: EasingLogic = PageScrollConfig.defaultEasingLogic;
     /* Boolean whether the scroll animation should stop on user interruption or not */
@@ -74,6 +128,8 @@ export class PageScrollInstance {
     private _startTime: number;
     /* The estimate end time of the animation, calculated by startTime + duration */
     private _endTime: number;
+    /* The duration a started animation takes. This may match the _duration or be adjusted due to the _speed option */
+    private _executionDuration: number;
     /* Whether an interrupt listener is attached to the body or not */
     private _interruptListenersAttached = false;
 
@@ -96,12 +152,12 @@ export class PageScrollInstance {
 
     public static newInstance(options: PageScrollOptions) {
 
-        if (PageScrollUtilService.isUndefinedOrNull(options.namespace) || options.namespace.length <= 0) {
+        if (Util.isUndefinedOrNull(options.namespace) || options.namespace.length <= 0) {
             options.namespace = PageScrollConfig._defaultNamespace;
         }
         let pageScrollInstance: PageScrollInstance = new PageScrollInstance(options.namespace, document);
 
-        if (PageScrollUtilService.isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
+        if (Util.isUndefinedOrNull(options.scrollingViews) || options.scrollingViews.length === 0) {
             pageScrollInstance._isInlineScrolling = false;
             pageScrollInstance._scrollingViews = [document.documentElement, document.body, document.body.parentNode];
         } else {
@@ -111,31 +167,35 @@ export class PageScrollInstance {
 
         pageScrollInstance._scrollTarget = options.scrollTarget;
 
-        if (!PageScrollUtilService.isUndefinedOrNull(options.verticalScrolling)) {
+        if (!Util.isUndefinedOrNull(options.verticalScrolling)) {
             pageScrollInstance._verticalScrolling = options.verticalScrolling;
         }
 
-        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollOffset)) {
+        if (!Util.isUndefinedOrNull(options.pageScrollOffset)) {
             pageScrollInstance._offset = options.pageScrollOffset;
         }
 
-        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollEasingLogic)) {
+        if (!Util.isUndefinedOrNull(options.pageScrollEasingLogic)) {
             pageScrollInstance._easingLogic = options.pageScrollEasingLogic;
         }
 
-        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollDuration)) {
+        if (Util.isUndefinedOrNull(options.pageScrollDuration) && !Util.isUndefinedOrNull(options.pageScrollSpeed)) {
+            // No duration specified in the options, only in this case we use the speed option when present
+            pageScrollInstance._speed = options.pageScrollSpeed;
+            pageScrollInstance._duration = undefined;
+        } else if (!Util.isUndefinedOrNull(options.pageScrollDuration)) {
             pageScrollInstance._duration = options.pageScrollDuration;
         }
 
-        if (!PageScrollUtilService.isUndefinedOrNull(options.pageScrollFinishListener)) {
+        if (!Util.isUndefinedOrNull(options.pageScrollFinishListener)) {
             pageScrollInstance._pageScrollFinish = options.pageScrollFinishListener;
         }
 
         pageScrollInstance._interruptible = options.pageScrollInterruptible ||
-            (PageScrollUtilService.isUndefinedOrNull(options.pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
+            (Util.isUndefinedOrNull(options.pageScrollInterruptible) && PageScrollConfig.defaultInterruptible);
 
         pageScrollInstance._advancedInlineOffsetCalculation = options.advancedInlineOffsetCalculation ||
-            (PageScrollUtilService.isUndefinedOrNull(options.advancedInlineOffsetCalculation) &&
+            (Util.isUndefinedOrNull(options.advancedInlineOffsetCalculation) &&
             PageScrollConfig.defaultAdvancedInlineOffsetCalculation);
 
         return pageScrollInstance;
@@ -315,7 +375,7 @@ export class PageScrollInstance {
                 let parent = scrollTargetElement.parentElement;
 
                 // Iterate upwards all parents
-                while (!parentFound && !PageScrollUtilService.isUndefinedOrNull(parent)) {
+                while (!parentFound && !Util.isUndefinedOrNull(parent)) {
                     if (theWindow.getComputedStyle(parent).getPropertyValue('position') === 'relative') {
                         accumulatedParentsPos.top += parent.offsetTop;
                         accumulatedParentsPos.left += parent.offsetLeft;
@@ -337,7 +397,7 @@ export class PageScrollInstance {
             return position;
         }
 
-        return PageScrollUtilService.extractElementPosition(this.document, scrollTargetElement);
+        return Util.extractElementPosition(this.document, scrollTargetElement);
     }
 
     /**
@@ -365,7 +425,7 @@ export class PageScrollInstance {
         // Set the new scrollTop/scrollLeft to all scrollingViews elements
         return this.scrollingViews.reduce((oneAlreadyWorked: any, scrollingView: any) => {
             let startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
-            if (scrollingView && !PageScrollUtilService.isUndefinedOrNull(startScrollPropertyValue)) {
+            if (scrollingView && !Util.isUndefinedOrNull(startScrollPropertyValue)) {
                 let scrollDistance = Math.abs(startScrollPropertyValue - position);
 
                 // The movement we need to perform is less than 2px
@@ -476,8 +536,20 @@ export class PageScrollInstance {
         return this._distanceToScroll;
     }
 
+    get executionDuration(): number {
+        return this._executionDuration;
+    }
+
+    set executionDuration(value: number) {
+        this._executionDuration = value;
+    }
+
     public get duration(): number {
         return this._duration;
+    }
+
+    public get speed(): number {
+        return this._speed;
     }
 
     public get easingLogic(): EasingLogic {
@@ -519,7 +591,7 @@ export class PageScrollInstance {
 
 /**
  * An Interface a listener should implement to be notified about possible interrupt events
- * that happend due to user interaction while a scroll animation takes place.
+ * that happened due to user interaction while a scroll animation takes place.
  *
  * The PageScrollService provides an implementation to a PageScrollInstance to be notified
  * about scroll animation interrupts and stop related animations.

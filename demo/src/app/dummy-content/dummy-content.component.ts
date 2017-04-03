@@ -6,19 +6,15 @@ import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core'
 })
 export class DummyContentComponent implements OnChanges {
 
-  @Input() start: number;
-  @Input() length: number;
-  @Input() idPrefix: string = 'head';
-  @Input() headings: boolean = true;
-  @Input() scrollButtons: boolean = true;
+  @Input() length: number = 1;
 
-  public array: number[] = [];
+  public array: number[] = [0];
 
   constructor() {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.array = Array.from(Array(this.length), (e, i) => i + this.start);
+    this.array = Array.from(Array(this.length), (e, i) => i);
   }
 
 }

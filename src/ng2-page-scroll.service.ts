@@ -2,7 +2,7 @@ import {Injectable, isDevMode} from '@angular/core';
 
 import {PageScrollConfig} from './ng2-page-scroll-config';
 import {PageScrollInstance, InterruptReporter} from './ng2-page-scroll-instance';
-import {PageScrollUtilService} from './ng2-page-scroll-util.service';
+import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
 
 @Injectable()
 export class PageScrollService {
@@ -85,7 +85,7 @@ export class PageScrollService {
 
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
         pageScrollInstance.scrollingViews.forEach((scrollingView: any) => {
-            if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
+            if (Util.isUndefinedOrNull(scrollingView)) {
                 return;
             }
             // Get the scrollTop or scrollLeft value of the first scrollingView that returns a value for its "scrollTop"
@@ -127,9 +127,18 @@ export class PageScrollService {
         // OR we need to scroll up but are at the top already
         let allReadyAtDestination = Math.abs(pageScrollInstance.distanceToScroll) < PageScrollConfig._minScrollDistance;
 
+        // Check how long we need to scroll if a speed option is given
+        // Default executionDuration is the specified duration
+        pageScrollInstance.executionDuration = pageScrollInstance.duration;
+        // Maybe we need to pay attention to the speed option?
+        if (!Util.isUndefinedOrNull(pageScrollInstance.speed) && Util.isUndefinedOrNull(pageScrollInstance.duration)) {
+            // Speed option is set and no duration => calculate duration based on speed and scroll distance
+            pageScrollInstance.executionDuration = pageScrollInstance.distanceToScroll / pageScrollInstance.speed * 1000;
+        }
+
         // We should go there directly, as our "animation" would have one big step
         // only anyway and this way we save the interval stuff
-        let tooShortInterval = pageScrollInstance.duration <= PageScrollConfig._interval;
+        let tooShortInterval = pageScrollInstance.executionDuration <= PageScrollConfig._interval;
 
         if (allReadyAtDestination || tooShortInterval) {
             if (isDevMode()) {
@@ -146,14 +155,14 @@ export class PageScrollService {
 
         // Register the interrupt listeners if we want an interruptible scroll animation
         if (pageScrollInstance.interruptible ||
-            (PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
+            (Util.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
             pageScrollInstance.attachInterruptListeners(this.onInterrupted);
         }
 
         // Let's get started, get the start time...
         pageScrollInstance.startTime = new Date().getTime();
         // .. and calculate the end time (when we need to finish at last)
-        pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.duration;
+        pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
 
         pageScrollInstance.timer = setInterval((_pageScrollInstance: PageScrollInstance) => {
             // Take the current time
@@ -172,7 +181,7 @@ export class PageScrollService {
                     currentTime - _pageScrollInstance.startTime,
                     _pageScrollInstance.startScrollPosition,
                     _pageScrollInstance.distanceToScroll,
-                    _pageScrollInstance.duration));
+                    _pageScrollInstance.executionDuration));
             }
             // Set the new scrollPosition to all scrollingViews elements
             if (!_pageScrollInstance.setScrollPosition(newScrollPosition)) {
@@ -205,7 +214,7 @@ export class PageScrollService {
 
             for (let i = 0; i < this.runningInstances.length; ++i) {
                 let pageScrollInstance = this.runningInstances[i];
-                if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
+                if (Util.isUndefinedOrNull(namespace) || namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
                     this.stopInternal(true, pageScrollInstance);

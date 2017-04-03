@@ -7,120 +7,112 @@
     two scrolling animations acting on the same scrollView DOM element, where each interferes with the other ones.
     All scroll animations on the same scrollView should thus share the same namespace.
   </p>
-
-
-  <md-grid-list cols="3" rowHeight="100px" class="columnGrid">
-    <md-grid-tile>
-      <h3>Namespace <code>default</code></h3>
-      <p>
-        <button md-raised-button color="primary" (click)="startDefaultNamespaceScrolls()"
-                id="startDefaultNamespaceScrollsButton" mdTooltip="Start scroll animation">
-          <md-icon>play_arrow</md-icon>
-        </button>
-        <button md-raised-button color="primary" (click)="pageScrollService.stopAll('default')"
-                id="stopDefaultNamespaceScrollsButton" mdTooltip="Stop scroll animation">
-          <md-icon>stop</md-icon>
-        </button>
-        <button md-raised-button color="primary" (click)="resetDefaultNameScrolls()"
-                id="resetDefaultNamespaceScrollsButton" mdTooltip="Scroll container to top">
-          <md-icon>replay</md-icon>
-        </button>
-      </p>
-    </md-grid-tile>
-    <md-grid-tile>
-      <h3>Namespace <code>customSpace</code></h3>
-      <p>
-        <button md-raised-button color="primary" (click)="startCustomNamespaceScroll()"
-                id="startCustomNamespaceScrollsButton" mdTooltip="Start scroll animation">
-          <md-icon>play_arrow</md-icon>
-        </button>
-        <button md-raised-button color="primary" (click)="pageScrollService.stopAll('customSpace')"
-                id="stopCustomNamespaceScrollsButton" mdTooltip="Stop scroll animation">
-          <md-icon>stop</md-icon>
-        </button>
-        <button md-raised-button color="primary" (click)="resetCustomNamespaceScroll()"
-                id="resetCustomNamespaceScrollsButton" mdTooltip="Scroll container to top">
-          <md-icon>replay</md-icon>
-        </button>
-      </p>
-    </md-grid-tile>
-    <md-grid-tile>
-      <h3>All Namespaces</h3>
-      <p>
-        <button md-raised-button color="primary" (click)="pageScrollService.stopAll()"
-                id="stopAllNamespaceScrollsButton" mdTooltip="Stop all scroll animations">
-          <md-icon>stop</md-icon>
-        </button>
-      </p>
-    </md-grid-tile>
-  </md-grid-list>
 </md-card>
 
-<md-grid-list cols="3" rowHeight="300px">
-  <md-grid-tile>
-    <md-card>
-      <md-card-title>Namespace default</md-card-title>
-      <md-card-content #container1 id="container1" class="scrollContainer">
+<md-card fxLayout="row" fxLayoutGap="5px">
 
-        <p id="container1Head">
-          This containers scroll animation is started at the same time like the second one.
-          As both are in the same namespace, this one's will be stopped at the moment the second one starts scrolling.
-        </p>
+  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="5px" fxLayoutWrap.gt-sm="wrap"
+       fxLayoutAlign.gt-sm="center">
+    <h3 fxFlex.gt-sm="grow">Namespace <code>default</code></h3>
+    <button md-raised-button color="primary" (click)="startDefaultNamespaceScrolls()"
+            id="startDefaultNamespaceScrollsButton" mdTooltip="Start scroll animation">
+      <md-icon>play_arrow</md-icon>
+    </button>
+    <button md-raised-button color="primary" (click)="pageScrollService.stopAll('default')"
+            id="stopDefaultNamespaceScrollsButton" mdTooltip="Stop scroll animation">
+      <md-icon>stop</md-icon>
+    </button>
+    <button md-raised-button color="primary" (click)="resetDefaultNameScrolls()"
+            id="resetDefaultNamespaceScrollsButton" mdTooltip="Scroll container to top">
+      <md-icon>replay</md-icon>
+    </button>
+  </div>
 
-        <app-dummy-content [start]="1" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
+  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="5px" fxLayoutWrap.gt-sm="wrap"
+       fxLayoutAlign.gt-sm="center">
+    <h3 fxFlex.gt-sm="grow">Namespace <code>customSpace</code></h3>
+    <button md-raised-button color="primary" (click)="startCustomNamespaceScroll()"
+            id="startCustomNamespaceScrollsButton" mdTooltip="Start scroll animation">
+      <md-icon>play_arrow</md-icon>
+    </button>
+    <button md-raised-button color="primary" (click)="pageScrollService.stopAll('customSpace')"
+            id="stopCustomNamespaceScrollsButton" mdTooltip="Stop scroll animation">
+      <md-icon>stop</md-icon>
+    </button>
+    <button md-raised-button color="primary" (click)="resetCustomNamespaceScroll()"
+            id="resetCustomNamespaceScrollsButton" mdTooltip="Scroll container to top">
+      <md-icon>replay</md-icon>
+    </button>
+  </div>
+  <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="5px" fxLayoutWrap.gt-sm="wrap"
+       fxLayoutAlign.gt-sm="center">
+    <h3 fxFlex.gt-sm="grow">All Namespaces</h3>
+    <button md-raised-button color="primary" (click)="pageScrollService.stopAll()"
+            id="stopAllNamespaceScrollsButton" mdTooltip="Stop all scroll animations">
+      <md-icon>stop</md-icon>
+    </button>
+  </div>
+</md-card>
 
-        <p>
-          <button md-raised-button color="warn" id="scrollTarget1">A button inside the container</button>
-        </p>
+<div fxLayout="row" fxLayoutGap="5px">
+  <div>
+    <h4>Namespace default</h4>
+    <div #container1 id="container1" class="scrollContainer">
 
-        <app-dummy-content [start]="5" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
+      <p id="container1Head">
+        This containers scroll animation is started at the same time like the second one.
+        As both are in the same namespace, this one's will be stopped at the moment the second one starts scrolling.
+      </p>
 
-      </md-card-content>
-    </md-card>
-  </md-grid-tile>
+      <app-dummy-content [length]="4"></app-dummy-content>
 
-  <md-grid-tile>
-    <md-card>
-      <md-card-title>Namespace <code>default</code></md-card-title>
-      <md-card-content #container2 id="container2" class="scrollContainer">
+      <p>
+        <button md-raised-button color="warn" id="scrollTarget1">Target</button>
+      </p>
 
-        <p id="container2Head">
-          This containers scroll animation is started at the same time like the first one.
-          Both are in the same namespace, but this one's is started second and thus actually takes place.
-        </p>
+      <app-dummy-content [length]="4"></app-dummy-content>
 
-        <app-dummy-content [start]="1" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
+    </div>
+  </div>
 
-        <p>
-          <button md-raised-button color="warn" id="scrollTarget2">A button inside the container</button>
-        </p>
+  <div>
+    <h4>Namespace <code>default</code></h4>
+    <div #container2 id="container2" class="scrollContainer">
 
-        <app-dummy-content [start]="5" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
+      <p id="container2Head">
+        This containers scroll animation is started at the same time like the first one.
+        Both are in the same namespace, but this one's is started second and thus actually takes place.
+      </p>
 
-      </md-card-content>
-    </md-card>
-  </md-grid-tile>
+      <app-dummy-content [length]="4"></app-dummy-content>
 
-  <md-grid-tile>
-    <md-card>
-      <md-card-title>Namespace <code>customSpace</code></md-card-title>
-      <md-card-content #container3 id="container3" class="scrollContainer">
+      <p>
+        <button md-raised-button color="warn" id="scrollTarget2">Target</button>
+      </p>
 
-        <p id="container3Head">
-          This containers scroll animation uses a custom namespace <code>customSpace</code>.
-          It is therefore capable to scroll independently of the status of the <code>default</code> namespace
-          animations.
-        </p>
+      <app-dummy-content [length]="4"></app-dummy-content>
 
-        <app-dummy-content [start]="1" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
+    </div>
+  </div>
 
-        <p>
-          <button md-raised-button color="warn" id="scrollTarget3">A button inside the container</button>
-        </p>
+  <div>
+    <h4>Namespace <code>customSpace</code></h4>
+    <div #container3 id="container3" class="scrollContainer">
 
-        <app-dummy-content [start]="5" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
+      <p id="container3Head">
+        This containers scroll animation uses a custom namespace <code>customSpace</code>.
+        It is therefore capable to scroll independently of the status of the <code>default</code> namespace
+        animations.
+      </p>
 
-      </md-card-content>
-    </md-card>
-  </md-grid-tile>
-</md-grid-list>
+      <app-dummy-content [length]="4"></app-dummy-content>
+
+      <p>
+        <button md-raised-button color="warn" id="scrollTarget3">Target</button>
+      </p>
+
+      <app-dummy-content [length]="4"></app-dummy-content>
+
+    </div>
+  </div>
+</div>

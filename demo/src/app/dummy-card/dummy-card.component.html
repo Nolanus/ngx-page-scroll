@@ -1,0 +1,10 @@
+<md-card *ngFor="let num of array; let isLast = last">
+  <md-card-title id="{{ idPrefix + num }}" *ngIf="headings">Prioris generis {{ num }}</md-card-title>
+  <md-card-content>
+    <app-dummy-content></app-dummy-content>
+  </md-card-content>
+  <md-card-actions *ngIf="scrollButtons && headings">
+    <a href="#{{ idPrefix + (num - 1) }}" md-button pageScroll>Go to previous</a>
+    <a *ngIf="!isLast" href="#{{ idPrefix + (num + 1) }}" pageScroll md-button>Go to next</a>
+  </md-card-actions>
+</md-card>

@@ -116,7 +116,7 @@ In your template you may add the `pageScroll` attribute
  to elements with an `href` attribute pointing towards an id on the 
  same page (e.g. `#theId`).
 
-```js
+```typescript
 
 @Component({
    ...
@@ -139,11 +139,10 @@ after content initialization.
 Start by obtaining a reference to the `PageScrollService` instance by adding it to your component's 
 constructor. The `PageScrollService` offers a `start()` method to trigger `PageScrollInstance`s. 
 A `PageScrollInstance` is an object encapsulating all information relevant for performing a scroll animation.
-You may create a new `PageScrollInstance` by using the provided factory methods 
-`PageScrollInstance#simpleInstance`, `PageScrollInstance#simpleInlineInstance`, and 
-`PageScrollInstance#advancedInstance`.
+You may create a new `PageScrollInstance` by using the provided factory methods
+`PageScrollInstance#simpleInstance` and `PageScrollInstance#newInstance`.
 
-```js
+```typescript
 @Component({
     template: `
         <p>Main content</p>
@@ -178,6 +177,8 @@ export class MyComponent {
      };
  }
  ```
+ 
+The `PageScrollInstance#newInstance` method takes a `PageScrollOptions` object. Most attributes are the same as attributes for the directive. Refer to [the sources](https://github.com/Nolanus/ng2-page-scroll/blob/master/src/ng2-page-scroll-instance.ts#L13) for a detailed list of options.
 
 ## Configuration
 
@@ -195,7 +196,7 @@ all page scroll-animation defaults.
 
 ### Example
 
-```js
+```typescript
 import {PageScrollConfig} from 'ng2-page-scroll';
 
 export class AppComponent {
@@ -229,6 +230,7 @@ of only 1 second.
 | `pageScrollHorizontal`    | boolean     | false        | Whether the scroll should happen in vertical direction (`false`, default) or horizontal (`true`).
 | `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 | `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
+| `pageScrollSpeed`         | number      | -            | Speed in Pixel/Second the animation should take. Only applied if no duration is set. 
 | `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
 | `pageScrollAdjustHash`    | boolean     | false        | Whether the [routes hash/fragment](https://angular.io/docs/ts/latest/guide/router.html#!#query-parameters) should be updated to reflect to section that has been scrolled to
 | `pageScrollEasing`        | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
@@ -258,7 +260,7 @@ defined in the component
  <a pageScroll [pageScrollOffset]="0" [pageScrollDuration]="2000" [pageScrollEasing]="myEasing" [pageScrollInterruptible]="false" (pageScrollFinish)="doSmth($event)" href="#theanchor">Visit</a>
 ```
 
-```js
+```typescript
     myEasing: EasingLogic = {
         ease: (t: number, b: number, c: number, d: number): number => {
             // easeInOutExpo easing

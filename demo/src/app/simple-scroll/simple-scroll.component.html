@@ -7,14 +7,27 @@
 
 <!-- Buttons -->
 <md-card>
-  <p>All the following buttons scroll to the seventh heading but with different configuration.</p>
-
   <h3>Non-Interruptible, custom duration</h3>
-  <p>This button has a custom animation duration of 5 seconds and is specified to be non-interrupbtible. Try scrolling
+  <p>This button has a custom animation duration of 4 seconds and is specified to be non-interrupbtible. Try scrolling
     or using the arrow keys while the scroll animation takes place.</p>
-  <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollInterruptible]="false"
-          [pageScrollDuration]="5000" id="testButton">
-    Start
+  <button md-raised-button color="primary" href="#head5" pageScroll [pageScrollInterruptible]="false"
+          [pageScrollDuration]="4000" id="testButton">
+    Start for Heading 5
+  </button>
+  <button md-raised-button color="primary" href="#head11" pageScroll [pageScrollInterruptible]="false"
+          [pageScrollDuration]="4000" id="testButton2">
+    Start for Heading 11
+  </button>
+
+  <h3>Speed option</h3>
+  <p>As an alternative to specifying the exact duration you may set the <code>pageScrollSpeed</code> attribute to
+    specify the speed in "pixel/second". This results in animations to take place at the same speed, no matter how far
+    to scroll.</p>
+  <button md-raised-button color="primary" href="#head5" pageScroll [pageScrollSpeed]="800" id="speedButton1">
+    Start for Heading 5
+  </button>
+  <button md-raised-button color="primary" href="#head11" pageScroll [pageScrollSpeed]="800" id="speedButton2">
+    Start for Heading 11
   </button>
 
   <h3>Target Offset</h3>
@@ -79,4 +92,4 @@
 
 </md-card>
 
-<app-dummy-content [start]="2" [length]="14"></app-dummy-content>
+<app-dummy-card [start]="2" [length]="14"></app-dummy-card>

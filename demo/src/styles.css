@@ -1,6 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/core/theming/prebuilt/indigo-pink.css';
 
+div.mat-toolbar-layout:first-child md-toolbar-row {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .mat-tab-labels .mat-tab-label {
   flex: 1;
 }
@@ -8,4 +13,3 @@
 .columnGrid .mat-figure {
   flex-direction: column;
 }
-

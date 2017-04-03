@@ -14,56 +14,52 @@
   </button>
 </md-card>
 
-<md-grid-list cols="2" rowHeight="300px">
-  <md-grid-tile>
+<div fxLayout="column" fxLayout.gt-sm="row">
+  <md-card>
+    <md-card-title>A basic card</md-card-title>
+    <md-card-content #basicContainer id="basicContainer" class="scrollContainer">
+
+      <app-dummy-card [start]="1" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-card>
+
+      <p>
+        <button md-raised-button color="warn" id="basicScrollTarget">A button inside the container</button>
+      </p>
+
+      <app-dummy-card [start]="5" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-card>
+
+    </md-card-content>
+  </md-card>
+
+  <div class="scrollContainer" #complexContainer id="complexContainer">
     <md-card>
-      <md-card-title>A basic card</md-card-title>
-      <md-card-content #basicContainer id="basicContainer" class="scrollContainer">
-
-        <app-dummy-content [start]="1" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
-
-        <p>
-          <button md-raised-button color="warn" id="basicScrollTarget">A button inside the container</button>
-        </p>
-
-        <app-dummy-content [start]="5" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-content>
-
+      <md-card-title>A complex card</md-card-title>
+      <md-card-content>
+        This Container has several cards in it. Each of them has <code>position: relative</code>.
       </md-card-content>
     </md-card>
-  </md-grid-tile>
-  <md-grid-tile>
 
-    <div class="scrollContainer" #complexContainer id="complexContainer">
-      <md-card>
-        <md-card-title>A complex card</md-card-title>
-        <md-card-content>
-          This Container has several cards in it. Each of them has <code>position: relative</code>.
-        </md-card-content>
-      </md-card>
+    <md-card>
+      <md-card-title>Dummy Card</md-card-title>
+      <md-card-content>
+        <app-dummy-card [start]="1" [length]="5" [headings]="false" [scrollButtons]="false"></app-dummy-card>
+      </md-card-content>
+    </md-card>
 
-      <md-card>
-        <md-card-title>Dummy Card</md-card-title>
-        <md-card-content>
-          <app-dummy-content [start]="1" [length]="5" [headings]="false" [scrollButtons]="false"></app-dummy-content>
-        </md-card-content>
-      </md-card>
+    <md-card>
+      <md-card-title>Target Card</md-card-title>
+      <md-card-content>
+        <p>An here's our scroll target</p>
+        <p>
+          <button md-raised-button color="warn" id="complexScrollTarget">A button inside the container</button>
+        </p>
+      </md-card-content>
+    </md-card>
 
-      <md-card>
-        <md-card-title>Target Card</md-card-title>
-        <md-card-content>
-          <p>An here's our scroll target</p>
-          <p>
-            <button md-raised-button color="warn" id="complexScrollTarget">A button inside the container</button>
-          </p>
-        </md-card-content>
-      </md-card>
-
-      <md-card>
-        <md-card-title>Dummy Card</md-card-title>
-        <md-card-content>
-          <app-dummy-content [start]="6" [length]="5" [headings]="false" [scrollButtons]="false"></app-dummy-content>
-        </md-card-content>
-      </md-card>
-    </div>
-  </md-grid-tile>
-</md-grid-list>
+    <md-card>
+      <md-card-title>Dummy Card</md-card-title>
+      <md-card-content>
+        <app-dummy-card [start]="6" [length]="5" [headings]="false" [scrollButtons]="false"></app-dummy-card>
+      </md-card-content>
+    </md-card>
+  </div>
+</div>

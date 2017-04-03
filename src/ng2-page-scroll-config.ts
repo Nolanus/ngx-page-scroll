@@ -28,8 +28,8 @@ export class PageScrollConfig {
      * The amount of pixels that need to be between the current scrollTop/scrollLeft position
      * and the target position the cause a scroll animation. In case distance is below
      * this threshold, an immediate jump will be performed.
-     * Due to dpi or rounding irregularities in browsers floating point numbers as scrollTop/scrollLeft values
-     * are possible, making an === comparison or current scrollTop or scrollLeft and target scrollPosition error-prone.
+     * Due to dpi or rounding irregularities in browsers floating point numbers for scrollTop/scrollLeft values
+     * are possible, making a === comparison of current scrollTop or scrollLeft and target scrollPosition error-prone.
      * @type {number}
      * @private
      */
