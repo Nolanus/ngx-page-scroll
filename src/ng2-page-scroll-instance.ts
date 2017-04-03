@@ -8,19 +8,71 @@ import {EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews} fro
 import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
 
 /**
- * An Interface specifying the possible options to be passed into the Factory Method
+ * An Interface specifying the possible options to be passed into the newInstance() factory method
  */
 export interface PageScrollOptions {
+    /**
+     * The document object of the current app
+     */
     document: Document;
+
+    /**
+     * A specification of the DOM element to scroll to. Either a string referring to an
+     * object id (`#target`) or a HTMLElement that is attached to the document's DOM tree.
+     */
     scrollTarget: PageScrollTarget;
+
+    /**
+     * Array of HTMLElements or the body object that should be manipulated while performing
+     * the scroll animation.
+     */
     scrollingViews?: PageScrollingViews[];
+
+    /**
+     * Namespace of the scroll animation
+     */
     namespace?: string;
+
+    /**
+     * Whether that scroll animation scrolls in vertical direction (true) or
+     * horizontal (false, default value)
+     */
     verticalScrolling?: boolean;
+
+    /**
+     * Whether the an advanced offset calculation for inline scrollings should be applied
+     */
     advancedInlineOffsetCalculation?: boolean;
+
+    /**
+     * Offset of target elements location and scroll location
+     */
     pageScrollOffset?: number;
+
+    /**
+     * Whether the scroll animation should be interruptible
+     */
     pageScrollInterruptible?: boolean;
+
+    /**
+     * The easing logic to be used
+     */
     pageScrollEasingLogic?: EasingLogic;
+
+    /**
+     * Duration in milliseconds the scroll animation should last
+     */
     pageScrollDuration?: number;
+
+    /**
+     * Maximum speed to be used for the scroll animation. Only taken
+     * into account of no pageScrollDuration is provided
+     */
+    pageScrollSpeed?: number;
+
+    /**
+     * A listener to be called whenever the scroll animation stops
+     */
     pageScrollFinishListener?: EventEmitter<boolean>;
 }
 
