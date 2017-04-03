@@ -22,7 +22,7 @@ import {Subscription} from 'rxjs/Subscription';
 
 import {PageScrollService} from './ng2-page-scroll.service';
 import {PageScrollInstance} from './ng2-page-scroll-instance';
-import {PageScrollUtilService} from './ng2-page-scroll-util.service';
+import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
 import {EasingLogic} from './ng2-page-scroll-config';
 
 @Directive({
@@ -83,7 +83,7 @@ export class PageScroll implements OnChanges, OnDestroy {
     }
 
     private generatePageScrollInstance(): PageScrollInstance {
-        if (PageScrollUtilService.isUndefinedOrNull(this.pageScrollInstance)) {
+        if (Util.isUndefinedOrNull(this.pageScrollInstance)) {
             this.pageScrollInstance = PageScrollInstance.newInstance({
                 document: this.document,
                 scrollTarget: this.href,

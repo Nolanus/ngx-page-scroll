@@ -2,7 +2,7 @@ import {Injectable, isDevMode} from '@angular/core';
 
 import {PageScrollConfig} from './ng2-page-scroll-config';
 import {PageScrollInstance, InterruptReporter} from './ng2-page-scroll-instance';
-import {PageScrollUtilService} from './ng2-page-scroll-util.service';
+import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
 
 @Injectable()
 export class PageScrollService {
@@ -85,7 +85,7 @@ export class PageScrollService {
 
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
         pageScrollInstance.scrollingViews.forEach((scrollingView: any) => {
-            if (PageScrollUtilService.isUndefinedOrNull(scrollingView)) {
+            if (Util.isUndefinedOrNull(scrollingView)) {
                 return;
             }
             // Get the scrollTop or scrollLeft value of the first scrollingView that returns a value for its "scrollTop"
@@ -146,7 +146,7 @@ export class PageScrollService {
 
         // Register the interrupt listeners if we want an interruptible scroll animation
         if (pageScrollInstance.interruptible ||
-            (PageScrollUtilService.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
+            (Util.isUndefinedOrNull(pageScrollInstance.interruptible) && PageScrollConfig.defaultInterruptible)) {
             pageScrollInstance.attachInterruptListeners(this.onInterrupted);
         }
 
@@ -205,7 +205,7 @@ export class PageScrollService {
 
             for (let i = 0; i < this.runningInstances.length; ++i) {
                 let pageScrollInstance = this.runningInstances[i];
-                if (PageScrollUtilService.isUndefinedOrNull(namespace) || namespace.length === 0 ||
+                if (Util.isUndefinedOrNull(namespace) || namespace.length === 0 ||
                     pageScrollInstance.namespace === namespace) {
                     stoppedSome = true;
                     this.stopInternal(true, pageScrollInstance);
