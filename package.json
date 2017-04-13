@@ -63,7 +63,7 @@
     "@types/jasmine": "2.5.45",
     "codelyzer": "^2.0.0",
     "jasmine-core": "~2.5.2",
-    "jasmine-spec-reporter": "~3.2.0",
+    "jasmine-spec-reporter": "~3.3.0",
     "protractor": "5.1.1",
     "rimraf": "^2.5.4",
     "rollup": "^0.41.4",
