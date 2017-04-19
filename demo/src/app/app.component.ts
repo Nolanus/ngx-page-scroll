@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Router, NavigationEnd, ActivatedRoute} from '@angular/router';
+import {Component} from '@angular/core';
+import {Router, NavigationEnd} from '@angular/router';
 import {MdCheckbox} from '@angular/material';
 import {PageScrollConfig} from 'ng2-page-scroll';
 
@@ -12,7 +12,7 @@ export class AppComponent {
 
   public isDebugEnabled = PageScrollConfig._logLevel >= 5;
 
-  constructor(private router: Router, private route: ActivatedRoute) {
+  constructor(private router: Router) {
     router.events.subscribe((event) => {
       // see also
       if (event instanceof NavigationEnd) {

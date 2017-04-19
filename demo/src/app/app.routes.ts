@@ -2,8 +2,7 @@
  * Created by sebastianfuss on 03.09.16.
  */
 
-import {ModuleWithProviders} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {Routes} from '@angular/router';
 
 // Components
 import {SimpleScrollComponent} from './simple-scroll/simple-scroll.component';
@@ -15,7 +14,7 @@ import {HorizontalScrollComponent} from './horizontal-scroll/horizontal-scroll.c
 import {RouterScrollComponent} from "./router-scroll/router-scroll.component";
 import {NamespaceScrollComponent} from "./namespace-scroll/namespace-scroll.component";
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'simple', component: SimpleScrollComponent},
   {path: 'nested', component: NestedScrollComponent},
@@ -26,7 +25,3 @@ const routes: Routes = [
   {path: 'tests', component: PathologicalTestsComponent},
   {path: '**', redirectTo: '/'},
 ];
-
-export const appRoutingProviders: any[] = [];
-
-export const routing: ModuleWithProviders = RouterModule.forRoot(routes);
