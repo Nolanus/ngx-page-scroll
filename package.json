@@ -61,7 +61,7 @@
     "@angular/platform-server": "^2.4.0",
     "@angular/router": "^3.2.1",
     "@types/jasmine": "2.5.45",
-    "codelyzer": "^2.0.0",
+    "codelyzer": "^3.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~3.2.0",
     "protractor": "5.1.1",
