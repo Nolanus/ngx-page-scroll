@@ -24,7 +24,7 @@
 
 ### Other
 
-- Document namepsace feature in demo app (b53881e)
+- Document namespace feature in demo app (b53881e)
 - Loosen peer deps for work with angular 4 (#106, #107, #108, #109, #110, #113)
 - Do not publish travis deployment specific files to npm (#112)
 - Remove inadvertent fdescribe in e2e specs
