@@ -1,3 +1,13 @@
+## 4.0.0-beta.7 (2017-04-24)
+
+### Fix
+
+- Scrolling did not start at top of screen but from previus scroll start position (05ea7c4) (#125)
+
+### Other
+
+- Updated development dependencies to use angular 4
+
 ## 4.0.0-beta.6 (2017-03-26)
 
 ### Breaking Change
@@ -11,7 +21,6 @@
 ### Fix
 
 - Bug where `stopAll` did not stop all running pageScroll instances (d5de63d)
-
 
 ### Other
 
