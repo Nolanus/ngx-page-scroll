@@ -133,7 +133,9 @@ describe('Simple Scroll page', () => {
                         let snackbar = element(by.css('simple-snack-bar'));
                         let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
                         let snackbarButton = snackbar.element(by.css('button'));
-                        expect(snackbarMessage.getText()).toBe('Yeah, we reached our destination');
+                        snackbarMessage.getText().then(function (text) {
+                            expect(text).toBe('Yeah, we reached our destination');
+                        });
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);

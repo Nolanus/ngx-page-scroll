@@ -30,7 +30,9 @@ describe('Pathological Tests page', () => {
                         let snackbar = element(by.css('simple-snack-bar'));
                         let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
                         let snackbarButton = snackbar.element(by.css('button'));
-                        expect(snackbarMessage.getText()).toBe('Ohoh, something interrupted us');
+                        snackbarMessage.getText().then(function (text) {
+                            expect(text).toBe('Ohoh, something interrupted us');
+                        });
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
                             expect(pos).toBeLessThan(headingLocation.y);
@@ -51,7 +53,9 @@ describe('Pathological Tests page', () => {
                         let snackbar = element(by.css('simple-snack-bar'));
                         let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
                         let snackbarButton = snackbar.element(by.css('button'));
-                        expect(snackbarMessage.getText()).toBe('Ohoh, something interrupted us');
+                        snackbarMessage.getText().then(function (text) {
+                            expect(text).toBe('Ohoh, something interrupted us');
+                        });
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
                             // Should not be scrolled anywhere
@@ -71,7 +75,9 @@ describe('Pathological Tests page', () => {
                     let snackbar = element(by.css('simple-snack-bar'));
                     let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
                     let snackbarButton = snackbar.element(by.css('button'));
-                    expect(snackbarMessage.getText()).toBe('Yeah, we reached our destination');
+                    snackbarMessage.getText().then(function (text) {
+                        expect(text).toBe('Yeah, we reached our destination');
+                    });
                     snackbarButton.click();
                     getScrollPos().then((pos: number) => {
                         expect(pos).toBe(0);
