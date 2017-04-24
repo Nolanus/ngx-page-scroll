@@ -82,6 +82,8 @@ export class PageScrollService {
         }
 
         let startScrollPositionFound = false;
+        // Reset start scroll position to 0. If any of the scrollingViews has a different one, it will be extracted next
+        pageScrollInstance.startScrollPosition = 0;
 
         // Get the start scroll position from the scrollingViews (e.g. if the user already scrolled down the content)
         pageScrollInstance.scrollingViews.forEach((scrollingView: any) => {
