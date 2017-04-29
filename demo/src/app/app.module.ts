@@ -56,6 +56,7 @@ import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.comp
     MdTabsModule,
     MdToolbarModule,
     MdTooltipModule,
+    FlexLayoutModule,
     Ng2PageScrollModule.forRoot()
   ],
   declarations: [
