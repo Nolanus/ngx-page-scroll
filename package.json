@@ -64,7 +64,7 @@
     "codelyzer": "~3.0.0",
     "jasmine-core": "~2.5.2",
     "jasmine-spec-reporter": "~4.0.0",
-    "protractor": "5.1.1",
+    "protractor": "5.1.2",
     "rimraf": "^2.5.4",
     "rollup": "^0.41.4",
     "rollup-plugin-uglify": "^1.0.1",
