@@ -131,10 +131,9 @@ describe('Simple Scroll page', () => {
                 trigger.sendKeys(protractor.Key.ENTER).then(() => {
                     browser.sleep(400).then(() => {
                         let snackbar = element(by.css('simple-snack-bar'));
-                        let snackbarMessage = snackbar.element(by.css('.mat-simple-snackbar-message'));
                         let snackbarButton = snackbar.element(by.css('button'));
-                        snackbarMessage.getText().then(function (text) {
-                            expect(text).toBe('Yeah, we reached our destination');
+                        snackbar.getText().then(function (text) {
+                            expect(text).toContain('Yeah, we reached our destination');
                         });
                         snackbarButton.click();
                         getScrollPos().then((pos: number) => {
