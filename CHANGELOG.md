@@ -1,3 +1,9 @@
+## 4.0.0-beta.8 (2017-05-21)
+
+### Other
+
+- Updated dependencies and fix tests
+
 ## 4.0.0-beta.7 (2017-04-24)
 
 ### Fix
