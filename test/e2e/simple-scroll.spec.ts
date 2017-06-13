@@ -180,4 +180,25 @@ describe('Simple Scroll page', () => {
             });
         });
     });
+
+    it('should scroll to the top using speed option when starting at the bottom', () => {
+        let target: ElementFinder = element(by.css('#head1'));
+        target.getLocation().then((headingLocation: ILocation) => {
+            browser.driver.executeScript('return window.innerHeight;').then((windowHeight: number) => {
+                scrollTo(windowHeight).then(() => {
+                    let scrollButton: ElementFinder = element(by.css('#toTopWithSpeed'));
+                    getScrollPos().then((initialPos: number) => {
+                        expect(initialPos).toBeGreaterThan(Math.round(headingLocation.y));
+                        scrollButton.sendKeys(protractor.Key.ENTER).then(() => {
+                            browser.sleep(5000).then(() => {
+                                getScrollPos().then((pos: number) => {
+                                    expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+        });
+    });
 });

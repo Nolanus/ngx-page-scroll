@@ -93,3 +93,17 @@
 </md-card>
 
 <app-dummy-card [start]="2" [length]="14"></app-dummy-card>
+
+<md-card>
+  <h3>Up-scrolling examples</h3>
+  <p>These buttons perform similar scroll animations like the ones used above, but the scroll direction is now upwards
+    (as the target is atop of the button) instead of downwards like from the buttons are the beginning of the page.</p>
+
+  <button md-raised-button color="primary" href="#head1" pageScroll [pageScrollSpeed]="800" id="toTopWithSpeed">
+    To top with speed option
+  </button>
+  <button md-raised-button color="primary" href="#head1" pageScroll [pageScrollOffset]="-50"
+          id="toTopWithNegativeOffset">
+    To top with offset -50px
+  </button>
+</md-card>
