@@ -135,7 +135,7 @@ export class PageScrollService {
         // Maybe we need to pay attention to the speed option?
         if (!Util.isUndefinedOrNull(pageScrollInstance.speed) && Util.isUndefinedOrNull(pageScrollInstance.duration)) {
             // Speed option is set and no duration => calculate duration based on speed and scroll distance
-            pageScrollInstance.executionDuration = pageScrollInstance.distanceToScroll / pageScrollInstance.speed * 1000;
+            pageScrollInstance.executionDuration = Math.abs(pageScrollInstance.distanceToScroll) / pageScrollInstance.speed * 1000;
         }
 
         // We should go there directly, as our "animation" would have one big step
