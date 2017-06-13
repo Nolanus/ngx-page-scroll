@@ -1,3 +1,13 @@
+## 4.0.0-beta.9 (2017-06-13)
+
+### Fix
+
+- Scrolling upwards with pageScrollSpeed option resulted in immediate jump (#170)
+
+### Other
+
+- Updated dependencies
+
 ## 4.0.0-beta.8 (2017-05-21)
 
 ### Other
