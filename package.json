@@ -53,6 +53,7 @@
     "@angular/router": ">=3.2.0 <5.0.0"
   },
   "devDependencies": {
+    "@angular/animations": "^4.2.2",
     "@angular/common": "^4.0.2",
     "@angular/compiler": "^4.0.2",
     "@angular/compiler-cli": "^4.0.2",
@@ -66,11 +67,11 @@
     "jasmine-spec-reporter": "~4.1.0",
     "protractor": "5.1.2",
     "rimraf": "^2.5.4",
-    "rollup": "^0.41.4",
+    "rollup": "^0.43.0",
     "rollup-plugin-uglify": "^2.0.1",
     "rxjs": "^5.4.0",
     "tslint": "^5.2.0",
-    "typescript": "~2.2.1",
+    "typescript": "~2.3.4",
     "typings": "^2.1.0",
     "zone.js": "^0.8.11"
   }
