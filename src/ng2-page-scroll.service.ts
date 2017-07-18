@@ -1,4 +1,4 @@
-import {Injectable, isDevMode} from '@angular/core';
+import {Injectable, Optional, SkipSelf, isDevMode} from '@angular/core';
 
 import {PageScrollConfig} from './ng2-page-scroll-config';
 import {PageScrollInstance, InterruptReporter} from './ng2-page-scroll-instance';
@@ -242,3 +242,13 @@ export class PageScrollService {
     }
 }
 
+/* singleton pattern taken from https://github.com/angular/angular/issues/13854 */
+export function NG2PAGESCROLL_SERVICE_PROVIDER_FACTORY(parentDispatcher: PageScrollService) {
+    return parentDispatcher || new PageScrollService();
+}
+
+export const NG2PAGESCROLL_SERVICE_PROVIDER = {
+    provide: PageScrollService,
+    deps: [[new Optional(), new SkipSelf(), PageScrollService]],
+    useFactory: NG2PAGESCROLL_SERVICE_PROVIDER_FACTORY
+};
