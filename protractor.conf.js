@@ -28,8 +28,8 @@ if (process.env.TRAVIS) {
 
     var capabilities = [
         // [platform, browsername, version]
-        ['macOS 10.12', 'chrome', '56.0'],
-        ['macOS 10.12', 'chrome', '55.0'],
+        ['macOS 10.12', 'chrome', '59.0'],
+        ['macOS 10.12', 'chrome', '58.0'],
         ['macOS 10.12', 'chrome', '49.0'],
         ['Windows 10', 'MicrosoftEdge', '14.14393'],
         ['Windows 10', 'MicrosoftEdge', '13.10586'],

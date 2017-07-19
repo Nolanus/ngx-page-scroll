@@ -190,7 +190,7 @@ describe('Simple Scroll page', () => {
                     getScrollPos().then((initialPos: number) => {
                         expect(initialPos).toBeGreaterThan(Math.round(headingLocation.y));
                         scrollButton.sendKeys(protractor.Key.ENTER).then(() => {
-                            browser.sleep(5000).then(() => {
+                            browser.sleep(10000).then(() => {
                                 getScrollPos().then((pos: number) => {
                                     expect(pos).toBeCloseTo(Math.round(headingLocation.y), Closeness.ofByOne);
                                 });
