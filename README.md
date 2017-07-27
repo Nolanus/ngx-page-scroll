@@ -48,7 +48,7 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
 @NgModule({
     imports: [
         /* Other imports here */
-        Ng2PageScrollModule.forRoot()
+        Ng2PageScrollModule
         ]
 })
 export class AppModule {
@@ -100,7 +100,7 @@ import {Ng2PageScrollModule} from 'ng2-page-scroll';
 @NgModule({
     imports: [
         /* Other imports here */
-        Ng2PageScrollModule.forRoot()
+        Ng2PageScrollModule
         ]
 })
 export class AppModule {
