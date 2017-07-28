@@ -63,7 +63,7 @@
     "@angular/router": "^4.0.2",
     "@types/jasmine": "^2.5.45",
     "codelyzer": "~3.0.1",
-    "jasmine-core": "~2.6.2",
+    "jasmine-core": "~2.7.0",
     "jasmine-spec-reporter": "~4.1.0",
     "protractor": "5.1.2",
     "rimraf": "^2.5.4",
