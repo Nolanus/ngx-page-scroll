@@ -1,7 +1,7 @@
 {
   "name": "ng2-page-scroll",
   "version": "4.0.0-beta.10",
-  "description": "Animated scrolling functionality written in pure angular2",
+  "description": "Animated scrolling functionality for angular written in pure typescript",
   "scripts": {
     "compile": "npm run lint:code && ngc -p tsconfig-build.json",
     "compile:tsc": "npm run lint && tsc -p tsconfig.json --noUnusedLocals",
