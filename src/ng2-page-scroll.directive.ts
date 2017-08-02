@@ -16,7 +16,7 @@ import {
     NavigationCancel,
     UrlTree
 } from '@angular/router';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 
 import {Subscription} from 'rxjs/Subscription';
 

@@ -1,5 +1,5 @@
 import {Component, OnInit, Inject} from '@angular/core';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 import {MdSnackBar} from '@angular/material';
 import {PageScrollInstance, PageScrollService, EasingLogic} from 'ng2-page-scroll';
 

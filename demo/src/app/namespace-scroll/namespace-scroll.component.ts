@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, ElementRef, Inject} from '@angular/core';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 import {PageScrollService, PageScrollInstance} from  'ng2-page-scroll';
 
 @Component({

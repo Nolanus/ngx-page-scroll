@@ -1,5 +1,5 @@
 import {Component, OnInit, Renderer, Inject} from '@angular/core';
-import {DOCUMENT} from '@angular/platform-browser';
+import {DOCUMENT} from '@angular/common';
 import {MdSnackBar} from '@angular/material';
 
 @Component({
