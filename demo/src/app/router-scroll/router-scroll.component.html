@@ -5,6 +5,17 @@
   </p>
 </md-card>
 
+<md-card class="warn">
+  <md-card-title id="head1">Known issue!</md-card-title>
+  <md-card-content>
+    <p>
+      Due to a recent change in the angular lifecycle cross-route scrolling currently does
+      not function properly. The target page has not been fully loaded when the scroll animation determines the target
+      location, leading to wrong positions.
+    </p>
+  </md-card-content>
+</md-card>
+
 <md-card>
   <h3>Scroll to target on different route</h3>
   <p>The following button has a <code>routerLink</code> attribute set referring to a different route than the current

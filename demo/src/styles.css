@@ -12,3 +12,8 @@ div.mat-toolbar-layout:first-child md-toolbar-row {
 .columnGrid .mat-figure {
   flex-direction: column;
 }
+
+.mat-card.warn {
+  background-color: #f44336;
+  color: #ffffff;
+}
