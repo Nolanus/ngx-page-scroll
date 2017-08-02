@@ -1,3 +1,19 @@
+## 4.0.0-beta.10 (2017-08-03)
+
+### Breaking change
+
+- The `pageScrollInstance` factory methods marked as deprecated since v4.0.0-beta.5 have been removed. 
+
+### Feature
+
+- The `scrollTarget` parameter for `pageScrollInstance` creation may now take any valid css selector (#193) 
+
+### Other
+
+- Remove the flawed `forRoot()` approach for module and introduced singleton patter (#96, #190, thanks to @achimha) 
+- Updated dependencies
+- Raised minimum supported angular version to 4.2.0
+
 ## 4.0.0-beta.9 (2017-06-13)
 
 ### Fix
