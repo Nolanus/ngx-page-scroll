@@ -16,12 +16,22 @@ export class HorizontalScrollComponent implements OnInit {
     }
 
     public scrollHorizontalStart() {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineDirectionInstance(this.document, '#horizontalContainerStart', this.container.nativeElement, false);
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+          document: this.document,
+          scrollTarget: '#horizontalContainerStart',
+          scrollingViews: [this.container.nativeElement],
+          verticalScrolling: false
+        });
         this.pageScrollService.start(pageScrollInstance);
     }
 
     public scrollHorizontal() {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInlineDirectionInstance(this.document, '#inHorizontalContainer', this.container.nativeElement, false);
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+          document: this.document,
+          scrollTarget: '#inHorizontalContainer',
+          scrollingViews: [this.container.nativeElement],
+          verticalScrolling: false
+        });
         this.pageScrollService.start(pageScrollInstance);
     }
 
