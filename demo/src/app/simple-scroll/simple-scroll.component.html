@@ -85,8 +85,8 @@
 
   <h3>Scrolling using <i>PageScrollService</i></h3>
   <p>You may use the <i>PageScrollService</i> to create highly customized scroll animations. This example will scroll
-    to the last heading of this page.</p>
-  <button (click)="goToLastHeading()" md-button color="primary" id="goToLastHeadingButton">
+    to the end of the page, which is identified by a div-element with css-class <code>theEnd</code>.</p>
+  <button (click)="goToLastHeading()" md-raised-button color="primary" id="goToLastHeadingButton">
     Go to last heading (done via service)
   </button>
 
@@ -107,3 +107,5 @@
     To top with offset -50px
   </button>
 </md-card>
+
+<div class="theEnd"></div>

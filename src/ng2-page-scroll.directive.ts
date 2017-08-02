@@ -40,6 +40,9 @@ export class PageScroll implements OnChanges, OnDestroy {
     public href: string;
 
     @Input()
+    public pageScrollTarget: string = null;
+
+    @Input()
     public pageScrollHorizontal: boolean = null;
 
     @Input()
@@ -89,7 +92,7 @@ export class PageScroll implements OnChanges, OnDestroy {
         if (Util.isUndefinedOrNull(this.pageScrollInstance)) {
             this.pageScrollInstance = PageScrollInstance.newInstance({
                 document: this.document,
-                scrollTarget: this.href,
+                scrollTarget: this.pageScrollTarget || this.href,
                 scrollingViews: null,
                 namespace: this.pageScroll,
                 verticalScrolling: !this.pageScrollHorizontal,

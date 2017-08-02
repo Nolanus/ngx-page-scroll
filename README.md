@@ -112,9 +112,10 @@ export class AppModule {
 
 ### Directive
 
-In your template you may add the `pageScroll` attribute 
- to elements with an `href` attribute pointing towards an id on the 
- same page (e.g. `#theId`).
+In your template you may add the `pageScroll` attribute to elements with an `href` attribute pointing towards an id on 
+the same page (e.g. `#theId`). The `onClick` event will be interrupted and the scroll animation starts.
+Alternatively you may set the optional `pageScrolllTarget` property to a valid css selector to specify the 
+target element to scroll to.
 
 ```typescript
 
@@ -176,7 +177,7 @@ export class MyComponent {
      }; 
 
      public goToHeadingInContainer(): void {
-         let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '#head3', scrollingViews: [this.container.nativeElement]});
+         let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '.headingClass', scrollingViews: [this.container.nativeElement]});
          this.pageScrollService.start(pageScrollInstance);
      };
  }
@@ -231,6 +232,7 @@ of only 1 second.
 | Attribute                 | Type        | Default      | Description   |
 | ------------------------- | ----------- | ------------ |-------------- |
 | `pageScroll`              |             |              | Attribute adding scroll-animation behavior when the `click`-event happens on the element.
+| `pageScrollTarget`        | string      |              | Optional attribute to set the element that should be scrolled to. Takes precedence over the ´href´-value
 | `pageScrollHorizontal`    | boolean     | false        | Whether the scroll should happen in vertical direction (`false`, default) or horizontal (`true`).
 | `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 | `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.

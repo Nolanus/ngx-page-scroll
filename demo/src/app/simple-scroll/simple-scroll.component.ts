@@ -20,7 +20,8 @@ export class SimpleScrollComponent implements OnInit {
   }
 
   public goToLastHeading() {
-    let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '#head15');
+    // You may use any valid css selector as scroll target (e.g. ids, class selectors, tags, combinations of those, ...)
+    let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '.theEnd');
     this.pageScrollService.start(pageScrollInstance);
   }
 

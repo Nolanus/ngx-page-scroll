@@ -18,7 +18,8 @@ export interface PageScrollOptions {
 
     /**
      * A specification of the DOM element to scroll to. Either a string referring to an
-     * object id (`#target`) or a HTMLElement that is attached to the document's DOM tree.
+     * element using a valid css selector (`#target`, `.class`, `div.class`) or a HTMLElement
+     * that is attached to the document's DOM tree.
      */
     scrollTarget: PageScrollTarget;
 
@@ -232,7 +233,7 @@ export class PageScrollInstance {
     public extractScrollTargetPosition(): {top: number, left: number} {
         let scrollTargetElement: HTMLElement;
         if (typeof this._scrollTarget === 'string') {
-            scrollTargetElement = this.document.getElementById((<string>this._scrollTarget).substr(1));
+            scrollTargetElement = <HTMLElement>this.document.querySelector(<string>this._scrollTarget);
         } else {
             scrollTargetElement = <HTMLElement>this._scrollTarget;
         }
