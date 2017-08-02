@@ -143,6 +143,8 @@ You may create a new `PageScrollInstance` by using the provided factory methods
 `PageScrollInstance#simpleInstance` and `PageScrollInstance#newInstance`.
 
 ```typescript
+import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
+import { DOCUMENT} from '@angular/common';
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 
 @Component({
