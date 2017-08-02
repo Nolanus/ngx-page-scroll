@@ -30,7 +30,7 @@
     "normalize.css": "~7.0.0",
     "rxjs": "^5.4.2",
     "ts-helpers": "^1.1.2",
-    "zone.js": "0.8.14"
+    "zone.js": "0.8.16"
   },
   "devDependencies": {
     "@angular/cli": "~1.2.1",
@@ -38,7 +38,7 @@
     "@types/jasmine": "2.5.53",
     "@types/node": "^8.0.14",
     "codelyzer": "~3.1.2",
-    "jasmine-core": "~2.6.4",
+    "jasmine-core": "~2.7.0",
     "jasmine-spec-reporter": "~4.1.1",
     "karma": "1.7.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -46,7 +46,7 @@
     "karma-jasmine": "^1.1.0",
     "karma-remap-istanbul": "^0.6.0",
     "protractor": "~5.1.2",
-    "ts-node": "3.2.0",
+    "ts-node": "3.3.0",
     "tslint": "^5.5.0",
     "typescript": "~2.4.1"
   }
