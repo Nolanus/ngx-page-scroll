@@ -197,7 +197,7 @@ export class PageScrollInstance {
 
         pageScrollInstance._advancedInlineOffsetCalculation = options.advancedInlineOffsetCalculation ||
             (Util.isUndefinedOrNull(options.advancedInlineOffsetCalculation) &&
-            PageScrollConfig.defaultAdvancedInlineOffsetCalculation);
+                PageScrollConfig.defaultAdvancedInlineOffsetCalculation);
 
         return pageScrollInstance;
     }
@@ -230,10 +230,16 @@ export class PageScrollInstance {
      *
      * @returns {HTMLElement}
      */
-    public extractScrollTargetPosition(): {top: number, left: number} {
+    public extractScrollTargetPosition(): { top: number, left: number } {
         let scrollTargetElement: HTMLElement;
         if (typeof this._scrollTarget === 'string') {
-            scrollTargetElement = <HTMLElement>this.document.querySelector(<string>this._scrollTarget);
+            let targetSelector = <string>this._scrollTarget;
+            if (targetSelector.match(/^#[^\s]+$/g) !== null) {
+                // It's an id selector and a valid id, as it does not contain any white space characters
+                scrollTargetElement = this.document.getElementById(targetSelector.substr(1));
+            } else {
+                scrollTargetElement = <HTMLElement>this.document.querySelector(targetSelector);
+            }
         } else {
             scrollTargetElement = <HTMLElement>this._scrollTarget;
         }
