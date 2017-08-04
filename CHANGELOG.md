@@ -1,3 +1,9 @@
+## 4.0.0-beta.11 (2017-08-04)
+
+### Fix
+
+- Adjust the minimum angular version to 4.2.6
+
 ## 4.0.0-beta.10 (2017-08-03)
 
 ### Breaking change
