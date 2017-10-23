@@ -2,7 +2,7 @@
  * Created by sebastianfuss on 29.08.16.
  */
 
-import {EventEmitter} from '@angular/core';
+import { EventEmitter, isDevMode } from '@angular/core';
 
 import {EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews} from './ng2-page-scroll-config';
 import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
@@ -275,7 +275,7 @@ export class PageScrollInstance {
                     position.top += accumulatedParentsPos.top;
                     position.left += accumulatedParentsPos.left;
                 } else {
-                    if (PageScrollConfig._logLevel >= 2) {
+                    if (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode())) {
                         console.warn('Unable to find nested scrolling targets parent!');
                     }
                 }
@@ -305,7 +305,7 @@ export class PageScrollInstance {
      *          (probably because we're at the end of the scrolling region)
      */
     public setScrollPosition(position: number): boolean {
-        if (PageScrollConfig._logLevel >= 5) {
+        if (PageScrollConfig._logLevel >= 5 && isDevMode()) {
             console.warn('Scroll Position: ' + position);
         }
         // Set the new scrollTop/scrollLeft to all scrollingViews elements

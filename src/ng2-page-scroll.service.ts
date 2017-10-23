@@ -1,8 +1,8 @@
-import {Injectable, Optional, SkipSelf, isDevMode} from '@angular/core';
+import { Injectable, Optional, SkipSelf, isDevMode } from '@angular/core';
 
-import {PageScrollConfig} from './ng2-page-scroll-config';
-import {PageScrollInstance, InterruptReporter} from './ng2-page-scroll-instance';
-import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
+import { PageScrollConfig } from './ng2-page-scroll-config';
+import { PageScrollInstance, InterruptReporter } from './ng2-page-scroll-instance';
+import { PageScrollUtilService as Util } from './ng2-page-scroll-util.service';
 
 @Injectable()
 export class PageScrollService {
@@ -75,7 +75,7 @@ export class PageScrollService {
 
         if (pageScrollInstance.scrollingViews === null || pageScrollInstance.scrollingViews.length === 0) {
             // No scrollingViews specified, thus we can't animate anything
-            if (isDevMode()) {
+            if (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode())) {
                 console.warn('No scrollingViews specified, this ng2-page-scroll does not know which DOM elements to scroll');
             }
             return;
@@ -117,7 +117,7 @@ export class PageScrollService {
         if (isNaN(pageScrollInstance.distanceToScroll)) {
             // We weren't able to find the target position, maybe the element does not exist?
 
-            if (isDevMode()) {
+            if (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode())) {
                 console.log('Scrolling not possible, as we can\'t find the specified target');
             }
             pageScrollInstance.fireEvent(false);
@@ -143,7 +143,7 @@ export class PageScrollService {
         let tooShortInterval = pageScrollInstance.executionDuration <= PageScrollConfig._interval;
 
         if (allReadyAtDestination || tooShortInterval) {
-            if (isDevMode()) {
+            if (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode())) {
                 if (allReadyAtDestination) {
                     console.log('Scrolling not possible, as we can\'t get any closer to the destination');
                 } else {
@@ -234,7 +234,8 @@ export class PageScrollService {
     }
 
     constructor() {
-        if (PageScrollService.instanceCounter > 0 && isDevMode()) {
+        if (PageScrollService.instanceCounter > 0 &&
+            (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode()))) {
             console.warn('An instance of PageScrollService already exists, usually ' +
                 'including one provider should be enough, so double check.');
         }

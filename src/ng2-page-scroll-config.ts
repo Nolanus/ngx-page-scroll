@@ -50,10 +50,11 @@ export class PageScrollConfig {
     public static defaultIsVerticalScrolling = true;
 
     /**
-     * How many console logs should be emitted.
-     * 0: None
-     * 2: If animation could not be started due to missing target, "already at destination" or similar reasons
-     * 5: All scroll position values that get set
+     * How many console logs should be emitted. Also influenced by angular mode (dev or prod mode)
+     * 0: No logs, neither in dev nor in prod mode
+     * 1: Animation errors in dev mode, no logs in prod mode
+     * 2: Animation errors in dev and prod mode
+     * 5: Animation errors in dev and all scroll position values that get set; animation errors in prod mode
      * @type {boolean}
      * @private
      */
