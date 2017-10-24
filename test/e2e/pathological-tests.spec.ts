@@ -1,7 +1,3 @@
-/**
- * Created by sebastianfuss on 22.10.16.
- */
-
 import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {ILocation} from 'selenium-webdriver';
 

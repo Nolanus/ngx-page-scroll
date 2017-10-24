@@ -1,17 +1,17 @@
 <div class="app-content" id="top">
 
-  <md-toolbar>
+  <mat-toolbar>
     <span>ng2-page-scroll demo application</span>
     <span>
-        <md-checkbox id="debugCheckBox" [checked]="isDebugEnabled" (change)="setDebug($event)" color="primary">
+        <mat-checkbox id="debugCheckBox" [checked]="isDebugEnabled" (change)="setDebug($event)" color="primary">
             Debug Mode
-        </md-checkbox>
+        </mat-checkbox>
     </span>
-  </md-toolbar>
+  </mat-toolbar>
 
-  <md-tab-group (selectChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
-    <md-tab *ngFor="let link of links" label="{{ link.name }}"></md-tab>
-  </md-tab-group>
+  <mat-tab-group (selectChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
+    <mat-tab *ngFor="let link of links" label="{{ link.name }}"></mat-tab>
+  </mat-tab-group>
 
   <!-- Routed views go here -->
   <router-outlet></router-outlet>

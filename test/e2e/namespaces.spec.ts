@@ -1,6 +1,3 @@
-/**
- * Created by sebastianfuss on 13.03.17.
- */
 import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
 

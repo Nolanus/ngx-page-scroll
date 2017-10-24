@@ -1,20 +1,20 @@
-<md-card>
-  <md-card-title id="head1">Simple Scrolling</md-card-title>
+<mat-card>
+  <mat-card-title id="head1">Simple Scrolling</mat-card-title>
   <p>
     On this page you may find some basic scroll operations using the directive and using the service.
   </p>
-</md-card>
+</mat-card>
 
 <!-- Buttons -->
-<md-card>
+<mat-card>
   <h3>Non-Interruptible, custom duration</h3>
   <p>This button has a custom animation duration of 4 seconds and is specified to be non-interrupbtible. Try scrolling
     or using the arrow keys while the scroll animation takes place.</p>
-  <button md-raised-button color="primary" href="#head5" pageScroll [pageScrollInterruptible]="false"
+  <button mat-raised-button color="primary" href="#head5" pageScroll [pageScrollInterruptible]="false"
           [pageScrollDuration]="4000" id="testButton">
     Start for Heading 5
   </button>
-  <button md-raised-button color="primary" href="#head11" pageScroll [pageScrollInterruptible]="false"
+  <button mat-raised-button color="primary" href="#head11" pageScroll [pageScrollInterruptible]="false"
           [pageScrollDuration]="4000" id="testButton2">
     Start for Heading 11
   </button>
@@ -23,20 +23,20 @@
   <p>As an alternative to specifying the exact duration you may set the <code>pageScrollSpeed</code> attribute to
     specify the speed in "pixel/second". This results in animations to take place at the same speed, no matter how far
     to scroll.</p>
-  <button md-raised-button color="primary" href="#head5" pageScroll [pageScrollSpeed]="800" id="speedButton1">
+  <button mat-raised-button color="primary" href="#head5" pageScroll [pageScrollSpeed]="800" id="speedButton1">
     Start for Heading 5
   </button>
-  <button md-raised-button color="primary" href="#head11" pageScroll [pageScrollSpeed]="800" id="speedButton2">
+  <button mat-raised-button color="primary" href="#head11" pageScroll [pageScrollSpeed]="800" id="speedButton2">
     Start for Heading 11
   </button>
 
   <h3>Target Offset</h3>
   <p>These two buttons trigger a scroll animation with a custom offset to the target. One will stop 150px atop the
     target, the second one 50px below the target.</p>
-  <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollOffset]="150" id="offsetButton">
+  <button mat-raised-button color="primary" href="#head7" pageScroll [pageScrollOffset]="150" id="offsetButton">
     Offset 150px
   </button>
-  <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollOffset]="-50"
+  <button mat-raised-button color="primary" href="#head7" pageScroll [pageScrollOffset]="-50"
           id="negativeOffsetButton">
     Offset -50px
   </button>
@@ -45,7 +45,7 @@
   <p>The following scroll animation has a custom duration of 350ms and a <code>pageScrollFinish</code> event listener
     attached and shows a snackbar
     at the bottom of the page when the event fires.</p>
-  <button md-raised-button color="primary" href="#head7" pageScroll (pageScrollFinish)="doSmth($event)"
+  <button mat-raised-button color="primary" href="#head7" pageScroll (pageScrollFinish)="doSmth($event)"
           [pageScrollDuration]="350" id="finishEventButton">
     Start
   </button>
@@ -53,7 +53,7 @@
   <h3>Hash/Fragment adjustment</h3>
   <p>The following scroll animation adjusts the url to contain the hash of the target element once it reached the
     target. This further allows pressing the browser's back button to jump back to the top of the page.</p>
-  <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollAdjustHash]="true"
+  <button mat-raised-button color="primary" href="#head7" pageScroll [pageScrollAdjustHash]="true"
           id="hashAdjustmentButton">
     Start
   </button>
@@ -61,11 +61,11 @@
   <h3>Custom easing</h3>
   <p>You may specify a custom easing function to manipulate the scroll position over time. This example uses an <i>easeInOutExpo</i>
     function.</p>
-  <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollEasing]="myEasing"
+  <button mat-raised-button color="primary" href="#head7" pageScroll [pageScrollEasing]="myEasing"
           id="customEasingButton">
     Start
   </button>
-  <button md-raised-button color="primary" href="#head7" pageScroll [pageScrollDuration]="5000"
+  <button mat-raised-button color="primary" href="#head7" pageScroll [pageScrollDuration]="5000"
           [pageScrollEasing]="myEasing">
     Start slow version
   </button>
@@ -73,39 +73,41 @@
   <h3>Dynamic target</h3>
   <p>The following button showcases dynamically changing the scroll targets.</p>
   <p>
-    <button md-raised-button color="primary" [href]="dynamicSelectedTarget" pageScroll id="dynamicTargetButton">
+    <button mat-raised-button color="primary" [href]="dynamicSelectedTarget" pageScroll id="dynamicTargetButton">
       Start
     </button>
-    <md-select placeholder="Button Scroll Target" [(ngModel)]="dynamicSelectedTarget" id="dynamicTargetSelect">
-      <md-option *ngFor="let dynamicTarget of dynamicTargets" [value]="dynamicTarget">
-        {{ dynamicTarget }}
-      </md-option>
-    </md-select>
+    <mat-form-field>
+      <mat-select placeholder="Button Scroll Target" [(ngModel)]="dynamicSelectedTarget" id="dynamicTargetSelect">
+        <mat-option *ngFor="let dynamicTarget of dynamicTargets" [value]="dynamicTarget">
+          {{ dynamicTarget }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </p>
 
   <h3>Scrolling using <i>PageScrollService</i></h3>
   <p>You may use the <i>PageScrollService</i> to create highly customized scroll animations. This example will scroll
     to the end of the page, which is identified by a div-element with css-class <code>theEnd</code>.</p>
-  <button (click)="goToLastHeading()" md-raised-button color="primary" id="goToLastHeadingButton">
+  <button (click)="goToLastHeading()" mat-raised-button color="primary" id="goToLastHeadingButton">
     Go to last heading (done via service)
   </button>
 
-</md-card>
+</mat-card>
 
 <app-dummy-card [start]="2" [length]="14"></app-dummy-card>
 
-<md-card>
+<mat-card>
   <h3>Up-scrolling examples</h3>
   <p>These buttons perform similar scroll animations like the ones used above, but the scroll direction is now upwards
     (as the target is atop of the button) instead of downwards like from the buttons are the beginning of the page.</p>
 
-  <button md-raised-button color="primary" href="#head1" pageScroll [pageScrollSpeed]="800" id="toTopWithSpeed">
+  <button mat-raised-button color="primary" href="#head1" pageScroll [pageScrollSpeed]="800" id="toTopWithSpeed">
     To top with speed option
   </button>
-  <button md-raised-button color="primary" href="#head1" pageScroll [pageScrollOffset]="-50"
+  <button mat-raised-button color="primary" href="#head1" pageScroll [pageScrollOffset]="-50"
           id="toTopWithNegativeOffset">
     To top with offset -50px
   </button>
-</md-card>
+</mat-card>
 
 <div class="theEnd"></div>

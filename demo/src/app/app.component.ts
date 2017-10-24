@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { MdCheckbox } from '@angular/material';
+import { MatCheckbox } from '@angular/material';
 import { PageScrollConfig } from 'ng2-page-scroll';
 
 @Component({
@@ -55,7 +55,7 @@ export class AppComponent {
     });
   }
 
-  public setDebug(debug: {checked: boolean, source: MdCheckbox}) {
+  public setDebug(debug: {checked: boolean, source: MatCheckbox}) {
     console.warn('Debug mode has been ' + (debug.checked ? 'en' : 'dis') + 'abled');
     this.isDebugEnabled = debug.checked;
     PageScrollConfig._logLevel = this.isDebugEnabled ? 5 : 2;

@@ -1,7 +1,3 @@
-/**
- * Created by sebastianfuss on 29.08.16.
- */
-
 import { EventEmitter, isDevMode } from '@angular/core';
 
 import {EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews} from './ng2-page-scroll-config';

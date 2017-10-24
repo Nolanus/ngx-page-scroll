@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { PageScrollInstance, PageScrollService, EasingLogic } from 'ng2-page-scroll';
 
 @Component({
   selector: 'app-simple-scroll',
   templateUrl: './simple-scroll.component.html',
   styleUrls: ['./simple-scroll.component.css'],
-  providers: [MdSnackBar]
+  providers: [MatSnackBar]
 })
 export class SimpleScrollComponent implements OnInit {
 
@@ -32,7 +32,7 @@ export class SimpleScrollComponent implements OnInit {
 
   public constructor(@Inject(DOCUMENT) private document: any,
                      private pageScrollService: PageScrollService,
-                     private snackBar: MdSnackBar) {
+                     private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {

@@ -1,5 +1,5 @@
-<md-card>
-  <md-card-title id="title">Namespace scrolling</md-card-title>
+<mat-card>
+  <mat-card-title id="title">Namespace scrolling</mat-card-title>
   <p>
     This page demonstrates the interaction with running scroll animation, especially if there are multiple ones.
     Each scroll animation belongs to a <code>namespace</code>. The default namespace value is <i>default</i>. Whenever a
@@ -7,54 +7,54 @@
     two scrolling animations acting on the same scrollView DOM element, where each interferes with the other ones.
     All scroll animations on the same scrollView should thus share the same namespace.
   </p>
-</md-card>
+</mat-card>
 
-<md-card fxLayout="row" fxLayoutGap="5px">
+<mat-card fxLayout="row" fxLayoutGap="5px">
 
   <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="5px" fxLayoutWrap.gt-sm="wrap"
        fxLayoutAlign.gt-sm="center">
     <h3 fxFlex.gt-sm="grow">Namespace <code>default</code></h3>
-    <button md-raised-button color="primary" (click)="startDefaultNamespaceScrolls()"
-            id="startDefaultNamespaceScrollsButton" mdTooltip="Start scroll animation">
-      <md-icon>play_arrow</md-icon>
+    <button mat-raised-button color="primary" (click)="startDefaultNamespaceScrolls()"
+            id="startDefaultNamespaceScrollsButton" matTooltip="Start scroll animation">
+      <mat-icon>play_arrow</mat-icon>
     </button>
-    <button md-raised-button color="primary" (click)="pageScrollService.stopAll('default')"
-            id="stopDefaultNamespaceScrollsButton" mdTooltip="Stop scroll animation">
-      <md-icon>stop</md-icon>
+    <button mat-raised-button color="primary" (click)="pageScrollService.stopAll('default')"
+            id="stopDefaultNamespaceScrollsButton" matTooltip="Stop scroll animation">
+      <mat-icon>stop</mat-icon>
     </button>
-    <button md-raised-button color="primary" (click)="resetDefaultNameScrolls()"
-            id="resetDefaultNamespaceScrollsButton" mdTooltip="Scroll container to top">
-      <md-icon>replay</md-icon>
+    <button mat-raised-button color="primary" (click)="resetDefaultNameScrolls()"
+            id="resetDefaultNamespaceScrollsButton" matTooltip="Scroll container to top">
+      <mat-icon>replay</mat-icon>
     </button>
   </div>
 
   <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="5px" fxLayoutWrap.gt-sm="wrap"
        fxLayoutAlign.gt-sm="center">
     <h3 fxFlex.gt-sm="grow">Namespace <code>customSpace</code></h3>
-    <button md-raised-button color="primary" (click)="startCustomNamespaceScroll()"
-            id="startCustomNamespaceScrollsButton" mdTooltip="Start scroll animation">
-      <md-icon>play_arrow</md-icon>
+    <button mat-raised-button color="primary" (click)="startCustomNamespaceScroll()"
+            id="startCustomNamespaceScrollsButton" matTooltip="Start scroll animation">
+      <mat-icon>play_arrow</mat-icon>
     </button>
-    <button md-raised-button color="primary" (click)="pageScrollService.stopAll('customSpace')"
-            id="stopCustomNamespaceScrollsButton" mdTooltip="Stop scroll animation">
-      <md-icon>stop</md-icon>
+    <button mat-raised-button color="primary" (click)="pageScrollService.stopAll('customSpace')"
+            id="stopCustomNamespaceScrollsButton" matTooltip="Stop scroll animation">
+      <mat-icon>stop</mat-icon>
     </button>
-    <button md-raised-button color="primary" (click)="resetCustomNamespaceScroll()"
-            id="resetCustomNamespaceScrollsButton" mdTooltip="Scroll container to top">
-      <md-icon>replay</md-icon>
+    <button mat-raised-button color="primary" (click)="resetCustomNamespaceScroll()"
+            id="resetCustomNamespaceScrollsButton" matTooltip="Scroll container to top">
+      <mat-icon>replay</mat-icon>
     </button>
   </div>
   <div fxFlex fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="5px" fxLayoutWrap.gt-sm="wrap"
        fxLayoutAlign.gt-sm="center">
     <h3 fxFlex.gt-sm="grow">All Namespaces</h3>
-    <button md-raised-button color="primary" (click)="pageScrollService.stopAll()"
-            id="stopAllNamespaceScrollsButton" mdTooltip="Stop all scroll animations">
-      <md-icon>stop</md-icon>
+    <button mat-raised-button color="primary" (click)="pageScrollService.stopAll()"
+            id="stopAllNamespaceScrollsButton" matTooltip="Stop all scroll animations">
+      <mat-icon>stop</mat-icon>
     </button>
   </div>
-</md-card>
+</mat-card>
 
-<md-card fxLayout="row" fxLayoutGap="5px">
+<mat-card fxLayout="row" fxLayoutGap="5px">
   <div>
     <h4>Namespace default</h4>
     <div #container1 id="container1" class="scrollContainer">
@@ -67,7 +67,7 @@
       <app-dummy-content [length]="4"></app-dummy-content>
 
       <p>
-        <button md-raised-button color="warn" id="scrollTarget1">Target</button>
+        <button mat-raised-button color="warn" id="scrollTarget1">Target</button>
       </p>
 
       <app-dummy-content [length]="4"></app-dummy-content>
@@ -87,7 +87,7 @@
       <app-dummy-content [length]="4"></app-dummy-content>
 
       <p>
-        <button md-raised-button color="warn" id="scrollTarget2">Target</button>
+        <button mat-raised-button color="warn" id="scrollTarget2">Target</button>
       </p>
 
       <app-dummy-content [length]="4"></app-dummy-content>
@@ -108,11 +108,11 @@
       <app-dummy-content [length]="4"></app-dummy-content>
 
       <p>
-        <button md-raised-button color="warn" id="scrollTarget3">Target</button>
+        <button mat-raised-button color="warn" id="scrollTarget3">Target</button>
       </p>
 
       <app-dummy-content [length]="4"></app-dummy-content>
 
     </div>
   </div>
-</md-card>
+</mat-card>

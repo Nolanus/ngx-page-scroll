@@ -1,7 +1,3 @@
-/**
- * Created by sebastianfuss on 24.02.17.
- */
-
 export class Util {
     // Some pre-calculated and approximated closeness epsilons
     public static ofByOne = -1 / 3;

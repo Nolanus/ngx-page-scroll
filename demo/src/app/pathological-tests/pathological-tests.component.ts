@@ -1,18 +1,18 @@
 import { Component, OnInit, Renderer, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-pathological-tests',
   templateUrl: './pathological-tests.component.html',
   styleUrls: ['./pathological-tests.component.css'],
-  providers: [MdSnackBar]
+  providers: [MatSnackBar]
 })
 export class PathologicalTestsComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: any,
               private renderer: Renderer,
-              private snackBar: MdSnackBar) {
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {

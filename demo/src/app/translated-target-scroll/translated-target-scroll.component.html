@@ -1,27 +1,27 @@
-<md-card>
-  <md-card-title id="title">Transformed Target scrolling</md-card-title>
+<mat-card>
+  <mat-card-title id="title">Transformed Target scrolling</mat-card-title>
   <p>
     Scrolling to a target that has been transformed using CSS.
   </p>
-  <button md-raised-button color="primary" href="#untranslated" pageScroll>
+  <button mat-raised-button color="primary" href="#untranslated" pageScroll>
     Scroll to regular button
   </button>
-  <button md-raised-button color="primary" href="#translated" pageScroll>
+  <button mat-raised-button color="primary" href="#translated" pageScroll>
     Scroll to transformend/translated button
   </button>
-</md-card>
+</mat-card>
 
 <app-dummy-card [start]="2" [length]="1" [scrollButtons]="false"></app-dummy-card>
 
-<md-card>
+<mat-card>
   <div class="target-holder">
-    <button md-raised-button id="untranslated" href="#top" pageScroll>
+    <button mat-raised-button id="untranslated" href="#top" pageScroll>
       Regular button
     </button>
-    <button md-raised-button id="translated" class="transform" href="#top" pageScroll>
+    <button mat-raised-button id="translated" class="transform" href="#top" pageScroll>
       CSS transformed button
     </button>
   </div>
-</md-card>
+</mat-card>
 
 <app-dummy-card [start]="3" [length]="10" [scrollButtons]="false"></app-dummy-card>

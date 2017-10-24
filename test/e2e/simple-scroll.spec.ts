@@ -164,7 +164,7 @@ describe('Simple Scroll page', () => {
                             // Change the dynamic target value...
                             scrollToElement(select);
                             select.click();
-                            element(by.css('#md-option-1')).click();
+                            element(by.css('#mat-option-1')).click();
 
                             // ... and scroll again
                             trigger.sendKeys(protractor.Key.ENTER).then(() => {

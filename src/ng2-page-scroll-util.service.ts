@@ -1,7 +1,3 @@
-/**
- * Created by sebastianfuss on 02.09.16.
- */
-
 export class PageScrollUtilService {
 
     /**

@@ -1,7 +1,3 @@
-/**
- * Created by sebastianfuss on 03.09.16.
- */
-
 import {CommonModule} from '@angular/common';
 import {NgModule, ModuleWithProviders} from '@angular/core';
 

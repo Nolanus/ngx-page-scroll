@@ -7,16 +7,16 @@ import {RouterModule} from '@angular/router';
 
 // Material 2
 import {
-  MdButtonModule,
-  MdCardModule,
-  MdCheckboxModule,
-  MdIconModule,
-  MdSelectModule,
-  MdSidenavModule,
-  MdSnackBarModule,
-  MdTabsModule,
-  MdToolbarModule,
-  MdTooltipModule
+  MatButtonModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatIconModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 // Angular Flex-Layout Library
@@ -46,16 +46,16 @@ import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.comp
     HttpModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
-    MdCardModule,
-    MdButtonModule,
-    MdCheckboxModule,
-    MdIconModule,
-    MdSelectModule,
-    MdSidenavModule,
-    MdSnackBarModule,
-    MdTabsModule,
-    MdToolbarModule,
-    MdTooltipModule,
+    MatCardModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
     FlexLayoutModule,
     Ng2PageScrollModule
   ],

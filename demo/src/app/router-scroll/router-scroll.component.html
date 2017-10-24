@@ -1,43 +1,43 @@
-<md-card>
-  <md-card-title id="head1">Router Scrolling</md-card-title>
+<mat-card>
+  <mat-card-title id="head1">Router Scrolling</mat-card-title>
   <p>
     On this page examples the pageScroll directives routerLink capability is demonstrated.
   </p>
-</md-card>
+</mat-card>
 
-<md-card class="warn">
-  <md-card-title id="head1">Known issue!</md-card-title>
-  <md-card-content>
+<mat-card class="warn">
+  <mat-card-title id="head1">Known issue!</mat-card-title>
+  <mat-card-content>
     <p>
       Due to a recent change in the angular lifecycle cross-route scrolling currently does
       not function properly. The target page has not been fully loaded when the scroll animation determines the target
       location, leading to wrong positions.
     </p>
-  </md-card-content>
-</md-card>
+  </mat-card-content>
+</mat-card>
 
-<md-card>
+<mat-card>
   <h3>Scroll to target on different route</h3>
   <p>The following button has a <code>routerLink</code> attribute set referring to a different route than the current
     one.</p>
-  <button md-raised-button color="primary" href="#head7" pageScroll routerLink="/simple" id="differentRouteScroll">
+  <button mat-raised-button color="primary" href="#head7" pageScroll routerLink="/simple" id="differentRouteScroll">
     Open Route and start scrolling
   </button>
 
   <h3>Scroll target with router to current page</h3>
   <p>The following scroll animation refers to a scroll target on the current page and includes the routerLink
     directive pointing to the current page. Each button uses a different routerLink syntax.</p>
-  <button md-raised-button color="primary" href="#head7" pageScroll routerLink="/router" id="currentRouteScroll1">
+  <button mat-raised-button color="primary" href="#head7" pageScroll routerLink="/router" id="currentRouteScroll1">
     Start 1
   </button>
-  <button md-raised-button color="primary" href="#head7" pageScroll [routerLink]="['/router']" id="currentRouteScroll2">
+  <button mat-raised-button color="primary" href="#head7" pageScroll [routerLink]="['/router']" id="currentRouteScroll2">
     Start 2
   </button>
-  <button md-raised-button color="primary" href="#head7" pageScroll [routerLink]="['/router', {foo: 'bar'}]"
+  <button mat-raised-button color="primary" href="#head7" pageScroll [routerLink]="['/router', {foo: 'bar'}]"
           id="currentRouteScroll3">
     Start 3
   </button>
 
-</md-card>
+</mat-card>
 
 <app-dummy-card [start]="2" [length]="13" [scrollButtons]="false"></app-dummy-card>
