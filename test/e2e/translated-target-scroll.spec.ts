@@ -1,6 +1,6 @@
-import {browser, element, by, protractor, ElementFinder} from 'protractor';
-import {Util as Closeness} from '../util';
-import {ILocation} from 'selenium-webdriver';
+import { browser, element, by, protractor, ElementFinder } from 'protractor';
+import { Util as Closeness } from '../util';
+import { ILocation, promise } from 'selenium-webdriver';
 
 describe('Transformed Target Scroll page', () => {
 
@@ -8,7 +8,7 @@ describe('Transformed Target Scroll page', () => {
         browser.get('/translated');
     });
 
-    function getScrollPos(): Promise<number> {
+    function getScrollPos(): promise.Promise<number> {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
     }
 

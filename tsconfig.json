@@ -12,10 +12,9 @@
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "listFiles": false,
-    "noLib": false
+    "skipLibCheck": true
   },
   "include": [
-    "./typings/index.d.ts",
     "./ng2-page-scroll.ts",
     "./test/**/*.ts"
   ]

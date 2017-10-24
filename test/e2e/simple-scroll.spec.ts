@@ -1,6 +1,6 @@
-import {browser, element, by, protractor, ElementFinder} from 'protractor';
-import {Util as Closeness} from '../util';
-import {ILocation} from 'selenium-webdriver';
+import { browser, element, by, protractor, ElementFinder } from 'protractor';
+import { Util as Closeness } from '../util';
+import { ILocation, promise } from 'selenium-webdriver';
 
 describe('Simple Scroll page', () => {
 
@@ -8,17 +8,17 @@ describe('Simple Scroll page', () => {
         browser.get('/simple');
     });
 
-    function getScrollPos(): Promise<number> {
+    function getScrollPos(): promise.Promise<number> {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
     }
 
-    function scrollToElement(elm: ElementFinder) {
+    function scrollToElement(elm: ElementFinder): promise.Promise<void> {
         return elm.getLocation().then(function (loc) {
             return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', loc.y);
         });
     }
 
-    function scrollTo(scrollPos: number): Promise<any> {
+    function scrollTo(scrollPos: number): promise.Promise<any> {
         return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', scrollPos);
     }
 

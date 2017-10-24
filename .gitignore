@@ -120,9 +120,6 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Typescript typings
-typings
-
 # ng2-page-scroll specific
 *.js.map
 *.d.ts

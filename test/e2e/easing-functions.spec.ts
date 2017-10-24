@@ -1,5 +1,6 @@
-import {browser, element, by, protractor, ElementFinder} from 'protractor';
-import {Util as Closeness} from '../util';
+import { browser, element, by, protractor, ElementFinder } from 'protractor';
+import { promise } from 'selenium-webdriver';
+import { Util as Closeness } from '../util';
 
 xdescribe('Scroll Easing Functions', () => {
 
@@ -8,7 +9,7 @@ xdescribe('Scroll Easing Functions', () => {
         element(by.css('#debugCheckBox')).click();
     });
 
-    function getScrollPos(): Promise<number> {
+    function getScrollPos(): promise.Promise<number> {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
     }
 

@@ -1,5 +1,5 @@
-import {browser, element, by, protractor, ElementFinder} from 'protractor';
-import {ILocation} from 'selenium-webdriver';
+import { browser, element, by, protractor, ElementFinder } from 'protractor';
+import { ILocation, promise } from 'selenium-webdriver';
 
 describe('Pathological Tests page', () => {
 
@@ -7,11 +7,11 @@ describe('Pathological Tests page', () => {
         browser.get('/tests');
     });
 
-    function getScrollPos(): Promise<number> {
+    function getScrollPos(): promise.Promise<number> {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
     }
 
-    function scrollTo(scrollPos: number): Promise<any> {
+    function scrollTo(scrollPos: number): promise.Promise<any> {
         return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', scrollPos);
     }
 

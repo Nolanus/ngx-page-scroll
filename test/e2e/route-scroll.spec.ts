@@ -1,6 +1,6 @@
 import {browser, element, by, protractor, ElementFinder} from 'protractor';
 import {Util as Closeness} from '../util';
-import {ILocation} from 'selenium-webdriver';
+import {ILocation,  promise} from 'selenium-webdriver';
 
 describe('Route Scroll page', () => {
 
@@ -8,7 +8,7 @@ describe('Route Scroll page', () => {
         browser.get('/router');
     });
 
-    function getScrollPos(): Promise<number> {
+    function getScrollPos(): promise.Promise<number> {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
     }
 
