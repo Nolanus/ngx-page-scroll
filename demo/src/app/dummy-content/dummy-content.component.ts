@@ -6,9 +6,9 @@ import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core'
 })
 export class DummyContentComponent implements OnChanges {
 
-  @Input() length: number = 1;
+  @Input() length = 1;
 
-  public array: number[] = [0];
+  public array = [0];
 
   constructor() {
   }

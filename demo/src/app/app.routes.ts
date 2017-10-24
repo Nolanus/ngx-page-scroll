@@ -1,7 +1,3 @@
-/**
- * Created by sebastianfuss on 03.09.16.
- */
-
 import {Routes} from '@angular/router';
 
 // Components
@@ -11,8 +7,8 @@ import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
 import {TranslatedTargetScrollComponent} from './translated-target-scroll/translated-target-scroll.component';
 import {PathologicalTestsComponent} from './pathological-tests/pathological-tests.component';
 import {HorizontalScrollComponent} from './horizontal-scroll/horizontal-scroll.component';
-import {RouterScrollComponent} from "./router-scroll/router-scroll.component";
-import {NamespaceScrollComponent} from "./namespace-scroll/namespace-scroll.component";
+import {RouterScrollComponent} from './router-scroll/router-scroll.component';
+import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},

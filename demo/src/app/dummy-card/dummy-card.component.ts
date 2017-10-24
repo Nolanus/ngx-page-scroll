@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-dummy-card',
@@ -8,9 +8,9 @@ export class DummyCardComponent implements OnChanges {
 
   @Input() start: number;
   @Input() length: number;
-  @Input() idPrefix: string = 'head';
-  @Input() headings: boolean = true;
-  @Input() scrollButtons: boolean = true;
+  @Input() idPrefix = 'head';
+  @Input() headings = true;
+  @Input() scrollButtons = true;
 
   public array: number[] = [];
 

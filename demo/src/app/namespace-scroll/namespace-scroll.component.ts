@@ -1,6 +1,6 @@
-import {Component, OnInit, ViewChild, ElementRef, Inject} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {PageScrollService, PageScrollInstance} from  'ng2-page-scroll';
+import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 
 @Component({
   selector: 'app-namespace-scroll',
@@ -28,14 +28,14 @@ export class NamespaceScrollComponent implements OnInit {
   }
 
   public startDefaultNamespaceScrolls() {
-    let pageScrollInstance1: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance1: PageScrollInstance = PageScrollInstance.newInstance({
       document: this.document,
       pageScrollDuration: 10000,
       scrollTarget: '#scrollTarget1',
       scrollingViews: [this.container1.nativeElement]
     });
 
-    let pageScrollInstance2: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance2: PageScrollInstance = PageScrollInstance.newInstance({
       document: this.document,
       pageScrollDuration: 10000,
       scrollTarget: '#scrollTarget2',
@@ -48,14 +48,14 @@ export class NamespaceScrollComponent implements OnInit {
 
   public resetDefaultNameScrolls() {
     // Jump to the top inside each container
-    let pageScrollInstance1: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance1: PageScrollInstance = PageScrollInstance.newInstance({
       document: this.document,
       pageScrollDuration: 0,
       scrollTarget: '#container1Head',
       scrollingViews: [this.container1.nativeElement]
     });
 
-    let pageScrollInstance2: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance2: PageScrollInstance = PageScrollInstance.newInstance({
       document: this.document,
       pageScrollDuration: 0,
       scrollTarget: '#container2Head',
@@ -67,7 +67,7 @@ export class NamespaceScrollComponent implements OnInit {
   }
 
   public startCustomNamespaceScroll() {
-    let pageScrollInstance3: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance3: PageScrollInstance = PageScrollInstance.newInstance({
       document: this.document,
       pageScrollDuration: 10000,
       namespace: 'customSpace',
@@ -79,7 +79,7 @@ export class NamespaceScrollComponent implements OnInit {
   }
 
   public resetCustomNamespaceScroll() {
-    let pageScrollInstance3: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance3: PageScrollInstance = PageScrollInstance.newInstance({
       document: this.document,
       pageScrollDuration: 0,
       namespace: 'customSpace',

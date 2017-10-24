@@ -16,7 +16,7 @@ export class HorizontalScrollComponent implements OnInit {
     }
 
     public scrollHorizontalStart() {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+        const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
           document: this.document,
           scrollTarget: '#horizontalContainerStart',
           scrollingViews: [this.container.nativeElement],
@@ -26,7 +26,7 @@ export class HorizontalScrollComponent implements OnInit {
     }
 
     public scrollHorizontal() {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+      const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
           document: this.document,
           scrollTarget: '#inHorizontalContainer',
           scrollingViews: [this.container.nativeElement],
