@@ -1,22 +1,24 @@
 import uglify from 'rollup-plugin-uglify';
 
 export default {
-    entry     : 'ng2-page-scroll.js',
-    dest      : 'bundles/ng2-page-scroll.umd.min.js',
-    format    : 'umd',
-    external  : [
+    input: 'ng2-page-scroll.js',
+    output: {
+        file: 'bundles/ng2-page-scroll.umd.min.js',
+        format: 'umd'
+    },
+    external: [
         '@angular/core',
         '@angular/router',
         '@angular/platform-browser',
         '@angular/common'
     ],
-    globals   : {
+    globals: {
         '@angular/core': 'ng.core',
         '@angular/router': 'ng.router',
         '@angular/platform-browser': 'ng.platform-browser',
         '@angular/common': 'ng.common'
     },
-    moduleName: 'ng2.page.scroll',
+    name: 'ng2.page.scroll',
     plugins: [
         uglify()
     ]
