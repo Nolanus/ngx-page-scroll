@@ -1,3 +1,17 @@
+## 4.0.0-beta.12 (2017-10-25)
+
+### Fix
+
+- Restore support for id selectors starting with a numeric value (#205)
+- Cross-route scrolling (#185)
+- Inconsistent logging levels (#207)
+
+### Other
+
+- Remove typings type definitions (#237)
+- Update to later rollup version (751642b)
+- Updated demo app dependencies (d2788c9)
+
 ## 4.0.0-beta.11 (2017-08-04)
 
 ### Fix
