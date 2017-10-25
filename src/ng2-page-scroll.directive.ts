@@ -16,14 +16,14 @@ import {
     NavigationCancel,
     UrlTree
 } from '@angular/router';
-import {DOCUMENT} from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
-import {Subscription} from 'rxjs/Subscription';
+import { Subscription } from 'rxjs/Subscription';
 
-import {PageScrollService} from './ng2-page-scroll.service';
-import {PageScrollInstance} from './ng2-page-scroll-instance';
-import {PageScrollUtilService as Util} from './ng2-page-scroll-util.service';
-import {EasingLogic} from './ng2-page-scroll-config';
+import { PageScrollService } from './ng2-page-scroll.service';
+import { PageScrollInstance } from './ng2-page-scroll-instance';
+import { PageScrollUtilService as Util } from './ng2-page-scroll-util.service';
+import { EasingLogic } from './ng2-page-scroll-config';
 
 @Directive({
     selector: '[pageScroll]',
@@ -139,7 +139,10 @@ export class PageScroll implements OnChanges, OnDestroy {
                 let subscription: Subscription = <Subscription>this.router.events.subscribe((routerEvent) => {
                     if (routerEvent instanceof NavigationEnd) {
                         subscription.unsubscribe();
-                        this.scroll();
+                        // use a timeout to start scrolling as soon as the stack is cleared
+                        setTimeout(() => {
+                            this.scroll();
+                        }, 0);
                     } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
                         subscription.unsubscribe();
                     }
