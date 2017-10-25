@@ -20,7 +20,6 @@ export class PageScrollConfig {
      * The number of milliseconds to wait till updating the scroll position again.
      * Small amounts may produce smoother animations but require more processing power.
      * @type {number}
-     * @private
      */
     public static _interval = 10;
 
@@ -31,14 +30,12 @@ export class PageScrollConfig {
      * Due to dpi or rounding irregularities in browsers floating point numbers for scrollTop/scrollLeft values
      * are possible, making a === comparison of current scrollTop or scrollLeft and target scrollPosition error-prone.
      * @type {number}
-     * @private
      */
     public static _minScrollDistance = 2;
 
     /**
      * Name of the default namespace.
      * @type {string}
-     * @private
      */
     public static _defaultNamespace = 'default';
 
@@ -56,9 +53,8 @@ export class PageScrollConfig {
      * 2: Animation errors in dev and prod mode
      * 5: Animation errors in dev and all scroll position values that get set; animation errors in prod mode
      * @type {number}
-     * @private
      */
-    public static _logLevel = 2;
+    public static _logLevel = 1;
 
     /**
      * The duration how long a scrollTo animation should last by default.
