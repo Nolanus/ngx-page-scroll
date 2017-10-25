@@ -94,20 +94,6 @@ System.config({
 });
 ```
 
-```typescript
-import {Ng2PageScrollModule} from 'ng2-page-scroll';
-
-@NgModule({
-    imports: [
-        /* Other imports here */
-        Ng2PageScrollModule
-        ]
-})
-export class AppModule {
-}
-```
-
-
 ## Usage 
 
 ### Directive
