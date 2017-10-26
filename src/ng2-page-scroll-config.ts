@@ -55,7 +55,7 @@ export class PageScrollConfig {
      * 1: Animation errors in dev mode, no logs in prod mode
      * 2: Animation errors in dev and prod mode
      * 5: Animation errors in dev and all scroll position values that get set; animation errors in prod mode
-     * @type {boolean}
+     * @type {number}
      * @private
      */
     public static _logLevel = 2;
@@ -122,4 +122,7 @@ export class PageScrollConfig {
         PageScrollConfig._easingLogic = easingLogic;
     }
 
+    public static set defaultLogLevel(logLevel: number) {
+        PageScrollConfig._logLevel = logLevel;
+    }
 }

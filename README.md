@@ -198,6 +198,7 @@ all page scroll-animation defaults.
 | `defaultDuration`            | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
 | `defaultInterruptible`       | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
 | `defaultEasingLogic`         | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
+| `defaultLogLevel`            | number      | 2            | Defines how many console logs should be emitted. Also influenced by angular mode (dev or prod mode)
 
 ### Example
 
