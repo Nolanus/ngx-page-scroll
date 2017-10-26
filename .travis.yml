@@ -25,7 +25,9 @@ install:
   - cd demo/
   # Install the demo app deps
   - npm install
-   # Build the demo app
+  # Lint the demo app
+  - npm run lint
+  # Build the demo app
   - node_modules/.bin/ng build --prod
   - export DEMO_DIST=$(pwd)/dist
   - echo $DEMO_DIST
