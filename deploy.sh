@@ -11,9 +11,9 @@ if [ "$TRAVIS_PULL_REQUEST" != "false" -o "$TRAVIS_BRANCH" != "$SOURCE_BRANCH" ]
 fi
 
 # Save some useful information
-REPO=`git config remote.origin.url`
+REPO=$(git config remote.origin.url)
 SSH_REPO=${REPO/https:\/\/github.com\//git@github.com:}
-SHA=`git rev-parse --verify HEAD`
+SHA=$(git rev-parse --verify HEAD)
 
 # Clone the existing gh-pages for this repo into ghpages/
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deploy)
@@ -63,7 +63,7 @@ ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
 openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in ../ssh.enc -out deploy_key -d
 chmod 600 deploy_key
-eval `ssh-agent -s`
+eval $(ssh-agent -s)
 ssh-add deploy_key
 
 # Now that we're all set up, we can push.
