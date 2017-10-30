@@ -35,7 +35,7 @@ cd ghpages
 
 # Adjust the baseurl href property to meet the one of github pages
 echo "Adjust base href"
-sed -i -e 's/base href="\/"/base href="\/ng2-page-scroll\/"/g' index.html
+sed -i -e 's/base href="\/"/base href="\/ngx-page-scroll\/"/g' index.html
 
 # Configure git
 echo "Configure git"

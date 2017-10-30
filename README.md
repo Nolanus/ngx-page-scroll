@@ -1,14 +1,14 @@
-# ng2-page-scroll [![npm version](https://img.shields.io/npm/v/ng2-page-scroll.svg?style=flat)](https://www.npmjs.com/package/ng2-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
+# ngx-page-scroll [![npm version](https://img.shields.io/npm/v/ngx-page-scroll.svg?style=flat)](https://www.npmjs.com/package/ngx-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
 Animated scrolling functionality for angular written in pure typescript
 with no additional dependencies
 
-[![Build Status](https://travis-ci.org/Nolanus/ng2-page-scroll.svg?branch=master)](https://travis-ci.org/Nolanus/ng2-page-scroll)
-[![Dependency Status](https://david-dm.org/Nolanus/ng2-page-scroll.svg)](https://david-dm.org/Nolanus/ng2-page-scroll)
-[![devDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=dev)
-[![peerDependency Status](https://david-dm.org/Nolanus/ng2-page-scroll/peer-status.svg)](https://david-dm.org/Nolanus/ng2-page-scroll?type=peer)
-[![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ng2-page-scroll.svg)](https://greenkeeper.io/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bddd94eb51474880ac749b540470c78c)](https://www.codacy.com/app/sebastian-fuss/ng2-page-scroll?utm_source=github.com&utm_medium=referral&utm_content=Nolanus/ng2-page-scroll&utm_campaign=badger)
+[![Build Status](https://travis-ci.org/Nolanus/ngx-page-scroll.svg?branch=master)](https://travis-ci.org/Nolanus/ngx-page-scroll)
+[![Dependency Status](https://david-dm.org/Nolanus/ngx-page-scroll.svg)](https://david-dm.org/Nolanus/ngx-page-scroll)
+[![devDependency Status](https://david-dm.org/Nolanus/ngx-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ngx-page-scroll?type=dev)
+[![peerDependency Status](https://david-dm.org/Nolanus/ngx-page-scroll/peer-status.svg)](https://david-dm.org/Nolanus/ngx-page-scroll?type=peer)
+[![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ngx-page-scroll.svg)](https://greenkeeper.io/)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bddd94eb51474880ac749b540470c78c)](https://www.codacy.com/app/sebastian-fuss/ngx-page-scroll?utm_source=github.com&utm_medium=referral&utm_content=Nolanus/ngx-page-scroll&utm_campaign=badger)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/Nolanus.svg)](https://saucelabs.com/u/Nolanus)
 
@@ -18,7 +18,7 @@ with no additional dependencies
 (`href="#mytarget`) just by adding `pageScroll` directive
 - service usage: trigger scroll animations from your component or when server responds
 - customizable: adjust duration, offset or whether scrolling stops if the user interrupts 
-([read more](https://github.com/Nolanus/ng2-page-scroll/wiki/Scroll-Interruption-Interference))
+([read more](https://github.com/Nolanus/ngx-page-scroll/wiki/Scroll-Interruption-Interference))
 - use custom easing functions to calculate the scroll position over time
 - works across routes (scrolls to target element as soon as the 
 routing has finished) and in both directions (horizontal/vertical)
@@ -37,18 +37,18 @@ routing has finished) and in both directions (horizontal/vertical)
 
 First you need to install the npm module:
 ```sh
-npm install ng2-page-scroll --save
+npm install ngx-page-scroll --save
 ```
 
-Then add the `Ng2PageScrollModule` to the imports array of your application module:
+Then add the `NgxPageScrollModule` to the imports array of your application module:
 
 ```typescript
-import {Ng2PageScrollModule} from 'ng2-page-scroll';
+import {NgxPageScrollModule} from 'ngx-page-scroll';
 
 @NgModule({
     imports: [
         /* Other imports here */
-        Ng2PageScrollModule
+        NgxPageScrollModule
         ]
 })
 export class AppModule {
@@ -59,7 +59,7 @@ To ensure there's only one instance of a PageScrollService (Singleton) it is rec
 PageScrollService to only one Injector, preferably the root injector of the application. You may read 
 more about [angular dependency injection hierarchy at their documentation](https://angular.io/docs/ts/latest/guide/hierarchical-dependency-injection.html).
  
-Finally you need to specify how your application should load the ng2-page-scroll library:
+Finally you need to specify how your application should load the ngx-page-scroll library:
 
 #### Angular modules
 
@@ -83,7 +83,7 @@ System.config({
         '@angular/common' : 'npm:@angular/common/bundles/common.umd.js',
         // further angular bundles...
 
-        'ng2-page-scroll': 'npm:ng2-page-scroll/bundles/ng2-page-scroll.umd.js',
+        'ngx-page-scroll': 'npm:ngx-page-scroll/bundles/ngx-page-scroll.umd.js',
 
         rxjs: 'npm:rxjs',
     },
@@ -132,7 +132,7 @@ You may create a new `PageScrollInstance` by using the provided factory methods
 ```typescript
 import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
 import { DOCUMENT} from '@angular/common';
-import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 
 @Component({
     template: `
@@ -169,7 +169,7 @@ export class MyComponent {
  }
  ```
  
-The `PageScrollInstance#newInstance` method takes a `PageScrollOptions` object. Most attributes are the same as attributes for the directive. Refer to [the sources](https://github.com/Nolanus/ng2-page-scroll/blob/master/src/ng2-page-scroll-instance.ts#L13) for a detailed list of options.
+The `PageScrollInstance#newInstance` method takes a `PageScrollOptions` object. Most attributes are the same as attributes for the directive. Refer to [the sources](https://github.com/Nolanus/ngx-page-scroll/blob/master/src/ngx-page-scroll-instance.ts#L13) for a detailed list of options.
 
 ## Configuration
 
@@ -188,7 +188,7 @@ all page scroll-animation defaults.
 ### Example
 
 ```typescript
-import {PageScrollConfig} from 'ng2-page-scroll';
+import {PageScrollConfig} from 'ngx-page-scroll';
 
 export class AppComponent {
     constructor() {
@@ -275,7 +275,7 @@ defined in the component
 ## Example App
 
 The [_demo_](demo) subfolder contains a project created with angular-cli
-that has been adapted to showcase the functionality of ng2-page-scroll. Run the 
+that has been adapted to showcase the functionality of ngx-page-scroll. Run the 
 demo app by checking out that repository and execute the 
 following command in the project root directory:
 
@@ -286,12 +286,12 @@ following command in the project root directory:
  This will perform the following steps:
 
  ```
- // Install the ng2-page-scroll project
+ // Install the ngx-page-scroll project
  npm install
  // Change into the example website folder
  cd demo/
- // Uninstall the current ng2-page-scroll version
- npm uninstall ng2-page-scroll
+ // Uninstall the current ngx-page-scroll version
+ npm uninstall ngx-page-scroll
  // Install the demo website's dependencies
  npm install
  // Run the server
@@ -300,7 +300,7 @@ following command in the project root directory:
 
 ## TODO:
 
-* Test across browsers
+* Test across more different browsers
 
 ## License
 

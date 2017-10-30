@@ -1,6 +1,6 @@
 import {Component, OnInit, Inject, ElementRef, ViewChild} from '@angular/core';
 import {DOCUMENT} from '@angular/common';
-import {PageScrollService, PageScrollInstance} from 'ng2-page-scroll';
+import {PageScrollService, PageScrollInstance} from 'ngx-page-scroll';
 
 @Component({
   selector: 'app-nested-scroll',

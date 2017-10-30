@@ -1,5 +1,5 @@
 {
-  "name": "ng2-page-scroll",
+  "name": "ngx-page-scroll",
   "version": "4.0.0-beta.12",
   "description": "Animated scrolling functionality for angular written in pure typescript",
   "scripts": {
@@ -8,7 +8,7 @@
     "bundle:create": "npm run bundle:clean && npm run rollup && npm run rollup:min",
     "bundle:clean": "rimraf bundles",
     "demo": "npm install && npm run demo:clean && npm run demo:start",
-    "demo:clean": "cd demo/ && npm uninstall ng2-page-scroll && npm install",
+    "demo:clean": "cd demo/ && npm uninstall ngx-page-scroll && npm install",
     "demo:start": "cd demo/ && npm start",
     "lint": "npm run lint:code && npm run lint:test",
     "lint:code": "tslint ./src/**/*.ts -t verbose --exclude ./src/**/*.d.ts",
@@ -20,9 +20,9 @@
     "test": "protractor protractor.conf.js",
     "webdriver:init": "webdriver-manager update"
   },
-  "main": "bundles/ng2-page-scroll.umd.js",
-  "module": "ng2-page-scroll.js",
-  "typings": "ng2-page-scroll.d.ts",
+  "main": "bundles/ngx-page-scroll.umd.js",
+  "module": "ngx-page-scroll.js",
+  "typings": "ngx-page-scroll.d.ts",
   "keywords": [
     "angular2",
     "angularjs",
@@ -38,12 +38,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Nolanus/ng2-page-scroll.git"
+    "url": "git+ssh://git@github.com/Nolanus/ngx-page-scroll.git"
   },
   "bugs": {
-    "url": "https://github.com/Nolanus/ng2-page-scroll/issues"
+    "url": "https://github.com/Nolanus/ngx-page-scroll/issues"
   },
-  "homepage": "https://github.com/Nolanus/ng2-page-scroll#readme",
+  "homepage": "https://github.com/Nolanus/ngx-page-scroll#readme",
   "peerDependencies": {
     "@angular/core": ">=4.2.6 <5.0.0",
     "@angular/common": ">=4.2.6 <5.0.0",

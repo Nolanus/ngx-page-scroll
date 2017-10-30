@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { MatCheckbox } from '@angular/material';
-import { PageScrollConfig } from 'ng2-page-scroll';
+import { PageScrollConfig } from 'ngx-page-scroll';
 
 @Component({
   selector: 'app-root',

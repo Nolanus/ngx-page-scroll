@@ -58,7 +58,7 @@ export class PageScrollConfig {
 
     /**
      * The duration how long a scrollTo animation should last by default.
-     * May be overridden using the page-scroll-duration attribute on a single ng2PageScroll instance.
+     * May be overridden using the page-scroll-duration attribute on a single ngxPageScroll instance.
      * @type {number}
      */
     public static defaultDuration = 1250;

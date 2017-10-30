@@ -1,8 +1,8 @@
 import { Injectable, Optional, SkipSelf, isDevMode } from '@angular/core';
 
-import { PageScrollConfig } from './ng2-page-scroll-config';
-import { PageScrollInstance, InterruptReporter } from './ng2-page-scroll-instance';
-import { PageScrollUtilService as Util } from './ng2-page-scroll-util.service';
+import { PageScrollConfig } from './ngx-page-scroll-config';
+import { PageScrollInstance, InterruptReporter } from './ngx-page-scroll-instance';
+import { PageScrollUtilService as Util } from './ngx-page-scroll-util.service';
 
 @Injectable()
 export class PageScrollService {
@@ -76,7 +76,7 @@ export class PageScrollService {
         if (pageScrollInstance.scrollingViews === null || pageScrollInstance.scrollingViews.length === 0) {
             // No scrollingViews specified, thus we can't animate anything
             if (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode())) {
-                console.warn('No scrollingViews specified, this ng2-page-scroll does not know which DOM elements to scroll');
+                console.warn('No scrollingViews specified, this ngx-page-scroll does not know which DOM elements to scroll');
             }
             return;
         }
@@ -244,12 +244,12 @@ export class PageScrollService {
 }
 
 /* singleton pattern taken from https://github.com/angular/angular/issues/13854 */
-export function NG2PAGESCROLL_SERVICE_PROVIDER_FACTORY(parentDispatcher: PageScrollService) {
+export function NgxPageScrollServiceProviderFactory(parentDispatcher: PageScrollService) {
     return parentDispatcher || new PageScrollService();
 }
 
-export const NG2PAGESCROLL_SERVICE_PROVIDER = {
+export const NgxPageScrollServiceProvider = {
     provide: PageScrollService,
     deps: [[new Optional(), new SkipSelf(), PageScrollService]],
-    useFactory: NG2PAGESCROLL_SERVICE_PROVIDER_FACTORY
+    useFactory: NgxPageScrollServiceProviderFactory
 };

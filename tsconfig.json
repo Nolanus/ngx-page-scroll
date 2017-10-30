@@ -15,7 +15,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "./ng2-page-scroll.ts",
+    "./ngx-page-scroll.ts",
     "./test/**/*.ts"
   ]
 }

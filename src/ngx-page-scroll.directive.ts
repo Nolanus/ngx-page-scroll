@@ -20,10 +20,10 @@ import { DOCUMENT } from '@angular/common';
 
 import { Subscription } from 'rxjs/Subscription';
 
-import { PageScrollService } from './ng2-page-scroll.service';
-import { PageScrollInstance } from './ng2-page-scroll-instance';
-import { PageScrollUtilService as Util } from './ng2-page-scroll-util.service';
-import { EasingLogic } from './ng2-page-scroll-config';
+import { PageScrollService } from './ngx-page-scroll.service';
+import { PageScrollInstance } from './ngx-page-scroll-instance';
+import { PageScrollUtilService as Util } from './ngx-page-scroll-util.service';
+import { EasingLogic } from './ngx-page-scroll-config';
 
 @Directive({
     selector: '[pageScroll]',

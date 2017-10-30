@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
-import { PageScrollInstance, PageScrollService, EasingLogic } from 'ng2-page-scroll';
+import { PageScrollInstance, PageScrollService, EasingLogic } from 'ngx-page-scroll';
 
 @Component({
   selector: 'app-simple-scroll',

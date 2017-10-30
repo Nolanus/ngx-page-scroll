@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 
 @Component({
   selector: 'app-namespace-scroll',

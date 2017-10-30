@@ -52,7 +52,7 @@ if (process.env.TRAVIS) {
             platform: capability[0],
             version: capability[2],
             shardTestFiles: true,
-            name: 'Ng2PageScroll',
+            name: 'NgxPageScroll',
             'tunnel-identifier': process.env.TRAVIS_JOB_NUMBER
         }
     });

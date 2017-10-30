@@ -22,8 +22,8 @@ import {
 // Angular Flex-Layout Library
 import {FlexLayoutModule} from '@angular/flex-layout';
 
-// Ng2PageScroll
-import {Ng2PageScrollModule} from 'ng2-page-scroll';
+// NgxPageScroll
+import {NgxPageScrollModule} from 'ngx-page-scroll';
 
 // App specific
 import {routes} from './app.routes';
@@ -57,7 +57,7 @@ import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.comp
     MatToolbarModule,
     MatTooltipModule,
     FlexLayoutModule,
-    Ng2PageScrollModule
+    NgxPageScrollModule
   ],
   declarations: [
     AppComponent,

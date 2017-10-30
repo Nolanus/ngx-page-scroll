@@ -32,7 +32,7 @@ install:
   - export DEMO_DIST=$(pwd)/dist
   - echo $DEMO_DIST
   # Start the docker container that serves the example app
-  - docker run --name ng2psDemo -v $(pwd)/angular.nginx.conf:/etc/nginx/conf.d/angular.nginx.conf:ro -v $DEMO_DIST:/app:ro -d -p 127.0.0.1:8000:8000 nginx
+  - docker run --name ngxpsDemo -v $(pwd)/angular.nginx.conf:/etc/nginx/conf.d/angular.nginx.conf:ro -v $DEMO_DIST:/app:ro -d -p 127.0.0.1:8000:8000 nginx
   - sleep 3 # give the server a jump start
   - cd ../
 
@@ -44,5 +44,5 @@ after_success:
   - ./deploy.sh
 
 after_script:
-  - docker stop ng2psDemo
-  - docker rm ng2psDemo
+  - docker stop ngxpsDemo
+  - docker rm ngxpsDemo
