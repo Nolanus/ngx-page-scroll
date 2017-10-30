@@ -1,3 +1,14 @@
+## 4.0.0 (2017-10-30)
+
+### Breaking change
+
+- Change package name prefix from ng2 to ngx (#164)
+
+### Other
+
+- Remove some `@private` jsdoc comments to avoid syntax highlighter/lint warnings
+- Remove the `.forRoot()` method from NgxPageScrollModule which was marked as deprecated since 4.0.0-beta.10
+
 ## 4.0.0-beta.12 (2017-10-25)
 
 ### Fix
