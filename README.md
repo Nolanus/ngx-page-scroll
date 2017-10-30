@@ -8,7 +8,7 @@ with no additional dependencies
 [![devDependency Status](https://david-dm.org/Nolanus/ngx-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ngx-page-scroll?type=dev)
 [![peerDependency Status](https://david-dm.org/Nolanus/ngx-page-scroll/peer-status.svg)](https://david-dm.org/Nolanus/ngx-page-scroll?type=peer)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ngx-page-scroll.svg)](https://greenkeeper.io/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bddd94eb51474880ac749b540470c78c)](https://www.codacy.com/app/sebastian-fuss/ngx-page-scroll?utm_source=github.com&utm_medium=referral&utm_content=Nolanus/ngx-page-scroll&utm_campaign=badger)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2b93ea8939824803b0807b72a8c2f5a0)](https://www.codacy.com/app/sebastian-fuss/ngx-page-scroll?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nolanus/ngx-page-scroll&amp;utm_campaign=Badge_Grade)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/Nolanus.svg)](https://saucelabs.com/u/Nolanus)
 
