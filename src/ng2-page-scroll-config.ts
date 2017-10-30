@@ -83,7 +83,6 @@ export class PageScrollConfig {
     /**
      * The events that are listened to on the body to decide whether a scroll animation has been interfered/interrupted by the user
      * @type {string[]}
-     * @private
      */
     public static _interruptEvents: string[] = ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'];
 
@@ -91,7 +90,6 @@ export class PageScrollConfig {
      * The keys that are considered to interrupt a scroll animation (mainly the arrow keys). All other key presses will not stop the
      * scroll animation.
      * @type {number[]}
-     * @private
      */
     public static _interruptKeys: number[] = [33, 34, 35, 36, 38, 40];
 
