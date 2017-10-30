@@ -109,10 +109,10 @@ export class PageScroll implements OnChanges, OnDestroy {
 
     private pushRouterState() {
         if (this.pageScrollAdjustHash && typeof this.pageScrollInstance.scrollTarget === 'string'
-            && this.pageScrollInstance.scrollTarget.substr(0, 1) === '#') {
+            && (<string>this.pageScrollInstance.scrollTarget).substr(0, 1) === '#') {
             // "Navigate" to the current route again and this time set the fragment/hash
             this.router.navigate([], {
-                fragment: <string>this.pageScrollInstance.scrollTarget.substr(1),
+                fragment: (<string>this.pageScrollInstance.scrollTarget).substr(1),
                 preserveQueryParams: true
             });
         }
