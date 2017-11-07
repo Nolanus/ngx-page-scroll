@@ -2,7 +2,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {HttpModule} from '@angular/http';
+import {HttpClientModule} from "@angular/common/http";
 import {RouterModule} from '@angular/router';
 
 // Material 2
@@ -43,7 +43,7 @@ import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.comp
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     MatCardModule,

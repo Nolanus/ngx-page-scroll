@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-div.mat-toolbar-layout:first-child mat-toolbar-row {
+mat-toolbar {
   justify-content: space-between;
   flex-wrap: wrap;
 }
