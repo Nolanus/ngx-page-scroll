@@ -1,3 +1,9 @@
+## 4.0.1 (2017-11-07)
+
+### Other
+
+- Enhance supported angular version to include angular 5 (#254)
+
 ## 4.0.0 (2017-10-30)
 
 ### Breaking change
