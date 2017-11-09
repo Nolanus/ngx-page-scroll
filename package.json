@@ -1,6 +1,6 @@
 {
   "name": "ngx-page-scroll",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "Animated scrolling functionality for angular written in pure typescript",
   "scripts": {
     "compile": "npm run lint:code && ngc -p tsconfig-build.json --pretty",

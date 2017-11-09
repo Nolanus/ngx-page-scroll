@@ -1,3 +1,9 @@
+## 4.0.2 (2017-11-09)
+
+### Other
+
+- Revert to use angular 4 compiler to produce backward compatible metadata.json files (#257)
+
 ## 4.0.1 (2017-11-07)
 
 ### Other
