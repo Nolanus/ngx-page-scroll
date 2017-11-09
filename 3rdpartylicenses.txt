@@ -1,4 +1,4 @@
-@angular/core@5.0.0
+@angular/core@5.0.1
 MIT
 MIT
 
