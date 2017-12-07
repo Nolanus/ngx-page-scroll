@@ -58,7 +58,7 @@
     "@angular/core": "^4.2.6",
     "@angular/platform-browser": "^4.2.6",
     "@angular/platform-browser-dynamic": "^4.2.6",
-    "@angular/platform-server": "^4.2.6",
+    "@angular/platform-server": "^5.1.0",
     "@angular/router": "^4.2.6",
     "@types/jasmine": "^2.5.53",
     "codelyzer": "~4.0.1",
