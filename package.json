@@ -67,7 +67,7 @@
     "protractor": "~5.2.0",
     "rimraf": "^2.6.1",
     "rollup": "~0.52.1",
-    "rollup-plugin-uglify": "^2.0.1",
+    "rollup-plugin-uglify": "^3.0.0",
     "rxjs": "^5.4.2",
     "tslint": "^5.5.0",
     "typescript": "~2.4.2",
