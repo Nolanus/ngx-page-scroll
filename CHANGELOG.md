@@ -1,3 +1,14 @@
+## 5.0.0 (2018-04-04)
+
+### Breaking change
+
+- Now requires angular@5.2.0 or higher
+
+### Other
+
+- Update dependencies
+- Add in-dialog scrolling example
+
 ## 4.0.2 (2017-11-09)
 
 ### Other
