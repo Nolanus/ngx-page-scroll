@@ -9,7 +9,7 @@ export class PageScrollUtilService {
         return (typeof variable === 'undefined') || variable === undefined || variable === null;
     }
 
-    public static extractElementPosition(document: Document, scrollTargetElement: HTMLElement): {top: number, left: number} {
+    public static extractElementPosition(document: Document, scrollTargetElement: HTMLElement): { top: number, left: number } {
 
         let body = document.body;
         let docEl = document.documentElement;

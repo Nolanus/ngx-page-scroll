@@ -55,7 +55,7 @@ export class AppComponent {
     });
   }
 
-  public setDebug(debug: {checked: boolean, source: MatCheckbox}) {
+  public setDebug(debug: { checked: boolean, source: MatCheckbox }) {
     console.warn('Debug mode has been ' + (debug.checked ? 'en' : 'dis') + 'abled');
     this.isDebugEnabled = debug.checked;
     PageScrollConfig._logLevel = this.isDebugEnabled ? 5 : 2;

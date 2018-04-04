@@ -1,7 +1,7 @@
 import { EventEmitter, isDevMode } from '@angular/core';
 
-import {EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews} from './ngx-page-scroll-config';
-import {PageScrollUtilService as Util} from './ngx-page-scroll-util.service';
+import { EasingLogic, PageScrollConfig, PageScrollTarget, PageScrollingViews } from './ngx-page-scroll-config';
+import { PageScrollUtilService as Util } from './ngx-page-scroll-util.service';
 
 /**
  * An Interface specifying the possible options to be passed into the newInstance() factory method
