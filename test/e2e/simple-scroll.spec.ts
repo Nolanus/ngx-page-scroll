@@ -31,10 +31,10 @@ describe('Simple Scroll page', () => {
                 getScrollPos().then((initialPos: number) => {
                     expect(initialPos).toEqual(0);
                     lastHeadingLink.sendKeys(protractor.Key.ENTER).then(() => {
-                        browser.sleep(1250).then(() => {
+                        browser.sleep(1300).then(() => {
                             getScrollPos().then((pos: number) => {
                                 // Should be scrolled all the way to the bottom
-                                expect(pos).toBeCloseTo(bodyScrollHeight - windowHeight, Closeness.ofByOne);
+                                expect(pos).toBeGreaterThan(bodyScrollHeight - windowHeight);
                             });
                         });
                     });
@@ -56,7 +56,7 @@ describe('Simple Scroll page', () => {
                             browser.sleep(1250).then(() => {
                                 getScrollPos().then((pos: number) => {
                                     // Should be scrolled all the way to the bottom
-                                    expect(pos).toBeCloseTo(bodyScrollHeight - windowHeight, Closeness.ofByOne);
+                                    expect(pos).toBeGreaterThan(bodyScrollHeight - windowHeight);
                                 });
                             });
                         });
