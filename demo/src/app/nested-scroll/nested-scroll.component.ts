@@ -1,6 +1,9 @@
-import {Component, OnInit, Inject, ElementRef, ViewChild} from '@angular/core';
-import {DOCUMENT} from '@angular/common';
-import {PageScrollService, PageScrollInstance} from 'ngx-page-scroll';
+import { Component, OnInit, Inject, ElementRef, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
+import { MatDialog } from '@angular/material';
+
+import { DialogScrollDialog } from './dialog-scroll.dialog.component';
 
 @Component({
   selector: 'app-nested-scroll',
@@ -15,10 +18,23 @@ export class NestedScrollComponent implements OnInit {
   @ViewChild('complexContainer')
   public complexContainer: ElementRef;
 
-  constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
+  constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService, public dialog: MatDialog) {
   }
 
   ngOnInit() {
+  }
+
+  openDialog(): void {
+    let dialogRef = this.dialog.open(DialogScrollDialog, {width: '450px', autoFocus: false});
+
+
+    dialogRef.afterOpen().subscribe(() => {
+      dialogRef.componentInstance.scrollIt();
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
   }
 
   public scrollInsideBasic() {

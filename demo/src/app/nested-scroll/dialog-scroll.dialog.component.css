@@ -1,0 +1,8 @@
+p {
+  font-family: Roboto, Arial, sans-serif;
+}
+
+#dialogScrollingContainer {
+  /* This property is important for inline scrolling to work */
+  position: relative;
+}

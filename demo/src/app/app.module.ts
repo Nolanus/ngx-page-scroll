@@ -1,9 +1,9 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {RouterModule} from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 // Material 2
 import {
@@ -11,33 +11,36 @@ import {
   MatCardModule,
   MatCheckboxModule,
   MatIconModule,
+  MatDialogModule,
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatChipsModule,
 } from '@angular/material';
 
 // Angular Flex-Layout Library
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 // NgxPageScroll
-import {NgxPageScrollModule} from 'ngx-page-scroll';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 // App specific
-import {routes} from './app.routes';
-import {AppComponent} from './app.component';
-import {SimpleScrollComponent} from './simple-scroll/simple-scroll.component';
-import {HomeComponent} from './home/home.component';
-import {NestedScrollComponent} from './nested-scroll/nested-scroll.component';
-import {TranslatedTargetScrollComponent} from './translated-target-scroll/translated-target-scroll.component';
-import {PathologicalTestsComponent} from './pathological-tests/pathological-tests.component';
-import {HorizontalScrollComponent} from './horizontal-scroll/horizontal-scroll.component';
-import {RouterScrollComponent} from './router-scroll/router-scroll.component';
-import {DummyCardComponent} from './dummy-card/dummy-card.component';
-import {DummyContentComponent} from './dummy-content/dummy-content.component';
-import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.component';
+import { routes } from './app.routes';
+import { AppComponent } from './app.component';
+import { SimpleScrollComponent } from './simple-scroll/simple-scroll.component';
+import { HomeComponent } from './home/home.component';
+import { NestedScrollComponent } from './nested-scroll/nested-scroll.component';
+import { TranslatedTargetScrollComponent } from './translated-target-scroll/translated-target-scroll.component';
+import { PathologicalTestsComponent } from './pathological-tests/pathological-tests.component';
+import { HorizontalScrollComponent } from './horizontal-scroll/horizontal-scroll.component';
+import { RouterScrollComponent } from './router-scroll/router-scroll.component';
+import { DummyCardComponent } from './dummy-card/dummy-card.component';
+import { DummyContentComponent } from './dummy-content/dummy-content.component';
+import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.component';
+import { DialogScrollDialog } from './nested-scroll/dialog-scroll.dialog.component';
 
 @NgModule({
   imports: [
@@ -50,12 +53,14 @@ import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.comp
     MatButtonModule,
     MatCheckboxModule,
     MatIconModule,
+    MatDialogModule,
     MatSelectModule,
     MatSidenavModule,
     MatSnackBarModule,
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatChipsModule,
     FlexLayoutModule,
     NgxPageScrollModule
   ],
@@ -71,9 +76,11 @@ import {NamespaceScrollComponent} from './namespace-scroll/namespace-scroll.comp
     DummyContentComponent,
     NamespaceScrollComponent,
     DummyCardComponent,
-    DummyContentComponent
+    DummyContentComponent,
+    DialogScrollDialog
   ],
   providers: [],
+  entryComponents: [DialogScrollDialog],
   bootstrap: [
     AppComponent
   ]

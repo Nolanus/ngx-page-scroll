@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Dialog title</h1>
+<div mat-dialog-content #dialogScrollingContainer id="dialogScrollingContainer">
+  <app-dummy-content [length]="3"></app-dummy-content>
+  <p id="dialogScrollTarget">
+    <mat-chip-list class="mat-chip-list-stacked">
+      <mat-chip>This is the scroll target</mat-chip>
+    </mat-chip-list>
+  </p>
+  <app-dummy-content [length]="3"></app-dummy-content>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeClick()">Close</button>
+</div>

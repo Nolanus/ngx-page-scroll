@@ -12,6 +12,9 @@
   <button mat-raised-button color="primary" (click)="scrollInsideComplex()" id="startNestedScrollingButton2">
     Scroll inside the complex card
   </button>
+  <button mat-raised-button color="primary" (click)="openDialog()" id="dialogScrollingButton">
+    Scroll inside a dialog
+  </button>
 </mat-card>
 
 <div fxLayout="column" fxLayout.gt-sm="row">
@@ -34,7 +37,7 @@
     <mat-card>
       <mat-card-title>A complex card</mat-card-title>
       <mat-card-content>
-        This Container has several cards in it. Each of them has <code>position: relative</code>.
+        This container has several cards in it. Each of them has <code>position: relative</code>.
       </mat-card-content>
     </mat-card>
 
