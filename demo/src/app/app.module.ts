@@ -40,7 +40,7 @@ import { RouterScrollComponent } from './router-scroll/router-scroll.component';
 import { DummyCardComponent } from './dummy-card/dummy-card.component';
 import { DummyContentComponent } from './dummy-content/dummy-content.component';
 import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.component';
-import { DialogScrollDialog } from './nested-scroll/dialog-scroll.dialog.component';
+import { ScrollDialogComponent } from './nested-scroll/scroll.dialog.component';
 
 @NgModule({
     imports: [
@@ -77,8 +77,10 @@ import { DialogScrollDialog } from './nested-scroll/dialog-scroll.dialog.compone
         NamespaceScrollComponent,
         DummyCardComponent,
         DummyContentComponent,
+        ScrollDialogComponent
     ],
     providers: [],
+    entryComponents: [ScrollDialogComponent],
     bootstrap: [
         AppComponent
     ]

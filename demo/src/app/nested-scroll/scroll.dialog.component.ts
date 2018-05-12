@@ -4,19 +4,21 @@ import { DOCUMENT } from '@angular/common';
 import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll';
 
 @Component({
-  selector: 'dialog-scroll-dialog',
-  templateUrl: 'dialog-scroll.dialog.component.html',
-  styleUrls: ['./dialog-scroll.dialog.component.css'],
+  selector: 'app-scroll-dialog',
+  templateUrl: 'scroll.dialog.component.html',
+  styleUrls: ['./scroll.dialog.component.css'],
 })
-export class DialogScrollDialog implements OnInit {
+export class ScrollDialogComponent implements OnInit {
 
   @ViewChild('dialogScrollingContainer')
   public scrollingView: ElementRef;
 
   private pageScrollInstance: PageScrollInstance;
 
-  constructor(public dialogRef: MatDialogRef<DialogScrollDialog>,
-              @Inject(MAT_DIALOG_DATA) public data: any, private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
+  constructor(public dialogRef: MatDialogRef<ScrollDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any,
+              private pageScrollService: PageScrollService,
+              @Inject(DOCUMENT) private document: any) {
   }
 
   ngOnInit(): void {
