@@ -1,8 +1,8 @@
-## 5.0.0 (2018-04-04)
+## 5.0.0 (2018-05-12)
 
 ### Breaking change
 
-- Now requires angular@5.2.0 or higher
+- Now requires angular@6.0.0 or higher
 
 ### Other
 
