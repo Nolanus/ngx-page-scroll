@@ -35,7 +35,7 @@ export class AppComponent {
         },
         {
             route: ['/translated'],
-            name: 'Transformed Target Scrolling'
+            name: 'Trnsf. Target Scrolling'
         },
         {
             route: ['/namespace'],
