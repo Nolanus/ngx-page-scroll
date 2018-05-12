@@ -18,7 +18,7 @@ import {
 } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 
 import { PageScrollService } from './ngx-page-scroll.service';
 import { PageScrollInstance } from './ngx-page-scroll-instance';

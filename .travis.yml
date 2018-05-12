@@ -14,7 +14,7 @@ env:
   - COMMIT_AUTHOR_EMAIL: "sebastian.fuss@googlemail.com"
 
 node_js:
-  - "6"
+  - "8"
 
 before_install:
 
