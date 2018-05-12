@@ -1,4 +1,4 @@
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
 
@@ -11,7 +11,6 @@ import { MatSnackBar } from '@angular/material';
 export class PathologicalTestsComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: any,
-              private renderer: Renderer,
               private snackBar: MatSnackBar) {
   }
 
@@ -21,7 +20,7 @@ export class PathologicalTestsComponent implements OnInit {
   public scheduleInterrupt(): void {
     setTimeout(() => {
       const event = new WheelEvent('mousewheel', {bubbles: true});
-      this.renderer.invokeElementMethod(this.document.body, 'dispatchEvent', [event]);
+      this.document.body.dispatchEvent(event);
     }, 500);
   }
 
