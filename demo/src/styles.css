@@ -9,6 +9,11 @@ mat-toolbar {
   flex: 1;
 }
 
+button.mat-raised-button {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
 .columnGrid .mat-figure {
   flex-direction: column;
 }
