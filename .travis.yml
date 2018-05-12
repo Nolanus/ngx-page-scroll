@@ -19,12 +19,14 @@ node_js:
 before_install:
 
 install:
+  # Install the library deps
   - npm install
   # Download webdriver stuff
   - npm run webdriver:init
+  # Install the demo app deps and copy a build of the lib
+  - npm run demo:clean
+  - npm run demo:prepare
   - cd demo/
-  # Install the demo app deps
-  - npm install
   # Lint the demo app
   - npm run lint
   # Build the demo app
