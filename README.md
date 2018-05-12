@@ -284,19 +284,11 @@ following command in the project root directory:
  ```
   
  This will perform the following steps:
-
- ```
- // Install the ngx-page-scroll project
- npm install
- // Change into the example website folder
- cd demo/
- // Uninstall the current ngx-page-scroll version
- npm uninstall ngx-page-scroll
- // Install the demo website's dependencies
- npm install
- // Run the server
- ng serve
- ```
+ 
+ * Install the dependencies of the ngx-page-scroll project
+ * Install the dependencies of the demo-app project
+ * Replace the ngx-page-scroll library in the demo-app with a fresh build
+ * Run the demo server (`ng serve`)
 
 ## TODO:
 
