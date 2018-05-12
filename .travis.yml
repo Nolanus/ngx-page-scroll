@@ -24,7 +24,7 @@ install:
   # Download webdriver stuff
   - npm run webdriver:init
   # Install the demo app deps and copy a build of the lib
-  - npm run demo:clean
+  - npm run demo:install
   - npm run demo:prepare
   - cd demo/
   # Lint the demo app
