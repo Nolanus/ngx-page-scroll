@@ -9,7 +9,7 @@
     </span>
   </mat-toolbar>
 
-  <mat-tab-group (selectChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
+  <mat-tab-group (selectedTabChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
     <mat-tab *ngFor="let link of links" label="{{ link.name }}"></mat-tab>
   </mat-tab-group>
 
