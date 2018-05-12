@@ -34,7 +34,7 @@ describe('Simple Scroll page', () => {
                         browser.sleep(1300).then(() => {
                             getScrollPos().then((pos: number) => {
                                 // Should be scrolled all the way to the bottom
-                                expect(pos).toBeGreaterThan(bodyScrollHeight - windowHeight);
+                                expect(pos).toBeGreaterThanOrEqual(bodyScrollHeight - windowHeight);
                             });
                         });
                     });
@@ -56,7 +56,7 @@ describe('Simple Scroll page', () => {
                             browser.sleep(1250).then(() => {
                                 getScrollPos().then((pos: number) => {
                                     // Should be scrolled all the way to the bottom
-                                    expect(pos).toBeGreaterThan(bodyScrollHeight - windowHeight);
+                                    expect(pos).toBeGreaterThanOrEqual(bodyScrollHeight - windowHeight);
                                 });
                             });
                         });
