@@ -103,10 +103,10 @@ describe('Namespace Feature', () => {
                         ).then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
                             // Test that the stopped container scrolled a bit but did not reach the target ...
                             expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
-                            expect(+target2.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer2ScrollTop);
+                            expect(target2.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer2ScrollTop);
 
                             // ... and the other one did reach the target
-                            expect(+target3.getAttribute('offsetTop')).toBeCloseTo(+laterContainer3ScrollTop, Closeness.ofByOne);
+                            expect(target3.getAttribute('offsetTop')).toBeCloseTo(+laterContainer3ScrollTop, Closeness.ofByOne);
                         });
                     });
                 });
@@ -147,10 +147,10 @@ describe('Namespace Feature', () => {
                         ).then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
                             // Test that the both containers scrolled a bit but did not reach their target
                             expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
-                            expect(+target2.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer2ScrollTop);
+                            expect(target2.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer2ScrollTop);
 
                             expect(+laterContainer3ScrollTop).toBeGreaterThan(0);
-                            expect(+target3.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer3ScrollTop);
+                            expect(target3.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer3ScrollTop);
                         });
                     });
                 });
