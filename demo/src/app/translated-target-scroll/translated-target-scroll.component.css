@@ -1,9 +1,9 @@
 .target-holder {
-    height: 300px;
+  height: 300px;
 }
 
 .transform {
-    -ms-transform: translate(50px, 100px) rotate(20deg); /* IE 9 */
-    -webkit-transform: translate(50px, 100px) rotate(20deg); /* Safari */
-    transform: translate(50px, 100px) rotate(20deg);
+  -ms-transform: translate(50px, 100px) rotate(20deg); /* IE 9 */
+  -webkit-transform: translate(50px, 100px) rotate(20deg); /* Safari */
+  transform: translate(50px, 100px) rotate(20deg);
 }

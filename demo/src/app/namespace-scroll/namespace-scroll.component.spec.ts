@@ -8,9 +8,9 @@ describe('NamespaceScrollComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NamespaceScrollComponent ]
+      declarations: [NamespaceScrollComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

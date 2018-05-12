@@ -1,5 +1,5 @@
-import {browser, element, by, protractor, ElementFinder} from 'protractor';
-import {Util as Closeness} from '../util';
+import { browser, element, by, protractor, ElementFinder } from 'protractor';
+import { Util as Closeness } from '../util';
 
 describe('Namespace Feature', () => {
 

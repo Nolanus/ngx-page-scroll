@@ -7,18 +7,18 @@ import { RouterModule } from '@angular/router';
 
 // Material 2
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatCheckboxModule,
-  MatIconModule,
-  MatDialogModule,
-  MatSelectModule,
-  MatSidenavModule,
-  MatSnackBarModule,
-  MatTabsModule,
-  MatToolbarModule,
-  MatTooltipModule,
-  MatChipsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatChipsModule,
 } from '@angular/material';
 
 // Angular Flex-Layout Library
@@ -43,47 +43,45 @@ import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.co
 import { DialogScrollDialog } from './nested-scroll/dialog-scroll.dialog.component';
 
 @NgModule({
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    RouterModule.forRoot(routes),
-    BrowserAnimationsModule,
-    MatCardModule,
-    MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatSidenavModule,
-    MatSnackBarModule,
-    MatTabsModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatChipsModule,
-    FlexLayoutModule,
-    NgxPageScrollModule
-  ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SimpleScrollComponent,
-    NestedScrollComponent,
-    TranslatedTargetScrollComponent,
-    PathologicalTestsComponent,
-    HorizontalScrollComponent,
-    RouterScrollComponent,
-    DummyContentComponent,
-    NamespaceScrollComponent,
-    DummyCardComponent,
-    DummyContentComponent,
-    DialogScrollDialog
-  ],
-  providers: [],
-  entryComponents: [DialogScrollDialog],
-  bootstrap: [
-    AppComponent
-  ]
+    imports: [
+        BrowserModule,
+        FormsModule,
+        HttpClientModule,
+        RouterModule.forRoot(routes),
+        BrowserAnimationsModule,
+        MatCardModule,
+        MatButtonModule,
+        MatCheckboxModule,
+        MatIconModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatSidenavModule,
+        MatSnackBarModule,
+        MatTabsModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatChipsModule,
+        FlexLayoutModule,
+        NgxPageScrollModule
+    ],
+    declarations: [
+        AppComponent,
+        HomeComponent,
+        SimpleScrollComponent,
+        NestedScrollComponent,
+        TranslatedTargetScrollComponent,
+        PathologicalTestsComponent,
+        HorizontalScrollComponent,
+        RouterScrollComponent,
+        DummyContentComponent,
+        NamespaceScrollComponent,
+        DummyCardComponent,
+        DummyContentComponent,
+    ],
+    providers: [],
+    bootstrap: [
+        AppComponent
+    ]
 
 })
 export class AppModule {

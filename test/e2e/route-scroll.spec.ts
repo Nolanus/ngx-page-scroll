@@ -1,6 +1,6 @@
-import {browser, element, by, protractor, ElementFinder} from 'protractor';
-import {Util as Closeness} from '../util';
-import {ILocation,  promise} from 'selenium-webdriver';
+import { browser, element, by, protractor, ElementFinder } from 'protractor';
+import { Util as Closeness } from '../util';
+import { ILocation, promise } from 'selenium-webdriver';
 
 describe('Route Scroll page', () => {
 
