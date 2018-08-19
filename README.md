@@ -100,7 +100,7 @@ System.config({
 
 In your template you may add the `pageScroll` attribute to elements with an `href` attribute pointing towards an id on 
 the same page (e.g. `#theId`). The `onClick` event will be interrupted and the scroll animation starts.
-Alternatively you may set the optional `pageScrolllTarget` property to a valid css selector to specify the 
+Alternatively you may set the optional `pageScrollTarget` property to a valid css selector to specify the 
 target element to scroll to.
 
 ```typescript
