@@ -12,7 +12,7 @@
   },
   "private": true,
   "dependencies": {
-    "ngx-page-scroll": "file:../",
+    "ngx-page-scroll": "~5.0.0",
     "@angular/animations": "^6.0.1",
     "@angular/cdk": "^6.0.1",
     "@angular/common": "^6.0.1",
