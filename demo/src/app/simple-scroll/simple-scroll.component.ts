@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
 import { PageScrollInstance, PageScrollService, EasingLogic } from 'ngx-page-scroll';
+import { Subscriber } from "rxjs";
 
 @Component({
     selector: 'app-simple-scroll',
@@ -40,7 +41,12 @@ export class SimpleScrollComponent implements OnInit {
 
     public goToLastHeading() {
         // You may use any valid css selector as scroll target (e.g. ids, class selectors, tags, combinations of those, ...)
-        const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '.theEnd');
+        // const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '.theEnd');
+        const subscriber = new EventEmitter<boolean>();
+        subscriber.subscribe((val) => {
+            // Reached last heading
+        });
+        const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '.theEnd', pageScrollFinishListener: subscriber});
         this.pageScrollService.start(pageScrollInstance);
     }
 
