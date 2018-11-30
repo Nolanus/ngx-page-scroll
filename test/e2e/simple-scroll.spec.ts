@@ -12,7 +12,7 @@ describe('Simple Scroll page', () => {
         return browser.driver.executeScript('return Math.round(window.pageYOffset);');
     }
 
-    function scrollToElement(elm: ElementFinder): promise.Promise<void> {
+    function scrollToElement(elm: ElementFinder): promise.Promise<{}> {
         return elm.getLocation().then(function (loc) {
             return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', loc.y);
         });
