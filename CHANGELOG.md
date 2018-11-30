@@ -1,3 +1,9 @@
+## 5.0.1 (2018-11-30)
+
+### Other
+
+- Add angular 7 to supported version range (#329)
+
 ## 5.0.0 (2018-05-12)
 
 ### Breaking change
