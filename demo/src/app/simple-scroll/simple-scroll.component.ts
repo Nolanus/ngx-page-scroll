@@ -2,7 +2,6 @@ import { Component, OnInit, Inject, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
 import { PageScrollInstance, PageScrollService, EasingLogic } from 'ngx-page-scroll';
-import { Subscriber } from "rxjs";
 
 @Component({
     selector: 'app-simple-scroll',
@@ -46,7 +45,11 @@ export class SimpleScrollComponent implements OnInit {
         subscriber.subscribe((val) => {
             // Reached last heading
         });
-        const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({document: this.document, scrollTarget: '.theEnd', pageScrollFinishListener: subscriber});
+        const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+          document: this.document,
+          scrollTarget: '.theEnd',
+          pageScrollFinishListener: subscriber
+        });
         this.pageScrollService.start(pageScrollInstance);
     }
 
