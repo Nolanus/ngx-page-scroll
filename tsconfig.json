@@ -1,21 +1,36 @@
 {
-  "version": "2.0.0",
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
-    "declaration": true,
-    "removeComments": false,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "listFiles": false,
-    "skipLibCheck": true
-  },
-  "include": [
-    "./ngx-page-scroll.ts",
-    "./test/**/*.ts"
-  ]
+    "importHelpers": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "ngx-page-scroll-core": [
+        "dist/ngx-page-scroll-core"
+      ],
+      "ngx-page-scroll-core/*": [
+        "dist/ngx-page-scroll-core/*"
+      ],
+      "ngx-page-scroll": [
+        "dist/ngx-page-scroll"
+      ],
+      "ngx-page-scroll/*": [
+        "dist/ngx-page-scroll/*"
+      ]
+    }
+  }
 }

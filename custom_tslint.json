@@ -1,0 +1,27 @@
+{
+  "rules": {
+    "cyclomatic-complexity": true,
+    "newline-before-return": true,
+    "no-consecutive-blank-lines": true,
+    "no-irregular-whitespace": true,
+    "object-literal-key-quotes": [
+      true,
+      "as-needed"
+    ],
+    "only-arrow-functions": true,
+    "prefer-method-signature": true,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": {
+          "objects": "always",
+          "arrays": "always",
+          "functions": "never",
+          "typeLiterals": "ignore"
+        },
+        "singleline": "never",
+        "esSpecCompliant": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "name": "ngx-page-scroll",
+  "version": "6.0.0",
+  "peerDependencies": {
+    "ngx-page-scroll-core": "^6.0.0",
+    "@angular/common": "^7.1.0",
+    "@angular/core": "^7.1.0"
+  }
+}
