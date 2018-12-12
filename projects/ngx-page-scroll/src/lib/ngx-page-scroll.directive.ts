@@ -15,7 +15,7 @@ import { NavigationCancel, NavigationEnd, NavigationError, Router, UrlTree } fro
 import { DOCUMENT } from '@angular/common';
 
 import { Subscription } from 'rxjs';
-import { PageScrollService, PageScrollInstance, EasingLogic } from 'ngx-page-scroll-core';
+import { EasingLogic, PageScrollInstance, PageScrollOptions, PageScrollService } from 'ngx-page-scroll-core';
 
 @Directive({
   selector: '[pageScroll]',
@@ -32,22 +32,22 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   public href: string;
 
   @Input()
-  public pageScrollTarget: string = null;
+  public pageScrollTarget: string;
 
   @Input()
-  public pageScrollHorizontal: boolean = null;
+  public pageScrollHorizontal: boolean;
 
   @Input()
-  public pageScrollOffset: number = null;
+  public pageScrollOffset: number;
 
   @Input()
-  public pageScrollDuration: number = null;
+  public pageScrollDuration: number;
 
   @Input()
-  public pageScrollSpeed: number = null;
+  public pageScrollSpeed: number;
 
   @Input()
-  public pageScrollEasing: EasingLogic = null;
+  public pageScrollEasing: EasingLogic;
 
   @Input()
   public pageScrollInterruptible: boolean;
@@ -56,7 +56,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   public pageScrollAdjustHash = false;
 
   @Input()
-  public pageScroll: string = null;
+  public pageScroll: string;
 
   @Output()
   pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -82,19 +82,36 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
 
   private generatePageScrollInstance(): PageScrollInstance {
     if (this.pageScrollInstance === undefined || this.pageScrollInstance === null) {
-      this.pageScrollInstance = PageScrollInstance.newInstance({
+      const options: PageScrollOptions = {
         document: this.document,
         scrollTarget: this.pageScrollTarget || this.href,
-        scrollViews: null,
-        namespace: this.pageScroll,
-        verticalScrolling: !this.pageScrollHorizontal,
-        scrollOffset: this.pageScrollOffset,
-        interruptible: this.pageScrollInterruptible,
-        easingLogic: this.pageScrollEasing,
-        duration: this.pageScrollDuration,
-        speed: this.pageScrollSpeed,
-        scrollFinishListener: this.pageScrollFinish
-      });
+      };
+
+      if (this.pageScroll) {
+        options.namespace = this.pageScroll;
+      }
+      if (this.pageScrollHorizontal !== undefined && this.pageScrollHorizontal !== null) {
+        options.verticalScrolling = !this.pageScrollHorizontal;
+      }
+      if (this.pageScrollOffset !== undefined && this.pageScrollOffset !== null) {
+        options.scrollOffset = this.pageScrollOffset;
+      }
+      if (this.pageScrollInterruptible !== undefined && this.pageScrollInterruptible !== null) {
+        options.interruptible = this.pageScrollInterruptible;
+      }
+      if (this.pageScrollEasing) {
+        options.easingLogic = this.pageScrollEasing;
+      }
+      if (this.pageScrollDuration !== undefined && this.pageScrollDuration !== null) {
+        options.duration = this.pageScrollDuration;
+      }
+      if (this.pageScrollSpeed !== undefined && this.pageScrollSpeed !== null) {
+        options.speed = this.pageScrollSpeed;
+      }
+      if (this.pageScrollFinish) {
+        options.scrollFinishListener = this.pageScrollFinish;
+      }
+      this.pageScrollInstance = this.pageScrollService.newInstance(options);
     }
     return this.pageScrollInstance;
   }

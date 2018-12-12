@@ -65,6 +65,10 @@ export class PageScrollService {
     return false;
   }
 
+  public newInstance(options: PageScrollOptions): PageScrollInstance {
+    return new PageScrollInstance({...this.config, ...options} as PageScrollOptions);
+  }
+
   /**
    * Start a scroll animation. All properties of the animation are stored in the given {@link PageScrollInstance} object.
    *
@@ -113,7 +117,7 @@ export class PageScrollService {
 
     const scrollTargetPosition = pageScrollInstance.extractScrollTargetPosition();
     pageScrollInstance.targetScrollPosition = Math.round(
-      (pageScrollInstance.pageScrollOptions.isVerticalScrolling ? scrollTargetPosition.top : scrollTargetPosition.left) - pageScrollOffset);
+      (pageScrollInstance.pageScrollOptions.verticalScrolling ? scrollTargetPosition.top : scrollTargetPosition.left) - pageScrollOffset);
 
     // Calculate the distance we need to go in total
     pageScrollInstance.distanceToScroll = pageScrollInstance.targetScrollPosition - pageScrollInstance.startScrollPosition;
@@ -189,6 +193,9 @@ export class PageScrollService {
           _pageScrollInstance.startScrollPosition,
           _pageScrollInstance.distanceToScroll,
           _pageScrollInstance.executionDuration));
+      }
+      if (this.config._logLevel >= 5 && isDevMode()) {
+        console.warn('Scroll Position: ' + newScrollPosition);
       }
       // Set the new scrollPosition to all scrollViews elements
       if (!_pageScrollInstance.setScrollPosition(newScrollPosition)) {

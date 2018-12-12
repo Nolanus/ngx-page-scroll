@@ -83,22 +83,10 @@ export class PageScrollInstance {
    able to clear it on animation end*/
   public timer: any = null;
 
-  /*
-   * Factory methods for instance creation
-   */
-  public static simpleInstance(document: Document, scrollTarget: PageScrollTarget, namespace?: string): PageScrollInstance {
-    return PageScrollInstance.newInstance({document, scrollTarget, namespace});
-  }
-
-  public static newInstance(options: PageScrollOptions) {
-    return new PageScrollInstance(options);
-  }
-
   /**
    * Private constructor, requires the properties assumed to be the bare minimum.
    * Use the factory methods to create instances:
-   *      {@link PageScrollInstance#simpleInstance}
-   *      {@link PageScrollInstance#newInstance}
+   *      {@link PageScrollService#newInstance}
    */
   constructor(pageScrollOptions: PageScrollOptions) {
     if (!pageScrollOptions.scrollViews || pageScrollOptions.scrollViews.length === 0) {
@@ -227,15 +215,10 @@ export class PageScrollInstance {
    *          (probably because we're at the end of the scrolling region)
    */
   public setScrollPosition(position: number): boolean {
-    /* TODO Uncomment
-    if (PageScrollConfig._logLevel >= 5 && isDevMode()) {
-      console.warn('Scroll Position: ' + position);
-    }
-    */
     // Set the new scrollTop/scrollLeft to all scrollViews elements
     return this.pageScrollOptions.scrollViews.reduce((oneAlreadyWorked: any, scrollingView: any) => {
       const startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
-      if (scrollingView && !(startScrollPropertyValue !== undefined && startScrollPropertyValue !== null)) {
+      if (scrollingView && startScrollPropertyValue !== undefined && startScrollPropertyValue !== null) {
         const scrollDistance = Math.abs(startScrollPropertyValue - position);
 
         // The movement we need to perform is less than 2px
@@ -251,7 +234,7 @@ export class PageScrollInstance {
           scrollingView.scrollTop = position;
         }
 
-        // Return true of setting the new scrollTop/scrollLeft value worked
+        // Return true if setting the new scrollTop/scrollLeft value worked
         // We consider that it worked if the new scrollTop/scrollLeft value is closer to the
         // desired scrollTop/scrollLeft than before (it might not be exactly the value we
         // set due to dpi or rounding irregularities)

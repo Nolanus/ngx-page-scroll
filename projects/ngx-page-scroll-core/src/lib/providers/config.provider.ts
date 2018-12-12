@@ -5,6 +5,7 @@ export const NGXPS_CONFIG = new InjectionToken<PageScrollConfig>('ngxps_config')
 
 export const defaultPageScrollConfig: PageScrollConfig = {
   _interval: 10,
+  _minScrollDistance: 2,
   _logLevel: 1,
   namespace: 'default',
   verticalScrolling: true,
