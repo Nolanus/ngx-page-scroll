@@ -43,12 +43,11 @@ export class SimpleScrollComponent implements OnInit {
     subscriber.subscribe((val) => {
       // Reached last heading
     });
-    const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+    this.pageScrollService.scroll({
       document: this.document,
       scrollTarget: '.theEnd',
       scrollFinishListener: subscriber
     });
-    this.pageScrollService.start(pageScrollInstance);
   }
 
   public doSmth(reachedTarget: boolean) {

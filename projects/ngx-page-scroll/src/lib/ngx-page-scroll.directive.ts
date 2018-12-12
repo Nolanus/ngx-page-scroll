@@ -111,7 +111,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
       if (this.pageScrollFinish) {
         options.scrollFinishListener = this.pageScrollFinish;
       }
-      this.pageScrollInstance = this.pageScrollService.newInstance(options);
+      this.pageScrollInstance = this.pageScrollService.create(options);
     }
     return this.pageScrollInstance;
   }

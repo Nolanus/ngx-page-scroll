@@ -28,14 +28,14 @@ export class NamespaceScrollComponent implements OnInit {
   }
 
   public startDefaultNamespaceScrolls() {
-    const pageScrollInstance1: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance1: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       duration: 10000,
       scrollTarget: '#scrollTarget1',
       scrollViews: [this.container1.nativeElement]
     });
 
-    const pageScrollInstance2: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance2: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       duration: 10000,
       scrollTarget: '#scrollTarget2',
@@ -48,14 +48,14 @@ export class NamespaceScrollComponent implements OnInit {
 
   public resetDefaultNameScrolls() {
     // Jump to the top inside each container
-    const pageScrollInstance1: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance1: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       duration: 0,
       scrollTarget: '#container1Head',
       scrollViews: [this.container1.nativeElement]
     });
 
-    const pageScrollInstance2: PageScrollInstance = PageScrollInstance.newInstance({
+    const pageScrollInstance2: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       duration: 0,
       scrollTarget: '#container2Head',
@@ -67,27 +67,23 @@ export class NamespaceScrollComponent implements OnInit {
   }
 
   public startCustomNamespaceScroll() {
-    const pageScrollInstance3: PageScrollInstance = PageScrollInstance.newInstance({
+    this.pageScrollService.scroll({
       document: this.document,
       duration: 10000,
       namespace: 'customSpace',
       scrollTarget: '#scrollTarget3',
       scrollViews: [this.container3.nativeElement]
     });
-
-    this.pageScrollService.start(pageScrollInstance3);
   }
 
   public resetCustomNamespaceScroll() {
-    const pageScrollInstance3: PageScrollInstance = PageScrollInstance.newInstance({
+    this.pageScrollService.scroll({
       document: this.document,
       duration: 0,
       namespace: 'customSpace',
       scrollTarget: '#container3Head',
       scrollViews: [this.container3.nativeElement]
     });
-
-    this.pageScrollService.start(pageScrollInstance3);
   }
 
   public stopDefaultNamespaceScrolls() {

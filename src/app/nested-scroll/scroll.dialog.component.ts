@@ -22,7 +22,7 @@ export class ScrollDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pageScrollInstance = PageScrollInstance.newInstance({
+    this.pageScrollInstance = this.pageScrollService.create({
       document: this.document,
       scrollTarget: '#dialogScrollTarget',
       scrollViews: [this.scrollingView.nativeElement]

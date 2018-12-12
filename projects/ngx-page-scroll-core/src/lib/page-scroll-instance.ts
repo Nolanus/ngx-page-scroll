@@ -1,8 +1,8 @@
-import { EventEmitter, isDevMode } from '@angular/core';
-import { PageScrollConfig } from './page-scroll.config';
-import { PageScrollTarget } from './page-scroll-target';
-import { PageScrollViews } from './page-scroll-view';
-import { EasingLogic } from './easing-logic';
+import { EventEmitter } from '@angular/core';
+import { PageScrollConfig } from './types/page-scroll.config';
+import { PageScrollTarget } from './types/page-scroll-target';
+import { PageScrollViews } from './types/page-scroll-view';
+import { EasingLogic } from './types/easing-logic';
 
 /**
  * An Interface specifying the possible options to be passed into the newInstance() factory method
@@ -100,7 +100,6 @@ export class PageScrollInstance {
       this.isInlineScrolling = true;
     }
 
-    // TODO Merge the default options in here
     this.pageScrollOptions = pageScrollOptions;
   }
 

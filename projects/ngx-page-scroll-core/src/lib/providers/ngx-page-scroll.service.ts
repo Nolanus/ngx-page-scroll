@@ -1,7 +1,7 @@
 import { Inject, Injectable, isDevMode } from '@angular/core';
 
 import { PageScrollConfig } from '../types/page-scroll.config';
-import { InterruptReporter, PageScrollInstance, PageScrollOptions } from '../types/page-scroll-instance';
+import { InterruptReporter, PageScrollInstance, PageScrollOptions } from '../page-scroll-instance';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
 
 @Injectable({
@@ -65,7 +65,7 @@ export class PageScrollService {
     return false;
   }
 
-  public newInstance(options: PageScrollOptions): PageScrollInstance {
+  public create(options: PageScrollOptions): PageScrollInstance {
     return new PageScrollInstance({...this.config, ...options} as PageScrollOptions);
   }
 
@@ -84,7 +84,7 @@ export class PageScrollService {
     if (pageScrollInstance.pageScrollOptions.scrollViews === null || pageScrollInstance.pageScrollOptions.scrollViews.length === 0) {
       // No scrollViews specified, thus we can't animate anything
       if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-        console.warn('No scrollViews specified, this ngx-page-scroll does not know which DOM elements to scroll');
+        console.warn('No scrollViews specified, thus ngx-page-scroll does not know which DOM elements to scroll');
       }
       return;
     }
@@ -214,6 +214,10 @@ export class PageScrollService {
 
     // Register the instance as running one
     this.runningInstances.push(pageScrollInstance);
+  }
+
+  public scroll(options: PageScrollOptions): void {
+    this.start(this.create(options));
   }
 
   /**

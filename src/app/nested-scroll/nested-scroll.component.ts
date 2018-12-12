@@ -38,7 +38,7 @@ export class NestedScrollComponent implements OnInit {
     }
 
     public scrollInsideBasic() {
-        const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+        const pageScrollInstance: PageScrollInstance = this.pageScrollService.create({
             document: this.document,
             scrollTarget: '#basicScrollTarget',
             scrollViews: [this.basicContainer.nativeElement]
@@ -47,7 +47,7 @@ export class NestedScrollComponent implements OnInit {
     }
 
     public scrollInsideComplex() {
-        const pageScrollInstance: PageScrollInstance = PageScrollInstance.newInstance({
+        const pageScrollInstance: PageScrollInstance = this.pageScrollService.create({
             document: this.document,
             scrollTarget: '#complexScrollTarget',
             scrollViews: [this.complexContainer.nativeElement],
