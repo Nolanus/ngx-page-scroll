@@ -28,11 +28,11 @@ if (process.env.TRAVIS) {
 
   var capabilities = [
     // [platform, browsername, version]
-    ['macOS 10.12', 'chrome', 'latest'],
-    ['macOS 10.12', 'chrome', 'latest-1'],
-    ['macOS 10.12', 'chrome', 'latest-2'],
-    ['Windows 10', 'MicrosoftEdge', 'latest'],
-    ['Windows 10', 'MicrosoftEdge', 'latest-1'],
+    ['macOS 10.14', 'chrome', '71.0'],
+    ['macOS 10.14', 'chrome', '70.0'],
+    ['macOS 10.14', 'chrome', '68.0'],
+    ['Windows 10', 'MicrosoftEdge', '16.16299'],
+    ['Windows 10', 'MicrosoftEdge', '15.15063'],
     // TODO Check why getting window height does not work in android any more
     // ['Linux', 'android', '6.0']
     // TODO Selenium Driver problem for the following
