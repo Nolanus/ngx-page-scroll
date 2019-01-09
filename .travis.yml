@@ -22,8 +22,7 @@ install:
   - ng lint
   # Build the libs
   - npm run build:lib
-  # Build the demo app
-  - ng build
+  # Prepare webdriver manager
   - npm run wdm:update
 
 script:
@@ -31,8 +30,9 @@ script:
   - ng e2e
 
 after_success:
+  - export DEMO_DIST=$(pwd)/dist
+  - echo $DEMO_DIST
+  # Build the demo app
+  - ng build --prod --baseHref=/ngx-page-scroll
   - ./deploy.sh
 
-after_script:
-  - docker stop ngxpsDemo
-  - docker rm ngxpsDemo
