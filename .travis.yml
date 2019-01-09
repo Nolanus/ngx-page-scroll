@@ -1,0 +1,37 @@
+sudo: required
+
+language: node_js
+
+addons:
+  sauce_connect: true
+
+env:
+  global:
+  - ENCRYPTION_LABEL: "56bfe4a947b1"
+  - COMMIT_AUTHOR_EMAIL: "sebastian.fuss@googlemail.com"
+
+node_js:
+  - "11"
+
+before_install:
+
+install:
+  # Install the deps
+  - npm install
+  # Run lint
+  - ng lint
+  # Build the libs
+  - npm run build:lib
+  # Build the demo app
+  - ng build
+
+script:
+  # Execute the tests
+  - ng e2e
+
+after_success:
+  - ./deploy.sh
+
+after_script:
+  - docker stop ngxpsDemo
+  - docker rm ngxpsDemo
