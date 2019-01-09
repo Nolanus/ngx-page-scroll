@@ -8,7 +8,7 @@ const config = {
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
-  directConnect: true,
+  directConnect: false,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
@@ -28,11 +28,11 @@ if (process.env.TRAVIS) {
 
   var capabilities = [
     // [platform, browsername, version]
-    ['macOS 10.12', 'chrome', '59.0'],
-    ['macOS 10.12', 'chrome', '58.0'],
-    ['macOS 10.12', 'chrome', '49.0'],
-    ['Windows 10', 'MicrosoftEdge', '14.14393'],
-    ['Windows 10', 'MicrosoftEdge', '13.10586'],
+    ['macOS 10.12', 'chrome', 'latest'],
+    ['macOS 10.12', 'chrome', 'latest-1'],
+    ['macOS 10.12', 'chrome', 'latest-2'],
+    ['Windows 10', 'MicrosoftEdge', 'latest'],
+    ['Windows 10', 'MicrosoftEdge', 'latest-1'],
     // TODO Check why getting window height does not work in android any more
     // ['Linux', 'android', '6.0']
     // TODO Selenium Driver problem for the following
