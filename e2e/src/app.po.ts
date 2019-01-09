@@ -1,11 +1,46 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ElementFinder, protractor } from 'protractor';
+import { By, ILocation, promise } from 'selenium-webdriver';
 
-export class AppPage {
-  navigateTo() {
-    return browser.get('/');
+export abstract class AppPage {
+
+  abstract getPath(): string;
+
+  navigateTo(): promise.Promise<any> {
+    return browser.get(this.getPath()) as promise.Promise<any>;
   }
 
-  getTitleText() {
-    return element(by.css('app-root h1')).getText();
+  scrollToElement(elm: ElementFinder): promise.Promise<{}> {
+    return elm.getLocation().then(function (loc) {
+      return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', loc.y);
+    });
+  }
+
+  protected triggerAButton(selector: By): promise.Promise<any> {
+    return element(selector).sendKeys(protractor.Key.ENTER);
+  }
+
+  protected getVerticalPosition(selector: By): promise.Promise<number> {
+    return element(selector).getLocation().then((headingLocation: ILocation) => {
+      return headingLocation.y;
+    });
+  }
+
+  getScrollPos(): promise.Promise<number> {
+    return browser.driver.executeScript('return Math.round(window.pageYOffset);');
+  }
+
+  scrollTo(scrollPos: number): promise.Promise<any> {
+    return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', scrollPos);
+  }
+
+  getBodyScrollHeight(): promise.Promise<number> {
+    const body: ElementFinder = element(by.css('body'));
+    return body.getAttribute('scrollHeight').then((bodyScrollHeightString: string) => {
+      return +bodyScrollHeightString;
+    });
+  }
+
+  getWindowInnerHeight(): promise.Promise<number> {
+    return browser.driver.executeScript('return window.innerHeight;');
   }
 }
