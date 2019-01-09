@@ -43,7 +43,7 @@ export interface PageScrollOptions extends PageScrollConfig {
   scrollOffset?: number;
   advancedInlineOffsetCalculation?: boolean;
   interruptEvents?: string[];
-  interruptKeys?: number[];
+  interruptKeys?: string[];
   interruptible?: boolean;
   easingLogic?: EasingLogic;
 }

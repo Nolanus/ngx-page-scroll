@@ -25,7 +25,7 @@ export class PageScrollService {
 
       if (event.type === 'keyup') {
         // Only stop if specific keys have been pressed, for all others don't stop anything
-        if (this.config.interruptKeys.indexOf((<KeyboardEvent>event).keyCode) === -1) {
+        if (this.config.interruptKeys.indexOf((<KeyboardEvent>event).key) === -1) {
           // The pressed key is not in the list of interrupting keys
           shouldStop = false;
         }

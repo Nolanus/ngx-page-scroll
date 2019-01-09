@@ -13,7 +13,7 @@ export const defaultPageScrollConfig: PageScrollConfig = {
   scrollOffset: 0,
   advancedInlineOffsetCalculation: false,
   interruptEvents: ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'],
-  interruptKeys: [33, 34, 35, 36, 38, 40],
+  interruptKeys: [' ', 'Escape', 'Tab', 'Enter', 'PageUp', 'PageDown', 'Home', 'End', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'ArrowDown'],
   interruptible: true,
   easingLogic: (t: number, b: number, c: number, d: number): number => {
     // Linear easing

@@ -67,7 +67,7 @@ export interface PageScrollConfig {
    * The keys that are considered to interrupt a scroll animation (mainly the arrow keys). All other key presses will not stop the
    * scroll animation.
    */
-  interruptKeys?: number[];
+  interruptKeys?: string[];
 
   /**
    * Whether a scroll animation should be interruptible by user interaction (true) or not (false). If the user performs an
