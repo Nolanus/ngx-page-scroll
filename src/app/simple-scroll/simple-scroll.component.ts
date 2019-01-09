@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
-import { EasingLogic, PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
+import { EasingLogic, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'app-simple-scroll',
@@ -26,7 +26,7 @@ export class SimpleScrollComponent implements OnInit {
       return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
     }
     return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
-  };
+  }
 
   public constructor(@Inject(DOCUMENT) private document: any,
                      private pageScrollService: PageScrollService,

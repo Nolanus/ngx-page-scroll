@@ -49,7 +49,7 @@ export class SimpleScrollPage extends AppPage {
   }
 
   getHead10VerticalPosition(): promise.Promise<number> {
-    return this.getVerticalPosition(by.css('#head1ß'));
+    return this.getVerticalPosition(by.css('#head10'));
   }
 
   getSnackBarText(): promise.Promise<string> {

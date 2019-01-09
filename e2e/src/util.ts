@@ -12,7 +12,7 @@ export class Util {
      * http://www.wolframalpha.com/input/?i=the+inverse+function+of+(10%5Ex)%2F2+is
      *
      * @param custom epsilon
-     * @returns {number} a parameter to be passed to jasmine's toBeCloseTo() matcher
+     * @returns a parameter to be passed to jasmine's toBeCloseTo() matcher
      */
     public static ofBy(custom: number): number {
         return -Math.log(custom * 2) / 2.3025850929940455;

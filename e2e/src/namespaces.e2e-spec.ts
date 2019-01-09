@@ -12,9 +12,9 @@ describe('Namespace Feature', () => {
   });
 
   it('should have only one scroll animation running in one namespace', () => {
-    let container1: ElementFinder = element(by.css('#container1'));
-    let container2: ElementFinder = element(by.css('#container2'));
-    let trigger: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
+    const container1: ElementFinder = element(by.css('#container1'));
+    const container2: ElementFinder = element(by.css('#container2'));
+    const trigger: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
 
     // Check that both containers start at the top
     protractor.promise.all([container1.getAttribute('scrollTop'), container2.getAttribute('scrollTop')]).then(
@@ -36,10 +36,10 @@ describe('Namespace Feature', () => {
   });
 
   it('should be possible to have multiple scroll animations running', () => {
-    let container2: ElementFinder = element(by.css('#container2'));
-    let container3: ElementFinder = element(by.css('#container3'));
-    let trigger1: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
-    let trigger2: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
+    const container2: ElementFinder = element(by.css('#container2'));
+    const container3: ElementFinder = element(by.css('#container3'));
+    const trigger1: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
+    const trigger2: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
 
     // Check that both containers start at the top
     protractor.promise.all([container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]).then(
@@ -61,16 +61,16 @@ describe('Namespace Feature', () => {
   });
 
   it('should stop only the running scroll animations in the correct namespace', () => {
-    let container2: ElementFinder = element(by.css('#container2'));
-    let container3: ElementFinder = element(by.css('#container3'));
+    const container2: ElementFinder = element(by.css('#container2'));
+    const container3: ElementFinder = element(by.css('#container3'));
 
-    let trigger2: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
-    let trigger3: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
+    const trigger2: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
+    const trigger3: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
 
-    let stopButton: ElementFinder = element(by.css('#stopDefaultNamespaceScrollsButton'));
+    const stopButton: ElementFinder = element(by.css('#stopDefaultNamespaceScrollsButton'));
 
-    let target2: ElementFinder = element(by.css('#scrollTarget2'));
-    let target3: ElementFinder = element(by.css('#scrollTarget3'));
+    const target2: ElementFinder = element(by.css('#scrollTarget2'));
+    const target3: ElementFinder = element(by.css('#scrollTarget3'));
 
     // Check that both containers start at the top
     protractor.promise.all([container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]).then(
@@ -105,16 +105,16 @@ describe('Namespace Feature', () => {
   });
 
   it('should stop be able to stop all running scroll animations, regardless of the namespace', () => {
-    let container2: ElementFinder = element(by.css('#container2'));
-    let container3: ElementFinder = element(by.css('#container3'));
+    const container2: ElementFinder = element(by.css('#container2'));
+    const container3: ElementFinder = element(by.css('#container3'));
 
-    let trigger2: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
-    let trigger3: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
+    const trigger2: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
+    const trigger3: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
 
-    let stopButton: ElementFinder = element(by.css('#stopAllNamespaceScrollsButton'));
+    const stopButton: ElementFinder = element(by.css('#stopAllNamespaceScrollsButton'));
 
-    let target2: ElementFinder = element(by.css('#scrollTarget2'));
-    let target3: ElementFinder = element(by.css('#scrollTarget3'));
+    const target2: ElementFinder = element(by.css('#scrollTarget2'));
+    const target3: ElementFinder = element(by.css('#scrollTarget3'));
 
     // Check that both containers start at the top
     protractor.promise.all([container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]).then(

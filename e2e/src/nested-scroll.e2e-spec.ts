@@ -12,10 +12,10 @@ describe('Nested Scrolling page', () => {
   });
 
   it('should scroll to the inline button when the inside scroll is at the top', () => {
-    let target: ElementFinder = element(by.css('#basicScrollTarget'));
-    let trigger: ElementFinder = element(by.css('#startNestedScrollingButton'));
+    const target: ElementFinder = element(by.css('#basicScrollTarget'));
+    const trigger: ElementFinder = element(by.css('#startNestedScrollingButton'));
 
-    let scrollParent: ElementFinder = element(by.css('#basicContainer'));
+    const scrollParent: ElementFinder = element(by.css('#basicContainer'));
 
     scrollParent.getAttribute('scrollTop').then((initialScrollTop: string) => {
       expect(initialScrollTop).toEqual('0');
@@ -32,17 +32,17 @@ describe('Nested Scrolling page', () => {
   });
 
   it('should scroll to the inline button when the inside scroll is at the bottom', () => {
-    let target: ElementFinder = element(by.css('#basicScrollTarget'));
-    let trigger: ElementFinder = element(by.css('#startNestedScrollingButton'));
+    const target: ElementFinder = element(by.css('#basicScrollTarget'));
+    const trigger: ElementFinder = element(by.css('#startNestedScrollingButton'));
 
-    let scrollParent: ElementFinder = element(by.css('#basicContainer'));
+    const scrollParent: ElementFinder = element(by.css('#basicContainer'));
 
     // Cause the scroll container to be scrolled to the end
     browser.driver.executeScript('document.getElementById(\'basicContainer\').scrollTop =' +
       ' document.getElementById(\'basicContainer\').scrollHeight');
 
     scrollParent.getAttribute('scrollTop').then((initialScrollTopString: string) => {
-      let initialScrollTop = +initialScrollTopString;
+      const initialScrollTop = +initialScrollTopString;
       expect(initialScrollTop).toBeGreaterThan(0);
       trigger.sendKeys(protractor.Key.ENTER).then(() => {
         browser.sleep(1250).then(() => {
@@ -58,10 +58,10 @@ describe('Nested Scrolling page', () => {
 
   it('should scroll to the inline button with multiple relative positioned in-between parents' +
     ' and advanced position calculation', () => {
-    let target: ElementFinder = element(by.css('#complexScrollTarget'));
-    let trigger: ElementFinder = element(by.css('#startNestedScrollingButton2'));
+    const target: ElementFinder = element(by.css('#complexScrollTarget'));
+    const trigger: ElementFinder = element(by.css('#startNestedScrollingButton2'));
 
-    let scrollParent: ElementFinder = element(by.css('#complexContainer'));
+    const scrollParent: ElementFinder = element(by.css('#complexContainer'));
 
     scrollParent.getAttribute('scrollTop').then((initialScrollTop: string) => {
       expect(initialScrollTop).toEqual('0');
@@ -78,10 +78,10 @@ describe('Nested Scrolling page', () => {
 
   it('should scroll to the inline button with multiple relative positioned in-between parents' +
     ' and advanced position calculation when the container is scrolled to the bottom', () => {
-    let target: ElementFinder = element(by.css('#complexScrollTarget'));
-    let trigger: ElementFinder = element(by.css('#startNestedScrollingButton2'));
+    const target: ElementFinder = element(by.css('#complexScrollTarget'));
+    const trigger: ElementFinder = element(by.css('#startNestedScrollingButton2'));
 
-    let scrollParent: ElementFinder = element(by.css('#complexContainer'));
+    const scrollParent: ElementFinder = element(by.css('#complexContainer'));
 
     // Cause the scroll container to be scrolled to the end
     browser.driver.executeScript('document.getElementById(\'complexContainer\').scrollTop =' +

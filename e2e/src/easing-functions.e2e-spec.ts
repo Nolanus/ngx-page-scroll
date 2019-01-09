@@ -11,8 +11,8 @@ xdescribe('Scroll Easing Functions', () => {
   });
 
   it('should scroll to seventh heading from button with linear easing', () => {
-    let target: ElementFinder = element(by.css('#head7'));
-    let trigger: ElementFinder = element(by.css('#testButton'));
+    const target: ElementFinder = element(by.css('#head7'));
+    const trigger: ElementFinder = element(by.css('#testButton'));
     target.getLocation().then((headingLocation: any) => {
       page.getScrollPos().then((initialPos: number) => {
         expect(initialPos).toEqual(0);
@@ -29,7 +29,7 @@ xdescribe('Scroll Easing Functions', () => {
               // Using the browser.sleep() to execute some code while the animation is running does not work
               // consistently across browser, especially causing problems with the CI server
               browser.manage().logs().get('browser').then(function (browserLog) {
-                let scrollPositionHistory = browserLog
+                const scrollPositionHistory = browserLog
                   .filter(log => log.message.indexOf('Scroll Position: ') >= 0) // only take scroll position logs
                   .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints
 
@@ -37,14 +37,14 @@ xdescribe('Scroll Easing Functions', () => {
                 // Iterate over all scroll position logs and make sure the increment is always nearly the same
                 // (as it should be the case for linear easing)
 
-                let totalScrollDistance = headingLocation.y - initialPos;
-                let averageScrollPosChange = scrollPositionHistory[scrollPositionHistory.length - 1]
+                const totalScrollDistance = headingLocation.y - initialPos;
+                const averageScrollPosChange = scrollPositionHistory[scrollPositionHistory.length - 1]
                   / scrollPositionHistory.length;
                 // Allow some variation (the exact absolute value is made to depend on the total scroll distance)
-                let closeToEpsilon = Closeness.ofBy(totalScrollDistance * 0.0075);
+                const closeToEpsilon = Closeness.ofBy(totalScrollDistance * 0.0075);
 
                 for (let i = 0; i < scrollPositionHistory.length - 2; i++) {
-                  let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                  const scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
                   expect(scrollPosChange).toBeCloseTo(averageScrollPosChange, closeToEpsilon);
                 }
               });
@@ -56,9 +56,9 @@ xdescribe('Scroll Easing Functions', () => {
   });
 
   it('should scroll to seventh heading from button with custom easing', () => {
-    let target: ElementFinder = element(by.css('#head7'));
-    let trigger: ElementFinder = element(by.css('#customEasingButton'));
-    let pageScrollDuration = 1250;
+    const target: ElementFinder = element(by.css('#head7'));
+    const trigger: ElementFinder = element(by.css('#customEasingButton'));
+    const pageScrollDuration = 1250;
     target.getLocation().then((headingLocation: any) => {
       page.getScrollPos().then((initialPos: number) => {
         expect(initialPos).toEqual(0);
@@ -75,34 +75,34 @@ xdescribe('Scroll Easing Functions', () => {
               // Using the browser.sleep() to execute some code while the animation is running does not work
               // consistently across browser, especially causing problems with the CI server
               browser.manage().logs().get('browser').then(function (browserLog) {
-                let scrollPositionHistory = browserLog
+                const scrollPositionHistory = browserLog
                   .filter(log => log.message.indexOf('Scroll Position: ') >= 0) // only take scroll position logs
                   .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints
 
                 expect(scrollPositionHistory.length).toBeGreaterThan(0);
 
-                let averageScrollPosChange = scrollPositionHistory[scrollPositionHistory.length - 1]
+                const averageScrollPosChange = scrollPositionHistory[scrollPositionHistory.length - 1]
                   / scrollPositionHistory.length;
 
                 // For the first quarter check that the scrollPosChange is below the linear average
-                let firstQuarterEnd = Math.round(scrollPositionHistory.length * 0.25);
+                const firstQuarterEnd = Math.round(scrollPositionHistory.length * 0.25);
                 for (let i = 0; i < firstQuarterEnd; i++) {
-                  let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                  const scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
                   expect(scrollPosChange).toBeLessThan(averageScrollPosChange);
                 }
 
                 // For the 20% in the middle check that the scrollPosChange is above the linear average
-                let center20PercentStart = Math.round(scrollPositionHistory.length * 0.4);
-                let center20PercentEnd = Math.round(scrollPositionHistory.length * 0.6);
+                const center20PercentStart = Math.round(scrollPositionHistory.length * 0.4);
+                const center20PercentEnd = Math.round(scrollPositionHistory.length * 0.6);
                 for (let i = center20PercentStart; i < center20PercentEnd; i++) {
-                  let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                  const scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
                   expect(scrollPosChange).toBeGreaterThan(averageScrollPosChange);
                 }
 
                 // For the last quarter again check that the scrollPosChange is below the linear one
-                let lastQuarterStart = Math.round(scrollPositionHistory.length * 0.75);
+                const lastQuarterStart = Math.round(scrollPositionHistory.length * 0.75);
                 for (let i = lastQuarterStart; i < scrollPositionHistory.length - 2; i++) {
-                  let scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
+                  const scrollPosChange = scrollPositionHistory[i + 1] - scrollPositionHistory[i];
                   expect(scrollPosChange).toBeLessThan(averageScrollPosChange);
                 }
               });
