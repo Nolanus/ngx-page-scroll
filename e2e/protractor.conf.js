@@ -8,7 +8,7 @@ const config = {
   specs: [
     './src/**/*.e2e-spec.ts'
   ],
-  directConnect: true,
+  directConnect: false,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',
   jasmineNodeOpts: {
