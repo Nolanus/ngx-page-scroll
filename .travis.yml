@@ -24,6 +24,7 @@ install:
   - npm run build:lib
   # Build the demo app
   - ng build
+  - npm run wdm:update
 
 script:
   # Execute the tests

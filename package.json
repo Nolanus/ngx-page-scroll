@@ -8,7 +8,8 @@
     "build:lib": "ng build ngx-page-scroll-core && ng build ngx-page-scroll",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "wdm:update": "webdriver-manager update"
   },
   "private": true,
   "dependencies": {
