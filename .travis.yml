@@ -22,8 +22,8 @@ install:
   - ng lint
   # Build the libs
   - npm run build:lib
-  # Prepare webdriver manager
-  - npm run wdm:update
+  # Prepare webdriver manager (chrome only)
+  - ./node_modules/protractor/bin/webdriver-manager update --gecko=false
 
 script:
   # Execute the tests
