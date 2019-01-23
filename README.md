@@ -9,7 +9,7 @@ Animated scrolling functionality for angular written in pure typescript with no 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ngx-page-scroll.svg)](https://greenkeeper.io/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2b93ea8939824803b0807b72a8c2f5a0)](https://www.codacy.com/app/sebastian-fuss/ngx-page-scroll?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nolanus/ngx-page-scroll&amp;utm_campaign=Badge_Grade)
 
-**Breaking Change**: Starting with v6 this library consists of two modules: `ngx-page-scroll-core` (the service) and `ngx-page-scroll` (the directive).
+**Breaking Change**: Starting with v6 this library consists of two modules: `ngx-page-scroll-core` (the service) and `ngx-page-scroll` (the directive). [➡ How to upgrade](https://github.com/Nolanus/ngx-page-scroll/issues/88#issuecomment-456824209)
 
 ## Features
 
