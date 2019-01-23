@@ -3,9 +3,9 @@
 Animated scrolling functionality for angular written in pure typescript with no additional dependencies
 
 [![Build Status](https://travis-ci.org/Nolanus/ngx-page-scroll.svg?branch=master)](https://travis-ci.org/Nolanus/ngx-page-scroll)
-[![Dependency Status](https://david-dm.org/Nolanus/ngx-page-scroll.svg)](https://david-dm.org/Nolanus/ngx-page-scroll)
-[![devDependency Status](https://david-dm.org/Nolanus/ngx-page-scroll/dev-status.svg)](https://david-dm.org/Nolanus/ngx-page-scroll?type=dev)
-[![peerDependency Status](https://david-dm.org/Nolanus/ngx-page-scroll/peer-status.svg)](https://david-dm.org/Nolanus/ngx-page-scroll?type=peer)
+[![Dependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll)
+[![devDependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll/dev-status.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll&type=dev)
+[![peerDependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll/peer-status.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll&type=peer)
 [![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ngx-page-scroll.svg)](https://greenkeeper.io/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2b93ea8939824803b0807b72a8c2f5a0)](https://www.codacy.com/app/sebastian-fuss/ngx-page-scroll?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nolanus/ngx-page-scroll&amp;utm_campaign=Badge_Grade)
 
