@@ -5,9 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:app": "ng build --prod --baseHref=/ngx-page-scroll/",
     "build:lib": "ng build ngx-page-scroll-core && ng build ngx-page-scroll",
+    "copy:readme": "cpx README.md dist/ngx-multi-window",
     "test": "ng test",
     "lint": "ng lint",
+    "release:lib": "npm run lint && npm run build:lib && cd dist/ngx-page-scroll-core && npm publish && cd ../ngx-page-scroll && npm publish",
     "e2e": "ng e2e"
   },
   "private": true,

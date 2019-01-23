@@ -1,4 +1,5 @@
 {
+  "extends": "./custom_tslint.json",
   "rulesDirectory": [
     "codelyzer"
   ],

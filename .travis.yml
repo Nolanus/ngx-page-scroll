@@ -14,4 +14,14 @@ script:
   - npm run build:lib
   - ng test --watch false --browsers ChromeHeadless
   - ng e2e --protractor-config='e2e/protractor.ci.conf.js'
+  - npm run build:app
 
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
+  local_dir: dist/ngx-page-scroll-demo
+  keep-history: true
+  name:
+  on:
+    branch: master
