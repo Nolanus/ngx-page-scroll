@@ -5,11 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:ci": "ng build --prod --baseHref=/ngx-page-scroll",
     "build:lib": "ng build ngx-page-scroll-core && ng build ngx-page-scroll",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "wdm:update": "webdriver-manager update"
+    "e2e:ci": "ng e2e --protractor-config='e2e/protractor.ci.conf.js'"
   },
   "private": true,
   "dependencies": {

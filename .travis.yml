@@ -1,9 +1,4 @@
-sudo: required
-
 language: node_js
-
-addons:
-  chrome: stable
 
 env:
   global:
@@ -11,28 +6,28 @@ env:
   - COMMIT_AUTHOR_EMAIL: "sebastian.fuss@googlemail.com"
 
 node_js:
-  - "11"
+  - "10.4.1"
 
-before_install:
+sudo: true
 
-install:
-  # Install the deps
-  - npm install
-  # Run lint
+addons:
+  chrome: stable
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
   - ng lint
   # Build the libs
   - npm run build:lib
   # Prepare webdriver manager (chrome only)
   - ./node_modules/protractor/bin/webdriver-manager update --gecko=false
-
-script:
-  # Execute the tests
-  - ng e2e
+  # - ng test -watch false -browsers ChromeHeadless
+  - npm run e2e:ci
 
 after_success:
   - export DEMO_DIST=$(pwd)/dist
   - echo $DEMO_DIST
   # Build the demo app
-  - ng build --prod --baseHref=/ngx-page-scroll
+  - npm run build:ci
   - ./deploy.sh
-
