@@ -54,4 +54,16 @@ export abstract class AppPage {
   getWindowInnerHeight(): promise.Promise<number> {
     return browser.driver.executeScript('return window.innerHeight;');
   }
+
+
+  getSnackBarText(): promise.Promise<string> {
+    const snackbar = element(by.css('simple-snack-bar'));
+    return snackbar.getText();
+  }
+
+  closeSnackBar(): promise.Promise<any> {
+    const snackbar = element(by.css('simple-snack-bar'));
+    const snackbarButton = snackbar.element(by.css('button'));
+    return snackbarButton.click();
+  }
 }

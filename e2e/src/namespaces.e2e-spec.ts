@@ -60,8 +60,8 @@ describe('Namespace Feature', () => {
         expect(container2ScrollTop).toEqual(0);
         expect(container3ScrollTop).toEqual(0);
 
-      // Schedule a click on the stop button in the browser (calling it from protractor won't work)
-        page.scheduleStopButtonClick();
+      // Schedule a click on the stop default namespace button in the browser (calling it from protractor won't work)
+        page.scheduleDefaultButtonClick();
 
         // Start both scroll animations
         page.triggerDefaultAndCustomNamespaceScroll().then(() => {
@@ -90,7 +90,7 @@ describe('Namespace Feature', () => {
         expect(container3ScrollTop).toEqual(0);
 
         // Schedule a click on the stop button in the browser (calling it from protractor won't work)
-        page.scheduleStopButtonClick();
+        page.scheduleStopAllButtonClick();
 
         // Start both scroll animations
         page.triggerDefaultAndCustomNamespaceScroll().then(() => {

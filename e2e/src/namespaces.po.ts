@@ -38,10 +38,16 @@ export class NamespaceScrollPage extends AppPage {
       element(by.css('#startCustomNamespaceScrollsButton')));
   }
 
-  scheduleStopButtonClick(): promise.Promise<any> {
+  scheduleStopAllButtonClick(): promise.Promise<any> {
     return browser.driver.executeScript(
       'var button = arguments[0]; setTimeout(function(){button.click()}, 1500)',
       element(by.css('#stopAllNamespaceScrollsButton')).getWebElement()
+    );
+  }
+  scheduleDefaultButtonClick(): promise.Promise<any> {
+    return browser.driver.executeScript(
+      'var button = arguments[0]; setTimeout(function(){button.click()}, 1500)',
+      element(by.css('#stopDefaultNamespaceScrollsButton')).getWebElement()
     );
   }
 

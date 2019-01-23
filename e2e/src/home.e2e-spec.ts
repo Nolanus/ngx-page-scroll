@@ -1,6 +1,6 @@
 import { HomePage } from './home.po';
 
-describe('workspace-project App', () => {
+describe('NgxPageScroll Demo App', () => {
   let page: HomePage;
 
   beforeEach(() => {
