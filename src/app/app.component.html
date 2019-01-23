@@ -2,11 +2,6 @@
 
   <mat-toolbar>
     <span>ngx-page-scroll demo application</span>
-    <span>
-        <mat-checkbox id="debugCheckBox" [checked]="isDebugEnabled" (change)="setDebug($event)" color="primary">
-            Debug Mode
-        </mat-checkbox>
-    </span>
   </mat-toolbar>
 
   <mat-tab-group (selectedTabChange)="tabChange($event)" [selectedIndex]="currentTabIndex">

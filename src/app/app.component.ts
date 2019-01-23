@@ -8,7 +8,6 @@ import { PageScrollService } from 'ngx-page-scroll-core';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  // public isDebugEnabled = PageScrollConfig._logLevel >= 5;
   public currentTabIndex = 0;
   public links = [
     {
@@ -52,14 +51,6 @@ export class AppComponent {
       }
     });
   }
-
-  // TODO Manipulate settings after instance creation
-  /*
-  public setDebug(debug: { checked: boolean, source: MatCheckbox }) {
-    console.warn('Debug mode has been ' + (debug.checked ? 'en' : 'dis') + 'abled');
-    this.isDebugEnabled = debug.checked;
-    PageScrollConfig._logLevel = this.isDebugEnabled ? 5 : 2;
-  }*/
 
   public tabChange(event: any) {
     // Select the correct route for that tab

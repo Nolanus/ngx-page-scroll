@@ -53,7 +53,7 @@ import { ScrollDialogComponent } from './nested-scroll/scroll.dialog.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxPageScrollCoreModule.forRoot({_logLevel: 5}),
+    NgxPageScrollCoreModule.forRoot({_logLevel: 3}),
     NgxPageScrollModule,
     BrowserAnimationsModule,
     MatCardModule,
