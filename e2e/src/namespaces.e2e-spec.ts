@@ -12,19 +12,17 @@ describe('Namespace Feature', () => {
   });
 
   it('should have only one scroll animation running in one namespace', () => {
-    const container1: ElementFinder = element(by.css('#container1'));
-    const container2: ElementFinder = element(by.css('#container2'));
     const trigger: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
 
     // Check that both containers start at the top
-    protractor.promise.all([container1.getAttribute('scrollTop'), container2.getAttribute('scrollTop')]).then(
+    protractor.promise.all([page.getContainer1ScrollTop(), page.getContainer2ScrollTop()]).then(
       function ([container1ScrollTop, container2ScrollTop]) {
-        expect(+container1ScrollTop).toEqual(0);
-        expect(+container2ScrollTop).toEqual(0);
-        trigger.sendKeys(protractor.Key.ENTER).then(() => {
+        expect(container1ScrollTop).toEqual(0);
+        expect(container2ScrollTop).toEqual(0);
+        page.triggerDefaultNamespaces().then(() => {
           // Wait a bit
           browser.sleep(1250).then(() => {
-            protractor.promise.all([container1.getAttribute('scrollTop'), container2.getAttribute('scrollTop')]).then(
+            protractor.promise.all([page.getContainer1ScrollTop(), page.getContainer2ScrollTop()]).then(
               function ([laterContainer1ScrollTop, laterContainer2ScrollTop]) {
                 expect(+laterContainer1ScrollTop).toEqual(0);
                 expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
@@ -36,23 +34,18 @@ describe('Namespace Feature', () => {
   });
 
   it('should be possible to have multiple scroll animations running', () => {
-    const container2: ElementFinder = element(by.css('#container2'));
-    const container3: ElementFinder = element(by.css('#container3'));
-    const trigger1: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
-    const trigger2: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
-
     // Check that both containers start at the top
-    protractor.promise.all([container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]).then(
+    protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()]).then(
       function ([container2ScrollTop, container3ScrollTop]) {
-        expect(+container2ScrollTop).toEqual(0);
-        expect(+container3ScrollTop).toEqual(0);
-        page.clickButtonsSimultaneously(trigger1, trigger2).then(() => {
+        expect(container2ScrollTop).toEqual(0);
+        expect(container3ScrollTop).toEqual(0);
+        page.triggerDefaultAndCustomNamespaceScroll().then(() => {
           // Wait a bit
           browser.sleep(1250).then(() => {
-            protractor.promise.all([container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')])
+            protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()])
               .then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
-                expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
-                expect(+laterContainer3ScrollTop).toBeGreaterThan(0);
+                expect(laterContainer2ScrollTop).toBeGreaterThan(0);
+                expect(laterContainer3ScrollTop).toBeGreaterThan(0);
               });
           });
         });
@@ -61,43 +54,28 @@ describe('Namespace Feature', () => {
   });
 
   it('should stop only the running scroll animations in the correct namespace', () => {
-    const container2: ElementFinder = element(by.css('#container2'));
-    const container3: ElementFinder = element(by.css('#container3'));
-
-    const trigger2: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
-    const trigger3: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
-
-    const stopButton: ElementFinder = element(by.css('#stopDefaultNamespaceScrollsButton'));
-
-    const target2: ElementFinder = element(by.css('#scrollTarget2'));
-    const target3: ElementFinder = element(by.css('#scrollTarget3'));
-
     // Check that both containers start at the top
-    protractor.promise.all([container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]).then(
+    protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()]).then(
       function ([container2ScrollTop, container3ScrollTop]) {
-        expect(+container2ScrollTop).toEqual(0);
-        expect(+container3ScrollTop).toEqual(0);
+        expect(container2ScrollTop).toEqual(0);
+        expect(container3ScrollTop).toEqual(0);
 
-        // Schedule a click on the stop button in the browser (calling it from protractor won't work)
-        browser.driver.executeScript(
-          'var button = arguments[0]; setTimeout(function(){button.click()}, 1500)',
-          stopButton.getWebElement()
-        );
+      // Schedule a click on the stop button in the browser (calling it from protractor won't work)
+        page.scheduleStopButtonClick();
 
         // Start both scroll animations
-        page.clickButtonsSimultaneously(trigger2, trigger3).then(() => {
+        page.triggerDefaultAndCustomNamespaceScroll().then(() => {
           // Wait a bit
           browser.sleep(10000).then(() => {
-            protractor.promise.all(
-              [container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]
-            ).then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
-              // Test that the stopped container scrolled a bit but did not reach the target ...
-              expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
-              expect(target2.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer2ScrollTop);
+            protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()])
+              .then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
+                // Test that the stopped container scrolled a bit but did not reach the target ...
+                expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
+                expect(page.getTarget2OffsetTop()).toBeGreaterThan(+laterContainer2ScrollTop);
 
-              // ... and the other one did reach the target
-              expect(target3.getAttribute('offsetTop')).toBeCloseTo(+laterContainer3ScrollTop, Closeness.ofByOne);
-            });
+                // ... and the other one did reach the target
+                expect(page.getTarget3OffsetTop()).toBeCloseTo(+laterContainer3ScrollTop, Closeness.ofByOne);
+              });
           });
         });
       }
@@ -105,43 +83,28 @@ describe('Namespace Feature', () => {
   });
 
   it('should stop be able to stop all running scroll animations, regardless of the namespace', () => {
-    const container2: ElementFinder = element(by.css('#container2'));
-    const container3: ElementFinder = element(by.css('#container3'));
-
-    const trigger2: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
-    const trigger3: ElementFinder = element(by.css('#startCustomNamespaceScrollsButton'));
-
-    const stopButton: ElementFinder = element(by.css('#stopAllNamespaceScrollsButton'));
-
-    const target2: ElementFinder = element(by.css('#scrollTarget2'));
-    const target3: ElementFinder = element(by.css('#scrollTarget3'));
-
     // Check that both containers start at the top
-    protractor.promise.all([container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]).then(
+    protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()]).then(
       function ([container2ScrollTop, container3ScrollTop]) {
-        expect(+container2ScrollTop).toEqual(0);
-        expect(+container3ScrollTop).toEqual(0);
+        expect(container2ScrollTop).toEqual(0);
+        expect(container3ScrollTop).toEqual(0);
 
         // Schedule a click on the stop button in the browser (calling it from protractor won't work)
-        browser.driver.executeScript(
-          'var button = arguments[0]; setTimeout(function(){button.click()}, 1500)',
-          stopButton.getWebElement()
-        );
+        page.scheduleStopButtonClick();
 
         // Start both scroll animations
-        page.clickButtonsSimultaneously(trigger2, trigger3).then(() => {
+        page.triggerDefaultAndCustomNamespaceScroll().then(() => {
           // Wait a bit
           browser.sleep(10000).then(() => {
-            protractor.promise.all(
-              [container2.getAttribute('scrollTop'), container3.getAttribute('scrollTop')]
-            ).then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
-              // Test that the both containers scrolled a bit but did not reach their target
-              expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
-              expect(target2.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer2ScrollTop);
+            protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()])
+              .then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
+                // Test that the both containers scrolled a bit but did not reach their target
+                expect(laterContainer2ScrollTop).toBeGreaterThan(0);
+                expect(page.getTarget2OffsetTop()).toBeGreaterThan(+laterContainer2ScrollTop);
 
-              expect(+laterContainer3ScrollTop).toBeGreaterThan(0);
-              expect(target3.getAttribute('offsetTop')).toBeGreaterThan(+laterContainer3ScrollTop);
-            });
+                expect(laterContainer3ScrollTop).toBeGreaterThan(0);
+                expect(page.getTarget3OffsetTop()).toBeGreaterThan(+laterContainer3ScrollTop);
+              });
           });
         });
       }

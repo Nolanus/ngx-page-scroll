@@ -16,7 +16,18 @@ export abstract class AppPage {
   }
 
   protected triggerAButton(selector: By): promise.Promise<any> {
-    return element(selector).sendKeys(protractor.Key.ENTER);
+    return element(selector).click();
+  }
+
+  protected getOffsetTop(selector: By): promise.Promise<number> {
+    return element(selector).getAttribute('offsetTop').then((offsetTopString) => {
+        return +offsetTopString;
+    });
+  }
+  protected getScrollTop(selector: By): promise.Promise<number> {
+    return element(selector).getAttribute('scrollTop').then((scrollTop) => {
+        return +scrollTop;
+    });
   }
 
   protected getVerticalPosition(selector: By): promise.Promise<number> {
