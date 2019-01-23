@@ -40,7 +40,7 @@ import { HomeComponent } from './home/home.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgxPageScrollCoreModule,
+    NgxPageScrollCoreModule.forRoot({_logLevel: 5}),
     NgxPageScrollModule,
     BrowserAnimationsModule,
     MatCardModule,

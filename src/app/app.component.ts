@@ -54,6 +54,7 @@ export class AppComponent {
     });
   }
 
+  // TODO Manipulate settings after instance creation
   /*
   public setDebug(debug: { checked: boolean, source: MatCheckbox }) {
     console.warn('Debug mode has been ' + (debug.checked ? 'en' : 'dis') + 'abled');
