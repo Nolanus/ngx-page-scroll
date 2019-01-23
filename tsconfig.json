@@ -19,17 +19,17 @@
       "dom"
     ],
     "paths": {
-      "ngx-page-scroll-core": [
-        "dist/ngx-page-scroll-core"
-      ],
-      "ngx-page-scroll-core/*": [
-        "dist/ngx-page-scroll-core/*"
-      ],
       "ngx-page-scroll": [
         "dist/ngx-page-scroll"
       ],
       "ngx-page-scroll/*": [
         "dist/ngx-page-scroll/*"
+      ],
+      "ngx-page-scroll-core": [
+        "dist/ngx-page-scroll-core"
+      ],
+      "ngx-page-scroll-core/*": [
+        "dist/ngx-page-scroll-core/*"
       ]
     }
   }

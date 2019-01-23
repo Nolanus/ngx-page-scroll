@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-
 import { PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({

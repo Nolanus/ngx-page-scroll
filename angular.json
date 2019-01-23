@@ -134,41 +134,6 @@
         }
       }
     },
-    "ngx-page-scroll-core": {
-      "root": "projects/ngx-page-scroll-core",
-      "sourceRoot": "projects/ngx-page-scroll-core/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/ngx-page-scroll-core/tsconfig.lib.json",
-            "project": "projects/ngx-page-scroll-core/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ngx-page-scroll-core/src/test.ts",
-            "tsConfig": "projects/ngx-page-scroll-core/tsconfig.spec.json",
-            "karmaConfig": "projects/ngx-page-scroll-core/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ngx-page-scroll-core/tsconfig.lib.json",
-              "projects/ngx-page-scroll-core/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "ngx-page-scroll": {
       "root": "projects/ngx-page-scroll",
       "sourceRoot": "projects/ngx-page-scroll/src",
@@ -196,6 +161,41 @@
             "tsConfig": [
               "projects/ngx-page-scroll/tsconfig.lib.json",
               "projects/ngx-page-scroll/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "ngx-page-scroll-core": {
+      "root": "projects/ngx-page-scroll-core",
+      "sourceRoot": "projects/ngx-page-scroll-core/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-page-scroll-core/tsconfig.lib.json",
+            "project": "projects/ngx-page-scroll-core/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-page-scroll-core/src/test.ts",
+            "tsConfig": "projects/ngx-page-scroll-core/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-page-scroll-core/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-page-scroll-core/tsconfig.lib.json",
+              "projects/ngx-page-scroll-core/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

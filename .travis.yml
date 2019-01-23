@@ -1,13 +1,6 @@
 language: node_js
-
-env:
-  global:
-  - ENCRYPTION_LABEL: "56bfe4a947b1"
-  - COMMIT_AUTHOR_EMAIL: "sebastian.fuss@googlemail.com"
-
 node_js:
   - "10.4.1"
-
 sudo: true
 
 addons:
@@ -18,16 +11,7 @@ before_script:
 
 script:
   - ng lint
-  # Build the libs
   - npm run build:lib
-  # Prepare webdriver manager (chrome only)
-  - ./node_modules/protractor/bin/webdriver-manager update --gecko=false
-  # - ng test -watch false -browsers ChromeHeadless
-  - npm run e2e:ci
+  - ng test --watch false --browsers ChromeHeadless
+  - ng e2e --protractor-config='e2e/protractor.ci.conf.js'
 
-after_success:
-  - export DEMO_DIST=$(pwd)/dist
-  - echo $DEMO_DIST
-  # Build the demo app
-  - npm run build:ci
-  - ./deploy.sh

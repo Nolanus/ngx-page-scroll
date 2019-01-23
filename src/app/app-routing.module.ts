@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { HomeComponent } from './home/home.component';
 import { SimpleScrollComponent } from './simple-scroll/simple-scroll.component';
 import { NestedScrollComponent } from './nested-scroll/nested-scroll.component';

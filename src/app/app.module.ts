@@ -17,25 +17,38 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
-import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollModule } from 'ngx-page-scroll';
+import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ScrollDialogComponent } from './nested-scroll/scroll.dialog.component';
-import { DummyContentComponent } from './dummy-content/dummy-content.component';
-import { DummyCardComponent } from './dummy-card/dummy-card.component';
+import { HomeComponent } from './home/home.component';
+import { SimpleScrollComponent } from './simple-scroll/simple-scroll.component';
 import { NamespaceScrollComponent } from './namespace-scroll/namespace-scroll.component';
 import { RouterScrollComponent } from './router-scroll/router-scroll.component';
 import { HorizontalScrollComponent } from './horizontal-scroll/horizontal-scroll.component';
 import { PathologicalTestsComponent } from './pathological-tests/pathological-tests.component';
 import { TranslatedTargetScrollComponent } from './translated-target-scroll/translated-target-scroll.component';
 import { NestedScrollComponent } from './nested-scroll/nested-scroll.component';
-import { SimpleScrollComponent } from './simple-scroll/simple-scroll.component';
-import { HomeComponent } from './home/home.component';
+import { DummyCardComponent } from './dummy-card/dummy-card.component';
+import { DummyContentComponent } from './dummy-content/dummy-content.component';
+import { ScrollDialogComponent } from './nested-scroll/scroll.dialog.component';
 
 @NgModule({
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    SimpleScrollComponent,
+    NestedScrollComponent,
+    TranslatedTargetScrollComponent,
+    PathologicalTestsComponent,
+    HorizontalScrollComponent,
+    RouterScrollComponent,
+    NamespaceScrollComponent,
+    DummyCardComponent,
+    DummyContentComponent,
+    ScrollDialogComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -56,21 +69,6 @@ import { HomeComponent } from './home/home.component';
     MatTooltipModule,
     MatChipsModule,
     FlexLayoutModule,
-  ],
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    SimpleScrollComponent,
-    NestedScrollComponent,
-    TranslatedTargetScrollComponent,
-    PathologicalTestsComponent,
-    HorizontalScrollComponent,
-    RouterScrollComponent,
-    DummyContentComponent,
-    NamespaceScrollComponent,
-    DummyCardComponent,
-    DummyContentComponent,
-    ScrollDialogComponent,
   ],
   providers: [],
   entryComponents: [ScrollDialogComponent],
