@@ -1,8 +1,20 @@
+## 6.0.0-beta.0 (2019-01-23)
+
+### Breaking Change
+
+- Modularization ([#88](https://github.com/Nolanus/ngx-page-scroll/issues/88)): The library has been split up into two npm modules: `ngx-page-scroll-core` and `ngx-page-scroll`. The core module contains the `PageScrollService` and does not depend on `@angular/router` any more. The latter mentioned module has a peer dependency on the NgxPageScrollCore Module and provides the `pageScroll` directive. [Read this comment on how to upgrade](https://github.com/Nolanus/ngx-page-scroll/issues/88#issuecomment-456824209)
+- The build system has been changed and now uses angular-cli
+- Set minimum supported angular version to 7
+
+### Other
+
+- Unit tests are executed and will be added in the future
+
 ## 5.0.1 (2018-11-30)
 
 ### Other
 
-- Add angular 7 to supported version range (#329)
+- Add angular 7 to supported version range ([#329](https://github.com/Nolanus/ngx-page-scroll/issues/329))
 
 ## 5.0.0 (2018-05-12)
 
@@ -19,19 +31,19 @@
 
 ### Other
 
-- Revert to use angular 4 compiler to produce backward compatible metadata.json files (#257)
+- Revert to use angular 4 compiler to produce backward compatible metadata.json files ([#257](https://github.com/Nolanus/ngx-page-scroll/issues/257))
 
 ## 4.0.1 (2017-11-07)
 
 ### Other
 
-- Enhance supported angular version to include angular 5 (#254)
+- Enhance supported angular version to include angular 5 ([#254](https://github.com/Nolanus/ngx-page-scroll/issues/254))
 
 ## 4.0.0 (2017-10-30)
 
 ### Breaking change
 
-- Change package name prefix from ng2 to ngx (#164)
+- Change package name prefix from ng2 to ngx ([#164](https://github.com/Nolanus/ngx-page-scroll/issues/164))
 
 ### Other
 
@@ -42,13 +54,13 @@
 
 ### Fix
 
-- Restore support for id selectors starting with a numeric value (#205)
-- Cross-route scrolling (#185)
-- Inconsistent logging levels (#207)
+- Restore support for id selectors starting with a numeric value ([#205](https://github.com/Nolanus/ngx-page-scroll/issues/205))
+- Cross-route scrolling ([#185](https://github.com/Nolanus/ngx-page-scroll/issues/185))
+- Inconsistent logging levels ([#207](https://github.com/Nolanus/ngx-page-scroll/issues/207))
 
 ### Other
 
-- Remove typings type definitions (#237)
+- Remove typings type definitions ([#237](https://github.com/Nolanus/ngx-page-scroll/issues/237))
 - Update to later rollup version (751642b)
 - Updated demo app dependencies (d2788c9)
 
@@ -66,11 +78,11 @@
 
 ### Feature
 
-- The `scrollTarget` parameter for `pageScrollInstance` creation may now take any valid css selector (#193) 
+- The `scrollTarget` parameter for `pageScrollInstance` creation may now take any valid css selector ([#193](https://github.com/Nolanus/ngx-page-scroll/issues/193)) 
 
 ### Other
 
-- Remove the flawed `forRoot()` approach for module and introduced singleton patter (#96, #190, thanks to @achimha) 
+- Remove the flawed `forRoot()` approach for module and introduced singleton patter ([#96](https://github.com/Nolanus/ngx-page-scroll/issues/96), [#190](https://github.com/Nolanus/ngx-page-scroll/issues/190), thanks to @achimha) 
 - Updated dependencies
 - Raised minimum supported angular version to 4.2.0
 
@@ -78,7 +90,7 @@
 
 ### Fix
 
-- Scrolling upwards with pageScrollSpeed option resulted in immediate jump (#170)
+- Scrolling upwards with pageScrollSpeed option resulted in immediate jump ([#170](https://github.com/Nolanus/ngx-page-scroll/issues/170))
 
 ### Other
 
@@ -94,7 +106,7 @@
 
 ### Fix
 
-- Scrolling did not start at top of screen but from previus scroll start position (05ea7c4) (#125)
+- Scrolling did not start at top of screen but from previus scroll start position (05ea7c4) ([#125](https://github.com/Nolanus/ngx-page-scroll/issues/125))
 
 ### Other
 
@@ -117,8 +129,8 @@
 ### Other
 
 - Document namespace feature in demo app (b53881e)
-- Loosen peer deps for work with angular 4 (#106, #107, #108, #109, #110, #113)
-- Do not publish travis deployment specific files to npm (#112)
+- Loosen peer deps for work with angular 4 ([#106](https://github.com/Nolanus/ngx-page-scroll/issues/106), [#107](https://github.com/Nolanus/ngx-page-scroll/issues/107), [#108](https://github.com/Nolanus/ngx-page-scroll/issues/108), [#109](https://github.com/Nolanus/ngx-page-scroll/issues/109), [#110](https://github.com/Nolanus/ngx-page-scroll/issues/110), [#113](https://github.com/Nolanus/ngx-page-scroll/issues/113))
+- Do not publish travis deployment specific files to npm ([#112](https://github.com/Nolanus/ngx-page-scroll/issues/112))
 - Remove inadvertent fdescribe in e2e specs
 - Fixed README typos
 
@@ -127,11 +139,11 @@
 ### Feature 
 
 - New factory method `newInstance` at PageScrollInstance that consumes an options object. The other factory methods are deprecated and will be removed in final release.
-- Advanced offset position calculation for inline scrolling (#92)
+- Advanced offset position calculation for inline scrolling ([#92](https://github.com/Nolanus/ngx-page-scroll/issues/92))
 
 ### Fixes
 
-- Changes to the input values for the directive where not respected (#84)
+- Changes to the input values for the directive where not respected ([#84](https://github.com/Nolanus/ngx-page-scroll/issues/84))
 - Default LogLevel in PageScrollConfig was too low
 
 ### Other
@@ -152,17 +164,17 @@
 
 ### Other
 
-- Remove source map reference from published files (#72)
+- Remove source map reference from published files ([#72](https://github.com/Nolanus/ngx-page-scroll/issues/72))
 
 ## 4.0.0-beta.2 (2016-12-22)
 
 ### Feature
 
-- Horizontal scrolling feature (#61)
+- Horizontal scrolling feature ([#61](https://github.com/Nolanus/ngx-page-scroll/issues/61))
 
 ### Fixes
 
-- Problem with not revmoved timer reference (fix #64)
+- Problem with not revmoved timer reference (fix [#64](https://github.com/Nolanus/ngx-page-scroll/issues/64))
 
 ### Other
 
@@ -194,7 +206,7 @@
 
 ### Fixes
 
-- Scrolling stops in case the scrollTop value were floating point numbers, resulting in `===` comparisons to be false. Fix by comparing rounded and delta values (fixes #55)
+- Scrolling stops in case the scrollTop value were floating point numbers, resulting in `===` comparisons to be false. Fix by comparing rounded and delta values (fixes [#55](https://github.com/Nolanus/ngx-page-scroll/issues/55))
 
 ### Other
 
@@ -204,7 +216,7 @@
 
 ### Fixes
 
-- Remove `*.ts` files from npm published package (fixes #54)
+- Remove `*.ts` files from npm published package (fixes [#54](https://github.com/Nolanus/ngx-page-scroll/issues/54))
 - Package.json scripts calling executables in node_modules folder
 
 ### Other
@@ -216,7 +228,7 @@
 
 ### Other 
 
-- scrollFinish event now fires when scroll target can not be found and it can not be scrolled any closer to the target (fixes #50)
+- scrollFinish event now fires when scroll target can not be found and it can not be scrolled any closer to the target (fixes [#50](https://github.com/Nolanus/ngx-page-scroll/issues/50))
 - Typo in README
 - Demo app enhancement + new e2e tests
 
@@ -321,7 +333,7 @@ Feature:
 
 ### Fixes
 
-- Scrolling did not work properly when initial scrollTop value was greater 0 (fixes #15) 
+- Scrolling did not work properly when initial scrollTop value was greater 0 (fixes [#15](https://github.com/Nolanus/ngx-page-scroll/issues/15)) 
 
 Enhance:
 
@@ -363,7 +375,7 @@ save resources (fixes #9)
 - Overshooting target when large distance to scroll and short scroll animation 
 duration (fixes #7)
 - body.scrollTop not working on non-Blink based browser like Firefox and IE 
-(thanks to [bensgroi](https://github.com/bensgroi), #10)
+(thanks to [bensgroi](https://github.com/bensgroi), [#10](https://github.com/Nolanus/ngx-page-scroll/issues/10))
  
 ### Other
 
@@ -375,7 +387,7 @@ scroll target is not found or already reached (previously it did not stop).
 ### Fixes
 
 - Referencing non existing variable causes error in non webkit-based 
-browser (fixes #5)
+browser (fixes [#5](https://github.com/Nolanus/ngx-page-scroll/issues/5))
 
 ## 1.0.0-beta.0 (2016-05-05)
 
