@@ -16,14 +16,14 @@ describe('Namespace Feature', () => {
 
     // Check that both containers start at the top
     protractor.promise.all([page.getContainer1ScrollTop(), page.getContainer2ScrollTop()]).then(
-      function ([container1ScrollTop, container2ScrollTop]) {
+      ([container1ScrollTop, container2ScrollTop]) => {
         expect(container1ScrollTop).toEqual(0);
         expect(container2ScrollTop).toEqual(0);
         page.triggerDefaultNamespaces().then(() => {
           // Wait a bit
           browser.sleep(1250).then(() => {
             protractor.promise.all([page.getContainer1ScrollTop(), page.getContainer2ScrollTop()]).then(
-              function ([laterContainer1ScrollTop, laterContainer2ScrollTop]) {
+              ([laterContainer1ScrollTop, laterContainer2ScrollTop]) => {
                 expect(+laterContainer1ScrollTop).toEqual(0);
                 expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
               });
@@ -36,14 +36,14 @@ describe('Namespace Feature', () => {
   it('should be possible to have multiple scroll animations running', () => {
     // Check that both containers start at the top
     protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()]).then(
-      function ([container2ScrollTop, container3ScrollTop]) {
+      ([container2ScrollTop, container3ScrollTop]) => {
         expect(container2ScrollTop).toEqual(0);
         expect(container3ScrollTop).toEqual(0);
         page.triggerDefaultAndCustomNamespaceScroll().then(() => {
           // Wait a bit
           browser.sleep(1250).then(() => {
             protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()])
-              .then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
+              .then(([laterContainer2ScrollTop, laterContainer3ScrollTop]) => {
                 expect(laterContainer2ScrollTop).toBeGreaterThan(0);
                 expect(laterContainer3ScrollTop).toBeGreaterThan(0);
               });
@@ -56,7 +56,7 @@ describe('Namespace Feature', () => {
   it('should stop only the running scroll animations in the correct namespace', () => {
     // Check that both containers start at the top
     protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()]).then(
-      function ([container2ScrollTop, container3ScrollTop]) {
+      ([container2ScrollTop, container3ScrollTop]) => {
         expect(container2ScrollTop).toEqual(0);
         expect(container3ScrollTop).toEqual(0);
 
@@ -68,7 +68,7 @@ describe('Namespace Feature', () => {
           // Wait a bit
           browser.sleep(10000).then(() => {
             protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()])
-              .then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
+              .then(([laterContainer2ScrollTop, laterContainer3ScrollTop]) => {
                 // Test that the stopped container scrolled a bit but did not reach the target ...
                 expect(+laterContainer2ScrollTop).toBeGreaterThan(0);
                 expect(page.getTarget2OffsetTop()).toBeGreaterThan(+laterContainer2ScrollTop);
@@ -85,7 +85,7 @@ describe('Namespace Feature', () => {
   it('should stop be able to stop all running scroll animations, regardless of the namespace', () => {
     // Check that both containers start at the top
     protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()]).then(
-      function ([container2ScrollTop, container3ScrollTop]) {
+      ([container2ScrollTop, container3ScrollTop]) => {
         expect(container2ScrollTop).toEqual(0);
         expect(container3ScrollTop).toEqual(0);
 
@@ -97,7 +97,7 @@ describe('Namespace Feature', () => {
           // Wait a bit
           browser.sleep(10000).then(() => {
             protractor.promise.all([page.getContainer2ScrollTop(), page.getContainer3ScrollTop()])
-              .then(function ([laterContainer2ScrollTop, laterContainer3ScrollTop]) {
+              .then(([laterContainer2ScrollTop, laterContainer3ScrollTop]) => {
                 // Test that the both containers scrolled a bit but did not reach their target
                 expect(laterContainer2ScrollTop).toBeGreaterThan(0);
                 expect(page.getTarget2OffsetTop()).toBeGreaterThan(+laterContainer2ScrollTop);

@@ -12,4 +12,3 @@ export * from './lib/page-scroll-instance';
 export * from './lib/types/page-scroll-target';
 export * from './lib/types/page-scroll-view';
 export * from './lib/types/page-scroll.config';
-

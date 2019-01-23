@@ -1,4 +1,4 @@
-import { browser, by, element, ElementFinder, protractor } from 'protractor';
+import { browser, protractor } from 'protractor';
 import { Util as Closeness } from './util';
 import { NestedScrollPage } from './nested-scroll.po';
 
@@ -51,7 +51,7 @@ describe('Nested Scrolling page', () => {
       page.triggerNestedScrollButton2().then(() => {
         browser.sleep(1250).then(() => {
           protractor.promise.all([page.getComplexContainerTargetVerticalPosition(), page.getComplexScrollTargetVerticalPosition()])
-            .then(function (positions: number[]) {
+            .then(positions => {
               expect(positions[0]).toBeCloseTo(positions[1], Closeness.ofByOne);
             });
         });
@@ -70,7 +70,7 @@ describe('Nested Scrolling page', () => {
       page.triggerNestedScrollButton2().then(() => {
         browser.sleep(1250).then(() => {
           protractor.promise.all([page.getComplexContainerTargetVerticalPosition(), page.getComplexScrollTargetVerticalPosition()])
-            .then(function (locations: number[]) {
+            .then(locations => {
               expect(locations[0]).toBeCloseTo(locations[1], Closeness.ofByOne);
             });
         });

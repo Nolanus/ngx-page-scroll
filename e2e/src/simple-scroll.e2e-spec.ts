@@ -103,7 +103,7 @@ describe('Simple Scroll page', () => {
         expect(initialPos).toEqual(0);
         page.triggerFinishButton().then(() => {
           browser.sleep(400).then(() => {
-            page.getSnackBarText().then(function (text) {
+            page.getSnackBarText().then(text => {
               expect(text).toContain('Yeah, we reached our destination');
             });
             page.closeSnackBar();
@@ -119,7 +119,7 @@ describe('Simple Scroll page', () => {
   it('should recreate the pageScrollInstance on input changes', () => {
     protractor.promise.all(
       [page.getHead7VerticalPosition(), page.getHead10VerticalPosition()]
-    ).then(function (targetLocations: number[]) {
+    ).then(targetLocations => {
       page.getScrollPos().then((initialPos: number) => {
         expect(initialPos).toEqual(0);
         // Scroll to first target

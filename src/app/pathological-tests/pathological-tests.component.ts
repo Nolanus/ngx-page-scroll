@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material';
 
@@ -6,12 +6,11 @@ import { MatSnackBar } from '@angular/material';
   selector: 'app-pathological-tests',
   templateUrl: './pathological-tests.component.html',
   styleUrls: ['./pathological-tests.component.css'],
-  providers: [MatSnackBar]
+  providers: [MatSnackBar],
 })
 export class PathologicalTestsComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: any,
-              private snackBar: MatSnackBar) {
+  constructor(@Inject(DOCUMENT) private document: any, private snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -23,7 +22,6 @@ export class PathologicalTestsComponent implements OnInit {
       this.document.body.dispatchEvent(event);
     }, 500);
   }
-
 
   public doSmth(reachedTarget: boolean) {
     let text: string;

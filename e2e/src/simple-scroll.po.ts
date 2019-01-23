@@ -33,6 +33,7 @@ export class SimpleScrollPage extends AppPage {
 
     this.scrollToElement(select);
     select.click();
+
     return element(by.css('#mat-option-1')).click();
   }
 

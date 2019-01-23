@@ -18,5 +18,5 @@ export const defaultPageScrollConfig: PageScrollConfig = {
   easingLogic: (t: number, b: number, c: number, d: number): number => {
     // Linear easing
     return c * t / d + b;
-  }
+  },
 };

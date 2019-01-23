@@ -16,7 +16,7 @@ describe('Pathological Tests page', () => {
         expect(initialPos).toEqual(0);
         page.triggerInterruptScrollButton().then(() => {
           browser.sleep(400).then(() => {
-            page.getSnackBarText().then(function (text) {
+            page.getSnackBarText().then(text => {
               expect(text).toContain('Ohoh, something interrupted us');
             });
             page.closeSnackBar();
@@ -34,7 +34,7 @@ describe('Pathological Tests page', () => {
     page.getScrollPos().then((initialPos: number) => {
       page.triggerNonExistingTargetButton().then(() => {
         browser.sleep(500).then(() => {
-          page.getSnackBarText().then(function (text) {
+          page.getSnackBarText().then(text => {
             expect(text).toContain('Ohoh, something interrupted us');
           });
           page.closeSnackBar();
@@ -51,7 +51,7 @@ describe('Pathological Tests page', () => {
     page.scrollTo(0).then(() => {
       page.triggerAlreadyAtTargetButton().then(() => {
         browser.sleep(400).then(() => {
-          page.getSnackBarText().then(function (text) {
+          page.getSnackBarText().then(text => {
             expect(text).toContain('Yeah, we reached our destination');
           });
           page.closeSnackBar();

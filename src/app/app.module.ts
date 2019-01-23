@@ -72,7 +72,7 @@ import { ScrollDialogComponent } from './nested-scroll/scroll.dialog.component';
   ],
   providers: [],
   entryComponents: [ScrollDialogComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

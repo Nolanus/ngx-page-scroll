@@ -7,7 +7,7 @@ import { EasingLogic, PageScrollService } from 'ngx-page-scroll-core';
   selector: 'app-simple-scroll',
   templateUrl: './simple-scroll.component.html',
   styleUrls: ['./simple-scroll.component.css'],
-  providers: [MatSnackBar]
+  providers: [MatSnackBar],
 })
 export class SimpleScrollComponent implements OnInit {
 
@@ -25,6 +25,7 @@ export class SimpleScrollComponent implements OnInit {
     if ((t /= d / 2) < 1) {
       return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
     }
+
     return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
   }
 
@@ -46,7 +47,7 @@ export class SimpleScrollComponent implements OnInit {
     this.pageScrollService.scroll({
       document: this.document,
       scrollTarget: '.theEnd',
-      scrollFinishListener: subscriber
+      scrollFinishListener: subscriber,
     });
   }
 

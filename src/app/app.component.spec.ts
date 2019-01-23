@@ -17,9 +17,9 @@ describe('AppComponent', () => {
         AppComponent,
       ],
       providers: [
-        {provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}
+        {provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig},
       ],
-      schemas: [NO_ERRORS_SCHEMA]
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 

@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll-core';
+import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'app-horizontal-scroll',
   templateUrl: './horizontal-scroll.component.html',
-  styleUrls: ['./horizontal-scroll.component.css']
+  styleUrls: ['./horizontal-scroll.component.css'],
 })
 export class HorizontalScrollComponent implements OnInit {
 
@@ -20,7 +20,7 @@ export class HorizontalScrollComponent implements OnInit {
       document: this.document,
       scrollTarget: '#horizontalContainerStart',
       scrollViews: [this.container.nativeElement],
-      verticalScrolling: false
+      verticalScrolling: false,
     });
   }
 
@@ -29,7 +29,7 @@ export class HorizontalScrollComponent implements OnInit {
       document: this.document,
       scrollTarget: '#inHorizontalContainer',
       scrollViews: [this.container.nativeElement],
-      verticalScrolling: false
+      verticalScrolling: false,
     });
     this.pageScrollService.start(pageScrollInstance);
   }

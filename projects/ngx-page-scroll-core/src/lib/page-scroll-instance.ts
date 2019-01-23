@@ -86,14 +86,14 @@ export class PageScrollInstance {
   /**
    * Private constructor, requires the properties assumed to be the bare minimum.
    * Use the factory methods to create instances:
-   *      {@link PageScrollService#newInstance}
+   *      {@link PageScrollService#create}
    */
   constructor(pageScrollOptions: PageScrollOptions) {
     if (!pageScrollOptions.scrollViews || pageScrollOptions.scrollViews.length === 0) {
       pageScrollOptions.scrollViews = [
         pageScrollOptions.document.documentElement,
         pageScrollOptions.document.body,
-        pageScrollOptions.document.body.parentNode
+        pageScrollOptions.document.body.parentNode,
       ];
       this.isInlineScrolling = false;
     } else {
@@ -103,88 +103,21 @@ export class PageScrollInstance {
     this.pageScrollOptions = pageScrollOptions;
   }
 
-  public getScrollPropertyValue(scrollingView: any): number {
-    if (!this.pageScrollOptions.verticalScrolling) {
-      return scrollingView.scrollLeft;
-    }
-    return scrollingView.scrollTop;
-  }
+  private static getScrollingTargetPosition(pageScrollOptions: PageScrollOptions,
+                                            scrollTargetElement: HTMLElement): { top: number, left: number } {
+    const body = pageScrollOptions.document.body;
+    const docEl = pageScrollOptions.document.documentElement;
 
-  /**
-   * Extract the exact location of the scrollTarget element.
-   *
-   * Extract the scrollTarget HTMLElement from the given PageScrollTarget object. The latter one may be
-   * a string like "#heading2", then this method returns the corresponding DOM element for that id.
-   *
-   */
-  public extractScrollTargetPosition(): { top: number, left: number } {
-    let scrollTargetElement: HTMLElement;
-    if (typeof this.pageScrollOptions.scrollTarget === 'string') {
-      const targetSelector = <string>this.pageScrollOptions.scrollTarget;
-      if (targetSelector.match(/^#[^\s]+$/g) !== null) {
-        // It's an id selector and a valid id, as it does not contain any white space characters
-        scrollTargetElement = this.pageScrollOptions.document.getElementById(targetSelector.substr(1));
-      } else {
-        scrollTargetElement = <HTMLElement>this.pageScrollOptions.document.querySelector(targetSelector);
-      }
-    } else {
-      scrollTargetElement = <HTMLElement>this.pageScrollOptions.scrollTarget;
-    }
-
-    if (scrollTargetElement === null || scrollTargetElement === undefined) {
-      // Scroll target not found
-      return {top: NaN, left: NaN};
-    }
-
-    if (this.isInlineScrolling) {
-      const position = {top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft};
-      if (this.pageScrollOptions.advancedInlineOffsetCalculation && this.pageScrollOptions.scrollViews.length === 1) {
-        const accumulatedParentsPos = {top: 0, left: 0};
-        // not named window to make sure we're not getting the global window variable by accident
-        const theWindow = scrollTargetElement.ownerDocument.defaultView;
-        let parentFound = false;
-
-        // Start parent is the immediate parent
-        let parent = scrollTargetElement.parentElement;
-
-        // Iterate upwards all parents
-        while (!parentFound && parent !== undefined && parent !== null) {
-          if (theWindow.getComputedStyle(parent).getPropertyValue('position') === 'relative') {
-            accumulatedParentsPos.top += parent.offsetTop;
-            accumulatedParentsPos.left += parent.offsetLeft;
-          }
-          // Next iteration
-          parent = parent.parentElement;
-          parentFound = parent === this.pageScrollOptions.scrollViews[0];
-        }
-        if (parentFound) {
-          // Only use the results if we found the parent, otherwise we accumulated too much anyway
-          position.top += accumulatedParentsPos.top;
-          position.left += accumulatedParentsPos.left;
-        } else {
-          /* TODO Uncomment
-          if (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode())) {
-            console.warn('Unable to find nested scrolling targets parent!');
-          }*/
-        }
-      }
-      return position;
-    }
-
-    const body = this.pageScrollOptions.document.body;
-    const docEl = this.pageScrollOptions.document.documentElement;
-
-    const windowPageYOffset: number = this.pageScrollOptions.document.defaultView &&
-      this.pageScrollOptions.document.defaultView.pageYOffset || undefined;
-    const windowPageXOffset: number = this.pageScrollOptions.document.defaultView &&
-      this.pageScrollOptions.document.defaultView.pageXOffset || undefined;
+    const windowPageYOffset: number = pageScrollOptions.document.defaultView &&
+      pageScrollOptions.document.defaultView.pageYOffset || undefined;
+    const windowPageXOffset: number = pageScrollOptions.document.defaultView &&
+      pageScrollOptions.document.defaultView.pageXOffset || undefined;
 
     const scrollTop = windowPageYOffset || docEl.scrollTop || body.scrollTop;
     const scrollLeft = windowPageXOffset || docEl.scrollLeft || body.scrollLeft;
 
     const clientTop = docEl.clientTop || body.clientTop || 0;
     const clientLeft = docEl.clientLeft || body.clientLeft || 0;
-
 
     if (scrollTargetElement === undefined || scrollTargetElement === null) {
       // No element found, so return the current position to not cause any change in scroll position
@@ -196,6 +129,73 @@ export class PageScrollInstance {
     const left = box.left + scrollLeft - clientLeft;
 
     return {top: Math.round(top), left: Math.round(left)};
+  }
+
+  private static getInlineScrollingTargetPosition(pageScrollOptions: PageScrollOptions,
+                                                  scrollTargetElement: HTMLElement): { top: number, left: number } {
+    const position = {top: scrollTargetElement.offsetTop, left: scrollTargetElement.offsetLeft};
+    if (pageScrollOptions.advancedInlineOffsetCalculation && pageScrollOptions.scrollViews.length === 1) {
+      const accumulatedParentsPos = {top: 0, left: 0};
+      // not named window to make sure we're not getting the global window variable by accident
+      const theWindow = scrollTargetElement.ownerDocument.defaultView;
+      let parentFound = false;
+
+      // Start parent is the immediate parent
+      let parent = scrollTargetElement.parentElement;
+
+      // Iterate upwards all parents
+      while (!parentFound && parent !== undefined && parent !== null) {
+        if (theWindow.getComputedStyle(parent).getPropertyValue('position') === 'relative') {
+          accumulatedParentsPos.top += parent.offsetTop;
+          accumulatedParentsPos.left += parent.offsetLeft;
+        }
+        // Next iteration
+        parent = parent.parentElement;
+        parentFound = parent === pageScrollOptions.scrollViews[0];
+      }
+      if (parentFound) {
+        // Only use the results if we found the parent, otherwise we accumulated too much anyway
+        position.top += accumulatedParentsPos.top;
+        position.left += accumulatedParentsPos.left;
+      } else {
+        /* TODO Uncomment
+        if (PageScrollConfig._logLevel >= 2 || (PageScrollConfig._logLevel >= 1 && isDevMode())) {
+          console.warn('Unable to find nested scrolling targets parent!');
+        }*/
+      }
+    }
+
+    return position;
+  }
+
+  public getScrollPropertyValue(scrollingView: any): number {
+    if (!this.pageScrollOptions.verticalScrolling) {
+      return scrollingView.scrollLeft;
+    }
+
+    return scrollingView.scrollTop;
+  }
+
+  /**
+   * Extract the exact location of the scrollTarget element.
+   *
+   * Extract the scrollTarget HTMLElement from the given PageScrollTarget object. The latter one may be
+   * a string like "#heading2", then this method returns the corresponding DOM element for that id.
+   *
+   */
+  public extractScrollTargetPosition(): { top: number, left: number } {
+    const scrollTargetElement = this.getScrollTargetElement();
+
+    if (scrollTargetElement === null || scrollTargetElement === undefined) {
+      // Scroll target not found
+      return {top: NaN, left: NaN};
+    }
+
+    if (this.isInlineScrolling) {
+      return PageScrollInstance.getInlineScrollingTargetPosition(this.pageScrollOptions, scrollTargetElement);
+    }
+
+    return PageScrollInstance.getScrollingTargetPosition(this.pageScrollOptions, scrollTargetElement);
   }
 
   /**
@@ -241,6 +241,7 @@ export class PageScrollInstance {
           return true;
         }
       }
+
       return oneAlreadyWorked;
     }, false);
   }
@@ -285,6 +286,21 @@ export class PageScrollInstance {
     );
     this.interruptListenersAttached = false;
   }
+
+  private getScrollTargetElement(): HTMLElement {
+    if (typeof this.pageScrollOptions.scrollTarget === 'string') {
+      const targetSelector = <string>this.pageScrollOptions.scrollTarget;
+      if (targetSelector.match(/^#[^\s]+$/g) !== null) {
+        // It's an id selector and a valid id, as it does not contain any white space characters
+
+        return this.pageScrollOptions.document.getElementById(targetSelector.substr(1));
+      }
+
+      return <HTMLElement>this.pageScrollOptions.document.querySelector(targetSelector);
+    }
+
+    return <HTMLElement>this.pageScrollOptions.scrollTarget;
+  }
 }
 
 /**
@@ -295,5 +311,5 @@ export class PageScrollInstance {
  * about scroll animation interrupts and stop related animations.
  */
 export interface InterruptReporter {
-  report: (event: Event, pageScrollInstance: PageScrollInstance) => void;
+  report(event: Event, pageScrollInstance: PageScrollInstance): void;
 }

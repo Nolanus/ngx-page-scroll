@@ -5,7 +5,7 @@ import { InterruptReporter, PageScrollInstance, PageScrollOptions } from '../pag
 import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PageScrollService {
   private static instanceCounter = 0;
@@ -41,7 +41,7 @@ export class PageScrollService {
       if (shouldStop) {
         this.stopAll(pageScrollInstance.pageScrollOptions.namespace);
       }
-    }
+    },
   };
 
   private stopInternal(interrupted: boolean, pageScrollInstance: PageScrollInstance): boolean {
@@ -60,8 +60,10 @@ export class PageScrollService {
       // Clear the reference to this timer
       pageScrollInstance.timer = undefined;
       pageScrollInstance.fireEvent(!interrupted);
+
       return true;
     }
+
     return false;
   }
 
@@ -74,6 +76,7 @@ export class PageScrollService {
    *
    * This is the core functionality of the whole library.
    */
+  // tslint:disable-next-line:cyclomatic-complexity
   public start(pageScrollInstance: PageScrollInstance): void {
     // Merge the default options in the pageScrollInstance options
     pageScrollInstance.pageScrollOptions = {...this.config, ...pageScrollInstance.pageScrollOptions} as PageScrollOptions;
@@ -86,6 +89,7 @@ export class PageScrollService {
       if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
         console.warn('No scrollViews specified, thus ngx-page-scroll does not know which DOM elements to scroll');
       }
+
       return;
     }
 
@@ -129,6 +133,7 @@ export class PageScrollService {
         console.log('Scrolling not possible, as we can\'t find the specified target');
       }
       pageScrollInstance.fireEvent(false);
+
       return;
     }
 
@@ -162,6 +167,7 @@ export class PageScrollService {
       }
       pageScrollInstance.setScrollPosition(pageScrollInstance.targetScrollPosition);
       pageScrollInstance.fireEvent(true);
+
       return;
     }
 
@@ -236,8 +242,10 @@ export class PageScrollService {
           i--;
         }
       }
+
       return stoppedSome;
     }
+
     return false;
   }
 

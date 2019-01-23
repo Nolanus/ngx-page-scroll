@@ -12,7 +12,7 @@ describe('Route Scroll page', () => {
   });
 
   it('should scroll open the new route and scroll to the target heading', () => {
-    page.getDifferentRouteScrollButtonRouterLink().then(function (routerLink: string) {
+    page.getDifferentRouteScrollButtonRouterLink().then(routerLink => {
       page.triggerDifferentRouteScroll().then(() => {
         expect(browser.getCurrentUrl()).toContain(routerLink);
         page.getHead7VerticalPosition().then((verticalHeadingLocation) => {
@@ -28,7 +28,7 @@ describe('Route Scroll page', () => {
 
   it('should scroll open the /simple route from home and scroll to the target heading', () => {
     browser.get('/');
-    page.getDemoScrollButtonRouterLink().then(function (routerLink: string) {
+    page.getDemoScrollButtonRouterLink().then(routerLink => {
       page.triggerDemoScroll().then(() => {
         expect(browser.getCurrentUrl()).toContain(routerLink);
         page.getHead3VerticalPosition().then((verticalHeadingLocation) => {

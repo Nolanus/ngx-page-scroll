@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef, Inject } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll-core';
+import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'app-namespace-scroll',
   templateUrl: './namespace-scroll.component.html',
-  styleUrls: ['./namespace-scroll.component.css']
+  styleUrls: ['./namespace-scroll.component.css'],
 })
 export class NamespaceScrollComponent implements OnInit {
 
@@ -32,14 +32,14 @@ export class NamespaceScrollComponent implements OnInit {
       document: this.document,
       duration: 10000,
       scrollTarget: '#scrollTarget1',
-      scrollViews: [this.container1.nativeElement]
+      scrollViews: [this.container1.nativeElement],
     });
 
     const pageScrollInstance2: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       duration: 10000,
       scrollTarget: '#scrollTarget2',
-      scrollViews: [this.container2.nativeElement]
+      scrollViews: [this.container2.nativeElement],
     });
 
     this.pageScrollService.start(pageScrollInstance1);
@@ -52,14 +52,14 @@ export class NamespaceScrollComponent implements OnInit {
       document: this.document,
       duration: 0,
       scrollTarget: '#container1Head',
-      scrollViews: [this.container1.nativeElement]
+      scrollViews: [this.container1.nativeElement],
     });
 
     const pageScrollInstance2: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       duration: 0,
       scrollTarget: '#container2Head',
-      scrollViews: [this.container2.nativeElement]
+      scrollViews: [this.container2.nativeElement],
     });
 
     this.pageScrollService.start(pageScrollInstance1);
@@ -72,7 +72,7 @@ export class NamespaceScrollComponent implements OnInit {
       duration: 10000,
       namespace: 'customSpace',
       scrollTarget: '#scrollTarget3',
-      scrollViews: [this.container3.nativeElement]
+      scrollViews: [this.container3.nativeElement],
     });
   }
 
@@ -82,7 +82,7 @@ export class NamespaceScrollComponent implements OnInit {
       duration: 0,
       namespace: 'customSpace',
       scrollTarget: '#container3Head',
-      scrollViews: [this.container3.nativeElement]
+      scrollViews: [this.container3.nativeElement],
     });
   }
 

@@ -21,7 +21,7 @@ import { EasingLogic, PageScrollInstance, PageScrollOptions, PageScrollService }
   selector: '[pageScroll]',
   host: {
     '(click)': 'handleClick($event)',
-  }
+  },
 })
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
 
@@ -77,7 +77,6 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
     if (this.pageScrollInstance) {
       this.pageScrollService.stop(this.pageScrollInstance);
     }
-    return undefined;
   }
 
   private generatePageScrollInstance(): PageScrollInstance {
@@ -113,6 +112,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
       }
       this.pageScrollInstance = this.pageScrollService.create(options);
     }
+
     return this.pageScrollInstance;
   }
 
@@ -122,7 +122,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
       // "Navigate" to the current route again and this time set the fragment/hash
       this.router.navigate([], {
         fragment: (<string>this.pageScrollInstance.pageScrollOptions.scrollTarget).substr(1),
-        preserveQueryParams: true
+        preserveQueryParams: true,
       });
     }
   }
@@ -156,13 +156,12 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
             subscription.unsubscribe();
           }
         });
+
         return false; // to preventDefault()
       }
     }
     this.scroll();
+
     return false; // to preventDefault()
   }
 }
-
-
-

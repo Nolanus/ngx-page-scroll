@@ -18,7 +18,7 @@ xdescribe('Scroll Easing Functions', () => {
         expect(initialPos).toEqual(0);
         // Make sure the browser logs are empty so get them once (which automatically clears them)
         // Source: http://stackoverflow.com/a/30589885
-        browser.manage().logs().get('browser').then(function () {
+        browser.manage().logs().get('browser').then(() => {
           trigger.sendKeys(protractor.Key.ENTER).then(() => {
             browser.sleep(5000).then(() => {
               // At the end of the time the scrolling should be at the specific target position
@@ -28,7 +28,7 @@ xdescribe('Scroll Easing Functions', () => {
               // Inspect the console logs, they should contain all in between scroll positions
               // Using the browser.sleep() to execute some code while the animation is running does not work
               // consistently across browser, especially causing problems with the CI server
-              browser.manage().logs().get('browser').then(function (browserLog) {
+              browser.manage().logs().get('browser').then(browserLog => {
                 const scrollPositionHistory = browserLog
                   .filter(log => log.message.indexOf('Scroll Position: ') >= 0) // only take scroll position logs
                   .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints
@@ -64,7 +64,7 @@ xdescribe('Scroll Easing Functions', () => {
         expect(initialPos).toEqual(0);
         // Make sure the browser logs are empty so get them once (which automatically clears them)
         // Source: http://stackoverflow.com/a/30589885
-        browser.manage().logs().get('browser').then(function () {
+        browser.manage().logs().get('browser').then(() => {
           trigger.sendKeys(protractor.Key.ENTER).then(() => {
             browser.sleep(pageScrollDuration).then(() => {
               // At the end of the time the scrolling should be at the specific target position
@@ -74,7 +74,7 @@ xdescribe('Scroll Easing Functions', () => {
               // Inspect the console logs, they should contain all in between scroll positions
               // Using the browser.sleep() to execute some code while the animation is running does not work
               // consistently across browser, especially causing problems with the CI server
-              browser.manage().logs().get('browser').then(function (browserLog) {
+              browser.manage().logs().get('browser').then(browserLog => {
                 const scrollPositionHistory = browserLog
                   .filter(log => log.message.indexOf('Scroll Position: ') >= 0) // only take scroll position logs
                   .map(log => parseInt(log.message.split(' ').reverse()[0], 10)); // parse scroll logs into ints

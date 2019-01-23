@@ -1,7 +1,7 @@
-import { Component, Inject, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { DOCUMENT } from '@angular/common';
-import { PageScrollService, PageScrollInstance } from 'ngx-page-scroll-core';
+import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
   selector: 'app-scroll-dialog',
@@ -25,7 +25,7 @@ export class ScrollDialogComponent implements OnInit {
     this.pageScrollInstance = this.pageScrollService.create({
       document: this.document,
       scrollTarget: '#dialogScrollTarget',
-      scrollViews: [this.scrollingView.nativeElement]
+      scrollViews: [this.scrollingView.nativeElement],
     });
 
   }

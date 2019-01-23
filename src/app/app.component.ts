@@ -5,7 +5,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   // public isDebugEnabled = PageScrollConfig._logLevel >= 5;
@@ -13,31 +13,31 @@ export class AppComponent {
   public links = [
     {
       route: ['/'],
-      name: 'Home'
+      name: 'Home',
     },
     {
       route: ['/simple'],
-      name: 'Simple Scrolling'
+      name: 'Simple Scrolling',
     },
     {
       route: ['/nested'],
-      name: 'Nested Scrolling'
+      name: 'Nested Scrolling',
     },
     {
       route: ['/router'],
-      name: 'Router Scrolling'
+      name: 'Router Scrolling',
     },
     {
       route: ['/horizontal'],
-      name: 'Horizontal Scrolling'
+      name: 'Horizontal Scrolling',
     },
     {
       route: ['/translated'],
-      name: 'Trnsf. Target Scrolling'
+      name: 'Trnsf. Target Scrolling',
     },
     {
       route: ['/namespace'],
-      name: 'Namespace Feature'
+      name: 'Namespace Feature',
     }];
 
   constructor(private router: Router, private pageScrollService: PageScrollService) {

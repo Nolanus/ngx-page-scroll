@@ -6,8 +6,8 @@ import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
 describe('PageScrollService', () => {
   beforeEach(() => TestBed.configureTestingModule({
     providers: [
-      { provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }
-    ]
+      { provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig },
+    ],
   }));
 
   it('should be created', () => {
