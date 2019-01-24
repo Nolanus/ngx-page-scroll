@@ -63,7 +63,7 @@ Using the `PageScrollService#scroll` method you may trigger scroll animations. P
 
 ```typescript
 import { DOCUMENT, Inject } from '@angular/common';
-import { PageScrollService } from 'ngx-page-scroll';
+import { PageScrollService } from 'ngx-page-scroll-core';
 
 export class MyComponent {
  constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
