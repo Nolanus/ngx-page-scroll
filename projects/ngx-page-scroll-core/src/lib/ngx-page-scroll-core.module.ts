@@ -7,6 +7,7 @@ import { PageScrollConfig } from './types/page-scroll.config';
 @NgModule({
   providers: [
     PageScrollService,
+    {provide: NGXPS_CONFIG, useValue: {}},
   ],
 })
 export class NgxPageScrollCoreModule {
