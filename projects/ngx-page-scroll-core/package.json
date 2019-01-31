@@ -1,6 +1,28 @@
 {
   "name": "ngx-page-scroll-core",
   "version": "6.0.0-beta.0",
+  "description": "Animated scrolling functionality for angular written in pure typescript",
+  "keywords": [
+    "angular",
+    "angularjs",
+    "page",
+    "scroll",
+    "pagescroll",
+    "animate",
+    "move",
+    "scrollto",
+    "anchor"
+  ],
+  "author": "Sebastian Fuss <sebastian.fuss@googlemail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Nolanus/ngx-page-scroll.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Nolanus/ngx-page-scroll/issues"
+  },
+  "homepage": "https://github.com/Nolanus/ngx-page-scroll#readme",
   "peerDependencies": {
     "@angular/common": "^7.1.0",
     "@angular/core": "^7.1.0"
