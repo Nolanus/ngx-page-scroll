@@ -1,3 +1,14 @@
+## 6.0.0-beta.1 (2019-02-15)
+
+### Fix
+
+- Using non-`forRoot()` import did not work ([#341](https://github.com/Nolanus/ngx-page-scroll/issues/341))
+
+### Other
+
+- Update third party dependencies
+- Add back some library project package.json properties
+
 ## 6.0.0-beta.0 (2019-01-23)
 
 ### Breaking Change
