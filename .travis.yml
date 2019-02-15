@@ -8,8 +8,12 @@ addons:
 
 before_script:
   - npm install -g @angular/cli
+  # Install commitlint cli for travis
+  - npm install @commitlint/travis-cli
 
 script:
+  # Lint the commit messages
+  - commitlint-travis
   - ng lint
   - npm run build:lib
   - ng test --watch false --browsers ChromeHeadless
