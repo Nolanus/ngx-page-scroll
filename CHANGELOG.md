@@ -1,3 +1,11 @@
+## 6.0.0 (2019-05-22)
+
+### Other
+
+- Adjust wrong peer dependency between core and directive module [#354](https://github.com/Nolanus/ngx-page-scroll/issues/354)
+- Update dependencies
+
+
 ## 6.0.0-beta.1 (2019-02-15)
 
 ### Fix
