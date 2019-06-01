@@ -12,10 +12,10 @@ import { ScrollDialogComponent } from './scroll.dialog.component';
 })
 export class NestedScrollComponent implements OnInit {
 
-  @ViewChild('basicContainer')
+  @ViewChild('basicContainer', {static: false})
   public basicContainer: ElementRef;
 
-  @ViewChild('complexContainer')
+  @ViewChild('complexContainer', {static: false})
   public complexContainer: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService, public dialog: MatDialog) {
