@@ -1,4 +1,4 @@
-/* tslint:disable:use-host-property-decorator directive-selector */
+/* tslint:disable:no-host-metadata-property directive-selector */
 
 import {
   Directive,
