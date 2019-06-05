@@ -9,7 +9,7 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 })
 export class HorizontalScrollComponent implements OnInit {
 
-  @ViewChild('container', {static: false})
+  @ViewChild('container')
   public container: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
