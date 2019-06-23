@@ -76,6 +76,12 @@ export interface PageScrollConfig {
   interruptible?: boolean;
 
   /**
+   * Whether the scroll animation should take place if the target is already in the view (true). If set to false the scroll
+   * animation will not start, in case the target pixel is already inside the current view.
+   */
+  scrollInView?: boolean;
+
+  /**
    * Easing logic to be applied when performing the scroll animation
    */
   easingLogic?: EasingLogic;

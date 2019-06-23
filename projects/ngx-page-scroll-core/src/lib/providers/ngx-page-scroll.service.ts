@@ -3,6 +3,7 @@ import { Inject, Injectable, isDevMode } from '@angular/core';
 import { PageScrollConfig } from '../types/page-scroll.config';
 import { InterruptReporter, PageScrollInstance, PageScrollOptions } from '../page-scroll-instance';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
+import { PageScrollViews } from "../types/page-scroll-view";
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
 export class PageScrollService {
   private static instanceCounter = 0;
 
-  private config: PageScrollConfig;
+  private readonly config: PageScrollConfig;
 
   private runningInstances: PageScrollInstance[] = [];
 
@@ -94,11 +95,12 @@ export class PageScrollService {
     }
 
     let startScrollPositionFound = false;
+    let scrollRange = pageScrollInstance.getScrollClientPropertyValue(pageScrollInstance.pageScrollOptions.scrollViews[0]);
     // Reset start scroll position to 0. If any of the scrollViews has a different one, it will be extracted next
     pageScrollInstance.startScrollPosition = 0;
 
     // Get the start scroll position from the scrollViews (e.g. if the user already scrolled down the content)
-    pageScrollInstance.pageScrollOptions.scrollViews.forEach((scrollingView: any) => {
+    pageScrollInstance.pageScrollOptions.scrollViews.forEach(scrollingView => {
       if (scrollingView === undefined || scrollingView === null) {
         return;
       }
@@ -112,6 +114,9 @@ export class PageScrollService {
         // Return the scroll position value, as this will be our startScrollPosition
         pageScrollInstance.startScrollPosition = scrollPosition;
         startScrollPositionFound = true;
+
+        // Remember te scrollRange of this scrollingView
+        scrollRange = pageScrollInstance.getScrollClientPropertyValue(scrollingView);
       }
     });
 
@@ -169,6 +174,19 @@ export class PageScrollService {
       pageScrollInstance.fireEvent(true);
 
       return;
+    }
+
+    if (!pageScrollInstance.pageScrollOptions.scrollInView) {
+      const alreadyInView = pageScrollInstance.targetScrollPosition > pageScrollInstance.startScrollPosition &&
+        pageScrollInstance.targetScrollPosition <= pageScrollInstance.startScrollPosition + scrollRange;
+      if (alreadyInView) {
+        if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
+          console.log('Not scrolling, as target already in view');
+        }
+        pageScrollInstance.fireEvent(true);
+
+        return;
+      }
     }
 
     // Register the interrupt listeners if we want an interruptible scroll animation

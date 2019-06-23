@@ -15,6 +15,7 @@ export const defaultPageScrollConfig: PageScrollConfig = {
   interruptEvents: ['mousedown', 'wheel', 'DOMMouseScroll', 'mousewheel', 'keyup', 'touchmove'],
   interruptKeys: [' ', 'Escape', 'Tab', 'Enter', 'PageUp', 'PageDown', 'Home', 'End', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'ArrowDown'],
   interruptible: true,
+  scrollInView: true,
   easingLogic: (t: number, b: number, c: number, d: number): number => {
     // Linear easing
     return c * t / d + b;

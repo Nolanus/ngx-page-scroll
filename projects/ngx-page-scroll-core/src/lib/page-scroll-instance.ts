@@ -45,6 +45,7 @@ export interface PageScrollOptions extends PageScrollConfig {
   interruptEvents?: string[];
   interruptKeys?: string[];
   interruptible?: boolean;
+  scrollInView?: boolean;
   easingLogic?: EasingLogic;
 }
 
@@ -174,6 +175,14 @@ export class PageScrollInstance {
     }
 
     return scrollingView.scrollTop;
+  }
+
+  public getScrollClientPropertyValue(scrollingView: any): number {
+    if (!this.pageScrollOptions.verticalScrolling) {
+      return scrollingView.clientWidth;
+    }
+
+    return scrollingView.clientHeight;
   }
 
   /**
