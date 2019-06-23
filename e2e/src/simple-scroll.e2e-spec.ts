@@ -28,6 +28,52 @@ describe('Simple Scroll page', () => {
     });
   });
 
+  it('should scroll to first heading even when in view', () => {
+    page.getScrollPos().then((initialPos: number) => {
+      expect(initialPos).toEqual(0);
+      page.triggerScrollAlwaysButton().then(() => {
+        browser.sleep(1250).then(() => {
+          page.getScrollPos().then((pos: number) => {
+            // Should be scrolled away from the top
+            expect(pos).toBeGreaterThan(0);
+          });
+        });
+      });
+    });
+  });
+
+  it('should not scroll to first heading when inView option is enabled', () => {
+    page.getScrollPos().then((initialPos: number) => {
+      expect(initialPos).toEqual(0);
+      page.triggerScrollInViewButton().then(() => {
+        browser.sleep(1250).then(() => {
+          page.getScrollPos().then((pos: number) => {
+            // Should not be scrolled away from the top
+            expect(pos).toEqual(0);
+          });
+        });
+      });
+    });
+  });
+
+  it('should scroll to first heading when inView option is enabled but target not in view', () => {
+    page.getHead1VerticalPosition().then((headingVerticalLocation) => {
+      page.scrollTo(headingVerticalLocation + 100).then(() => {
+        page.getScrollPos().then((initialPos: number) => {
+          expect(initialPos).toBeGreaterThan(headingVerticalLocation);
+          page.triggerScrollInViewButton().then(() => {
+            browser.sleep(1250).then(() => {
+              page.getScrollPos().then((pos: number) => {
+                // Should not be scrolled away from the top
+                expect(pos).toEqual(headingVerticalLocation);
+              });
+            });
+          });
+        });
+      });
+    });
+  });
+
   it('should scroll to last heading using service when start position is not the top', () => {
     page.scrollTo(250).then(() => {
       page.getWindowInnerHeight().then((windowHeight: number) => {

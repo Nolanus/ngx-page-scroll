@@ -7,6 +7,16 @@
 
 <!-- Buttons -->
 <mat-card>
+  <h3>Scrolling when in view</h3>
+  <p>These buttons demonstrate the "scrollInView" option. If set to false, scrolling does not happen if the target
+    scroll position is already inside the current browser view.</p>
+  <button mat-raised-button color="primary" href="#head1" pageScroll id="testScrollInView1">
+    Scroll to Heading 1
+  </button>
+  <button mat-raised-button color="primary" href="#head1" pageScroll [pageScrollInView]="false" id="testScrollInView2">
+    Scroll to Heading 1 when not in view
+  </button>
+
   <h3>Non-Interruptible, custom duration</h3>
   <p>This button has a custom animation duration of 4 seconds and is specified to be non-interrupbtible. Try scrolling
     or using the arrow keys while the scroll animation takes place.</p>
