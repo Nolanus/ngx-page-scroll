@@ -41,7 +41,7 @@
     "@angular/compiler-cli": "~8.0.0",
     "@angular/language-service": "~8.0.0",
     "@commitlint/cli": "~8.1.0",
-    "@commitlint/config-conventional": "~8.0.0",
+    "@commitlint/config-conventional": "~8.1.0",
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "~2.0.6",
     "codelyzer": "^5.0.1",
