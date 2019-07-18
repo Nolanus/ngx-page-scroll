@@ -45,7 +45,7 @@
     "@types/jasmine": "^3.3.13",
     "@types/jasminewd2": "~2.0.6",
     "codelyzer": "^5.0.1",
-    "commitizen": "^3.1.1",
+    "commitizen": "^4.0.0",
     "cpx": "^1.5.0",
     "cz-conventional-changelog": "^2.1.0",
     "husky": "^2.3.0",
