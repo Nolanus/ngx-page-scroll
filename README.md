@@ -72,7 +72,8 @@ export class AppModule {
 Using the `PageScrollService#scroll` method you may trigger scroll animations. Provide an options object that provides a reference to the document and the scroll target. Additional properties are optional.
 
 ```typescript
-import { DOCUMENT, Inject } from '@angular/common';
+import { Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { PageScrollService } from 'ngx-page-scroll-core';
 
 export class MyComponent {
