@@ -33,6 +33,16 @@ routing has finished) and in both directions (horizontal/vertical)
   - [Usage](#usage-1)
   - [Directive API](#directive-api)
   
+  
+### Version compatibility
+
+| ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                              |
+| -------------------------------------------- | -------------------------- | -------------------------------------------------------------------------- |
+| v7.x (to be released)                        | v8                         | [README](README.md)                                                        |
+| v6.x                                         | v8, v7                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v6.0.2/README.md) |
+| v5.x                                         | v6                         | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v5.0.1/README.md) |
+| v4.x                                         | v5, v4                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v4.0.2/README.md) |
+
 ## Service
 
 ### Setup
@@ -62,7 +72,8 @@ export class AppModule {
 Using the `PageScrollService#scroll` method you may trigger scroll animations. Provide an options object that provides a reference to the document and the scroll target. Additional properties are optional.
 
 ```typescript
-import { DOCUMENT, Inject } from '@angular/common';
+import { Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { PageScrollService } from 'ngx-page-scroll-core';
 
 export class MyComponent {

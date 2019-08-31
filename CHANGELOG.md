@@ -1,3 +1,11 @@
+## 6.0.2 (2019-06-05)
+
+Note: This release mainly reverts the changes made in v6.0.1
+
+### Fix
+
+- Revert to angular@7 build tools to produce compatible bundle files ([#363](https://github.com/Nolanus/ngx-page-scroll/issues/363))
+
 ## 6.0.1 (2019-06-01)
 
 ### Other
