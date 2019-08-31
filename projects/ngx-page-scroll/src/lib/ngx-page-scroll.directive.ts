@@ -1,4 +1,4 @@
-/* tslint:disable:use-host-property-decorator directive-selector */
+/* tslint:disable:no-host-metadata-property directive-selector */
 
 import {
   Directive,
@@ -53,6 +53,9 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   public pageScrollInterruptible: boolean;
 
   @Input()
+  public pageScrollInView: boolean;
+
+  @Input()
   public pageScrollAdjustHash = false;
 
   @Input()
@@ -65,7 +68,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   private document: Document;
 
   constructor(private pageScrollService: PageScrollService, @Optional() private router: Router, @Inject(DOCUMENT) document: any) {
-    this.document = <Document> document;
+    this.document = <Document>document;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -97,6 +100,9 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
       }
       if (this.pageScrollInterruptible !== undefined && this.pageScrollInterruptible !== null) {
         options.interruptible = this.pageScrollInterruptible;
+      }
+      if (this.pageScrollInView !== undefined && this.pageScrollInView !== null) {
+        options.scrollInView = this.pageScrollInView;
       }
       if (this.pageScrollEasing) {
         options.easingLogic = this.pageScrollEasing;

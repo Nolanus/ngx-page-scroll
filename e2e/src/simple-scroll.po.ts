@@ -8,6 +8,14 @@ export class SimpleScrollPage extends AppPage {
     return '/simple';
   }
 
+  triggerScrollAlwaysButton(): promise.Promise<any> {
+    return this.triggerAButton(by.css('#testScrollInView1'));
+  }
+
+  triggerScrollInViewButton(): promise.Promise<any> {
+    return this.triggerAButton(by.css('#testScrollInView2'));
+  }
+
   triggerLastHeadingButton(): promise.Promise<any> {
     return this.triggerAButton(by.css('#goToLastHeadingButton'));
   }

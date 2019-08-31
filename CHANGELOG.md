@@ -1,3 +1,13 @@
+## 7.0.0 (2019-08-31)
+
+### Breaking Change
+
+- This release requires angular v8 or later
+
+### Other
+
+- Update dependencies and build script problems
+
 ## 6.0.2 (2019-06-05)
 
 Note: This release mainly reverts the changes made in v6.0.1
