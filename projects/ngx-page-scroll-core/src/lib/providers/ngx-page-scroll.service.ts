@@ -3,7 +3,6 @@ import { Inject, Injectable, isDevMode } from '@angular/core';
 import { PageScrollConfig } from '../types/page-scroll.config';
 import { InterruptReporter, PageScrollInstance, PageScrollOptions } from '../page-scroll-instance';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
-import { PageScrollViews } from "../types/page-scroll-view";
 
 @Injectable({
   providedIn: 'root',
