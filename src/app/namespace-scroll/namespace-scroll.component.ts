@@ -9,16 +9,16 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 })
 export class NamespaceScrollComponent implements OnInit {
 
-  @ViewChild('container1', {static: false})
+  @ViewChild('container1')
   public container1: ElementRef;
 
-  @ViewChild('container2', {static: false})
+  @ViewChild('container2')
   public container2: ElementRef;
 
-  @ViewChild('container3', {static: false})
+  @ViewChild('container3')
   public container3: ElementRef;
 
-  @ViewChild('container4', {static: false})
+  @ViewChild('container4')
   public container4: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: any, public pageScrollService: PageScrollService) {

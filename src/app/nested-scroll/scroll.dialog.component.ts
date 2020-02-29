@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, Inject, ViewChild } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DOCUMENT } from '@angular/common';
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
@@ -10,7 +10,7 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 })
 export class ScrollDialogComponent implements AfterViewInit {
 
-  @ViewChild('dialogScrollingContainer', {static: false})
+  @ViewChild('dialogScrollingContainer')
   public scrollingView: ElementRef;
 
   private pageScrollInstance: PageScrollInstance;
