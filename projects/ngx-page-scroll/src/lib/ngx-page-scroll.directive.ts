@@ -128,7 +128,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
       // "Navigate" to the current route again and this time set the fragment/hash
       this.router.navigate([], {
         fragment: (<string>this.pageScrollInstance.pageScrollOptions.scrollTarget).substr(1),
-        preserveQueryParams: true,
+        queryParamsHandling: 'preserve',
       });
     }
   }
