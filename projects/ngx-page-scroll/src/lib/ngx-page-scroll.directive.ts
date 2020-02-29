@@ -14,8 +14,8 @@ import {
 import { NavigationCancel, NavigationEnd, NavigationError, Router, UrlTree } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
-import { Subscription } from 'rxjs';
 import { EasingLogic, PageScrollInstance, PageScrollOptions, PageScrollService } from 'ngx-page-scroll-core';
+import { filter, take } from 'rxjs/operators';
 
 @Directive({
   selector: '[pageScroll]',
@@ -152,17 +152,19 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
       }
       if (!this.router.isActive(urlTree, true)) {
         // We need to navigate their first.
-        // Navigation is handled by the routerLink directive
-        // so we only need to listen for route change
-        const subscription: Subscription = <Subscription>this.router.events.subscribe((routerEvent) => {
+        // Navigation is handled by the routerLink directive so we only need to listen for route change
+        this.router.events.pipe(filter(routerEvent => {
+            // We're only interested in successful navigations or when the navigation fails
+            return routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel
+          }),
+          // Consume only one event, automatically "unsubscribing" from the event stream afterwards
+          take(1)
+        ).subscribe((routerEvent) => {
           if (routerEvent instanceof NavigationEnd) {
-            subscription.unsubscribe();
             // use a timeout to start scrolling as soon as the stack is cleared
             setTimeout(() => {
               this.scroll();
             }, 0);
-          } else if (routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel) {
-            subscription.unsubscribe();
           }
         });
 
