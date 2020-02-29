@@ -155,7 +155,8 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
         // Navigation is handled by the routerLink directive so we only need to listen for route change
         this.router.events.pipe(filter(routerEvent => {
             // We're only interested in successful navigations or when the navigation fails
-            return routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationError || routerEvent instanceof NavigationCancel
+            return routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationError
+              || routerEvent instanceof NavigationCancel;
           }),
           // Consume only one event, automatically "unsubscribing" from the event stream afterwards
           take(1)

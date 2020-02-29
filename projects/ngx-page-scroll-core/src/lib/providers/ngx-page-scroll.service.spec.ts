@@ -11,7 +11,7 @@ describe('PageScrollService', () => {
   }));
 
   it('should be created', () => {
-    const service: PageScrollService = TestBed.get(PageScrollService);
+    const service: PageScrollService = TestBed.inject(PageScrollService);
     expect(service).toBeTruthy();
   });
 });
