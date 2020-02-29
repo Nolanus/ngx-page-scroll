@@ -1,7 +1,7 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 
 import { ScrollDialogComponent } from './scroll.dialog.component';
 
@@ -12,10 +12,10 @@ import { ScrollDialogComponent } from './scroll.dialog.component';
 })
 export class NestedScrollComponent implements OnInit {
 
-  @ViewChild('basicContainer', {static: false})
+  @ViewChild('basicContainer')
   public basicContainer: ElementRef;
 
-  @ViewChild('complexContainer', {static: false})
+  @ViewChild('complexContainer')
   public complexContainer: ElementRef;
 
   constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService, public dialog: MatDialog) {

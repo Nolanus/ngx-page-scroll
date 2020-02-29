@@ -11,7 +11,7 @@ import { PageScrollConfig } from './types/page-scroll.config';
   ],
 })
 export class NgxPageScrollCoreModule {
-  static forRoot(config?: PageScrollConfig): ModuleWithProviders {
+  static forRoot(config?: PageScrollConfig): ModuleWithProviders<NgxPageScrollCoreModule> {
     return {
       ngModule: NgxPageScrollCoreModule,
       providers: [PageScrollService, {provide: NGXPS_CONFIG, useValue: config}],
