@@ -178,6 +178,7 @@ of only 1 second.
 | `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 | `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
 | `pageScrollSpeed`         | number      | -            | Speed in Pixel/Second the animation should take. Only applied if no duration is set. 
+| `pageScrollInView`        | boolean     | true         | Whether the scroll animation should happen even when the scroll target is already inside the view port (`true`). Set to `false` to skip scroll animation if target is already in view.
 | `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
 | `pageScrollAdjustHash`    | boolean     | false        | Whether the [routes hash/fragment](https://angular.io/docs/ts/latest/guide/router.html#!#query-parameters) should be updated to reflect to section that has been scrolled to
 | `pageScrollEasing`        | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
