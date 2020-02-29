@@ -4,7 +4,7 @@
   "scripts": {
     "build": "ng build",
     "build:app": "ng build --prod --baseHref=/ngx-page-scroll/",
-    "build:lib": "ng build ngx-page-scroll-core && ng build ngx-page-scroll && npm run copy:readme",
+    "build:lib": "ng build ngx-page-scroll-core --prod && ng build ngx-page-scroll --prod && npm run copy:readme",
     "copy:readme": "cpx README.md dist/ngx-page-scroll && cpx README.md dist/ngx-page-scroll-core",
     "commit": "git-cz",
     "e2e": "ng e2e",
