@@ -24,6 +24,14 @@ export class RouteScrollPage extends AppPage {
     return this.triggerAButton(by.css('#differentRouteScroll'));
   }
 
+  getDifferentRouteScrollWithFragmentButtonRouterLink(): promise.Promise<string> {
+    return element(by.css('#differentRouteScrollWithFragment')).getAttribute('routerLink');
+  }
+
+  triggerDifferentRouteScrollWithFragment(): promise.Promise<any> {
+    return this.triggerAButton(by.css('#differentRouteScrollWithFragment'));
+  }
+
   getDemoScrollButtonRouterLink(): promise.Promise<string> {
     return element(by.css('#demoScroll2')).getAttribute('routerLink');
   }

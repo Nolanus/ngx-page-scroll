@@ -26,6 +26,21 @@ describe('Route Scroll page', () => {
     });
   });
 
+  it('should scroll open the new route and scroll to the target heading when the target is specified in fragment attribute', () => {
+    page.getDifferentRouteScrollWithFragmentButtonRouterLink().then(routerLink => {
+      page.triggerDifferentRouteScrollWithFragment().then(() => {
+        expect(browser.getCurrentUrl()).toContain(routerLink);
+        page.getHead7VerticalPosition().then((verticalHeadingLocation) => {
+          browser.sleep(1250).then(() => {
+            page.getScrollPos().then((pos: number) => {
+              expect(pos).toBeCloseTo(Math.round(verticalHeadingLocation), Closeness.ofByOne);
+            });
+          });
+        });
+      });
+    });
+  });
+
   it('should scroll open the /simple route from home and scroll to the target heading', () => {
     browser.get('/');
     page.getDemoScrollButtonRouterLink().then(routerLink => {
