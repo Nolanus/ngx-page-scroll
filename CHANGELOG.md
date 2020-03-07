@@ -1,3 +1,18 @@
+### 7.0.1 (2020-03-07)
+
+### Feature
+
+- Use `fragment` attribute as scroll target source ([#403](https://github.com/Nolanus/ngx-page-scroll/issues/403))
+
+### Fix
+
+- Remove usage of deprecated `preserveQueryParams` ([#392](https://github.com/Nolanus/ngx-page-scroll/issues/392))
+
+### Other
+
+- Document the `scrollInView` feature, which has been around since last version
+- Update demo application to angular 9
+
 ## 7.0.0 (2019-08-31)
 
 ### Breaking Change
