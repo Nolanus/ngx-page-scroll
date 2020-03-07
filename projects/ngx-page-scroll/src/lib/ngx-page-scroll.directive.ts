@@ -85,11 +85,15 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
     }
   }
 
+  private getPageScrollTarget(): string {
+    return this.pageScrollTarget || this.href || (this.fragment ? '#' + this.fragment : '');
+  }
+
   private generatePageScrollInstance(): PageScrollInstance {
     if (this.pageScrollInstance === undefined || this.pageScrollInstance === null) {
       const options: PageScrollOptions = {
         document: this.document,
-        scrollTarget: this.pageScrollTarget || this.href || (this.fragment ? '#' + this.fragment : ''),
+        scrollTarget: this.getPageScrollTarget(),
       };
 
       if (this.pageScroll) {
