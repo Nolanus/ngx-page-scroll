@@ -26,6 +26,18 @@ describe('Route Scroll page', () => {
     });
   });
 
+  it('should scroll on the current page when routerLink points to current page', () => {
+    page.triggerCurrentRouteScroll().then(() => {
+      page.getHead3VerticalPosition().then((verticalHeadingLocation) => {
+        browser.sleep(1250).then(() => {
+          page.getScrollPos().then((pos: number) => {
+            expect(pos).toBeCloseTo(Math.round(verticalHeadingLocation), Closeness.ofByOne);
+          });
+        });
+      });
+    });
+  });
+
   it('should scroll open the new route and scroll to the target heading when the target is specified in fragment attribute', () => {
     page.getDifferentRouteScrollWithFragmentButtonRouterLink().then(routerLink => {
       page.triggerDifferentRouteScrollWithFragment().then(() => {

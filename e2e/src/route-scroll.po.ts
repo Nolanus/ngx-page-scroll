@@ -20,6 +20,10 @@ export class RouteScrollPage extends AppPage {
     return element(by.css('#differentRouteScroll')).getAttribute('routerLink');
   }
 
+  triggerCurrentRouteScroll(): promise.Promise<any> {
+    return this.triggerAButton(by.css('#routerLinkToCurrentScroll'));
+  }
+
   triggerDifferentRouteScroll(): promise.Promise<any> {
     return this.triggerAButton(by.css('#differentRouteScroll'));
   }
