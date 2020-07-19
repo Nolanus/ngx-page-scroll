@@ -1,3 +1,10 @@
+### 7.0.2 (2020-07-19)
+
+### Other
+
+_ Add angular v10 to supported versions
+- Update demo app to angular 10
+
 ### 7.0.1 (2020-03-07)
 
 ### Feature

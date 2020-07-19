@@ -1,6 +1,6 @@
 {
   "name": "ngx-page-scroll",
-  "version": "7.0.1",
+  "version": "7.0.2",
   "description": "Convenience directive for animated scrolling functionality for angular written in pure typescript",
   "keywords": [
     "angular",
