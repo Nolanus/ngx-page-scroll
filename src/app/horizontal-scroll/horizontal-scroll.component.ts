@@ -5,7 +5,7 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-horizontal-scroll',
   templateUrl: './horizontal-scroll.component.html',
-  styleUrls: ['./horizontal-scroll.component.css'],
+  styleUrls: ['./horizontal-scroll.component.scss']
 })
 export class HorizontalScrollComponent implements OnInit {
 
@@ -15,7 +15,7 @@ export class HorizontalScrollComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
   }
 
-  public scrollHorizontalStart() {
+  public scrollHorizontalStart(): void {
     this.pageScrollService.scroll({
       document: this.document,
       scrollTarget: '#horizontalContainerStart',
@@ -24,7 +24,7 @@ export class HorizontalScrollComponent implements OnInit {
     });
   }
 
-  public scrollHorizontal() {
+  public scrollHorizontal(): void {
     const pageScrollInstance: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       scrollTarget: '#inHorizontalContainer',
@@ -34,7 +34,7 @@ export class HorizontalScrollComponent implements OnInit {
     this.pageScrollService.start(pageScrollInstance);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
 }

@@ -5,7 +5,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   public currentTabIndex = 0;
@@ -52,7 +52,7 @@ export class AppComponent {
     });
   }
 
-  public tabChange(event: any) {
+  public tabChange(event: any): void {
     // Select the correct route for that tab
     const routeObj = this.links[event.index];
     if (routeObj && routeObj.route) {

@@ -1,31 +1,35 @@
-import { async, TestBed } from '@angular/core/testing';
+import { TestBed, async } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-
-import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        BrowserAnimationsModule,
-        RouterTestingModule,
+        RouterTestingModule
       ],
       declarations: [
-        AppComponent,
+        AppComponent
       ],
-      providers: [
-        {provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig},
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   }));
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.debugElement.componentInstance;
+    const app = fixture.componentInstance;
     expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'ngx-page-scroll-demo'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('ngx-page-scroll-demo');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.content span').textContent).toContain('ngx-page-scroll-demo app is running!');
   });
 });

@@ -6,7 +6,7 @@ import { EasingLogic, PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-simple-scroll',
   templateUrl: './simple-scroll.component.html',
-  styleUrls: ['./simple-scroll.component.css'],
+  styleUrls: ['./simple-scroll.component.scss'],
   providers: [MatSnackBar],
 })
 export class SimpleScrollComponent implements OnInit {
@@ -34,10 +34,10 @@ export class SimpleScrollComponent implements OnInit {
                      private snackBar: MatSnackBar) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  public goToLastHeading() {
+  public goToLastHeading(): void {
     // You may use any valid css selector as scroll target (e.g. ids, class selectors, tags, combinations of those, ...)
     // const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, '.theEnd');
     const subscriber = new EventEmitter<boolean>();
@@ -51,7 +51,7 @@ export class SimpleScrollComponent implements OnInit {
     });
   }
 
-  public doSmth(reachedTarget: boolean) {
+  public doSmth(reachedTarget: boolean): void {
     let text: string;
     if (reachedTarget) {
       text = 'Yeah, we reached our destination';

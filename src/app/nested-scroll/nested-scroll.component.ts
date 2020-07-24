@@ -2,13 +2,12 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { DOCUMENT } from '@angular/common';
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 import { MatDialog } from '@angular/material/dialog';
-
-import { ScrollDialogComponent } from './scroll.dialog.component';
+import { ScrollDialogComponent } from '../scroll-dialog/scroll-dialog.component';
 
 @Component({
   selector: 'app-nested-scroll',
   templateUrl: './nested-scroll.component.html',
-  styleUrls: ['./nested-scroll.component.css'],
+  styleUrls: ['./nested-scroll.component.scss']
 })
 export class NestedScrollComponent implements OnInit {
 
@@ -21,7 +20,7 @@ export class NestedScrollComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService, public dialog: MatDialog) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
   openDialog(): void {
@@ -36,7 +35,7 @@ export class NestedScrollComponent implements OnInit {
     });
   }
 
-  public scrollInsideBasic() {
+  public scrollInsideBasic(): void {
     const pageScrollInstance: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       scrollTarget: '#basicScrollTarget',
@@ -45,7 +44,7 @@ export class NestedScrollComponent implements OnInit {
     this.pageScrollService.start(pageScrollInstance);
   }
 
-  public scrollInsideComplex() {
+  public scrollInsideComplex(): void {
     const pageScrollInstance: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       scrollTarget: '#complexScrollTarget',

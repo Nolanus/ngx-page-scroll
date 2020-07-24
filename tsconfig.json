@@ -8,25 +8,22 @@
   "files": [],
   "references": [
     {
-      "path": "./src/tsconfig.app.json"
+      "path": "./tsconfig.app.json"
     },
     {
-      "path": "./src/tsconfig.spec.json"
-    },
-    {
-      "path": "./e2e/tsconfig.e2e.json"
-    },
-    {
-      "path": "./projects/ngx-page-scroll/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/ngx-page-scroll/tsconfig.spec.json"
+      "path": "./tsconfig.spec.json"
     },
     {
       "path": "./projects/ngx-page-scroll-core/tsconfig.lib.json"
     },
     {
       "path": "./projects/ngx-page-scroll-core/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/ngx-page-scroll/tsconfig.lib.json"
+    },
+    {
+      "path": "./projects/ngx-page-scroll/tsconfig.spec.json"
     }
-  ]
+]
 }

@@ -298,17 +298,17 @@ export class PageScrollInstance {
 
   private getScrollTargetElement(): HTMLElement {
     if (typeof this.pageScrollOptions.scrollTarget === 'string') {
-      const targetSelector = <string>this.pageScrollOptions.scrollTarget;
+      const targetSelector = this.pageScrollOptions.scrollTarget as string;
       if (targetSelector.match(/^#[^\s]+$/g) !== null) {
         // It's an id selector and a valid id, as it does not contain any white space characters
 
         return this.pageScrollOptions.document.getElementById(targetSelector.substr(1));
       }
 
-      return <HTMLElement>this.pageScrollOptions.document.querySelector(targetSelector);
+      return this.pageScrollOptions.document.querySelector(targetSelector) as HTMLElement;
     }
 
-    return <HTMLElement>this.pageScrollOptions.scrollTarget;
+    return this.pageScrollOptions.scrollTarget as HTMLElement;
   }
 }
 

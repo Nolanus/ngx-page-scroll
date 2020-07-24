@@ -5,7 +5,7 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-namespace-scroll',
   templateUrl: './namespace-scroll.component.html',
-  styleUrls: ['./namespace-scroll.component.css'],
+  styleUrls: ['./namespace-scroll.component.scss']
 })
 export class NamespaceScrollComponent implements OnInit {
 
@@ -24,10 +24,10 @@ export class NamespaceScrollComponent implements OnInit {
   constructor(@Inject(DOCUMENT) private document: any, public pageScrollService: PageScrollService) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
 
-  public startDefaultNamespaceScrolls() {
+  public startDefaultNamespaceScrolls(): void {
     const pageScrollInstance1: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
       duration: 10000,
@@ -46,7 +46,7 @@ export class NamespaceScrollComponent implements OnInit {
     this.pageScrollService.start(pageScrollInstance2);
   }
 
-  public resetDefaultNameScrolls() {
+  public resetDefaultNameScrolls(): void {
     // Jump to the top inside each container
     const pageScrollInstance1: PageScrollInstance = this.pageScrollService.create({
       document: this.document,
@@ -66,7 +66,7 @@ export class NamespaceScrollComponent implements OnInit {
     this.pageScrollService.start(pageScrollInstance2);
   }
 
-  public startCustomNamespaceScroll() {
+  public startCustomNamespaceScroll(): void {
     this.pageScrollService.scroll({
       document: this.document,
       duration: 10000,
@@ -76,7 +76,7 @@ export class NamespaceScrollComponent implements OnInit {
     });
   }
 
-  public resetCustomNamespaceScroll() {
+  public resetCustomNamespaceScroll(): void {
     this.pageScrollService.scroll({
       document: this.document,
       duration: 0,
@@ -86,15 +86,15 @@ export class NamespaceScrollComponent implements OnInit {
     });
   }
 
-  public stopDefaultNamespaceScrolls() {
+  public stopDefaultNamespaceScrolls(): void {
     this.pageScrollService.stopAll('default');
   }
 
-  public stopCustomNamespaceScrolls() {
+  public stopCustomNamespaceScrolls(): void {
     this.pageScrollService.stopAll('customSpace');
   }
 
-  public stopAllNamespaceScrolls() {
+  public stopAllNamespaceScrolls(): void {
     this.pageScrollService.stopAll();
   }
 

@@ -71,7 +71,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   private document: Document;
 
   constructor(private pageScrollService: PageScrollService, @Optional() private router: Router, @Inject(DOCUMENT) document: any) {
-    this.document = <Document>document;
+    this.document = (document as Document);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -129,12 +129,12 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
     return this.pageScrollInstance;
   }
 
-  private pushRouterState() {
+  private pushRouterState(): void {
     if (this.pageScrollAdjustHash && typeof this.pageScrollInstance.pageScrollOptions.scrollTarget === 'string'
-      && (<string>this.pageScrollInstance.pageScrollOptions.scrollTarget).substr(0, 1) === '#') {
+      && (this.pageScrollInstance.pageScrollOptions.scrollTarget as string).substr(0, 1) === '#') {
       // "Navigate" to the current route again and this time set the fragment/hash
       this.router.navigate([], {
-        fragment: (<string>this.pageScrollInstance.pageScrollOptions.scrollTarget).substr(1),
+        fragment: (this.pageScrollInstance.pageScrollOptions.scrollTarget as string).substr(1),
         queryParamsHandling: 'preserve',
       });
     }
