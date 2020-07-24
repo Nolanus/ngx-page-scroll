@@ -22,6 +22,7 @@ export class SimpleScrollComponent implements OnInit {
     if (t === d) {
       return b + c;
     }
+    // tslint:disable-next-line:no-conditional-assignment
     if ((t /= d / 2) < 1) {
       return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
     }

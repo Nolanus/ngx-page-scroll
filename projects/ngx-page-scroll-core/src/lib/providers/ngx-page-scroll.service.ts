@@ -25,7 +25,7 @@ export class PageScrollService {
 
       if (event.type === 'keyup') {
         // Only stop if specific keys have been pressed, for all others don't stop anything
-        if (this.config.interruptKeys.indexOf((<KeyboardEvent>event).key) === -1) {
+        if (this.config.interruptKeys.indexOf((event as KeyboardEvent).key) === -1) {
           // The pressed key is not in the list of interrupting keys
           shouldStop = false;
         }
@@ -198,30 +198,30 @@ export class PageScrollService {
     // .. and calculate the end time (when we need to finish at last)
     pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
 
-    pageScrollInstance.timer = setInterval((_pageScrollInstance: PageScrollInstance) => {
+    pageScrollInstance.timer = setInterval((instance: PageScrollInstance) => {
       // Take the current time
       const currentTime: number = new Date().getTime();
 
       // Determine the new scroll position
       let newScrollPosition: number;
       let stopNow = false;
-      if (_pageScrollInstance.endTime <= currentTime) {
+      if (instance.endTime <= currentTime) {
         // We're over the time already, so go the targetScrollPosition (aka destination)
-        newScrollPosition = _pageScrollInstance.targetScrollPosition;
+        newScrollPosition = instance.targetScrollPosition;
         stopNow = true;
       } else {
         // Calculate the scroll position based on the current time using the easing function
-        newScrollPosition = Math.round(_pageScrollInstance.pageScrollOptions.easingLogic(
-          currentTime - _pageScrollInstance.startTime,
-          _pageScrollInstance.startScrollPosition,
-          _pageScrollInstance.distanceToScroll,
-          _pageScrollInstance.executionDuration));
+        newScrollPosition = Math.round(instance.pageScrollOptions.easingLogic(
+          currentTime - instance.startTime,
+          instance.startScrollPosition,
+          instance.distanceToScroll,
+          instance.executionDuration));
       }
       if (this.config._logLevel >= 5 && isDevMode()) {
         console.warn('Scroll Position: ' + newScrollPosition);
       }
       // Set the new scrollPosition to all scrollViews elements
-      if (!_pageScrollInstance.setScrollPosition(newScrollPosition)) {
+      if (!instance.setScrollPosition(newScrollPosition)) {
         // Setting the new scrollTop/scrollLeft value failed for all ScrollViews
         // early stop the scroll animation to save resources
         stopNow = true;
@@ -230,7 +230,7 @@ export class PageScrollService {
       // At the end do the internal stop maintenance and fire the pageScrollFinish event
       // (otherwise the event might arrive at "too early")
       if (stopNow) {
-        this.stopInternal(false, _pageScrollInstance);
+        this.stopInternal(false, instance);
       }
 
     }, this.config._interval, pageScrollInstance);

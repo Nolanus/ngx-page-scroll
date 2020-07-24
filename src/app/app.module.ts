@@ -2,17 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import { MatTabsModule } from "@angular/material/tabs";
-import { MatToolbarModule } from "@angular/material/toolbar";
-import { MatCardModule } from "@angular/material/card";
-import { NgxPageScrollModule } from "ngx-page-scroll";
-import { MatChipsModule } from "@angular/material/chips";
-import { MatButtonModule } from "@angular/material/button";
-import { FlexModule } from "@angular/flex-layout";
-import { MatIconModule } from "@angular/material/icon";
-import { MatDialogModule } from "@angular/material/dialog";
-import { MatSelectModule } from "@angular/material/select";
-import { FormsModule } from "@angular/forms";
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonModule } from '@angular/material/button';
+import { FlexModule } from '@angular/flex-layout';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { FormsModule } from '@angular/forms';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
