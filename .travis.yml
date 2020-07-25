@@ -4,7 +4,7 @@ node_js:
 sudo: true
 
 addons:
-  chrome: beta
+  chrome: stable
 
 before_script:
   - npm install -g @angular/cli
