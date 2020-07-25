@@ -1,10 +1,10 @@
 language: node_js
 node_js:
-  - "10.16.0"
+  - "12.18.3"
 sudo: true
 
 addons:
-  chrome: stable
+  chrome: beta
 
 before_script:
   - npm install -g @angular/cli
