@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-translated-target-scroll',
   templateUrl: './translated-target-scroll.component.html',
-  styleUrls: ['./translated-target-scroll.component.scss']
+  styleUrls: ['./translated-target-scroll.component.scss'],
 })
 export class TranslatedTargetScrollComponent implements OnInit {
 

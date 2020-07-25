@@ -6,7 +6,7 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-scroll-dialog',
   templateUrl: './scroll-dialog.component.html',
-  styleUrls: ['./scroll-dialog.component.scss']
+  styleUrls: ['./scroll-dialog.component.scss'],
 })
 export class ScrollDialogComponent implements OnInit, AfterViewInit {
 

@@ -7,7 +7,7 @@ import { ScrollDialogComponent } from '../scroll-dialog/scroll-dialog.component'
 @Component({
   selector: 'app-nested-scroll',
   templateUrl: './nested-scroll.component.html',
-  styleUrls: ['./nested-scroll.component.scss']
+  styleUrls: ['./nested-scroll.component.scss'],
 })
 export class NestedScrollComponent implements OnInit {
 

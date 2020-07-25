@@ -1,4 +1,5 @@
 {
+  "extends": "tslint:recommended",
   "rules": {
     "cyclomatic-complexity": true,
     "newline-before-return": true,

@@ -5,7 +5,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   public currentTabIndex = 0;

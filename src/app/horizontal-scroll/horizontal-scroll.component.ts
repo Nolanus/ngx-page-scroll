@@ -5,7 +5,7 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 @Component({
   selector: 'app-horizontal-scroll',
   templateUrl: './horizontal-scroll.component.html',
-  styleUrls: ['./horizontal-scroll.component.scss']
+  styleUrls: ['./horizontal-scroll.component.scss'],
 })
 export class HorizontalScrollComponent implements OnInit {
 

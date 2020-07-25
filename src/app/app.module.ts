@@ -61,7 +61,7 @@ import { ScrollDialogComponent } from './scroll-dialog/scroll-dialog.component';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [ScrollDialogComponent]
+  entryComponents: [ScrollDialogComponent],
 })
 export class AppModule {
 }

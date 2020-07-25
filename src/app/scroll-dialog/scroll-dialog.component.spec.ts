@@ -15,7 +15,7 @@ describe('ScrollDialogComponent', () => {
       providers: [
         {provide: MAT_DIALOG_DATA, useValue: {}},
         {provide: MatDialogRef, useValue: {}},
-        {provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}
+        {provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig},
       ],
     })
       .compileComponents();

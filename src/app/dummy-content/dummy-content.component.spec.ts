@@ -8,7 +8,7 @@ describe('DummyContentComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DummyContentComponent ]
+      declarations: [ DummyContentComponent ],
     })
     .compileComponents();
   }));

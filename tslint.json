@@ -1,5 +1,5 @@
 {
-  "extends": "tslint:recommended",
+  "extends": "./custom_tslint.json",
   "rules": {
     "align": {
       "options": [
