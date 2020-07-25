@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SimpleScrollComponent } from './simple-scroll.component';
+import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 describe('SimpleScrollComponent', () => {
   let component: SimpleScrollComponent;
@@ -8,9 +10,11 @@ describe('SimpleScrollComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SimpleScrollComponent ]
+      declarations: [SimpleScrollComponent],
+      imports: [OverlayModule],
+      providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

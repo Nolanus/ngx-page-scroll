@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NamespaceScrollComponent } from './namespace-scroll.component';
+import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
 
 describe('NamespaceScrollComponent', () => {
   let component: NamespaceScrollComponent;
@@ -8,7 +9,8 @@ describe('NamespaceScrollComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NamespaceScrollComponent ]
+      declarations: [ NamespaceScrollComponent ],
+      providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
     })
     .compileComponents();
   }));

@@ -41,7 +41,7 @@ import { ScrollDialogComponent } from './scroll-dialog/scroll-dialog.component';
     HomeComponent,
     DummyContentComponent,
     DummyCardComponent,
-    ScrollDialogComponent
+    ScrollDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +57,7 @@ import { ScrollDialogComponent } from './scroll-dialog/scroll-dialog.component';
     MatIconModule,
     MatDialogModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

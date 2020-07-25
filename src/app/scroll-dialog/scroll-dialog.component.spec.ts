@@ -1,4 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
 
 import { ScrollDialogComponent } from './scroll-dialog.component';
 
@@ -8,9 +10,15 @@ describe('ScrollDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ScrollDialogComponent ]
+      declarations: [ScrollDialogComponent],
+      imports: [MatDialogModule],
+      providers: [
+        {provide: MAT_DIALOG_DATA, useValue: {}},
+        {provide: MatDialogRef, useValue: {}},
+        {provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}
+      ],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

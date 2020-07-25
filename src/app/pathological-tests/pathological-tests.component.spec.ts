@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PathologicalTestsComponent } from './pathological-tests.component';
+import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 describe('PathologicalTestsComponent', () => {
   let component: PathologicalTestsComponent;
@@ -8,9 +10,11 @@ describe('PathologicalTestsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PathologicalTestsComponent ]
+      declarations: [PathologicalTestsComponent],
+      imports: [OverlayModule],
+      providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

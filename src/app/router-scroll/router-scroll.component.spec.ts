@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RouterScrollComponent } from './router-scroll.component';
+import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
 
 describe('RouterScrollComponent', () => {
   let component: RouterScrollComponent;
@@ -8,7 +9,8 @@ describe('RouterScrollComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RouterScrollComponent ]
+      declarations: [ RouterScrollComponent ],
+      providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
     })
     .compileComponents();
   }));
