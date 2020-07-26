@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
 
 import { ScrollDialogComponent } from './scroll-dialog.component';
+import { MatCardModule } from '@angular/material/card';
+import { DummyCardComponent } from '../dummy-card/dummy-card.component';
 
 describe('ScrollDialogComponent', () => {
   let component: ScrollDialogComponent;
@@ -10,8 +12,8 @@ describe('ScrollDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ScrollDialogComponent],
-      imports: [MatDialogModule],
+      declarations: [ScrollDialogComponent, DummyCardComponent],
+      imports: [MatDialogModule, MatCardModule],
       providers: [
         {provide: MAT_DIALOG_DATA, useValue: {}},
         {provide: MatDialogRef, useValue: {}},

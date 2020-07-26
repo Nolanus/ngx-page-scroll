@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HorizontalScrollComponent } from './horizontal-scroll.component';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
+import { MatCardModule } from '@angular/material/card';
 
 describe('HorizontalScrollComponent', () => {
   let component: HorizontalScrollComponent;
@@ -9,10 +10,11 @@ describe('HorizontalScrollComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HorizontalScrollComponent ],
+      declarations: [HorizontalScrollComponent],
+      imports: [MatCardModule],
       providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DummyCardComponent } from './dummy-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { DummyContentComponent } from '../dummy-content/dummy-content.component';
 
 describe('DummyCardComponent', () => {
   let component: DummyCardComponent;
@@ -8,9 +10,10 @@ describe('DummyCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DummyCardComponent ],
+      declarations: [DummyCardComponent, DummyContentComponent],
+      imports: [MatCardModule],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

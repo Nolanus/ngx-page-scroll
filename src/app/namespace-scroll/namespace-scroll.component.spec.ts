@@ -2,6 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NamespaceScrollComponent } from './namespace-scroll.component';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
+import { MatCardModule } from '@angular/material/card';
+import { DummyCardComponent } from '../dummy-card/dummy-card.component';
+import { DummyContentComponent } from '../dummy-content/dummy-content.component';
 
 describe('NamespaceScrollComponent', () => {
   let component: NamespaceScrollComponent;
@@ -9,10 +12,11 @@ describe('NamespaceScrollComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NamespaceScrollComponent ],
+      declarations: [NamespaceScrollComponent, DummyCardComponent, DummyContentComponent],
+      imports: [MatCardModule],
       providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
