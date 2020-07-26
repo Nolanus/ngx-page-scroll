@@ -1,8 +1,14 @@
+### 7.0.3 (2020-07-26)
+
+### Other
+
+- Fix release script causing unusable builds and release 7.0.2 ([#414](https://github.com/Nolanus/ngx-page-scroll/issues/414), [#415](https://github.com/Nolanus/ngx-page-scroll/issues/415))
+
 ### 7.0.2 (2020-07-19)
 
 ### Other
 
-_ Add angular v10 to supported versions
+- Add angular v10 to supported versions
 - Update demo app to angular 10
 
 ### 7.0.1 (2020-03-07)
