@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - "12.18.3"
-sudo: true
 
 addons:
   chrome: stable
@@ -22,10 +21,10 @@ script:
 
 deploy:
   provider: pages
-  skip-cleanup: true
+  skip_cleanup: true
   github-token: $GITHUB_TOKEN # Set in the settings page of your repository, as a secure variable
   local_dir: dist/ngx-page-scroll-demo
-  keep-history: true
+  keep_history: true
   name:
   on:
     branch: master
