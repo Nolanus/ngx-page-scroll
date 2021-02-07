@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { PathologicalTestsComponent } from './pathological-tests.component';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
@@ -9,11 +9,11 @@ describe('PathologicalTestsComponent', () => {
   let component: PathologicalTestsComponent;
   let fixture: ComponentFixture<PathologicalTestsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [PathologicalTestsComponent],
       imports: [OverlayModule, MatCardModule],
-      providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
+      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
     })
       .compileComponents();
   }));

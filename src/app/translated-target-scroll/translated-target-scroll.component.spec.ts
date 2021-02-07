@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { TranslatedTargetScrollComponent } from './translated-target-scroll.component';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
@@ -8,11 +8,11 @@ describe('TranslatedTargetScrollComponent', () => {
   let component: TranslatedTargetScrollComponent;
   let fixture: ComponentFixture<TranslatedTargetScrollComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TranslatedTargetScrollComponent],
       imports: [MatCardModule],
-      providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
+      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
     })
       .compileComponents();
   }));

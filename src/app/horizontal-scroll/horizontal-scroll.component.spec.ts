@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { HorizontalScrollComponent } from './horizontal-scroll.component';
 import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
@@ -8,11 +8,11 @@ describe('HorizontalScrollComponent', () => {
   let component: HorizontalScrollComponent;
   let fixture: ComponentFixture<HorizontalScrollComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [HorizontalScrollComponent],
       imports: [MatCardModule],
-      providers: [{provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig}],
+      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
     })
       .compileComponents();
   }));
