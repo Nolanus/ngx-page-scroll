@@ -1,3 +1,10 @@
+### 7.0.4 (2020-11-15)
+
+### Other
+
+- Add angular v11 to supported versions
+- Update demo app to angular 11
+
 ### 7.0.3 (2020-07-26)
 
 ### Other
