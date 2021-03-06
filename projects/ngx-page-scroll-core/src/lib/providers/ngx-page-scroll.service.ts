@@ -54,11 +54,11 @@ export class PageScrollService {
       pageScrollInstance.detachInterruptListeners();
     }
 
-    if (pageScrollInstance.timer) {
+    if (pageScrollInstance.requestFrameId) {
       // Clear/Stop the timer
-      clearInterval(pageScrollInstance.timer);
+      window.cancelAnimationFrame(pageScrollInstance.requestFrameId)
       // Clear the reference to this timer
-      pageScrollInstance.timer = undefined;
+      pageScrollInstance.requestFrameId = null;
       pageScrollInstance.fireEvent(!interrupted);
 
       return true;
@@ -198,7 +198,14 @@ export class PageScrollService {
     // .. and calculate the end time (when we need to finish at last)
     pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
 
-    pageScrollInstance.timer = setInterval((instance: PageScrollInstance) => {
+    pageScrollInstance.requestFrameId =  window.requestAnimationFrame(this.updateScrollPostion(pageScrollInstance))
+
+    // Register the instance as running one
+    this.runningInstances.push(pageScrollInstance);
+  }
+
+  public updateScrollPostion(instance: PageScrollInstance){
+    return  ()=>{
       // Take the current time
       const currentTime: number = new Date().getTime();
 
@@ -231,12 +238,10 @@ export class PageScrollService {
       // (otherwise the event might arrive at "too early")
       if (stopNow) {
         this.stopInternal(false, instance);
+      } else{
+        window.requestAnimationFrame(this.updateScrollPostion(instance))
       }
-
-    }, this.config._interval, pageScrollInstance);
-
-    // Register the instance as running one
-    this.runningInstances.push(pageScrollInstance);
+    }
   }
 
   public scroll(options: PageScrollOptions): void {
