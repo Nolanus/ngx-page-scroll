@@ -8,6 +8,18 @@ import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
   providedIn: 'root',
 })
 export class PageScrollService {
+
+  constructor(@Inject(NGXPS_CONFIG) customConfig: PageScrollConfig) {
+    this.config = { ...defaultPageScrollConfig, ...customConfig };
+
+    if (PageScrollService.instanceCounter > 0 &&
+      (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode()))) {
+      console.warn('An instance of PageScrollService already exists, usually ' +
+        'including one provider should be enough, so double check.');
+    }
+    PageScrollService.instanceCounter++;
+  }
+
   private static instanceCounter = 0;
 
   private readonly config: PageScrollConfig;
@@ -44,6 +56,18 @@ export class PageScrollService {
     },
   };
 
+  /**
+   * Util method to extract the window instance form a given document
+   * Source: https://stackoverflow.com/a/50023378/2225619
+   * @param instance
+   * @private
+   */
+  private static getWindow(instance: PageScrollInstance): Window | undefined {
+    const instanceDocument: Document & { parentWindow?: any } = instance.pageScrollOptions.document;
+
+    return instanceDocument.defaultView || instanceDocument.parentWindow;
+  }
+
   private stopInternal(interrupted: boolean, pageScrollInstance: PageScrollInstance): boolean {
     const index: number = this.runningInstances.indexOf(pageScrollInstance);
     if (index >= 0) {
@@ -56,7 +80,7 @@ export class PageScrollService {
 
     if (pageScrollInstance.requestFrameId) {
       // Clear/Stop the timer
-      window.cancelAnimationFrame(pageScrollInstance.requestFrameId)
+      window.cancelAnimationFrame(pageScrollInstance.requestFrameId);
       // Clear the reference to this timer
       pageScrollInstance.requestFrameId = null;
       pageScrollInstance.fireEvent(!interrupted);
@@ -68,7 +92,7 @@ export class PageScrollService {
   }
 
   public create(options: PageScrollOptions): PageScrollInstance {
-    return new PageScrollInstance({...this.config, ...options} as PageScrollOptions);
+    return new PageScrollInstance({ ...this.config, ...options } as PageScrollOptions);
   }
 
   /**
@@ -79,7 +103,7 @@ export class PageScrollService {
   // tslint:disable-next-line:cyclomatic-complexity
   public start(pageScrollInstance: PageScrollInstance): void {
     // Merge the default options in the pageScrollInstance options
-    pageScrollInstance.pageScrollOptions = {...this.config, ...pageScrollInstance.pageScrollOptions} as PageScrollOptions;
+    pageScrollInstance.pageScrollOptions = { ...this.config, ...pageScrollInstance.pageScrollOptions } as PageScrollOptions;
 
     // Stop all possibly running scroll animations in the same namespace
     this.stopAll(pageScrollInstance.pageScrollOptions.namespace);
@@ -157,17 +181,9 @@ export class PageScrollService {
         Math.abs(pageScrollInstance.distanceToScroll) / pageScrollInstance.pageScrollOptions.speed * 1000;
     }
 
-    // We should go there directly, as our "animation" would have one big step
-    // only anyway and this way we save the interval stuff
-    const tooShortInterval = pageScrollInstance.executionDuration <= pageScrollInstance.pageScrollOptions._interval;
-
-    if (allReadyAtDestination || tooShortInterval) {
+    if (allReadyAtDestination) {
       if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-        if (allReadyAtDestination) {
-          console.log('Scrolling not possible, as we can\'t get any closer to the destination');
-        } else {
-          console.log('Scroll duration shorter that interval length, jumping to target');
-        }
+        console.log('Scrolling not possible, as we can\'t get any closer to the destination');
       }
       pageScrollInstance.setScrollPosition(pageScrollInstance.targetScrollPosition);
       pageScrollInstance.fireEvent(true);
@@ -198,14 +214,15 @@ export class PageScrollService {
     // .. and calculate the end time (when we need to finish at last)
     pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
 
-    pageScrollInstance.requestFrameId =  window.requestAnimationFrame(this.updateScrollPostion(pageScrollInstance))
+    pageScrollInstance.requestFrameId = PageScrollService.getWindow(pageScrollInstance)
+      .requestAnimationFrame(this.updateScrollPosition(pageScrollInstance));
 
     // Register the instance as running one
     this.runningInstances.push(pageScrollInstance);
   }
 
-  public updateScrollPostion(instance: PageScrollInstance){
-    return  ()=>{
+  public updateScrollPosition(instance: PageScrollInstance): () => void {
+    return () => {
       // Take the current time
       const currentTime: number = new Date().getTime();
 
@@ -238,10 +255,10 @@ export class PageScrollService {
       // (otherwise the event might arrive at "too early")
       if (stopNow) {
         this.stopInternal(false, instance);
-      } else{
-        window.requestAnimationFrame(this.updateScrollPostion(instance))
+      } else {
+        PageScrollService.getWindow(instance).requestAnimationFrame(this.updateScrollPosition(instance));
       }
-    }
+    };
   }
 
   public scroll(options: PageScrollOptions): void {
@@ -273,16 +290,5 @@ export class PageScrollService {
 
   public stop(pageScrollInstance: PageScrollInstance): boolean {
     return this.stopInternal(true, pageScrollInstance);
-  }
-
-  constructor(@Inject(NGXPS_CONFIG) customConfig: PageScrollConfig) {
-    this.config = {...defaultPageScrollConfig, ...customConfig};
-
-    if (PageScrollService.instanceCounter > 0 &&
-      (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode()))) {
-      console.warn('An instance of PageScrollService already exists, usually ' +
-        'including one provider should be enough, so double check.');
-    }
-    PageScrollService.instanceCounter++;
   }
 }
