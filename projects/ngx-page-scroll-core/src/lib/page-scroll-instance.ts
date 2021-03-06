@@ -5,7 +5,7 @@ import { PageScrollViews } from './types/page-scroll-view';
 import { EasingLogic } from './types/easing-logic';
 
 /**
- * An Interface specifying the possible options to be passed into the newInstance() factory method
+ * An Interface specifying the possible options to be passed into the {@link PageScrollService#create} method
  */
 export interface PageScrollOptions extends PageScrollConfig {
   /**
