@@ -56,7 +56,7 @@ export class PageScrollService {
 
     if (pageScrollInstance.requestFrameId) {
       // Clear/Stop the timer
-      window.cancelAnimationFrame(pageScrollInstance.requestFrameId)
+      pageScrollInstance.pageScrollOptions.document.defaultView.cancelAnimationFrame(pageScrollInstance.requestFrameId)
       // Clear the reference to this timer
       pageScrollInstance.requestFrameId = null;
       pageScrollInstance.fireEvent(!interrupted);
@@ -198,7 +198,7 @@ export class PageScrollService {
     // .. and calculate the end time (when we need to finish at last)
     pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
 
-    pageScrollInstance.requestFrameId =  window.requestAnimationFrame(this.updateScrollPostion(pageScrollInstance))
+    pageScrollInstance.requestFrameId =  pageScrollInstance.pageScrollOptions.document.defaultView.requestAnimationFrame(this.updateScrollPostion(pageScrollInstance));
 
     // Register the instance as running one
     this.runningInstances.push(pageScrollInstance);
@@ -239,7 +239,7 @@ export class PageScrollService {
       if (stopNow) {
         this.stopInternal(false, instance);
       } else{
-        window.requestAnimationFrame(this.updateScrollPostion(instance))
+        instance.pageScrollOptions.document.defaultView.requestAnimationFrame(this.updateScrollPostion(instance))
       }
     }
   }
