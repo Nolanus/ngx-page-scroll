@@ -157,17 +157,9 @@ export class PageScrollService {
         Math.abs(pageScrollInstance.distanceToScroll) / pageScrollInstance.pageScrollOptions.speed * 1000;
     }
 
-    // We should go there directly, as our "animation" would have one big step
-    // only anyway and this way we save the interval stuff
-    const tooShortInterval = pageScrollInstance.executionDuration <= pageScrollInstance.pageScrollOptions._interval;
-
-    if (allReadyAtDestination || tooShortInterval) {
+    if (allReadyAtDestination) {
       if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-        if (allReadyAtDestination) {
-          console.log('Scrolling not possible, as we can\'t get any closer to the destination');
-        } else {
-          console.log('Scroll duration shorter that interval length, jumping to target');
-        }
+        console.log('Scrolling not possible, as we can\'t get any closer to the destination');
       }
       pageScrollInstance.setScrollPosition(pageScrollInstance.targetScrollPosition);
       pageScrollInstance.fireEvent(true);

@@ -3,12 +3,6 @@ import { EasingLogic } from './easing-logic';
 export interface PageScrollConfig {
 
   /**
-   * The number of milliseconds to wait till updating the scroll position again.
-   * Small amounts may produce smoother animations but require more processing power.
-   */
-  _interval?: number;
-
-  /**
    * The amount of pixels that need to be between the current scrollTop/scrollLeft position
    * and the target position the cause a scroll animation. In case distance is below
    * this threshold, an immediate jump will be performed.
