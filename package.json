@@ -29,7 +29,7 @@
     "@angular/platform-browser-dynamic": "^11.1.2",
     "@angular/router": "^11.1.2",
     "normalize.css": "^8.0.1",
-    "rxjs": "~6.6.3",
+    "rxjs": "~6.6.6",
     "tslib": "^2.1.0",
     "zone.js": "~0.10.3"
   },
