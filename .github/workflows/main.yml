@@ -34,7 +34,7 @@ jobs:
         uses: browser-actions/setup-chrome@latest
         with:
           # The Chromium version to install and use.
-          chromium-version: stable
+          chrome-version: stable
           
       - name: Print chrome version
         run: chrome --version
@@ -55,22 +55,19 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-
-      - name: Install global npm dependencies
-        run: npm install -g @angular/cli
         
       # Runs npm install
       - name: Install dependencies
         run: npm install
 
       - name: Lint files
-        run: ng lint
+        run: npm run lint
 
       - name: Build lib
         run: npm run build:lib
       
       - name: Run tests
-        run: ng test --watch false --browsers ChromeHeadless
+        run: npm run test -- --watch false --browsers ChromeHeadless
         
       - name: Run e2e tests
-        run: ng e2e --protractor-config='e2e/protractor.ci.conf.js'
+        run: npm run e2e -- --protractor-config='e2e/protractor.ci.conf.js'
