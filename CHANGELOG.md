@@ -1,3 +1,13 @@
+### 7.0.5 (2021-06-03)
+
+### Fix
+
+- Peer dependency version mismatch ([#429](https://github.com/Nolanus/ngx-page-scroll/issues/429))
+
+### Other
+
+- Remove existing instance warning
+
 ### 7.0.4 (2021-02-07)
 
 ### Other
