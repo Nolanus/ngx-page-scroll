@@ -4,13 +4,15 @@ name: CI
 
 # Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
+  # Trigger the workflow on push or pull request,
+  # but only for the main branch
   push:
-    branches: [ master ]
+  
   pull_request:
-    branches: [ master ]
+    branches:
+      - main
 
-  # Allows you to run this workflow manually from the Actions tab
+# Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -24,15 +26,18 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-
+      
       # Install Chrome Browser
       - name: Setup Chrome
         # You may pin to the exact commit or the version.
         # uses: browser-actions/setup-chrome@4fa655aad48f56911cad16db9252399a9e592848
-        uses: browser-actions/setup-chrome@v0.0.0
+        uses: browser-actions/setup-chrome@latest
         with:
           # The Chromium version to install and use.
           chromium-version: stable
+          
+      - name: Print chrome version
+        run: chrome --version
                       
       # Install NodeJS
       - name: Setup Node.js environment
