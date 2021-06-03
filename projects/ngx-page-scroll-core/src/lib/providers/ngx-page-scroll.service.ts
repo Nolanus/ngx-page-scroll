@@ -8,8 +8,6 @@ import { defaultPageScrollConfig, NGXPS_CONFIG } from './config.provider';
   providedIn: 'root',
 })
 export class PageScrollService {
-  private static instanceCounter = 0;
-
   private readonly config: PageScrollConfig;
 
   private runningInstances: PageScrollInstance[] = [];
@@ -272,12 +270,5 @@ export class PageScrollService {
 
   constructor(@Inject(NGXPS_CONFIG) customConfig: PageScrollConfig) {
     this.config = {...defaultPageScrollConfig, ...customConfig};
-
-    if (PageScrollService.instanceCounter > 0 &&
-      (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode()))) {
-      console.warn('An instance of PageScrollService already exists, usually ' +
-        'including one provider should be enough, so double check.');
-    }
-    PageScrollService.instanceCounter++;
   }
 }
