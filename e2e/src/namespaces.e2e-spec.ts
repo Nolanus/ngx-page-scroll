@@ -12,8 +12,6 @@ describe('Namespace Feature', () => {
   });
 
   it('should have only one scroll animation running in one namespace', () => {
-    const trigger: ElementFinder = element(by.css('#startDefaultNamespaceScrollsButton'));
-
     // Check that both containers start at the top
     protractor.promise.all([page.getContainer1ScrollTop(), page.getContainer2ScrollTop()]).then(
       ([container1ScrollTop, container2ScrollTop]) => {
