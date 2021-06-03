@@ -30,7 +30,7 @@
     "@angular/router": "^11.1.2",
     "normalize.css": "^8.0.1",
     "rxjs": "~6.6.3",
-    "tslib": "^2.1.0",
+    "tslib": "^2.2.0",
     "zone.js": "~0.10.3"
   },
   "devDependencies": {
