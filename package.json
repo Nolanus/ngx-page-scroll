@@ -31,7 +31,7 @@
     "normalize.css": "^8.0.1",
     "rxjs": "~6.6.3",
     "tslib": "^2.1.0",
-    "zone.js": "~0.10.3"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.1101.4",
