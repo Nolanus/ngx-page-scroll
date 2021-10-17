@@ -1,3 +1,10 @@
+### 7.0.6 (2021-10-17)
+
+### Other
+
+- Add angular v12 to supported versions
+- Update demo app to angular 12
+
 ### 7.0.5 (2021-06-03)
 
 ### Fix
