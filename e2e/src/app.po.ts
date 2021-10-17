@@ -9,7 +9,7 @@ export abstract class AppPage {
     return browser.get(this.getPath()) as promise.Promise<any>;
   }
 
-  scrollToElement(elm: ElementFinder): promise.Promise<{}> {
+  scrollToElement(elm: ElementFinder): promise.Promise<unknown> {
     return elm.getLocation().then((loc) => {
       return browser.driver.executeScript('window.scrollTo(0,arguments[0]);', loc.y);
     });
@@ -20,15 +20,15 @@ export abstract class AppPage {
   }
 
   protected getOffsetTop(selector: By): promise.Promise<number> {
-    return element(selector).getAttribute('offsetTop').then((offsetTopString) => {
-      return +offsetTopString;
-    });
+    return browser.driver.executeScript('return (arguments[0].offsetTop);', element(selector).getWebElement());
   }
 
   protected getScrollTop(selector: By): promise.Promise<number> {
-    return element(selector).getAttribute('scrollTop').then((scrollTop) => {
-      return +scrollTop;
-    });
+    return browser.driver.executeScript('return (arguments[0].scrollTop);', element(selector).getWebElement());
+  }
+
+  protected getScrollHeight(selector: By): promise.Promise<number> {
+    return browser.driver.executeScript('return (arguments[0].scrollHeight);', element(selector).getWebElement());
   }
 
   protected getVerticalPosition(selector: By): promise.Promise<number> {
@@ -46,11 +46,7 @@ export abstract class AppPage {
   }
 
   getBodyScrollHeight(): promise.Promise<number> {
-    const body: ElementFinder = element(by.css('body'));
-
-    return body.getAttribute('scrollHeight').then((bodyScrollHeightString: string) => {
-      return +bodyScrollHeightString;
-    });
+    return this.getScrollHeight(by.css('body'));
   }
 
   getWindowInnerHeight(): promise.Promise<number> {

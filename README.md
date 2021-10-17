@@ -2,14 +2,12 @@
 
 Animated scrolling functionality for angular written in pure typescript with no additional dependencies
 
-[![Build Status](https://travis-ci.org/Nolanus/ngx-page-scroll.svg?branch=master)](https://travis-ci.org/Nolanus/ngx-page-scroll)
+[![Build Status](https://github.com/Nolanus/ngx-page-scroll/actions/workflows/main.yml/badge.svg)](https://github.com/Nolanus/ngx-page-scroll/actions/workflows/main.yml)
 [![Dependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll)
 [![devDependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll/dev-status.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll&type=dev)
 [![peerDependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll/peer-status.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll&type=peer)
-[![Greenkeeper badge](https://badges.greenkeeper.io/Nolanus/ngx-page-scroll.svg)](https://greenkeeper.io/)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2b93ea8939824803b0807b72a8c2f5a0)](https://www.codacy.com/app/sebastian-fuss/ngx-page-scroll?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nolanus/ngx-page-scroll&amp;utm_campaign=Badge_Grade)
-
-**Breaking Change**: Starting with v6 this library consists of two modules: `ngx-page-scroll-core` (the service) and `ngx-page-scroll` (the directive). [➡ How to upgrade](https://github.com/Nolanus/ngx-page-scroll/issues/88#issuecomment-456824209)
+[![Known Vulnerabilities](https://snyk.io/test/github/Nolanus/ngx-page-scroll/badge.svg)](https://snyk.io/test/github/Nolanus/ngx-page-scroll)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/aa10be6ea5654211bb451c6ade2f1ff6)](https://www.codacy.com/gh/Nolanus/ngx-page-scroll/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nolanus/ngx-page-scroll&amp;utm_campaign=Badge_Grade)
 
 ## Features
 
@@ -32,15 +30,16 @@ routing has finished) and in both directions (horizontal/vertical)
   - [Setup](#setup-1)
   - [Usage](#usage-1)
   - [Directive API](#directive-api)
-  
-  
+- [FAQ and common problems](#faq-and-common-problems)
+
+
 ### Version compatibility
 
 Install later versions in case your app is not running the very latest angular version.
 
 | ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                              |
 | -------------------------------------------- | -------------------------- | -------------------------------------------------------------------------- |
-| v7.x                                         | v11, v10, v9, v8           | [README](README.md)                                                        |
+| v7.x                                         | v12, v11, v10, v9, v8      | [README](README.md)                                                        |
 | v6.x                                         | v8, v7                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v6.0.2/README.md) |
 | v5.x                                         | v6                         | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v5.0.1/README.md) |
 | v4.x                                         | v5, v4                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v4.0.2/README.md) |
@@ -94,7 +93,6 @@ export class MyComponent {
 Note: The `scroll()` method is a shorthand from creating a `PageScrollInstance` (an object encapsulating all information 
 relevant for performing a scroll animation) using `PageScrollService#create` and starting it using 
 the `PageScrollService#start` method.
-
 
 ### Configuration
 
@@ -232,6 +230,10 @@ defined in the component
         }
     }
 ```
+
+## FAQ and common problems
+
+Please have a look at the wiki section of the GitHub repo at [https://github.com/Nolanus/ngx-page-scroll/wiki/FAQ](https://github.com/Nolanus/ngx-page-scroll/wiki/FAQ) for frequent questions and problems.
 
 ## License
 
