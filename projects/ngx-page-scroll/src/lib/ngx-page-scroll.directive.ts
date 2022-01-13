@@ -1,4 +1,4 @@
-/* tslint:disable:no-host-metadata-property directive-selector */
+/* eslint-disable @angular-eslint/no-host-metadata-property, @angular-eslint/directive-selector */
 
 import {
   Directive,
@@ -146,7 +146,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
     this.pageScrollService.start(pageScrollInstance);
   }
 
-  public handleClick(clickEvent: Event): boolean { // tslint:disable-line:no-unused-variable
+  public handleClick(clickEvent: Event): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars
     if (this.routerLink && this.router !== null && this.router !== undefined) {
       let urlTree: UrlTree;
       if (typeof this.routerLink === 'string') {
