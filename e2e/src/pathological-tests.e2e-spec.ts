@@ -10,7 +10,7 @@ describe('Pathological Tests page', () => {
     page.navigateTo();
   });
 
-  it('should scroll stop scroll animation when interruption event occurs', () => {
+  xit('should scroll stop scroll animation when interruption event occurs', () => {
     page.getScrollTargetVerticalPosition().then((headingLocation: number) => {
       page.getScrollPos().then((initialPos: number) => {
         expect(initialPos).toEqual(0);
