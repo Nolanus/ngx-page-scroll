@@ -1,3 +1,9 @@
+### 8.0.0 (2022-01-13)
+
+### Breaking Change
+
+- Add angular v13 support and remove support for older versions
+
 ### 7.0.6 (2021-10-17)
 
 ### Other
