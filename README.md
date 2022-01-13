@@ -22,15 +22,23 @@ routing has finished) and in both directions (horizontal/vertical)
 
 ## Table of contents
 
-- [Service](#service)
-  - [Setup](#setup)
-  - [Usage](#usage)
-  - [Configuration](#configuration)
-- [Directive](#directive)    
-  - [Setup](#setup-1)
-  - [Usage](#usage-1)
-  - [Directive API](#directive-api)
-- [FAQ and common problems](#faq-and-common-problems)
+- [ngx-page-scroll ![npm version](https://www.npmjs.com/package/ngx-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)](#ngx-page-scroll--)
+  - [Features](#features)
+  - [Table of contents](#table-of-contents)
+    - [Version compatibility](#version-compatibility)
+  - [Service](#service)
+    - [Setup](#setup)
+    - [Usage](#usage)
+    - [Configuration](#configuration)
+  - [Directive](#directive)
+    - [Setup](#setup-1)
+    - [Usage](#usage-1)
+    - [Directive API](#directive-api)
+      - [PageScroll properties](#pagescroll-properties)
+      - [PageScroll events](#pagescroll-events)
+      - [Example](#example)
+  - [FAQ and common problems](#faq-and-common-problems)
+  - [License](#license)
 
 
 ### Version compatibility
@@ -39,6 +47,7 @@ Install later versions in case your app is not running the very latest angular v
 
 | ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                              |
 | -------------------------------------------- | -------------------------- | -------------------------------------------------------------------------- |
+| v8.x                                         | v13      | [README](README.md)                                                        |
 | v7.x                                         | v12, v11, v10, v9, v8      | [README](README.md)                                                        |
 | v6.x                                         | v8, v7                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v6.0.2/README.md) |
 | v5.x                                         | v6                         | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v5.0.1/README.md) |
