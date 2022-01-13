@@ -22,24 +22,15 @@ routing has finished) and in both directions (horizontal/vertical)
 
 ## Table of contents
 
-- [ngx-page-scroll ![npm version](https://www.npmjs.com/package/ngx-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)](#ngx-page-scroll--)
-  - [Features](#features)
-  - [Table of contents](#table-of-contents)
-    - [Version compatibility](#version-compatibility)
-  - [Service](#service)
-    - [Setup](#setup)
-    - [Usage](#usage)
-    - [Configuration](#configuration)
-  - [Directive](#directive)
-    - [Setup](#setup-1)
-    - [Usage](#usage-1)
-    - [Directive API](#directive-api)
-      - [PageScroll properties](#pagescroll-properties)
-      - [PageScroll events](#pagescroll-events)
-      - [Example](#example)
-  - [FAQ and common problems](#faq-and-common-problems)
-  - [License](#license)
-
+- [Service](#service)
+  - [Setup](#setup)
+  - [Usage](#usage)
+  - [Configuration](#configuration)
+- [Directive](#directive)    
+  - [Setup](#setup-1)
+  - [Usage](#usage-1)
+  - [Directive API](#directive-api)
+- [FAQ and common problems](#faq-and-common-problems)
 
 ### Version compatibility
 
