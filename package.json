@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "scripts": {
     "build": "ng build",
-    "build:app": "ng build --baseHref=/ngx-page-scroll/",
-    "build:lib": "ng build ngx-page-scroll-core && ng build ngx-page-scroll && npm run copy:readme",
+    "build:app": "ng build --configuration production --baseHref=/ngx-page-scroll/",
+    "build:lib": "ng build ngx-page-scroll-core --configuration production && ng build ngx-page-scroll --configuration production && npm run copy:readme",
     "copy:readme": "copyfiles README.md dist/ngx-page-scroll && copyfiles README.md dist/ngx-page-scroll-core",
     "commit": "git-cz",
     "e2e": "ng e2e",
