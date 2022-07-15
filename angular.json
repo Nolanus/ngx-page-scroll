@@ -38,6 +38,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/ngx-page-scroll/",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -189,8 +190,9 @@
       }
     }
   },
-  "defaultProject": "ngx-page-scroll-demo",
   "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
+    "schematicCollections": [
+      "@angular-eslint/schematics"
+    ]
   }
 }

@@ -12,12 +12,12 @@ Animated scrolling functionality for angular written in pure typescript with no 
 ## Features
 
 - flexible: trigger scroll animations after component load, server response, etc.
-- easy-to-use directive: scroll to an element referenced in the href-attribute 
+- easy-to-use directive: scroll to an element referenced in the href-attribute
 (`href="#mytarget`) just by adding `pageScroll` directive
-- customizable: adjust duration, offset or whether scrolling stops if the user interrupts 
+- customizable: adjust duration, offset or whether scrolling stops if the user interrupts
 ([read more](https://github.com/Nolanus/ngx-page-scroll/wiki/Scroll-Interruption-Interference))
 - use custom easing functions to calculate the scroll position over time
-- works across routes (scrolls to target element as soon as the 
+- works across routes (scrolls to target element as soon as the
 routing has finished) and in both directions (horizontal/vertical)
 
 ## Table of contents
@@ -47,7 +47,8 @@ Install later versions in case your app is not running the very latest angular v
 
 | ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                              |
 | -------------------------------------------- | -------------------------- | -------------------------------------------------------------------------- |
-| v8.x                                         | v13                        | [README](README.md)                                                        |
+| v9.x                                         | v14                        | [README](README.md)                                                        |
+| v8.x                                         | v13                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v8.0.0/README.md) |
 | v7.x                                         | v12, v11, v10, v9, v8      | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v7.0.6/README.md) |
 | v6.x                                         | v8, v7                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v6.0.2/README.md) |
 | v5.x                                         | v6                         | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v5.0.1/README.md) |
@@ -89,7 +90,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
 export class MyComponent {
  constructor(private pageScrollService: PageScrollService, @Inject(DOCUMENT) private document: any) {
  }
-   
+
  ngOnInit(): void {
   this.pageScrollService.scroll({
     document: this.document,
@@ -97,10 +98,10 @@ export class MyComponent {
   });
  }
 }
-``` 
+```
 
-Note: The `scroll()` method is a shorthand from creating a `PageScrollInstance` (an object encapsulating all information 
-relevant for performing a scroll animation) using `PageScrollService#create` and starting it using 
+Note: The `scroll()` method is a shorthand from creating a `PageScrollInstance` (an object encapsulating all information
+relevant for performing a scroll animation) using `PageScrollService#create` and starting it using
 the `PageScrollService#start` method.
 
 ### Configuration
@@ -120,8 +121,8 @@ object.
 
 ## Directive
 
-For ease of use a directive `pageScroll` exists, which allows you to quickly add scroll animations to your angular app by 
-adding a property to your existing HTML a-tags. It can also work cross-routes, meaning it will start the scroll animation 
+For ease of use a directive `pageScroll` exists, which allows you to quickly add scroll animations to your angular app by
+adding a property to your existing HTML a-tags. It can also work cross-routes, meaning it will start the scroll animation
 after the target route has been loaded.
 It utilizes the ngx-page-scroll-core module for that, thus requires it as a peer dependency.
 
@@ -147,11 +148,11 @@ export class AppModule {
 }
 ```
 
-### Usage 
+### Usage
 
-In your template you may add the `pageScroll` attribute to elements with an `href` attribute pointing towards an id on 
+In your template you may add the `pageScroll` attribute to elements with an `href` attribute pointing towards an id on
 the same page (e.g. `#theId`). The `onClick` event will be interrupted and the scroll animation starts.
-Alternatively you may set the optional `pageScrollTarget` property to a valid css selector to specify the 
+Alternatively you may set the optional `pageScrollTarget` property to a valid css selector to specify the
 target element to scroll to.
 
 ```typescript
@@ -171,8 +172,8 @@ export class MyComponent {
 ### Directive API
 
 Additional attributes may be set on an DOM element using the `pageScroll` directive for customization.
-They take precedence over the default settings specified in `PageScrollConfig` class. Thereby it is 
-possible to have all page scroll-animations last e.g. 2 seconds, but a specific one should be performed with a custom easing function and a duration 
+They take precedence over the default settings specified in `PageScrollConfig` class. Thereby it is
+possible to have all page scroll-animations last e.g. 2 seconds, but a specific one should be performed with a custom easing function and a duration
 of only 1 second.
 
 #### PageScroll properties
@@ -184,7 +185,7 @@ of only 1 second.
 | `pageScrollHorizontal`    | boolean     | false        | Whether the scroll should happen in vertical direction (`false`, default) or horizontal (`true`).
 | `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
 | `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `pageScrollSpeed`         | number      | -            | Speed in Pixel/Second the animation should take. Only applied if no duration is set. 
+| `pageScrollSpeed`         | number      | -            | Speed in Pixel/Second the animation should take. Only applied if no duration is set.
 | `pageScrollInView`        | boolean     | true         | Whether the scroll animation should happen even when the scroll target is already inside the view port (`true`). Set to `false` to skip scroll animation if target is already in view.
 | `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
 | `pageScrollAdjustHash`    | boolean     | false        | Whether the [routes hash/fragment](https://angular.io/docs/ts/latest/guide/router.html#!#query-parameters) should be updated to reflect to section that has been scrolled to
@@ -198,17 +199,17 @@ of only 1 second.
 
 #### Example
 
-The following example will check whether the route _Home_ is currently loaded. 
-If this is true, the scroll-animation will be performed with the default 
-properties. If a different route is loaded, a subscription for route changes 
-will be made and the scroll-animation will be performed as soon as the new 
+The following example will check whether the route _Home_ is currently loaded.
+If this is true, the scroll-animation will be performed with the default
+properties. If a different route is loaded, a subscription for route changes
+will be made and the scroll-animation will be performed as soon as the new
 route is loaded.
 
 ```html
  <a pageScroll [routerLink]="['Home']" href="#myanchor">Go there</a>
 ```
 
-Overriding all possible properties. `doSmth()` and `myEasing` are 
+Overriding all possible properties. `doSmth()` and `myEasing` are
 defined in the component
 
 ```html
@@ -227,7 +228,7 @@ defined in the component
       if ((t /= d / 2) < 1) {
         return c / 2 * Math.pow(2, 10 * (t - 1)) + b;
       }
-  
+
       return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
     }
 
