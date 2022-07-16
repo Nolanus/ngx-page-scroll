@@ -1,3 +1,13 @@
+### 9.0.0 (2022-07-16)
+
+### Breaking Change
+
+- Add angular v14 support and remove support for v13
+
+### Other
+
+- Update demo app to angular 14
+
 ### 8.0.0 (2022-01-13)
 
 ### Breaking Change
@@ -174,15 +184,15 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ### Breaking change
 
-- The `pageScrollInstance` factory methods marked as deprecated since v4.0.0-beta.5 have been removed. 
+- The `pageScrollInstance` factory methods marked as deprecated since v4.0.0-beta.5 have been removed.
 
 ### Feature
 
-- The `scrollTarget` parameter for `pageScrollInstance` creation may now take any valid css selector ([#193](https://github.com/Nolanus/ngx-page-scroll/issues/193)) 
+- The `scrollTarget` parameter for `pageScrollInstance` creation may now take any valid css selector ([#193](https://github.com/Nolanus/ngx-page-scroll/issues/193))
 
 ### Other
 
-- Remove the flawed `forRoot()` approach for module and introduced singleton patter ([#96](https://github.com/Nolanus/ngx-page-scroll/issues/96), [#190](https://github.com/Nolanus/ngx-page-scroll/issues/190), thanks to @achimha) 
+- Remove the flawed `forRoot()` approach for module and introduced singleton patter ([#96](https://github.com/Nolanus/ngx-page-scroll/issues/96), [#190](https://github.com/Nolanus/ngx-page-scroll/issues/190), thanks to @achimha)
 - Updated dependencies
 - Raised minimum supported angular version to 4.2.0
 
@@ -236,7 +246,7 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ## 4.0.0-beta.5 (2017-03-11)
 
-### Feature 
+### Feature
 
 - New factory method `newInstance` at PageScrollInstance that consumes an options object. The other factory methods are deprecated and will be removed in final release.
 - Advanced offset position calculation for inline scrolling ([#92](https://github.com/Nolanus/ngx-page-scroll/issues/92))
@@ -248,7 +258,7 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ### Other
 
-- First release that automatically gets tested in multiple browser using SauceLabs ;) 
+- First release that automatically gets tested in multiple browser using SauceLabs ;)
 
 ## 4.0.0-beta.4 (2017-02-11)
 
@@ -300,7 +310,7 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ### Other
 
-- Adjust peer dependency to satisfy angular 2.1.2 deps 
+- Adjust peer dependency to satisfy angular 2.1.2 deps
 
 ## 3.2.2 (2016-11-11)
 
@@ -326,7 +336,7 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ## 3.2.0 (2016-10-22)
 
-### Other 
+### Other
 
 - scrollFinish event now fires when scroll target can not be found and it can not be scrolled any closer to the target (fixes [#50](https://github.com/Nolanus/ngx-page-scroll/issues/50))
 - Typo in README
@@ -334,25 +344,25 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ## 3.1.6 (2016-10-15)
 
-### Fixes 
+### Fixes
 
 - Wrong peer dependency
 
 ## 3.1.5 (2016-10-13)
 
-### Fixes 
+### Fixes
 
 - Make router an optional injection for pageScroll directive (it however requires `@angular/router` to be included)
 
 ### Other
 
-- Update dependencies (angular 2.1) 
+- Update dependencies (angular 2.1)
 
 ## 3.1.4 (2016-10-10)
 
 ### Fixes
 
-- Private method handleClick() referenced in template 
+- Private method handleClick() referenced in template
 
 ## 3.1.3 (2016-10-10)
 
@@ -365,14 +375,14 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ### Other
 
-- TypeScript parameter type change to satisfy ngc (angular compiler) 
+- TypeScript parameter type change to satisfy ngc (angular compiler)
 
 
 ## 3.1.1 (2016-10-01)
 
 ### Other
 
-- Update peer dependency to angular 2.0.1 and add back tilde/range constraint 
+- Update peer dependency to angular 2.0.1 and add back tilde/range constraint
 
 
 ## 3.1.0 (2016-09-16)
@@ -392,11 +402,11 @@ Breaking Change:
 
 Feature:
 
-- automatically stop the scroll timer task when an end of the scroll-region has been reached 
+- automatically stop the scroll timer task when an end of the scroll-region has been reached
 
 ### Fixes
 
-- Non working event emitter and directive scrolls not working properly on consecutive clicks 
+- Non working event emitter and directive scrolls not working properly on consecutive clicks
 
 ### Other
 
@@ -422,7 +432,7 @@ Feature:
 
 ### Fixes
 
-- Problem with Event gloval in angular universal  (thanks to [threesquared](https://github.com/threesquared), PR #20) 
+- Problem with Event gloval in angular universal  (thanks to [threesquared](https://github.com/threesquared), PR #20)
 
 ### Other
 
@@ -433,7 +443,7 @@ Feature:
 
 ### Fixes
 
-- Scrolling did not work properly when initial scrollTop value was greater 0 (fixes [#15](https://github.com/Nolanus/ngx-page-scroll/issues/15)) 
+- Scrolling did not work properly when initial scrollTop value was greater 0 (fixes [#15](https://github.com/Nolanus/ngx-page-scroll/issues/15))
 
 Enhance:
 
@@ -458,35 +468,35 @@ Enhance:
 
 ### Breaking Change
 
-- The `pageScrollFinish` event is now called for interrupted/interfered page 
-scroll animations as well. A boolean is emitted, indicating whether the 
+- The `pageScrollFinish` event is now called for interrupted/interfered page
+scroll animations as well. A boolean is emitted, indicating whether the
 animation got interrupted.
 
 ### Feature
 
-- The new property `pageScrollInterruptible` allows setting whether a 
-triggered scroll animation should be interrutible or not. A page wide 
+- The new property `pageScrollInterruptible` allows setting whether a
+triggered scroll animation should be interrutible or not. A page wide
 default can be specified using `PageScrollConfig.defaultInterruptible`.
 
 ### Fixes
 
-- Only register event listeners for running page scroll animations to 
+- Only register event listeners for running page scroll animations to
 save resources (fixes #9)
-- Overshooting target when large distance to scroll and short scroll animation 
+- Overshooting target when large distance to scroll and short scroll animation
 duration (fixes #7)
-- body.scrollTop not working on non-Blink based browser like Firefox and IE 
+- body.scrollTop not working on non-Blink based browser like Firefox and IE
 (thanks to [bensgroi](https://github.com/bensgroi), [#10](https://github.com/Nolanus/ngx-page-scroll/issues/10))
- 
+
 ### Other
 
-- Running animations are stopped when pressing a pageScroll link, even if the 
+- Running animations are stopped when pressing a pageScroll link, even if the
 scroll target is not found or already reached (previously it did not stop).
 
 ## 1.0.0-beta.1 (2016-05-19)
 
 ### Fixes
 
-- Referencing non existing variable causes error in non webkit-based 
+- Referencing non existing variable causes error in non webkit-based
 browser (fixes [#5](https://github.com/Nolanus/ngx-page-scroll/issues/5))
 
 ## 1.0.0-beta.0 (2016-05-05)
@@ -513,13 +523,13 @@ browser (fixes [#5](https://github.com/Nolanus/ngx-page-scroll/issues/5))
 
 ### Breaking Change
 
-- event indicating the end of the scroll-animation has been renamed from 
-`scrollFinish` to `pageScrollFinish` for consistency with all other 
+- event indicating the end of the scroll-animation has been renamed from
+`scrollFinish` to `pageScrollFinish` for consistency with all other
 attributes/properties.
-  
+
 ### Feature
 
-- Introducing `PageScrollConfig` class to specify defaults for all 
+- Introducing `PageScrollConfig` class to specify defaults for all
 `pageScroll` directive usages.
 - Customizable easing method
 
