@@ -9,7 +9,7 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es2020",
+    "target": "ES2022",
     "module": "es2020",
     "lib": [
       "es2018",
@@ -24,6 +24,7 @@
         "dist/ngx-page-scroll/ngx-page-scroll",
         "dist/ngx-page-scroll"
       ]
-    }
+    },
+    "useDefineForClassFields": false
   }
 }
