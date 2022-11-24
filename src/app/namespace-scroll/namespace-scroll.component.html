@@ -9,10 +9,10 @@
   </p>
 </mat-card>
 
-<mat-card fxLayout="row" fxLayoutGap="5px">
+<mat-card class="flex-mat-card-container">
 
-  <div fxFlex fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="5px" fxLayoutAlign.gt-sm="center">
-    <h3 fxFlex.gt-sm="grow">Namespace <code>default</code></h3>
+  <div class="flex-container">
+    <h3 class="flex-header">Namespace <code>default</code></h3>
     <button mat-raised-button color="primary" (click)="startDefaultNamespaceScrolls()"
             id="startDefaultNamespaceScrollsButton" matTooltip="Start scroll animation">
       <mat-icon>play_arrow</mat-icon>
@@ -27,8 +27,8 @@
     </button>
   </div>
 
-  <div fxFlex fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="5px" fxLayoutAlign.gt-sm="center">
-    <h3 fxFlex.gt-sm="grow">Namespace <code>customSpace</code></h3>
+  <div class="flex-container">
+    <h3 class="flex-header">Namespace <code>customSpace</code></h3>
     <button mat-raised-button color="primary" (click)="startCustomNamespaceScroll()"
             id="startCustomNamespaceScrollsButton" matTooltip="Start scroll animation">
       <mat-icon>play_arrow</mat-icon>
@@ -42,8 +42,8 @@
       <mat-icon>replay</mat-icon>
     </button>
   </div>
-  <div fxFlex fxLayout="column" fxLayout.gt-sm="row wrap" fxLayoutGap="5px" fxLayoutAlign.gt-sm="center">
-    <h3 fxFlex.gt-sm="grow">All Namespaces</h3>
+  <div class="flex-container">
+    <h3 class="flex-header">All Namespaces</h3>
     <button mat-raised-button color="primary" (click)="pageScrollService.stopAll()"
             id="stopAllNamespaceScrollsButton" matTooltip="Stop all scroll animations">
       <mat-icon>stop</mat-icon>
@@ -51,7 +51,7 @@
   </div>
 </mat-card>
 
-<mat-card fxLayout="row" fxLayoutGap="5px">
+<mat-card class="flex-mat-card-container">
   <div>
     <h4>Namespace default</h4>
     <div #container1 id="container1" class="scrollContainer">

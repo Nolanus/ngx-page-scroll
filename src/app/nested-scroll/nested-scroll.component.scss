@@ -10,3 +10,14 @@
 #complexContainer.scrollContainer {
   height: 300px;
 }
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+@media screen and (min-width: 960px) {
+    .flex-container {
+        flex-direction: row;
+    }
+}

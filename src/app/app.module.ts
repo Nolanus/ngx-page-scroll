@@ -7,7 +7,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonModule } from '@angular/material/button';
-import { FlexModule } from '@angular/flex-layout';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
@@ -53,7 +52,6 @@ import { ScrollDialogComponent } from './scroll-dialog/scroll-dialog.component';
         NgxPageScrollModule,
         MatChipsModule,
         MatButtonModule,
-        FlexModule,
         MatIconModule,
         MatDialogModule,
         MatSelectModule,
