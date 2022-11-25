@@ -1,25 +1,31 @@
 <mat-card>
-  <mat-card-title id="title">Nested scrolling</mat-card-title>
-  <p>
-    Showcasing the scrolling inside a custom container. Triggering is done using the scroll service.
-    In the complex card the scroll target is nested in multiple parents with <code>position:relative</code>. This
-    prevents the basic usage of <code>offsetTop</code> to determine the element's location. Therefore the <code>advancedInlineOffsetCalculation</code>
-    is used for that example to attain the correct scroll position.
-  </p>
-  <button mat-raised-button color="primary" (click)="scrollInsideBasic()" id="startNestedScrollingButton">
-    Scroll inside the basic card
-  </button>
-  <button mat-raised-button color="primary" (click)="scrollInsideComplex()" id="startNestedScrollingButton2">
-    Scroll inside the complex card
-  </button>
-  <button mat-raised-button color="primary" (click)="openDialog()" id="dialogScrollingButton">
-    Scroll inside a dialog
-  </button>
+  <mat-card-header>
+    <mat-card-title id="title">Nested scrolling</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Showcasing the scrolling inside a custom container. Triggering is done using the scroll service.
+      In the complex card the scroll target is nested in multiple parents with <code>position:relative</code>. This
+      prevents the basic usage of <code>offsetTop</code> to determine the element's location. Therefore the <code>advancedInlineOffsetCalculation</code>
+      is used for that example to attain the correct scroll position.
+    </p>
+    <button mat-raised-button color="primary" (click)="scrollInsideBasic()" id="startNestedScrollingButton">
+      Scroll inside the basic card
+    </button>
+    <button mat-raised-button color="primary" (click)="scrollInsideComplex()" id="startNestedScrollingButton2">
+      Scroll inside the complex card
+    </button>
+    <button mat-raised-button color="primary" (click)="openDialog()" id="dialogScrollingButton">
+      Scroll inside a dialog
+    </button>
+  </mat-card-content>
 </mat-card>
 
 <div class="flex-container">
   <mat-card>
-    <mat-card-title>A basic card</mat-card-title>
+    <mat-card-header>
+      <mat-card-title>A basic card</mat-card-title>
+    </mat-card-header>
     <mat-card-content #basicContainer id="basicContainer" class="scrollContainer">
 
       <app-dummy-card [start]="1" [length]="4" [headings]="false" [scrollButtons]="false"></app-dummy-card>
@@ -35,21 +41,27 @@
 
   <div class="scrollContainer" #complexContainer id="complexContainer">
     <mat-card>
-      <mat-card-title>A complex card</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>A complex card</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         This container has several cards in it. Each of them has <code>position: relative</code>.
       </mat-card-content>
     </mat-card>
 
     <mat-card>
-      <mat-card-title>Dummy Card</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>Dummy Card</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <app-dummy-card [start]="1" [length]="5" [headings]="false" [scrollButtons]="false"></app-dummy-card>
       </mat-card-content>
     </mat-card>
 
     <mat-card>
-      <mat-card-title>Target Card</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>Target Card</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <p>An here's our scroll target</p>
         <p>
@@ -59,7 +71,9 @@
     </mat-card>
 
     <mat-card>
-      <mat-card-title>Dummy Card</mat-card-title>
+      <mat-card-header>
+        <mat-card-title>Dummy Card</mat-card-title>
+      </mat-card-header>
       <mat-card-content>
         <app-dummy-card [start]="6" [length]="5" [headings]="false" [scrollButtons]="false"></app-dummy-card>
       </mat-card-content>

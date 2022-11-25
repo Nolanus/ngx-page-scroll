@@ -1,115 +1,122 @@
 <mat-card>
-  <mat-card-title id="title">Namespace scrolling</mat-card-title>
-  <p>
-    This page demonstrates the interaction with running scroll animation, especially if there are multiple ones.
-    Each scroll animation belongs to a <code>namespace</code>. The default namespace value is <i>default</i>. Whenever a
-    new scroll animation for the same namespace is started, all running ones will be stopped. This is allows to prevent
-    two scrolling animations acting on the same scrollView DOM element, where each interferes with the other ones.
-    All scroll animations on the same scrollView should thus share the same namespace.
-  </p>
+  <mat-card-header>
+    <mat-card-title id="title">Namespace scrolling</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      This page demonstrates the interaction with running scroll animation, especially if there are multiple ones.
+      Each scroll animation belongs to a <code>namespace</code>. The default namespace value is <i>default</i>. Whenever a
+      new scroll animation for the same namespace is started, all running ones will be stopped. This is allows to prevent
+      two scrolling animations acting on the same scrollView DOM element, where each interferes with the other ones.
+      All scroll animations on the same scrollView should thus share the same namespace.
+    </p>
+  </mat-card-content>
 </mat-card>
 
-<mat-card class="flex-mat-card-container">
+<mat-card>
+  <mat-card-content class="flex-mat-card-container">
+    <div class="flex-container">
+      <h3 class="flex-header">Namespace <code>default</code></h3>
+      <button mat-mini-fab color="primary" (click)="startDefaultNamespaceScrolls()"
+              id="startDefaultNamespaceScrollsButton" matTooltip="Start scroll animation">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" (click)="pageScrollService.stopAll('default')"
+              id="stopDefaultNamespaceScrollsButton" matTooltip="Stop scroll animation">
+        <mat-icon>stop</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" (click)="resetDefaultNameScrolls()"
+              id="resetDefaultNamespaceScrollsButton" matTooltip="Scroll container to top">
+        <mat-icon>replay</mat-icon>
+      </button>
+    </div>
 
-  <div class="flex-container">
-    <h3 class="flex-header">Namespace <code>default</code></h3>
-    <button mat-raised-button color="primary" (click)="startDefaultNamespaceScrolls()"
-            id="startDefaultNamespaceScrollsButton" matTooltip="Start scroll animation">
-      <mat-icon>play_arrow</mat-icon>
-    </button>
-    <button mat-raised-button color="primary" (click)="pageScrollService.stopAll('default')"
-            id="stopDefaultNamespaceScrollsButton" matTooltip="Stop scroll animation">
-      <mat-icon>stop</mat-icon>
-    </button>
-    <button mat-raised-button color="primary" (click)="resetDefaultNameScrolls()"
-            id="resetDefaultNamespaceScrollsButton" matTooltip="Scroll container to top">
-      <mat-icon>replay</mat-icon>
-    </button>
-  </div>
-
-  <div class="flex-container">
-    <h3 class="flex-header">Namespace <code>customSpace</code></h3>
-    <button mat-raised-button color="primary" (click)="startCustomNamespaceScroll()"
-            id="startCustomNamespaceScrollsButton" matTooltip="Start scroll animation">
-      <mat-icon>play_arrow</mat-icon>
-    </button>
-    <button mat-raised-button color="primary" (click)="pageScrollService.stopAll('customSpace')"
-            id="stopCustomNamespaceScrollsButton" matTooltip="Stop scroll animation">
-      <mat-icon>stop</mat-icon>
-    </button>
-    <button mat-raised-button color="primary" (click)="resetCustomNamespaceScroll()"
-            id="resetCustomNamespaceScrollsButton" matTooltip="Scroll container to top">
-      <mat-icon>replay</mat-icon>
-    </button>
-  </div>
-  <div class="flex-container">
-    <h3 class="flex-header">All Namespaces</h3>
-    <button mat-raised-button color="primary" (click)="pageScrollService.stopAll()"
-            id="stopAllNamespaceScrollsButton" matTooltip="Stop all scroll animations">
-      <mat-icon>stop</mat-icon>
-    </button>
-  </div>
+    <div class="flex-container">
+      <h3 class="flex-header">Namespace <code>customSpace</code></h3>
+      <button mat-mini-fab color="primary" (click)="startCustomNamespaceScroll()"
+              id="startCustomNamespaceScrollsButton" matTooltip="Start scroll animation">
+        <mat-icon>play_arrow</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" (click)="pageScrollService.stopAll('customSpace')"
+              id="stopCustomNamespaceScrollsButton" matTooltip="Stop scroll animation">
+        <mat-icon>stop</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" (click)="resetCustomNamespaceScroll()"
+              id="resetCustomNamespaceScrollsButton" matTooltip="Scroll container to top">
+        <mat-icon>replay</mat-icon>
+      </button>
+    </div>
+    <div class="flex-container">
+      <h3 class="flex-header">All Namespaces</h3>
+      <button mat-mini-fab color="primary" (click)="pageScrollService.stopAll()"
+              id="stopAllNamespaceScrollsButton" matTooltip="Stop all scroll animations">
+        <mat-icon>stop</mat-icon>
+      </button>
+    </div>
+  </mat-card-content>
 </mat-card>
 
-<mat-card class="flex-mat-card-container">
-  <div>
-    <h4>Namespace default</h4>
-    <div #container1 id="container1" class="scrollContainer">
+<mat-card>
+  <mat-card-content class="flex-mat-card-container">
+    <div>
+      <h4>Namespace default</h4>
+      <div #container1 id="container1" class="scrollContainer">
 
-      <p id="container1Head">
-        This containers scroll animation is started at the same time like the second one.
-        As both are in the same namespace, this one's will be stopped at the moment the second one starts scrolling.
-      </p>
+        <p id="container1Head">
+          This containers scroll animation is started at the same time like the second one.
+          As both are in the same namespace, this one's will be stopped at the moment the second one starts scrolling.
+        </p>
 
-      <app-dummy-content [length]="4"></app-dummy-content>
+        <app-dummy-content [length]="4"></app-dummy-content>
 
-      <p>
-        <button mat-raised-button color="warn" id="scrollTarget1">Target</button>
-      </p>
+        <p>
+          <button mat-raised-button color="warn" id="scrollTarget1">Target</button>
+        </p>
 
-      <app-dummy-content [length]="4"></app-dummy-content>
+        <app-dummy-content [length]="4"></app-dummy-content>
 
+      </div>
     </div>
-  </div>
 
-  <div>
-    <h4>Namespace <code>default</code></h4>
-    <div #container2 id="container2" class="scrollContainer">
+    <div>
+      <h4>Namespace <code>default</code></h4>
+      <div #container2 id="container2" class="scrollContainer">
 
-      <p id="container2Head">
-        This containers scroll animation is started at the same time like the first one.
-        Both are in the same namespace, but this one's is started second and thus actually takes place.
-      </p>
+        <p id="container2Head">
+          This containers scroll animation is started at the same time like the first one.
+          Both are in the same namespace, but this one's is started second and thus actually takes place.
+        </p>
 
-      <app-dummy-content [length]="4"></app-dummy-content>
+        <app-dummy-content [length]="4"></app-dummy-content>
 
-      <p>
-        <button mat-raised-button color="warn" id="scrollTarget2">Target</button>
-      </p>
+        <p>
+          <button mat-raised-button color="warn" id="scrollTarget2">Target</button>
+        </p>
 
-      <app-dummy-content [length]="4"></app-dummy-content>
+        <app-dummy-content [length]="4"></app-dummy-content>
 
+      </div>
     </div>
-  </div>
 
-  <div>
-    <h4>Namespace <code>customSpace</code></h4>
-    <div #container3 id="container3" class="scrollContainer">
+    <div>
+      <h4>Namespace <code>customSpace</code></h4>
+      <div #container3 id="container3" class="scrollContainer">
 
-      <p id="container3Head">
-        This containers scroll animation uses a custom namespace <code>customSpace</code>.
-        It is therefore capable to scroll independently of the status of the <code>default</code> namespace
-        animations.
-      </p>
+        <p id="container3Head">
+          This containers scroll animation uses a custom namespace <code>customSpace</code>.
+          It is therefore capable to scroll independently of the status of the <code>default</code> namespace
+          animations.
+        </p>
 
-      <app-dummy-content [length]="4"></app-dummy-content>
+        <app-dummy-content [length]="4"></app-dummy-content>
 
-      <p>
-        <button mat-raised-button color="warn" id="scrollTarget3">Target</button>
-      </p>
+        <p>
+          <button mat-raised-button color="warn" id="scrollTarget3">Target</button>
+        </p>
 
-      <app-dummy-content [length]="4"></app-dummy-content>
+        <app-dummy-content [length]="4"></app-dummy-content>
 
+      </div>
     </div>
-  </div>
+  </mat-card-content>
 </mat-card>

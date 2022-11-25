@@ -1,24 +1,26 @@
 <mat-card>
-  <h1>"Pathological" examples</h1>
-  <p>The following buttons do not perform proper scroll animation but are there to showcase the behavior in edge cases
-    or to be used in e2e tests.</p>
-  <button mat-raised-button color="primary" href="#head404" [pageScrollDuration]="350" pageScroll
-          (pageScrollFinish)="doSmth($event)"
-          id="nonExistingTargetButton">
-    Scroll to non existing target
-  </button>
-  <button mat-raised-button color="primary" href="#scrollTarget" pageScroll id="interruptScroll"
-          (pageScrollFinish)="doSmth($event)"
-          (click)="scheduleInterrupt()">
-    Start scroll but interrupt it
-  </button>
-  <button mat-raised-button color="primary" href="#top" pageScroll id="alreadyAtTargetScroll"
-          (pageScrollFinish)="doSmth($event)">
-    Scroll to target already at the top
-  </button>
+  <mat-card-content>
+    <h1>"Pathological" examples</h1>
+    <p>The following buttons do not perform proper scroll animation but are there to showcase the behavior in edge cases
+      or to be used in e2e tests.</p>
+    <button mat-raised-button color="primary" href="#head404" [pageScrollDuration]="350" pageScroll
+            (pageScrollFinish)="doSmth($event)"
+            id="nonExistingTargetButton">
+      Scroll to non existing target
+    </button>
+    <button mat-raised-button color="primary" href="#scrollTarget" pageScroll id="interruptScroll"
+            (pageScrollFinish)="doSmth($event)"
+            (click)="scheduleInterrupt()">
+      Start scroll but interrupt it
+    </button>
+    <button mat-raised-button color="primary" href="#top" pageScroll id="alreadyAtTargetScroll"
+            (pageScrollFinish)="doSmth($event)">
+      Scroll to target already at the top
+    </button>
 
-  <div class="spaceholder">
+    <div class="spaceholder">
 
-  </div>
-  <p id="scrollTarget">scroll target</p>
+    </div>
+    <p id="scrollTarget">scroll target</p>
+  </mat-card-content>
 </mat-card>

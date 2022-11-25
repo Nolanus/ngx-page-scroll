@@ -13,9 +13,10 @@ mat-toolbar {
   flex: 1;
 }
 
-button.mat-raised-button {
-  margin-left: 5px;
-  margin-right: 5px;
+button.mdc-button--raised,
+button.mdc-fab--mini {
+    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .columnGrid .mat-figure {

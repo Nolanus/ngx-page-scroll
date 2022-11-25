@@ -1,5 +1,7 @@
 <mat-card *ngFor="let num of array; let isLast = last">
-  <mat-card-title id="{{ idPrefix + num }}" *ngIf="headings">Prioris generis {{ num }}</mat-card-title>
+  <mat-card-header>
+    <mat-card-title id="{{ idPrefix + num }}" *ngIf="headings">Prioris generis {{ num }}</mat-card-title>
+  </mat-card-header>
   <mat-card-content>
     <app-dummy-content></app-dummy-content>
   </mat-card-content>
