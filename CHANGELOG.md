@@ -1,3 +1,15 @@
+### 10.0.0 (2022-11-25)
+
+### Breaking Change
+
+- Add angular v15 support and remove support for v14
+
+### Other
+
+- Update demo app to angular 15
+- Update demo app to angular material 15
+- Remove deprecated package "@angular/flex-layout"
+
 ### 9.0.0 (2022-07-16)
 
 ### Breaking Change
