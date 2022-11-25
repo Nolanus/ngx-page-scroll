@@ -12,12 +12,12 @@
 }
 
 .flex-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 960px) {
-    .flex-container {
-        flex-direction: row;
-    }
+  .flex-container {
+    flex-direction: row;
+  }
 }

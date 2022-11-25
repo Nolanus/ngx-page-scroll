@@ -5,44 +5,44 @@
 }
 
 .flex-mat-card-container {
-    display: flex;
-    flex-direction: row;
-    box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
 }
 
 .flex-mat-card-container div {
-    margin-right: 5px;
+  margin-right: 5px;
 
-    &:nth-last-child(1) {
-        margin-right: 0;
-    }
+  &:nth-last-child(1) {
+    margin-right: 0;
+  }
 }
 
 .flex-container {
-    box-sizing: border-box;
-    flex: 1 1 0%;
+  box-sizing: border-box;
+  flex: 1 1 0%;
 }
 
 .flex-header {
-    flex: 1 1 100%;
-    box-sizing: border-box;
-    max-width: 100%;
+  flex: 1 1 100%;
+  box-sizing: border-box;
+  max-width: 100%;
 }
 
 @media screen and (min-width: 960px) {
-    .flex-container {
-        display: flex;
-        flex-flow: row wrap;
-        place-content: stretch center;
-    }
+  .flex-container {
+    display: flex;
+    flex-flow: row wrap;
+    place-content: stretch center;
+  }
 
-    .flex-header {
-        margin-right: 5px;
-    }
+  .flex-header {
+    margin-right: 5px;
+  }
 }
 
 @media screen and (max-width: 959px) {
-    .flex-header {
-        margin-bottom: 5px;
-    }
+  .flex-header {
+    margin-bottom: 5px;
+  }
 }
