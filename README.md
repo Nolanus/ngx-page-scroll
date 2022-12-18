@@ -3,9 +3,6 @@
 Animated scrolling functionality for angular written in pure typescript with no additional dependencies
 
 [![Build Status](https://github.com/Nolanus/ngx-page-scroll/actions/workflows/main.yml/badge.svg)](https://github.com/Nolanus/ngx-page-scroll/actions/workflows/main.yml)
-[![Dependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll)
-[![devDependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll/dev-status.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll&type=dev)
-[![peerDependencies Status](https://david-dm.org/Nolanus/ngx-page-scroll/peer-status.svg?path=projects/ngx-page-scroll)](https://david-dm.org/Nolanus/ngx-page-scroll?path=projects/ngx-page-scroll&type=peer)
 [![Known Vulnerabilities](https://snyk.io/test/github/Nolanus/ngx-page-scroll/badge.svg)](https://snyk.io/test/github/Nolanus/ngx-page-scroll)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/aa10be6ea5654211bb451c6ade2f1ff6)](https://www.codacy.com/gh/Nolanus/ngx-page-scroll/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nolanus/ngx-page-scroll&amp;utm_campaign=Badge_Grade)
 
@@ -22,8 +19,7 @@ routing has finished) and in both directions (horizontal/vertical)
 
 ## Table of contents
 
-- [ngx-page-scroll ![npm version](https://www.npmjs.com/package/ngx-page-scroll) [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)](#ngx-page-scroll--)
-  - [Features](#features)
+- [Features](#features)
   - [Table of contents](#table-of-contents)
     - [Version compatibility](#version-compatibility)
   - [Service](#service)
@@ -39,7 +35,6 @@ routing has finished) and in both directions (horizontal/vertical)
       - [Example](#example)
   - [FAQ and common problems](#faq-and-common-problems)
   - [License](#license)
-
 
 ### Version compatibility
 
