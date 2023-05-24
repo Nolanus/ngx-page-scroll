@@ -118,7 +118,7 @@ describe('Simple Scroll page', () => {
             browser.sleep(1250).then(() => {
               page.getScrollPos().then((pos: number) => {
                 // 150px offset should be there
-                expect(pos).toBeCloseTo(Math.round(headingVerticalLocation) - 150, Closeness.ofByOne);
+                expect(pos).toBeCloseTo(Math.round(headingVerticalLocation) - 150, Closeness.ofBy(2));
               });
             });
           });

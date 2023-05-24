@@ -1,6 +1,6 @@
 {
   "name": "ngx-page-scroll",
-  "version": "10.0.0",
+  "version": "11.0.0",
   "description": "Convenience directive for animated scrolling functionality for angular written in pure typescript",
   "keywords": [
     "angular",
@@ -24,9 +24,9 @@
   },
   "homepage": "https://github.com/Nolanus/ngx-page-scroll#readme",
   "peerDependencies": {
-    "ngx-page-scroll-core": "10.0.0",
-    "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0"
+    "ngx-page-scroll-core": "11.0.0",
+    "@angular/common": "^16.0.0",
+    "@angular/core": "^16.0.0"
   },
   "dependencies": {
     "tslib": "^2.0.0"
