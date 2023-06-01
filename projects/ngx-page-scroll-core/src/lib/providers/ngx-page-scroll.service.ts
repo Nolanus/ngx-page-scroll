@@ -52,11 +52,11 @@ export class PageScrollService {
       pageScrollInstance.detachInterruptListeners();
     }
 
-    if (pageScrollInstance.timer) {
+    if (pageScrollInstance.requestFrameId) {
       // Clear/Stop the timer
-      clearInterval(pageScrollInstance.timer);
+      pageScrollInstance.pageScrollOptions.document.defaultView.cancelAnimationFrame(pageScrollInstance.requestFrameId)
       // Clear the reference to this timer
-      pageScrollInstance.timer = undefined;
+      pageScrollInstance.requestFrameId = null;
       pageScrollInstance.fireEvent(!interrupted);
 
       return true;
@@ -155,17 +155,9 @@ export class PageScrollService {
         Math.abs(pageScrollInstance.distanceToScroll) / pageScrollInstance.pageScrollOptions.speed * 1000;
     }
 
-    // We should go there directly, as our "animation" would have one big step
-    // only anyway and this way we save the interval stuff
-    const tooShortInterval = pageScrollInstance.executionDuration <= pageScrollInstance.pageScrollOptions._interval;
-
-    if (allReadyAtDestination || tooShortInterval) {
+    if (allReadyAtDestination) {
       if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-        if (allReadyAtDestination) {
-          console.log('Scrolling not possible, as we can\'t get any closer to the destination');
-        } else {
-          console.log('Scroll duration shorter that interval length, jumping to target');
-        }
+        console.log('Scrolling not possible, as we can\'t get any closer to the destination');
       }
       pageScrollInstance.setScrollPosition(pageScrollInstance.targetScrollPosition);
       pageScrollInstance.fireEvent(true);
@@ -196,7 +188,14 @@ export class PageScrollService {
     // .. and calculate the end time (when we need to finish at last)
     pageScrollInstance.endTime = pageScrollInstance.startTime + pageScrollInstance.executionDuration;
 
-    pageScrollInstance.timer = setInterval((instance: PageScrollInstance) => {
+    pageScrollInstance.requestFrameId =  pageScrollInstance.pageScrollOptions.document.defaultView.requestAnimationFrame(this.updateScrollPostion(pageScrollInstance));
+
+    // Register the instance as running one
+    this.runningInstances.push(pageScrollInstance);
+  }
+
+  public updateScrollPostion(instance: PageScrollInstance){
+    return  ()=>{
       // Take the current time
       const currentTime: number = new Date().getTime();
 
@@ -229,12 +228,10 @@ export class PageScrollService {
       // (otherwise the event might arrive at "too early")
       if (stopNow) {
         this.stopInternal(false, instance);
+      } else{
+        instance.pageScrollOptions.document.defaultView.requestAnimationFrame(this.updateScrollPostion(instance))
       }
-
-    }, this.config._interval, pageScrollInstance);
-
-    // Register the instance as running one
-    this.runningInstances.push(pageScrollInstance);
+    }
   }
 
   public scroll(options: PageScrollOptions): void {

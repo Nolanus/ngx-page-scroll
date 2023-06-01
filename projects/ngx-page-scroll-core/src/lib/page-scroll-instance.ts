@@ -80,9 +80,10 @@ export class PageScrollInstance {
   /* Whether an interrupt listener is attached to the body or not */
   public interruptListenersAttached = false;
 
-  /* References to the timer instance that is used to perform the scroll animation to be
+  /* Value of the requestAnimationFrameId that is used to perform the scroll animation to be
    able to clear it on animation end*/
-  public timer: any = null;
+
+  public requestFrameId: number | null = null;
 
   /**
    * Private constructor, requires the properties assumed to be the bare minimum.
