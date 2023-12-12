@@ -1,3 +1,8 @@
+### 12.0.0 (2023-12-12)
+
+### Breaking Change
+- Add angular v17 support and remove support for v16
+  
 ### 11.0.0 (2023-05-09)
 
 ### Breaking Change
