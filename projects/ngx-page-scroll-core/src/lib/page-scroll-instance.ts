@@ -82,7 +82,7 @@ export class PageScrollInstance {
 
   /* References to the timer instance that is used to perform the scroll animation to be
    able to clear it on animation end*/
-  public timer: any = null;
+  public timer = null;
 
   /**
    * Private constructor, requires the properties assumed to be the bare minimum.
@@ -169,7 +169,7 @@ export class PageScrollInstance {
     return position;
   }
 
-  public getScrollPropertyValue(scrollingView: any): number {
+  public getScrollPropertyValue(scrollingView): number {
     if (!this.pageScrollOptions.verticalScrolling) {
       return scrollingView.scrollLeft;
     }
@@ -177,7 +177,7 @@ export class PageScrollInstance {
     return scrollingView.scrollTop;
   }
 
-  public getScrollClientPropertyValue(scrollingView: any): number {
+  public getScrollClientPropertyValue(scrollingView): number {
     if (!this.pageScrollOptions.verticalScrolling) {
       return scrollingView.clientWidth;
     }
@@ -224,7 +224,7 @@ export class PageScrollInstance {
    */
   public setScrollPosition(position: number): boolean {
     // Set the new scrollTop/scrollLeft to all scrollViews elements
-    return this.pageScrollOptions.scrollViews.reduce((oneAlreadyWorked: any, scrollingView: any) => {
+    return this.pageScrollOptions.scrollViews.reduce((oneAlreadyWorked, scrollingView: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
       const startScrollPropertyValue = this.getScrollPropertyValue(scrollingView);
       if (scrollingView && startScrollPropertyValue !== undefined && startScrollPropertyValue !== null) {
         const scrollDistance = Math.abs(startScrollPropertyValue - position);

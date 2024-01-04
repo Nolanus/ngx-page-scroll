@@ -26,7 +26,7 @@ import { filter, take } from 'rxjs/operators';
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
 
   @Input()
-  public routerLink: any;
+  public routerLink;
 
   @Input()
   public href: string;
@@ -70,11 +70,11 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   private pageScrollInstance: PageScrollInstance;
   private document: Document;
 
-  constructor(private pageScrollService: PageScrollService, @Optional() private router: Router, @Inject(DOCUMENT) document: any) {
+  constructor(private pageScrollService: PageScrollService, @Optional() private router: Router, @Inject(DOCUMENT) document) {
     this.document = (document as Document);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: SimpleChanges): void {// eslint-disable-line @typescript-eslint/no-unused-vars
     // Some inputs changed, reset the pageScrollInstance
     this.pageScrollInstance = undefined;
   }
