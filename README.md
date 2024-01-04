@@ -19,7 +19,8 @@ routing has finished) and in both directions (horizontal/vertical)
 
 ## Table of contents
 
-- [Features](#features)
+- [ngx-page-scroll  ](#ngx-page-scroll--)
+  - [Features](#features)
   - [Table of contents](#table-of-contents)
     - [Version compatibility](#version-compatibility)
   - [Service](#service)
@@ -42,6 +43,7 @@ Install later versions in case your app is not running the very latest angular v
 
 | ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                              |
 | -------------------------------------------- | -------------------------- | -------------------------------------------------------------------------- |
+| v12.x                                        | v17                        | [README](README.md)                                                        |
 | v11.x                                        | v16                        | [README](README.md)                                                        |
 | v10.x                                        | v15                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v10.0.0/README.md)|
 | v9.x                                         | v14                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v9.0.0/README.md) |
