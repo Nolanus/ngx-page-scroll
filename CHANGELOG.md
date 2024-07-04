@@ -1,24 +1,24 @@
 # Changelog
 
-### 13.0.0 (2024-07-05)
+## 13.0.0 (2024-07-05)
 
 ### Breaking Change
 
 - Add angular v18 support and remove support for v17
 
-### 12.0.0 (2023-12-12)
+## 12.0.0 (2023-12-12)
 
 ### Breaking Change
 
 - Add angular v17 support and remove support for v16
 
-### 11.0.0 (2023-05-09)
+## 11.0.0 (2023-05-09)
 
 ### Breaking Change
 
 - Add angular v16 support and remove support for v15
 
-### 10.0.0 (2022-11-25)
+## 10.0.0 (2022-11-25)
 
 ### Breaking Change
 
@@ -30,7 +30,7 @@
 - Update demo app to angular material 15
 - Remove deprecated package "@angular/flex-layout"
 
-### 9.0.0 (2022-07-16)
+## 9.0.0 (2022-07-16)
 
 ### Breaking Change
 
@@ -40,20 +40,20 @@
 
 - Update demo app to angular 14
 
-### 8.0.0 (2022-01-13)
+## 8.0.0 (2022-01-13)
 
 ### Breaking Change
 
 - Add angular v13 support and remove support for older versions
 
-### 7.0.6 (2021-10-17)
+## 7.0.6 (2021-10-17)
 
 ### Other
 
 - Add angular v12 to supported versions
 - Update demo app to angular 12
 
-### 7.0.5 (2021-06-03)
+## 7.0.5 (2021-06-03)
 
 ### Fix
 
@@ -63,27 +63,27 @@
 
 - Remove existing instance warning
 
-### 7.0.4 (2021-02-07)
+## 7.0.4 (2021-02-07)
 
 ### Other
 
 - Add angular v11 to supported versions
 - Update demo app to angular 11
 
-### 7.0.3 (2020-07-26)
+## 7.0.3 (2020-07-26)
 
 ### Other
 
 - Fix release script causing unusable builds and release 7.0.2 ([#414](https://github.com/Nolanus/ngx-page-scroll/issues/414), [#415](https://github.com/Nolanus/ngx-page-scroll/issues/415))
 
-### 7.0.2 (2020-07-19)
+## 7.0.2 (2020-07-19)
 
 ### Other
 
 - Add angular v10 to supported versions
 - Update demo app to angular 10
 
-### 7.0.1 (2020-03-07)
+## 7.0.1 (2020-03-07)
 
 ### Feature
 
@@ -426,12 +426,12 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 ## 3.0.0 (2016-09-05)
 
-Breaking Change:
+### Breaking Change:
 
 - Only angular version 2 rc.5 or later supported
 - defaultEasingFunction interface has been removed in favour of defaultEasingLogic abstract class to be extended/overridden for defining custom easing methods
 
-Feature:
+### Feature:
 
 - automatically stop the scroll timer task when an end of the scroll-region has been reached
 
@@ -446,11 +446,11 @@ Feature:
 
 ## 2.0.0 (2016-09-03)
 
-Breaking Change:
+### Breaking Change:
 
 - New `PageScrollService` needs to be added to the bootstrap() calls provider array.
 
-Feature:
+### Feature:
 
 - Service implementation to trigger scroll animations from other places than an element click
 - Set the scroll container to scroll "inline" (e.g. a div with fixed height and vertical scroll bar)
@@ -463,7 +463,8 @@ Feature:
 
 ### Fixes
 
-- Problem with Event gloval in angular universal (thanks to [threesquared](https://github.com/threesquared), PR #20)
+- Problem with Event gloval in angular universal
+  (thanks to [threesquared](https://github.com/threesquared), PR #20)
 
 ### Other
 
