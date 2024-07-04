@@ -19,7 +19,7 @@ routing has finished) and in both directions (horizontal/vertical)
 
 ## Table of contents
 
-- [ngx-page-scroll  ](#ngx-page-scroll--)
+- [ngx-page-scroll](#ngx-page-scroll--)
   - [Features](#features)
   - [Table of contents](#table-of-contents)
     - [Version compatibility](#version-compatibility)
@@ -58,6 +58,7 @@ Install later versions in case your app is not running the very latest angular v
 ### Setup
 
 First you need to install the core npm module:
+
 ```sh
 npm install ngx-page-scroll-core --save
 ```
@@ -128,6 +129,7 @@ It utilizes the ngx-page-scroll-core module for that, thus requires it as a peer
 ### Setup
 
 First you need to install the directive npm module:
+
 ```sh
 npm install ngx-page-scroll --save
 ```
@@ -179,22 +181,22 @@ of only 1 second.
 
 | Attribute                 | Type        | Default      | Description   |
 | ------------------------- | ----------- | ------------ |-------------- |
-| `pageScroll`              |             |              | Attribute adding scroll-animation behavior when the `click`-event happens on the element.
-| `pageScrollTarget`        | string      |              | Optional attribute to set the element that should be scrolled to. Takes precedence over the ´href´-value
-| `pageScrollHorizontal`    | boolean     | false        | Whether the scroll should happen in vertical direction (`false`, default) or horizontal (`true`).
-| `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element).
-| `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last.
-| `pageScrollSpeed`         | number      | -            | Speed in Pixel/Second the animation should take. Only applied if no duration is set.
-| `pageScrollInView`        | boolean     | true         | Whether the scroll animation should happen even when the scroll target is already inside the view port (`true`). Set to `false` to skip scroll animation if target is already in view.
-| `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`).
-| `pageScrollAdjustHash`    | boolean     | false        | Whether the [routes hash/fragment](https://angular.io/docs/ts/latest/guide/router.html#!#query-parameters) should be updated to reflect to section that has been scrolled to
-| `pageScrollEasing`        | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing).
+| `pageScroll`              |             |              | Attribute adding scroll-animation behavior when the `click`-event happens on the element. |
+| `pageScrollTarget`        | string      |              | Optional attribute to set the element that should be scrolled to. Takes precedence over the ´href´-value |
+| `pageScrollHorizontal`    | boolean     | false        | Whether the scroll should happen in vertical direction (`false`, default) or horizontal (`true`). |
+| `pageScrollOffset`        | number      | 0            | Pixels to offset from the top of the element when scrolling to (positive value = scrolling will stop given pixels atop the target element). |
+| `pageScrollDuration`      | number      | 1250         | Duration in milliseconds the whole scroll-animation should last. |
+| `pageScrollSpeed`         | number      | -            | Speed in Pixel/Second the animation should take. Only applied if no duration is set. |
+| `pageScrollInView`        | boolean     | true         | Whether the scroll animation should happen even when the scroll target is already inside the view port (`true`). Set to `false` to skip scroll animation if target is already in view. |
+| `pageScrollInterruptible` | boolean     | true         | Whether the scroll animation should stop if the user interferes with it (`true`) or not (`false`). |
+| `pageScrollAdjustHash`    | boolean     | false        | Whether the [routes hash/fragment](https://angular.io/docs/ts/latest/guide/router.html#!#query-parameters) should be updated to reflect to section that has been scrolled to |
+| `pageScrollEasing`        | EasingLogic | linearEasing | Easing method to be used while calculating the scroll position over time (default is linear easing). |
 
 #### PageScroll events
 
 | Event                 | Type    | Description   |
 | --------------------- | ------- | ------------- |
-| `pageScrollFinish`    | boolean | Fired when the scroll-animation stops. Emits a boolean value which indicates whether the scroll animation finished successfully and reached its target (`true`) or not (`false`). Possible reasons for false: target not found or interrupted due to another scroll animation starting or user interaction.
+| `pageScrollFinish`    | boolean | Fired when the scroll-animation stops. Emits a boolean value which indicates whether the scroll animation finished successfully and reached its target (`true`) or not (`false`). Possible reasons for false: target not found or interrupted due to another scroll animation starting or user interaction. |
 
 #### Example
 
