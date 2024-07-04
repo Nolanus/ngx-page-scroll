@@ -1,13 +1,17 @@
+# Changelog
+
 ### 13.0.0 (2024-07-05)
 
 ### Breaking Change
+
 - Add angular v18 support and remove support for v17
 
 ### 12.0.0 (2023-12-12)
 
 ### Breaking Change
+
 - Add angular v17 support and remove support for v16
-  
+
 ### 11.0.0 (2023-05-09)
 
 ### Breaking Change
@@ -405,13 +409,11 @@ Note: This release mainly reverts the changes made in v6.0.1
 
 - TypeScript parameter type change to satisfy ngc (angular compiler)
 
-
 ## 3.1.1 (2016-10-01)
 
 ### Other
 
 - Update peer dependency to angular 2.0.1 and add back tilde/range constraint
-
 
 ## 3.1.0 (2016-09-16)
 
@@ -425,6 +427,7 @@ Note: This release mainly reverts the changes made in v6.0.1
 ## 3.0.0 (2016-09-05)
 
 Breaking Change:
+
 - Only angular version 2 rc.5 or later supported
 - defaultEasingFunction interface has been removed in favour of defaultEasingLogic abstract class to be extended/overridden for defining custom easing methods
 
@@ -460,7 +463,7 @@ Feature:
 
 ### Fixes
 
-- Problem with Event gloval in angular universal  (thanks to [threesquared](https://github.com/threesquared), PR #20)
+- Problem with Event gloval in angular universal (thanks to [threesquared](https://github.com/threesquared), PR #20)
 
 ### Other
 
@@ -497,35 +500,35 @@ Enhance:
 ### Breaking Change
 
 - The `pageScrollFinish` event is now called for interrupted/interfered page
-scroll animations as well. A boolean is emitted, indicating whether the
-animation got interrupted.
+  scroll animations as well. A boolean is emitted, indicating whether the
+  animation got interrupted.
 
 ### Feature
 
 - The new property `pageScrollInterruptible` allows setting whether a
-triggered scroll animation should be interrutible or not. A page wide
-default can be specified using `PageScrollConfig.defaultInterruptible`.
+  triggered scroll animation should be interrutible or not. A page wide
+  default can be specified using `PageScrollConfig.defaultInterruptible`.
 
 ### Fixes
 
 - Only register event listeners for running page scroll animations to
-save resources (fixes #9)
+  save resources (fixes #9)
 - Overshooting target when large distance to scroll and short scroll animation
-duration (fixes #7)
+  duration (fixes #7)
 - body.scrollTop not working on non-Blink based browser like Firefox and IE
-(thanks to [bensgroi](https://github.com/bensgroi), [#10](https://github.com/Nolanus/ngx-page-scroll/issues/10))
+  (thanks to [bensgroi](https://github.com/bensgroi), [#10](https://github.com/Nolanus/ngx-page-scroll/issues/10))
 
 ### Other
 
 - Running animations are stopped when pressing a pageScroll link, even if the
-scroll target is not found or already reached (previously it did not stop).
+  scroll target is not found or already reached (previously it did not stop).
 
 ## 1.0.0-beta.1 (2016-05-19)
 
 ### Fixes
 
 - Referencing non existing variable causes error in non webkit-based
-browser (fixes [#5](https://github.com/Nolanus/ngx-page-scroll/issues/5))
+  browser (fixes [#5](https://github.com/Nolanus/ngx-page-scroll/issues/5))
 
 ## 1.0.0-beta.0 (2016-05-05)
 
@@ -552,13 +555,13 @@ browser (fixes [#5](https://github.com/Nolanus/ngx-page-scroll/issues/5))
 ### Breaking Change
 
 - event indicating the end of the scroll-animation has been renamed from
-`scrollFinish` to `pageScrollFinish` for consistency with all other
-attributes/properties.
+  `scrollFinish` to `pageScrollFinish` for consistency with all other
+  attributes/properties.
 
 ### Feature
 
 - Introducing `PageScrollConfig` class to specify defaults for all
-`pageScroll` directive usages.
+  `pageScroll` directive usages.
 - Customizable easing method
 
 ### Other
