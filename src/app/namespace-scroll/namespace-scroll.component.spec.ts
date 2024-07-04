@@ -5,6 +5,7 @@ import { defaultPageScrollConfig, NGXPS_CONFIG } from 'ngx-page-scroll-core';
 import { MatCardModule } from '@angular/material/card';
 import { DummyCardComponent } from '../dummy-card/dummy-card.component';
 import { DummyContentComponent } from '../dummy-content/dummy-content.component';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('NamespaceScrollComponent', () => {
   let component: NamespaceScrollComponent;
@@ -13,7 +14,7 @@ describe('NamespaceScrollComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [NamespaceScrollComponent, DummyCardComponent, DummyContentComponent],
-      imports: [MatCardModule],
+      imports: [MatCardModule, MatIconModule],
       providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
     })
       .compileComponents();
