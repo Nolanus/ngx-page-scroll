@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class PathologicalTestsComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: any, private snackBar: MatSnackBar) {
+  constructor(@Inject(DOCUMENT) private readonly document: any, private readonly snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {

@@ -18,8 +18,8 @@ export class ScrollDialogComponent implements OnInit, AfterViewInit {
 
   constructor(public dialogRef: MatDialogRef<ScrollDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any,
-              private pageScrollService: PageScrollService,
-              @Inject(DOCUMENT) private document: any) {
+              private readonly pageScrollService: PageScrollService,
+              @Inject(DOCUMENT) private readonly document: any) {
   }
 
   ngOnInit(): void {

@@ -31,9 +31,9 @@ export class SimpleScrollComponent implements OnInit {
     return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
   }
 
-  public constructor(@Inject(DOCUMENT) private document: any,
-                     private pageScrollService: PageScrollService,
-                     private snackBar: MatSnackBar) {
+  public constructor(@Inject(DOCUMENT) private readonly document: any,
+                     private readonly pageScrollService: PageScrollService,
+                     private readonly snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {

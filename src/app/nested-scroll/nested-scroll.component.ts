@@ -18,7 +18,7 @@ export class NestedScrollComponent implements OnInit {
   @ViewChild('complexContainer')
   public complexContainer: ElementRef;
 
-  constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService, public dialog: MatDialog) {
+  constructor(@Inject(DOCUMENT) private readonly document: any, private readonly pageScrollService: PageScrollService, public readonly dialog: MatDialog) {
   }
 
   ngOnInit(): void {

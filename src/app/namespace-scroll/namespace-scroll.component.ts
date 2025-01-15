@@ -22,7 +22,7 @@ export class NamespaceScrollComponent implements OnInit {
   @ViewChild('container4')
   public container4: ElementRef;
 
-  constructor(@Inject(DOCUMENT) private document: any, public pageScrollService: PageScrollService) {
+  constructor(@Inject(DOCUMENT) private readonly document: any, public readonly pageScrollService: PageScrollService) {
   }
 
   ngOnInit(): void {

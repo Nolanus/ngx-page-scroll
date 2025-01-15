@@ -13,7 +13,7 @@ export class HorizontalScrollComponent implements OnInit {
   @ViewChild('container')
   public container: ElementRef;
 
-  constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
+  constructor(@Inject(DOCUMENT) private readonly document: any, private readonly pageScrollService: PageScrollService) {
   }
 
   public scrollHorizontalStart(): void {
