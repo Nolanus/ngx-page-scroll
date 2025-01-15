@@ -3,9 +3,10 @@ import { DOCUMENT } from '@angular/common';
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
-  selector: 'app-namespace-scroll',
-  templateUrl: './namespace-scroll.component.html',
-  styleUrls: ['./namespace-scroll.component.scss'],
+    selector: 'app-namespace-scroll',
+    templateUrl: './namespace-scroll.component.html',
+    styleUrls: ['./namespace-scroll.component.scss'],
+    standalone: false
 })
 export class NamespaceScrollComponent implements OnInit {
 

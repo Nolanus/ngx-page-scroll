@@ -5,9 +5,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { ScrollDialogComponent } from '../scroll-dialog/scroll-dialog.component';
 
 @Component({
-  selector: 'app-nested-scroll',
-  templateUrl: './nested-scroll.component.html',
-  styleUrls: ['./nested-scroll.component.scss'],
+    selector: 'app-nested-scroll',
+    templateUrl: './nested-scroll.component.html',
+    styleUrls: ['./nested-scroll.component.scss'],
+    standalone: false
 })
 export class NestedScrollComponent implements OnInit {
 

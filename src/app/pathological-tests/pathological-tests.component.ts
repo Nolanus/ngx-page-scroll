@@ -3,10 +3,11 @@ import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-pathological-tests',
-  templateUrl: './pathological-tests.component.html',
-  styleUrls: ['./pathological-tests.component.scss'],
-  providers: [MatSnackBar],
+    selector: 'app-pathological-tests',
+    templateUrl: './pathological-tests.component.html',
+    styleUrls: ['./pathological-tests.component.scss'],
+    providers: [MatSnackBar],
+    standalone: false
 })
 export class PathologicalTestsComponent implements OnInit {
 

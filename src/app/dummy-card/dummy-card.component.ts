@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-dummy-card',
-  templateUrl: './dummy-card.component.html',
+    selector: 'app-dummy-card',
+    templateUrl: './dummy-card.component.html',
+    standalone: false
 })
 export class DummyCardComponent implements OnChanges {
 

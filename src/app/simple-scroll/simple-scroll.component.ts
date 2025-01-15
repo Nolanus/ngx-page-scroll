@@ -4,10 +4,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { EasingLogic, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
-  selector: 'app-simple-scroll',
-  templateUrl: './simple-scroll.component.html',
-  styleUrls: ['./simple-scroll.component.scss'],
-  providers: [MatSnackBar],
+    selector: 'app-simple-scroll',
+    templateUrl: './simple-scroll.component.html',
+    styleUrls: ['./simple-scroll.component.scss'],
+    providers: [MatSnackBar],
+    standalone: false
 })
 export class SimpleScrollComponent implements OnInit {
 

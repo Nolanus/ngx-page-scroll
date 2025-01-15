@@ -4,9 +4,10 @@ import { DOCUMENT } from '@angular/common';
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
-  selector: 'app-scroll-dialog',
-  templateUrl: './scroll-dialog.component.html',
-  styleUrls: ['./scroll-dialog.component.scss'],
+    selector: 'app-scroll-dialog',
+    templateUrl: './scroll-dialog.component.html',
+    styleUrls: ['./scroll-dialog.component.scss'],
+    standalone: false
 })
 export class ScrollDialogComponent implements OnInit, AfterViewInit {
 

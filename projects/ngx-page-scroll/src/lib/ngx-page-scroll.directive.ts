@@ -18,10 +18,11 @@ import { EasingLogic, PageScrollInstance, PageScrollOptions, PageScrollService }
 import { filter, take } from 'rxjs/operators';
 
 @Directive({
-  selector: '[pageScroll]',
-  host: {
-    '(click)': 'handleClick($event)',
-  },
+    selector: '[pageScroll]',
+    host: {
+        '(click)': 'handleClick($event)',
+    },
+    standalone: false
 })
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
 
