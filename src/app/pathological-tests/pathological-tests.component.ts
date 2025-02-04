@@ -3,14 +3,15 @@ import { DOCUMENT } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-pathological-tests',
-  templateUrl: './pathological-tests.component.html',
-  styleUrls: ['./pathological-tests.component.scss'],
-  providers: [MatSnackBar],
+    selector: 'app-pathological-tests',
+    templateUrl: './pathological-tests.component.html',
+    styleUrls: ['./pathological-tests.component.scss'],
+    providers: [MatSnackBar],
+    standalone: false
 })
 export class PathologicalTestsComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: any, private snackBar: MatSnackBar) {
+  constructor(@Inject(DOCUMENT) private readonly document: Document, private readonly snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {

@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-router-scroll',
   templateUrl: './router-scroll.component.html',
   styleUrls: ['./router-scroll.component.scss'],
+  standalone: false
 })
 export class RouterScrollComponent implements OnInit {
 

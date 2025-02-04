@@ -8,6 +8,7 @@ import { ScrollDialogComponent } from '../scroll-dialog/scroll-dialog.component'
   selector: 'app-nested-scroll',
   templateUrl: './nested-scroll.component.html',
   styleUrls: ['./nested-scroll.component.scss'],
+  standalone: false
 })
 export class NestedScrollComponent implements OnInit {
 
@@ -17,7 +18,7 @@ export class NestedScrollComponent implements OnInit {
   @ViewChild('complexContainer')
   public complexContainer: ElementRef;
 
-  constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService, public dialog: MatDialog) {
+  constructor(@Inject(DOCUMENT) private readonly document: Document, private readonly pageScrollService: PageScrollService, public readonly dialog: MatDialog) {
   }
 
   ngOnInit(): void {

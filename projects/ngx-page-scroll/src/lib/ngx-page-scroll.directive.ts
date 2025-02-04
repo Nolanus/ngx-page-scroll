@@ -1,8 +1,7 @@
-/* eslint-disable @angular-eslint/no-host-metadata-property, @angular-eslint/directive-selector */
-
+/* eslint-disable @angular-eslint/directive-selector, @angular-eslint/prefer-standalone */
 import {
   Directive,
-  EventEmitter,
+  EventEmitter, HostListener,
   Inject,
   Input,
   OnChanges,
@@ -19,12 +18,9 @@ import { filter, take } from 'rxjs/operators';
 
 @Directive({
   selector: '[pageScroll]',
-  host: {
-    '(click)': 'handleClick($event)',
-  },
+  standalone: false
 })
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
-
   @Input()
   public routerLink;
 
@@ -68,10 +64,8 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   private pageScrollInstance: PageScrollInstance;
-  private document: Document;
 
-  constructor(private pageScrollService: PageScrollService, @Optional() private router: Router, @Inject(DOCUMENT) document) {
-    this.document = (document as Document);
+  constructor(private readonly pageScrollService: PageScrollService, @Optional() private readonly router: Router, @Inject(DOCUMENT) private readonly document : Document) {
   }
 
   ngOnChanges(changes: SimpleChanges): void {// eslint-disable-line @typescript-eslint/no-unused-vars
@@ -146,6 +140,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
     this.pageScrollService.start(pageScrollInstance);
   }
 
+  @HostListener('click', ['$event'])
   public handleClick(clickEvent: Event): boolean { // eslint-disable-line @typescript-eslint/no-unused-vars
     if (this.routerLink && this.router !== null && this.router !== undefined) {
       let urlTree: UrlTree;
@@ -155,7 +150,7 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
         urlTree = this.router.createUrlTree(this.routerLink);
       }
       if (!this.router.isActive(urlTree, true)) {
-        // We need to navigate their first.
+        // We need to navigate there first.
         // Navigation is handled by the routerLink directive so we only need to listen for route change
         this.router.events.pipe(filter(routerEvent => {
             // We're only interested in successful navigations or when the navigation fails

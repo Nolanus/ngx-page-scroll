@@ -6,6 +6,7 @@ import { PageScrollService } from 'ngx-page-scroll-core';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: false
 })
 export class AppComponent {
   public currentTabIndex = 0;
@@ -39,7 +40,7 @@ export class AppComponent {
       name: 'Namespace Feature',
     }];
 
-  constructor(private router: Router, private pageScrollService: PageScrollService) {
+  constructor(private readonly router: Router, private readonly pageScrollService: PageScrollService) {
     router.events.subscribe((event) => {
       // see also
       if (event instanceof NavigationEnd) {

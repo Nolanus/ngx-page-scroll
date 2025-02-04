@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 14.0.0 (2025-02-04)
+
+### Breaking Change
+
+- Add angular v19 support and remove support for v18
+
 ## 13.0.0 (2024-07-05)
 
 ### Breaking Change

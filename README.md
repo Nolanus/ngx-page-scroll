@@ -42,7 +42,9 @@ routing has finished) and in both directions (horizontal/vertical)
 Install later versions in case your app is not running the very latest angular version.
 
 | ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                              |
-| -------------------------------------------- | -------------------------- | -------------------------------------------------------------------------- |
+|----------------------------------------------|----------------------------| -------------------------------------------------------------------------- |
+| v14.x                                        | v19                        | [README](README.md)                                                        |
+| v13.x                                        | v18                        | [README](README.md)                                                        |
 | v12.x                                        | v17                        | [README](README.md)                                                        |
 | v11.x                                        | v16                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v11.0.0/README.md) |
 | v10.x                                        | v15                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v10.0.0/README.md)|

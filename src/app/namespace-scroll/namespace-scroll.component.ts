@@ -6,6 +6,7 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
   selector: 'app-namespace-scroll',
   templateUrl: './namespace-scroll.component.html',
   styleUrls: ['./namespace-scroll.component.scss'],
+  standalone: false
 })
 export class NamespaceScrollComponent implements OnInit {
 
@@ -21,7 +22,7 @@ export class NamespaceScrollComponent implements OnInit {
   @ViewChild('container4')
   public container4: ElementRef;
 
-  constructor(@Inject(DOCUMENT) private document: any, public pageScrollService: PageScrollService) {
+  constructor(@Inject(DOCUMENT) private readonly document: Document, public readonly pageScrollService: PageScrollService) {
   }
 
   ngOnInit(): void {
