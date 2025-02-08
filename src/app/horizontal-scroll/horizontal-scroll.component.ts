@@ -3,16 +3,17 @@ import { DOCUMENT } from '@angular/common';
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
 @Component({
-  selector: 'app-horizontal-scroll',
-  templateUrl: './horizontal-scroll.component.html',
-  styleUrls: ['./horizontal-scroll.component.scss'],
+    selector: 'app-horizontal-scroll',
+    templateUrl: './horizontal-scroll.component.html',
+    styleUrls: ['./horizontal-scroll.component.scss'],
+    standalone: false
 })
 export class HorizontalScrollComponent implements OnInit {
 
   @ViewChild('container')
   public container: ElementRef;
 
-  constructor(@Inject(DOCUMENT) private document: any, private pageScrollService: PageScrollService) {
+  constructor(@Inject(DOCUMENT) private readonly document: any, private readonly pageScrollService: PageScrollService) {
   }
 
   public scrollHorizontalStart(): void {

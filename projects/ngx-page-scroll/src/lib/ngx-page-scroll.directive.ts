@@ -18,10 +18,11 @@ import { EasingLogic, PageScrollInstance, PageScrollOptions, PageScrollService }
 import { filter, take } from 'rxjs/operators';
 
 @Directive({
-  selector: '[pageScroll]',
-  host: {
-    '(click)': 'handleClick($event)',
-  },
+    selector: '[pageScroll]',
+    host: {
+        '(click)': 'handleClick($event)',
+    },
+    standalone: false
 })
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
 
@@ -68,9 +69,9 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   pageScrollFinish: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   private pageScrollInstance: PageScrollInstance;
-  private document: Document;
+  private readonly document: Document;
 
-  constructor(private pageScrollService: PageScrollService, @Optional() private router: Router, @Inject(DOCUMENT) document) {
+  constructor(private readonly pageScrollService: PageScrollService, @Optional() private readonly router: Router, @Inject(DOCUMENT) document) {
     this.document = (document as Document);
   }
 

@@ -1,8 +1,9 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
-  selector: 'app-dummy-content',
-  templateUrl: './dummy-content.component.html',
+    selector: 'app-dummy-content',
+    templateUrl: './dummy-content.component.html',
+    standalone: false
 })
 export class DummyContentComponent implements OnChanges {
 
