@@ -41,17 +41,19 @@ routing has finished) and in both directions (horizontal/vertical)
 
 Install later versions in case your app is not running the very latest angular version.
 
-| ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                              |
-| -------------------------------------------- | -------------------------- | -------------------------------------------------------------------------- |
-| v12.x                                        | v17                        | [README](README.md)                                                        |
+| ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                               |
+|----------------------------------------------|----------------------------|-----------------------------------------------------------------------------|
+| v14.x                                        | v19                        | [README](README.md)                                                         |
+| v13.x                                        | v18                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v13.0.0/README.md) |
+| v12.x                                        | v17                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v12.0.0/README.md) |
 | v11.x                                        | v16                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v11.0.0/README.md) |
-| v10.x                                        | v15                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v10.0.0/README.md)|
-| v9.x                                         | v14                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v9.0.0/README.md) |
-| v8.x                                         | v13                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v8.0.0/README.md) |
-| v7.x                                         | v12, v11, v10, v9, v8      | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v7.0.6/README.md) |
-| v6.x                                         | v8, v7                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v6.0.2/README.md) |
-| v5.x                                         | v6                         | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v5.0.1/README.md) |
-| v4.x                                         | v5, v4                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v4.0.2/README.md) |
+| v10.x                                        | v15                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v10.0.0/README.md) |
+| v9.x                                         | v14                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v9.0.0/README.md)  |
+| v8.x                                         | v13                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v8.0.0/README.md)  |
+| v7.x                                         | v12, v11, v10, v9, v8      | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v7.0.6/README.md)  |
+| v6.x                                         | v8, v7                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v6.0.2/README.md)  |
+| v5.x                                         | v6                         | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v5.0.1/README.md)  |
+| v4.x                                         | v5, v4                     | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v4.0.2/README.md)  |
 
 ## Service
 
