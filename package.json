@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "ng": "ng",
     "prerelease:lib": "ng lint && ng test --no-watch && npm run build:lib",
-    "release:lib": "npm publish dist/ngx-page-scroll-core && npm publish dist/ngx-page-scroll ",
+    "release:lib": "cd dist/ngx-page-scroll-core && npm publish && cd ../ngx-page-scroll && npm publish",
     "start": "ng serve",
     "test": "ng test"
   },
