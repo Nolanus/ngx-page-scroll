@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 14.0.1 (2025-03-09)
+
+### Fix
+
+- Incorrect peer dependency
+
 ## 14.0.0 (2025-02-08)
 
 ### Breaking Change
