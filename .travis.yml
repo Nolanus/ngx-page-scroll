@@ -16,7 +16,8 @@ script:
   - ng lint
   - npm run build:lib
   - ng test --watch false --browsers ChromeHeadless
-  - ng e2e --protractor-config='e2e/protractor.ci.conf.js'
+  # TODO Refactor e2e test to use cypress instead of deprecated protractor
+  # - ng e2e --protractor-config='e2e/protractor.ci.conf.js'
   - npm run build:app
 
 deploy:

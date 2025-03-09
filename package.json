@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "lint": "ng lint",
     "ng": "ng",
-    "prerelease:lib": "ng lint && ng test --no-watch && ng e2e && npm run build:lib",
+    "prerelease:lib": "ng lint && ng test --no-watch && npm run build:lib",
     "release:lib": "npm publish dist/ngx-page-scroll-core && npm publish dist/ngx-page-scroll ",
     "start": "ng serve",
     "test": "ng test"
