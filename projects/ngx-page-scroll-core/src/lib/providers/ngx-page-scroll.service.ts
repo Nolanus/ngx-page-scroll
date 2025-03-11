@@ -1,4 +1,4 @@
-import { Inject, Injectable, isDevMode } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 
 import { PageScrollConfig } from '../types/page-scroll.config';
 import { InterruptReporter, PageScrollInstance, PageScrollOptions } from '../page-scroll-instance';
@@ -84,8 +84,10 @@ export class PageScrollService {
 
     if (pageScrollInstance.pageScrollOptions.scrollViews === null || pageScrollInstance.pageScrollOptions.scrollViews.length === 0) {
       // No scrollViews specified, thus we can't animate anything
-      if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-        console.warn('No scrollViews specified, thus ngx-page-scroll does not know which DOM elements to scroll');
+      if (typeof ngDevMode !== 'undefined' && ngDevMode) {
+        if (this.config._logLevel >= 1) {
+          console.warn('No scrollViews specified, thus ngx-page-scroll does not know which DOM elements to scroll');
+        }
       }
 
       return;
@@ -131,8 +133,10 @@ export class PageScrollService {
     if (isNaN(pageScrollInstance.distanceToScroll)) {
       // We weren't able to find the target position, maybe the element does not exist?
 
-      if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-        console.log('Scrolling not possible, as we can\'t find the specified target');
+      if (typeof ngDevMode !== 'undefined' && ngDevMode) {
+        if (this.config._logLevel >= 1) {
+          console.log('Scrolling not possible, as we can\'t find the specified target');
+        }
       }
       pageScrollInstance.fireEvent(false);
 
@@ -160,11 +164,13 @@ export class PageScrollService {
     const tooShortInterval = pageScrollInstance.executionDuration <= pageScrollInstance.pageScrollOptions._interval;
 
     if (allReadyAtDestination || tooShortInterval) {
-      if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-        if (allReadyAtDestination) {
-          console.log('Scrolling not possible, as we can\'t get any closer to the destination');
-        } else {
-          console.log('Scroll duration shorter that interval length, jumping to target');
+      if (this.config._logLevel >= 2 || this.config._logLevel >= 1) {
+        if (typeof ngDevMode !== 'undefined' && ngDevMode) {
+          if (allReadyAtDestination) {
+            console.log('Scrolling not possible, as we can\'t get any closer to the destination');
+          } else {
+            console.log('Scroll duration shorter that interval length, jumping to target');
+          }
         }
       }
       pageScrollInstance.setScrollPosition(pageScrollInstance.targetScrollPosition);
@@ -177,8 +183,10 @@ export class PageScrollService {
       const alreadyInView = pageScrollInstance.targetScrollPosition > pageScrollInstance.startScrollPosition &&
         pageScrollInstance.targetScrollPosition <= pageScrollInstance.startScrollPosition + scrollRange;
       if (alreadyInView) {
-        if (this.config._logLevel >= 2 || (this.config._logLevel >= 1 && isDevMode())) {
-          console.log('Not scrolling, as target already in view');
+        if (typeof ngDevMode !== 'undefined' && ngDevMode) {
+          if (this.config._logLevel >= 1) {
+            console.log('Not scrolling, as target already in view');
+          }
         }
         pageScrollInstance.fireEvent(true);
 
@@ -215,8 +223,10 @@ export class PageScrollService {
           instance.distanceToScroll,
           instance.executionDuration));
       }
-      if (this.config._logLevel >= 5 && isDevMode()) {
-        console.warn('Scroll Position: ' + newScrollPosition);
+      if (typeof ngDevMode !== 'undefined' && ngDevMode) {
+        if (this.config._logLevel >= 5) {
+          console.warn('Scroll Position: ' + newScrollPosition);
+        }
       }
       // Set the new scrollPosition to all scrollViews elements
       if (!instance.setScrollPosition(newScrollPosition)) {

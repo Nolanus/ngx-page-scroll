@@ -1,7 +1,9 @@
 import { InjectionToken } from '@angular/core';
 import { PageScrollConfig } from '../types/page-scroll.config';
 
-export const NGXPS_CONFIG = new InjectionToken<PageScrollConfig>('ngxps_config');
+export const NGXPS_CONFIG = new InjectionToken<PageScrollConfig>(
+  typeof ngDevMode !== 'undefined' && ngDevMode ? 'ngxps_config' : ''
+);
 
 export const defaultPageScrollConfig: PageScrollConfig = {
   _interval: 10,
