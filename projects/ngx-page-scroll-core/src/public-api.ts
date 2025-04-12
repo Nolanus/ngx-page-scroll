@@ -2,6 +2,8 @@
  * Public API Surface of ngx-page-scroll-core
  */
 
+import './ng-dev-mode';
+
 export { NgxPageScrollCoreModule } from './lib/ngx-page-scroll-core.module';
 
 export { defaultPageScrollConfig, NGXPS_CONFIG } from './lib/providers/config.provider';
