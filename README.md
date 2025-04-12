@@ -118,7 +118,7 @@ imports: [
 ```
 
 Check the [`PageScrollConfig` interface](https://github.com/Nolanus/ngx-page-scroll/blob/master/projects/ngx-page-scroll-core/src/lib/types/page-scroll.config.ts#L3)
-for possible options and their impact. The default values may be found in the [`defaultPageScrollConfig`](https://github.com/Nolanus/ngx-page-scroll/blob/master/projects/ngx-page-scroll-core/src/lib/provides/config.provider.ts#L6)
+for possible options and their impact. The default values may be found in the [`defaultPageScrollConfig`]([https://github.com/Nolanus/ngx-page-scroll/blob/master/projects/ngx-page-scroll-core/src/lib/provides/config.provider.ts#L6](https://github.com/Nolanus/ngx-page-scroll/blob/master/projects/ngx-page-scroll-core/src/lib/providers/config.provider.ts))
 object.
 
 ## Directive
