@@ -8,8 +8,8 @@ describe('DummyContentComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DummyContentComponent],
-    })
+    declarations: [DummyContentComponent],
+})
       .compileComponents();
   }));
 

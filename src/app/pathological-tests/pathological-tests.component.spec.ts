@@ -16,10 +16,10 @@ describe('PathologicalTestsComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [PathologicalTestsComponent, NgxPageScrollDirective, DummyCardComponent, DummyContentComponent],
-      imports: [OverlayModule, MatCardModule, MatIconModule, MatSelectModule],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
-    })
+    declarations: [PathologicalTestsComponent, DummyCardComponent, DummyContentComponent],
+    imports: [OverlayModule, MatCardModule, MatIconModule, MatSelectModule, NgxPageScrollDirective],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
+})
       .compileComponents();
   }));
 

@@ -5,15 +5,13 @@ import { NgxPageScrollCoreModule } from 'ngx-page-scroll-core';
 import { NgxPageScrollDirective } from './ngx-page-scroll.directive';
 
 @NgModule({
-  declarations: [
-    NgxPageScrollDirective,
-  ],
-  imports: [
-    NgxPageScrollCoreModule,
-  ],
-  exports: [
-    NgxPageScrollDirective,
-  ],
+    imports: [
+        NgxPageScrollCoreModule,
+        NgxPageScrollDirective,
+    ],
+    exports: [
+        NgxPageScrollDirective,
+    ],
 })
 export class NgxPageScrollModule {
 }

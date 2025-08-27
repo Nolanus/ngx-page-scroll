@@ -15,14 +15,14 @@ describe('ScrollDialogComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ScrollDialogComponent, DummyCardComponent, DummyContentComponent],
-      imports: [MatDialogModule, MatCardModule, MatIconModule, MatChipsModule],
-      providers: [
+    declarations: [ScrollDialogComponent, DummyCardComponent, DummyContentComponent],
+    imports: [MatDialogModule, MatCardModule, MatIconModule, MatChipsModule],
+    providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
         { provide: MatDialogRef, useValue: {} },
         { provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig },
-      ],
-    })
+    ],
+})
       .compileComponents();
   }));
 

@@ -10,9 +10,9 @@ describe('DummyCardComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [DummyCardComponent, DummyContentComponent],
-      imports: [MatCardModule],
-    })
+    declarations: [DummyCardComponent, DummyContentComponent],
+    imports: [MatCardModule],
+})
       .compileComponents();
   }));
 

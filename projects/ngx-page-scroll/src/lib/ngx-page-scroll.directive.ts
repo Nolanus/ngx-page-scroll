@@ -22,8 +22,7 @@ import { filter, take } from 'rxjs/operators';
     selector: '[pageScroll]',
     host: {
         '(click)': 'handleClick($event)',
-    },
-    standalone: false
+    }
 })
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
 

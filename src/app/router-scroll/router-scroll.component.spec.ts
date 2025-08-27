@@ -13,10 +13,10 @@ describe('RouterScrollComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [RouterScrollComponent, DummyCardComponent, DummyContentComponent],
-      imports: [MatCardModule, RouterModule],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }, provideRouter([])],
-    })
+    declarations: [RouterScrollComponent, DummyCardComponent, DummyContentComponent],
+    imports: [MatCardModule, RouterModule],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }, provideRouter([])],
+})
       .compileComponents();
   }));
 

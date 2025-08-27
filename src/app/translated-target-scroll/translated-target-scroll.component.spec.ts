@@ -12,10 +12,10 @@ describe('TranslatedTargetScrollComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [TranslatedTargetScrollComponent, DummyContentComponent, DummyCardComponent],
-      imports: [MatCardModule],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
-    })
+    declarations: [TranslatedTargetScrollComponent, DummyContentComponent, DummyCardComponent],
+    imports: [MatCardModule],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
+})
       .compileComponents();
   }));
 
