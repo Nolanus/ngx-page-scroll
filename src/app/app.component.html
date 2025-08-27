@@ -5,7 +5,9 @@
   </mat-toolbar>
 
   <mat-tab-group (selectedTabChange)="tabChange($event)" [selectedIndex]="currentTabIndex">
-    <mat-tab *ngFor="let link of links" label="{{ link.name }}"></mat-tab>
+    @for (link of links; track link) {
+      <mat-tab label="{{ link.name }}"></mat-tab>
+    }
   </mat-tab-group>
 
   <!-- Routed views go here -->

@@ -1,5 +1,5 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, ElementRef, Inject, OnInit, ViewChild, DOCUMENT } from '@angular/core';
+
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 import { MatDialog } from '@angular/material/dialog';
 import { ScrollDialogComponent } from '../scroll-dialog/scroll-dialog.component';
