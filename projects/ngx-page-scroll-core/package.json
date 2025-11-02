@@ -24,8 +24,8 @@
   },
   "homepage": "https://github.com/Nolanus/ngx-page-scroll#readme",
   "peerDependencies": {
-    "@angular/common": "^19.0.6",
-    "@angular/core": "^19.0.6"
+    "@angular/common": "^20.2.2",
+    "@angular/core": "^20.2.2"
   },
   "dependencies": {
     "tslib": "^2.6.2"
