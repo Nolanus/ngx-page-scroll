@@ -5,7 +5,15 @@
     "outDir": "./out-tsc/spec",
     "types": [
       "jasmine"
-    ]
+    ],
+    "paths": {
+      "ngx-page-scroll-core": [
+        "projects/ngx-page-scroll-core/src/public-api"
+      ],
+      "ngx-page-scroll": [
+        "projects/ngx-page-scroll/src/public-api"
+      ]
+    }
   },
   "files": [
     "src/test.ts",
