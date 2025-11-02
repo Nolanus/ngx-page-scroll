@@ -17,10 +17,10 @@ describe('SimpleScrollComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [SimpleScrollComponent, DummyCardComponent, NgxPageScrollDirective, DummyContentComponent],
-      imports: [OverlayModule, MatCardModule, MatSelectModule, BrowserAnimationsModule, FormsModule],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
-    })
+    declarations: [SimpleScrollComponent, DummyCardComponent, DummyContentComponent],
+    imports: [OverlayModule, MatCardModule, MatSelectModule, BrowserAnimationsModule, FormsModule, NgxPageScrollDirective],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
+})
       .compileComponents();
   }));
 

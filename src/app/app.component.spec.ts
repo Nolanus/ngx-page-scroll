@@ -8,16 +8,14 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         RouterTestingModule,
         MatToolbarModule,
         MatTabsModule,
-      ],
-      declarations: [
-        AppComponent,
-      ],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
-    }).compileComponents();
+    ],
+    declarations: [AppComponent],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
+}).compileComponents();
   }));
 
   it('should create the app', () => {

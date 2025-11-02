@@ -10,10 +10,10 @@ describe('HorizontalScrollComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HorizontalScrollComponent],
-      imports: [MatCardModule],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
-    })
+    declarations: [HorizontalScrollComponent],
+    imports: [MatCardModule],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
+})
       .compileComponents();
   }));
 

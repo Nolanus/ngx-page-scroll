@@ -9,10 +9,11 @@ import {
   OnDestroy,
   Optional,
   Output,
-  SimpleChanges
+  SimpleChanges,
+  DOCUMENT
 } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, Router, UrlTree } from '@angular/router';
-import { DOCUMENT } from '@angular/common';
+
 
 import { EasingLogic, PageScrollInstance, PageScrollOptions, PageScrollService } from 'ngx-page-scroll-core';
 import { filter, take } from 'rxjs/operators';
@@ -21,8 +22,7 @@ import { filter, take } from 'rxjs/operators';
     selector: '[pageScroll]',
     host: {
         '(click)': 'handleClick($event)',
-    },
-    standalone: false
+    }
 })
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
 

@@ -1,5 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { Component, Inject, OnInit, DOCUMENT } from '@angular/core';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({

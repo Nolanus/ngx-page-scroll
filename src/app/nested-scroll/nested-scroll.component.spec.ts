@@ -13,10 +13,10 @@ describe('NestedScrollComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NestedScrollComponent, DummyContentComponent, DummyCardComponent],
-      imports: [MatDialogModule, MatCardModule],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
-    })
+    declarations: [NestedScrollComponent, DummyContentComponent, DummyCardComponent],
+    imports: [MatDialogModule, MatCardModule],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
+})
       .compileComponents();
   }));
 

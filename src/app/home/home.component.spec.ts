@@ -11,10 +11,10 @@ describe('HomeComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [HomeComponent,NgxPageScrollDirective],
-      imports: [MatCardModule],
-      providers:[{provide:NGXPS_CONFIG,useValue:defaultPageScrollConfig}] 
-    })
+    declarations: [HomeComponent],
+    imports: [MatCardModule, NgxPageScrollDirective],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }]
+})
       .compileComponents();
   }));
 

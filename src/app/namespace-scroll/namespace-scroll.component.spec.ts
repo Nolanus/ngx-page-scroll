@@ -13,10 +13,10 @@ describe('NamespaceScrollComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [NamespaceScrollComponent, DummyCardComponent, DummyContentComponent],
-      imports: [MatCardModule, MatIconModule],
-      providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
-    })
+    declarations: [NamespaceScrollComponent, DummyCardComponent, DummyContentComponent],
+    imports: [MatCardModule, MatIconModule],
+    providers: [{ provide: NGXPS_CONFIG, useValue: defaultPageScrollConfig }],
+})
       .compileComponents();
   }));
 
