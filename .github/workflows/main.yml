@@ -71,5 +71,11 @@ jobs:
       - name: Run tests
         run: npm run test -- --watch false --browsers ChromeHeadless
 
-      - name: Run e2e tests
-        run: npm run e2e -- --protractor-config='e2e/protractor.ci.conf.js'
+      - name: Build app
+        run: npm run build:app
+
+      - name: Start server and run e2e tests
+        run: |
+          npm start &
+          npx wait-on http://localhost:4200
+          npm run e2e -- --browser chrome
