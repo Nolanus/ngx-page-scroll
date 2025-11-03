@@ -62,7 +62,8 @@
     "karma-jasmine-html-reporter": "^1.7.0",
     "ng-packagr": "^20.2.0",
     "ts-node": "~10.9.2",
-    "typescript": "~5.9.2"
+    "typescript": "~5.9.2",
+    "wait-on": "^8.0.1"
   },
   "config": {
     "commitizen": {
