@@ -1,0 +1,94 @@
+image: node:18
+
+stages:
+  - lint
+  - build
+  - test
+  - e2e
+  - deploy
+
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - node_modules/
+    - .npm/
+
+before_script:
+  - npm ci --cache .npm --prefer-offline
+
+# Commitlint job
+commitlint:
+  stage: lint
+  script:
+    - npm install @commitlint/travis-cli
+    - npx commitlint --from=HEAD~1 --to=HEAD
+  only:
+    - merge_requests
+    - master
+
+# Lint job
+lint:
+  stage: lint
+  script:
+    - npm run lint
+
+# Build library job
+build:lib:
+  stage: build
+  script:
+    - npm run build:lib
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+
+# Build app job
+build:app:
+  stage: build
+  script:
+    - npm run build:app
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+
+# Unit tests job
+test:unit:
+  stage: test
+  script:
+    - npm run test -- --watch false --browsers ChromeHeadless
+  coverage: '/Lines\s*:\s*(\d+\.\d+)%/'
+
+# E2E tests with Cypress
+test:e2e:
+  stage: e2e
+  image: cypress/browsers:node-20.18.1-chrome-131.0.6778.204-1-ff-133.0.3-edge-131.0.2903.112-1
+  dependencies:
+    - build:app
+  script:
+    # Start the Angular dev server in the background
+    - npm start &
+    # Wait for the server to be ready
+    - npx wait-on http://localhost:4200
+    # Run Cypress tests
+    - npm run e2e -- --browser chrome
+  artifacts:
+    when: on_failure
+    paths:
+      - cypress/screenshots/
+      - cypress/videos/
+    expire_in: 7 days
+
+# Deploy to GitHub Pages
+deploy:pages:
+  stage: deploy
+  dependencies:
+    - build:app
+  script:
+    - echo "Deployment would happen here"
+    # GitLab Pages deployment or custom deployment logic can be added here
+  only:
+    - master
+  when: manual
