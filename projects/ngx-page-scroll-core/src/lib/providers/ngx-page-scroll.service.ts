@@ -179,9 +179,19 @@ export class PageScrollService {
       return;
     }
 
+    console.log('[NGXPS] Before scrollInView check', {scrollInView: pageScrollInstance.pageScrollOptions.scrollInView});
     if (!pageScrollInstance.pageScrollOptions.scrollInView) {
-      const alreadyInView = pageScrollInstance.targetScrollPosition > pageScrollInstance.startScrollPosition &&
-        pageScrollInstance.targetScrollPosition <= pageScrollInstance.startScrollPosition + scrollRange;
+      const alreadyInView = pageScrollInstance.targetScrollPosition >= pageScrollInstance.startScrollPosition &&
+        pageScrollInstance.targetScrollPosition < pageScrollInstance.startScrollPosition + scrollRange;
+      
+      console.log('[NGXPS scrollInView=false check]', {
+        targetScrollPosition: pageScrollInstance.targetScrollPosition,
+        startScrollPosition: pageScrollInstance.startScrollPosition,
+        scrollRange: scrollRange,
+        alreadyInView: alreadyInView,
+        scrollInViewOption: pageScrollInstance.pageScrollOptions.scrollInView
+      });
+      
       if (alreadyInView) {
         if (typeof ngDevMode !== 'undefined' && ngDevMode) {
           if (this.config._logLevel >= 2 || this.config._logLevel >= 1) {

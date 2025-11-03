@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 15.0.0 (2025-11-02)
+
+### Breaking Change
+
+- Add angular v20 support and remove support for v19
+
 ## 14.0.1 (2025-03-09)
 
 ### Fix
