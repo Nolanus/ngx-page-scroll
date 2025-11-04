@@ -1,6 +1,12 @@
 
 # Changelog
 
+## 15.0.1 (2025-11-04)
+
+### Fix
+
+- Adjust peer dependency
+
 ## 15.0.0 (2025-11-04)
 
 ### Breaking Change
