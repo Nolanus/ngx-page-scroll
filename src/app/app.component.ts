@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { PageScrollService } from 'ngx-page-scroll-core';
 
@@ -9,6 +9,9 @@ import { PageScrollService } from 'ngx-page-scroll-core';
     standalone: false
 })
 export class AppComponent {
+  private readonly router = inject(Router);
+  private readonly pageScrollService = inject(PageScrollService);
+
   public currentTabIndex = 0;
   public links = [
     {
@@ -40,7 +43,9 @@ export class AppComponent {
       name: 'Namespace Feature',
     }];
 
-  constructor(private readonly router: Router, private readonly pageScrollService: PageScrollService) {
+  constructor() {
+    const router = this.router;
+
     router.events.subscribe((event) => {
       // see also
       if (event instanceof NavigationEnd) {

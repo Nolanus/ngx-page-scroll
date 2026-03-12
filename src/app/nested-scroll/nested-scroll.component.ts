@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild, DOCUMENT } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, DOCUMENT, inject } from '@angular/core';
 
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,15 +11,16 @@ import { ScrollDialogComponent } from '../scroll-dialog/scroll-dialog.component'
     standalone: false
 })
 export class NestedScrollComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
+  private readonly pageScrollService = inject(PageScrollService);
+  readonly dialog = inject(MatDialog);
+
 
   @ViewChild('basicContainer')
   public basicContainer: ElementRef;
 
   @ViewChild('complexContainer')
   public complexContainer: ElementRef;
-
-  constructor(@Inject(DOCUMENT) private readonly document: any, private readonly pageScrollService: PageScrollService, public readonly dialog: MatDialog) {
-  }
 
   ngOnInit(): void {
   }

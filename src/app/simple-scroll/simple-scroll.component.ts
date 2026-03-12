@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, OnInit, DOCUMENT } from '@angular/core';
+import { Component, EventEmitter, OnInit, DOCUMENT, inject } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { EasingLogic, PageScrollService } from 'ngx-page-scroll-core';
@@ -11,6 +11,10 @@ import { EasingLogic, PageScrollService } from 'ngx-page-scroll-core';
     standalone: false
 })
 export class SimpleScrollComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
+  private readonly pageScrollService = inject(PageScrollService);
+  private readonly snackBar = inject(MatSnackBar);
+
 
   public dynamicTargets = ['#head7', '#head10', '#head14'];
   public dynamicSelectedTarget = this.dynamicTargets[0];
@@ -29,11 +33,6 @@ export class SimpleScrollComponent implements OnInit {
     }
 
     return c / 2 * (-Math.pow(2, -10 * --t) + 2) + b;
-  }
-
-  public constructor(@Inject(DOCUMENT) private readonly document: any,
-                     private readonly pageScrollService: PageScrollService,
-                     private readonly snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {

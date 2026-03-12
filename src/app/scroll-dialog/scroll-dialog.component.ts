@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, DOCUMENT } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, DOCUMENT, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
@@ -10,17 +10,16 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
     standalone: false
 })
 export class ScrollDialogComponent implements OnInit, AfterViewInit {
+  dialogRef = inject<MatDialogRef<ScrollDialogComponent>>(MatDialogRef);
+  data = inject(MAT_DIALOG_DATA);
+  private readonly pageScrollService = inject(PageScrollService);
+  private readonly document = inject(DOCUMENT);
+
 
   @ViewChild('dialogScrollingContainer')
   public scrollingView: ElementRef;
 
   private pageScrollInstance: PageScrollInstance;
-
-  constructor(public dialogRef: MatDialogRef<ScrollDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any,
-              private readonly pageScrollService: PageScrollService,
-              @Inject(DOCUMENT) private readonly document: any) {
-  }
 
   ngOnInit(): void {
   }

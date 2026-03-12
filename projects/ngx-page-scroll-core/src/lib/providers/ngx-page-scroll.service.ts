@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 
 import { PageScrollConfig } from '../types/page-scroll.config';
 import { InterruptReporter, PageScrollInstance, PageScrollOptions } from '../page-scroll-instance';
@@ -288,7 +288,9 @@ export class PageScrollService {
     return this.stopInternal(true, pageScrollInstance);
   }
 
-  constructor(@Inject(NGXPS_CONFIG) customConfig: PageScrollConfig) {
+  constructor() {
+    const customConfig = inject<PageScrollConfig>(NGXPS_CONFIG);
+
     this.config = {...defaultPageScrollConfig, ...customConfig};
   }
 }

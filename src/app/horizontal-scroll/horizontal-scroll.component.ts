@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild, DOCUMENT } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, DOCUMENT, inject } from '@angular/core';
 
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
@@ -9,12 +9,12 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
     standalone: false
 })
 export class HorizontalScrollComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
+  private readonly pageScrollService = inject(PageScrollService);
+
 
   @ViewChild('container')
   public container: ElementRef;
-
-  constructor(@Inject(DOCUMENT) private readonly document: any, private readonly pageScrollService: PageScrollService) {
-  }
 
   public scrollHorizontalStart(): void {
     this.pageScrollService.scroll({

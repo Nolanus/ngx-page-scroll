@@ -1,17 +1,6 @@
-/* eslint-disable @angular-eslint/no-host-metadata-property, @angular-eslint/directive-selector */
+/* eslint-disable @angular-eslint/directive-selector */
 
-import {
-  Directive,
-  EventEmitter,
-  Inject,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Optional,
-  Output,
-  SimpleChanges,
-  DOCUMENT
-} from '@angular/core';
+import { Directive, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges, DOCUMENT, inject } from '@angular/core';
 import { NavigationCancel, NavigationEnd, NavigationError, Router, UrlTree } from '@angular/router';
 
 
@@ -25,6 +14,9 @@ import { filter, take } from 'rxjs/operators';
     }
 })
 export class NgxPageScrollDirective implements OnChanges, OnDestroy {
+  private readonly pageScrollService = inject(PageScrollService);
+  private readonly router = inject(Router, { optional: true });
+
 
   @Input()
   public routerLink;
@@ -71,7 +63,9 @@ export class NgxPageScrollDirective implements OnChanges, OnDestroy {
   private pageScrollInstance: PageScrollInstance;
   private readonly document: Document;
 
-  constructor(private readonly pageScrollService: PageScrollService, @Optional() private readonly router: Router, @Inject(DOCUMENT) document) {
+  constructor() {
+    const document = inject(DOCUMENT);
+
     this.document = (document as Document);
   }
 

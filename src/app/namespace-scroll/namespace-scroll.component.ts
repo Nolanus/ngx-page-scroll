@@ -1,4 +1,4 @@
-import { Component, ElementRef, Inject, OnInit, ViewChild, DOCUMENT } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, DOCUMENT, inject } from '@angular/core';
 
 import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
 
@@ -9,6 +9,9 @@ import { PageScrollInstance, PageScrollService } from 'ngx-page-scroll-core';
     standalone: false
 })
 export class NamespaceScrollComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
+  readonly pageScrollService = inject(PageScrollService);
+
 
   @ViewChild('container1')
   public container1: ElementRef;
@@ -21,9 +24,6 @@ export class NamespaceScrollComponent implements OnInit {
 
   @ViewChild('container4')
   public container4: ElementRef;
-
-  constructor(@Inject(DOCUMENT) private readonly document: any, public readonly pageScrollService: PageScrollService) {
-  }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, DOCUMENT } from '@angular/core';
+import { Component, OnInit, DOCUMENT, inject } from '@angular/core';
 
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -10,9 +10,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
     standalone: false
 })
 export class PathologicalTestsComponent implements OnInit {
+  private readonly document = inject(DOCUMENT);
+  private readonly snackBar = inject(MatSnackBar);
 
-  constructor(@Inject(DOCUMENT) private readonly document: any, private readonly snackBar: MatSnackBar) {
-  }
 
   ngOnInit(): void {
   }
