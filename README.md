@@ -43,7 +43,8 @@ Install later versions in case your app is not running the very latest angular v
 
 | ngx-page-scroll/ngx-page-scroll-core version | compatible angular version | Documentation                                                               |
 |----------------------------------------------|----------------------------|-----------------------------------------------------------------------------|
-| v15.x                                        | v20                        | [README](README.md)                                                         |
+| v16.x                                        | v21                        | [README](README.md)                                                         |
+| v15.x                                        | v20                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v15.0.1/README.md) |
 | v14.x                                        | v19                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v14.0.1/README.md) |
 | v13.x                                        | v18                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v13.0.0/README.md) |
 | v12.x                                        | v17                        | [README](https://github.com/Nolanus/ngx-page-scroll/blob/v12.0.0/README.md) |
