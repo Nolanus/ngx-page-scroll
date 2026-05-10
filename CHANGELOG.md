@@ -1,6 +1,17 @@
 
 # Changelog
 
+## 16.0.0 (2026-05-10)
+
+### Breaking Change
+
+- Add angular v21 support and remove support for v20
+
+### Other
+
+- Update demo app to angular 21
+- Resolve node 20 deprecation warning in GitHub Actions
+
 ## 15.0.1 (2025-11-04)
 
 ### Fix
