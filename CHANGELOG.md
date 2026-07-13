@@ -1,6 +1,17 @@
 
 # Changelog
 
+## 17.0.0 (2026-07-13)
+
+### Breaking Change
+
+- Add angular v22 support and remove support for v21
+
+### Other
+
+- Update demo app to angular 22
+- Migrate linter to modern ESLint flat config
+
 ## 16.0.0 (2026-05-10)
 
 ### Breaking Change
